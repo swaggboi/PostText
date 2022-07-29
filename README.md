@@ -24,5 +24,6 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Where is prototype lmao
+1. Moar tests...
+1. Need migrations for PostText::Model::Thread
 1. Implement threads

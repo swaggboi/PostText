@@ -9,6 +9,6 @@ use Test::Mojo;
 my $script = curfile->dirname->sibling('PostText.pl');
 my $t      = Test::Mojo->new($script);
 
-$t->get_ok('/')->status_is(200);
+$t->get_ok('/')->status_is(302);
 
 done_testing();
