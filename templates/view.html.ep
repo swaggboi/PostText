@@ -1,0 +1,4 @@
+% layout 'main';
+% title 'View Threads';
+<h2><%= title %></h2>
+<p>Some threads here...</p>

@@ -5,8 +5,11 @@
 
 use Mojolicious::Lite -signatures;
 
-get '/', sub ($c) {
-    $c->render(text => 'ayy... lmao')
+# Root redirect
+get '/', sub ($c) { $c->redirect_to('view') };
+
+get '/view', sub ($c) {
+    $c->render()
 };
 
 app->start();
