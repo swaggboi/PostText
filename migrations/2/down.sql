@@ -1,0 +1,3 @@
+ALTER TABLE threads
+ALTER COLUMN thread_title
+ TYPE VARCHAR(256);
