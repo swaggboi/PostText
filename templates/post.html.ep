@@ -1,0 +1,22 @@
+% layout 'main';
+% title 'New Thread';
+<h2><%= title %></h2>
+<form method="post">
+  <div class="name field">
+    <%= label_for name => 'Author' %>
+    <%= text_field name =>'Anonymous', maxlength => 63, minlength => 1 %>
+  </div>
+  <div class="title field">
+    <%= label_for title => 'Title' %>
+    <%= text_field 'title', maxlength => 255, minlength => 1 %>
+  </div>
+  <div class="text field">
+    <%= label_for post => 'Text' %>
+    <%= text_area 'post',
+        maxlength => 4000,
+        minlength => 2,
+        required  => 'true',
+        rows      => 6 %>
+  </div>
+  <%= submit_button 'Post', class => 'post button' %>
+</form>

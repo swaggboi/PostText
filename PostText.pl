@@ -25,15 +25,23 @@ under sub ($c) {
     1;
 };
 
-# Root redirect
+# Root
 get '/', sub ($c) { $c->redirect_to('view') };
 
+# View
 get '/view', sub ($c) {
     $c->render()
 };
 
+# Post
+any [qw{GET POST}], '/post', sub ($c) {
+    $c->render()
+};
+
+# Configure things
 app->secrets(app->config->{'secrets'}) || die $@;
 
 app->pg->migrations->from_dir('migrations')->migrate();
 
+# Send it
 app->start();
