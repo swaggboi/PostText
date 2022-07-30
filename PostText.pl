@@ -34,4 +34,6 @@ get '/view', sub ($c) {
 
 app->secrets(app->config->{'secrets'}) || die $@;
 
+app->pg->migrations->from_dir('migrations')->migrate();
+
 app->start();
