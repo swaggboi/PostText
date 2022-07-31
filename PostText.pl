@@ -41,7 +41,7 @@ any [qw{GET POST}], '/post', sub ($c) {
 # Configure things
 app->secrets(app->config->{'secrets'}) || die $@;
 
-app->pg->migrations->from_dir('migrations')->migrate();
+app->pg->migrations->from_dir('migrations')->migrate(3);
 
 # Send it
 app->start();
