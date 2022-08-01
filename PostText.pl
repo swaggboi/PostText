@@ -20,7 +20,7 @@ helper pg => sub {
 
 # Begin routing
 under sub ($c) {
-    $c->session(expires => time() + 1800);
+    $c->session(expires => time() + 31536000);
 
     1;
 };
