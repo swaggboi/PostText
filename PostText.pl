@@ -18,6 +18,10 @@ helper pg => sub {
     state $pg = Mojo::Pg->new(app->config->{app->mode}{'pg_string'})
 };
 
+helper thread => sub {
+    state $thread = PostText::Model::Thread->new(pg => shift->pg)
+};
+
 # Begin routing
 under sub ($c) {
     $c->session(expires => time() + 31536000);
@@ -35,7 +39,17 @@ get '/view', sub ($c) {
 
 # Post
 any [qw{GET POST}], '/post', sub ($c) {
-    $c->render()
+    my $thread_author = $c->param('name');
+    my $thread_title  = $c->param('title');
+    my $thread_body   = $c->param('post');
+
+    if ($thread_author && $thread_title && $thread_body) {
+        $c->thread->create_thread($thread_author, $thread_title, $thread_body);
+
+        return $c->redirect_to('view');
+    }
+
+    return $c->render();
 };
 
 # Configure things

@@ -25,4 +25,6 @@ Run the tests locally (against development environment)
 ## TODOs
 
 1. Moar tests...
-1. Do something with submitted form data
+1. Retreive threads for View route
+1. Validate input
+1. **Moar tests!!**
