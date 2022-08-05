@@ -25,6 +25,6 @@ Run the tests locally (against development environment)
 ## TODOs
 
 1. Moar tests...
-1. Retreive threads for View route
+1. Pick a date format
 1. Validate input
 1. **Moar tests!!**

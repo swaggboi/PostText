@@ -25,4 +25,17 @@ sub create_thread($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     END_SQL
 }
 
+sub get_threads($self) {
+    $self->pg->db->query(<<~'END_SQL')->hashes()
+        SELECT thread_id                                             AS id,
+               TO_CHAR(thread_date, 'Dy Mon DD HH:MI:SS AM TZ YYYY') AS date,
+               thread_author                                         AS author,
+               thread_title                                          AS title,
+               thread_body                                           AS body
+          FROM threads
+         WHERE NOT hidden_status
+         ORDER BY thread_date DESC;
+       END_SQL
+}
+
 1;

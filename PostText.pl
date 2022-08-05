@@ -9,6 +9,7 @@ use Mojo::Pg;
 # Load the local modules too
 use lib 'lib';
 use PostText::Model::Thread;
+#use Data::Dumper; # For your debugging pleasure
 
 # Load Mojo plugins
 plugin 'Config';
@@ -34,14 +35,18 @@ get '/', sub ($c) { $c->redirect_to('view') };
 
 # View
 get '/view', sub ($c) {
-    $c->render()
+    my $threads = $c->thread->get_threads();
+
+    $c->stash(threads => $threads);
+
+    $c->render();
 };
 
 # Post
 any [qw{GET POST}], '/post', sub ($c) {
-    my $thread_author = $c->param('name');
+    my $thread_author = $c->param('name' );
     my $thread_title  = $c->param('title');
-    my $thread_body   = $c->param('post');
+    my $thread_body   = $c->param('post' );
 
     if ($thread_author && $thread_title && $thread_body) {
         $c->thread->create_thread($thread_author, $thread_title, $thread_body);
