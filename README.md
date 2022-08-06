@@ -26,5 +26,4 @@ Run the tests locally (against development environment)
 
 1. Moar tests...
 1. Pick a date format
-1. Validate input
 1. **Moar tests!!**
