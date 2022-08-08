@@ -5,11 +5,11 @@
 
 use Mojolicious::Lite -signatures;
 use Mojo::Pg;
+#use Data::Dumper; # For your debugging pleasure
 
 # Load the local modules too
 use lib 'lib';
 use PostText::Model::Thread;
-#use Data::Dumper; # For your debugging pleasure
 
 # Load Mojo plugins
 plugin 'Config';
