@@ -11,5 +11,8 @@
 </nav>
 <hr>
 <%= content =%>
+<footer>
+  <p>In UTF-8 we trust.</p>
+</footer>
 </body>
 </html>
