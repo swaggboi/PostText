@@ -5,7 +5,7 @@
 
 use Mojolicious::Lite -signatures;
 use Mojo::Pg;
-#use Data::Dumper; # For your debugging pleasure
+use Data::Dumper; # For your debugging pleasure
 
 # Load the local modules too
 use lib 'lib';
@@ -13,6 +13,7 @@ use PostText::Model::Thread;
 
 # Load Mojo plugins
 plugin 'Config';
+plugin 'TagHelpers::Pagination';
 
 # Helpers
 helper pg => sub {
@@ -34,12 +35,28 @@ under sub ($c) {
 get '/', sub ($c) { $c->redirect_to('view') };
 
 # View
-get '/view', sub ($c) {
-    my $threads = $c->thread->get_threads();
+group {
+    under 'view';
 
-    $c->stash(threads => $threads);
+    get '/:page', [page => qr/[0-9]+/], {page => 1}, sub ($c) {
+        my $base_path = '/view';
+        my $this_page = $c->param('page');
+        my $last_page = $c->thread->get_last_page();
+        my $threads   = $c->thread->get_threads_by_page($this_page);
 
-    $c->render();
+        $c->stash(
+            threads   => $threads,
+            this_page => $this_page,
+            last_page => $last_page,
+            base_path => $base_path
+            );
+
+        unless (my $thread = @$threads[0]) {
+            $c->stash(status => 404)
+        }
+
+        $c->render();
+    };
 };
 
 # Post
@@ -70,6 +87,10 @@ any [qw{GET POST}], '/post', sub ($c) {
 app->secrets(app->config->{'secrets'}) || die $@;
 
 app->pg->migrations->from_dir('migrations')->migrate(3);
+
+if (my $threads_per_page = app->config->{'threads_per_page'}) {
+    app->thread->threads_per_page($threads_per_page)
+}
 
 # Send it
 app->start();

@@ -11,7 +11,7 @@ my $t      = Test::Mojo->new($script);
 my %valid_params = (
     name  => 'Anonymous',
     title => 'hi',
-    body  => 'ayy... lmao'
+    post  => 'ayy... lmao'
     );
 
 $t->ua->max_redirects(1);
