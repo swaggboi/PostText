@@ -7,7 +7,7 @@ use Mojo::Base -base, -signatures;
 has 'pg';
 
 sub new($class, $pg, $pg_reference) {
-    bless {$pg => $pg_reference}
+    bless {$pg => $pg_reference}, $class
 }
 
 sub create_thread($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
