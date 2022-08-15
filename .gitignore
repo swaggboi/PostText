@@ -40,4 +40,4 @@ inc/
 /PostText.yml
 
 # AssetPack cache
-/assets/cache/
+assets/cache/
