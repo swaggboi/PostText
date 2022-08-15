@@ -28,8 +28,6 @@ helper thread => sub {
 under sub ($c) {
     $c->session(expires => time() + 31536000);
 
-    $c->stash(status => 400) if $c->flash('invalid_input');
-
     1;
 };
 
@@ -73,17 +71,17 @@ any [qw{GET POST}], '/post', sub ($c) {
         $v->required('post' )->size(2, 4000);
 
         if ($v->has_error) {
-            $c->flash(invalid_input => 'Invalid thread title/text.')
+            $c->stash(status => 400)
         }
         else {
             $c->thread->create_thread(
                 $thread_author,
                 $thread_title,
                 $thread_body
-                )
-        }
+                );
 
-        return $c->redirect_to('view');
+            return $c->redirect_to('view');
+        }
     }
 
     return $c->render();
