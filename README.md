@@ -24,7 +24,6 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Handle POST with no params (error)
-1. Moar tests...
+1. Display error for invalid input (call `flash()` in template)
 1. Pick a date format
-1. **Moar tests!!**
+1. Reply model
