@@ -38,3 +38,6 @@ inc/
 /PostText.conf
 /PostText.yaml
 /PostText.yml
+
+# AssetPack cache
+/assets/cache/

@@ -14,6 +14,7 @@ use PostText::Model::Thread;
 # Load Mojo plugins
 plugin 'Config';
 plugin 'TagHelpers::Pagination';
+plugin AssetPack => {pipes => [qw{Css Combine}]};
 
 # Helpers
 helper pg => sub {
@@ -95,6 +96,8 @@ app->pg->migrations->from_dir('migrations')->migrate(3);
 if (my $threads_per_page = app->config->{'threads_per_page'}) {
     app->thread->threads_per_page($threads_per_page)
 }
+
+app->asset->process('main.css', 'css/PostText.css');
 
 # Send it
 app->start();
