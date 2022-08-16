@@ -67,9 +67,9 @@ sub get_last_page($self) {
     my $last_page    = int($thread_count / $self->{'threads_per_page'});
 
     # Add a page for 'remainder' posts
-    return ++$last_page if $thread_count % $self->{'threads_per_page'};
+    $last_page++ if $thread_count % $self->{'threads_per_page'};
 
-    return $last_page;
+    $last_page;
 }
 
 sub get_thread_count($self) {
