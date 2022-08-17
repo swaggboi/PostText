@@ -73,8 +73,8 @@ sub get_last_page($self) {
 }
 
 sub get_thread_count($self) {
-    $self->pg->db->query(<<~'END_SQL')->text()
-        SELECT COUNT(*)
+    $self->pg->db->query(<<~'END_SQL')->hash->{'count'}
+        SELECT COUNT(*) AS count
           FROM threads
          WHERE NOT hidden_status;
        END_SQL
