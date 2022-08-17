@@ -37,7 +37,7 @@ sub get_all_threads($self) {
                thread_body                                           AS body
           FROM threads
          WHERE NOT hidden_status
-         ORDER BY thread_date DESC;
+         ORDER BY bump_date DESC;
        END_SQL
 }
 
@@ -53,7 +53,7 @@ sub get_threads_by_page($self, $this_page = 1) {
                thread_body                                           AS body
           FROM threads
          WHERE NOT hidden_status
-         ORDER BY thread_date DESC
+         ORDER BY bump_date DESC
          LIMIT ? OFFSET ?;
        END_SQL
 }
