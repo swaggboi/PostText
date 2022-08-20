@@ -24,6 +24,8 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
+1. Clean up that single thread view (it's late and I need sleep)
+1. Tests for single thread view
 1. Retrieve replies in the single thread view
 1. Paging for replies in single thread view
 1. Default 'threads per page' is broken if config file isn't correct
