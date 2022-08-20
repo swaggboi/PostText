@@ -91,10 +91,11 @@ any [qw{GET POST}], '/post', sub ($c) {
 # Configure things
 app->secrets(app->config->{'secrets'}) || die $@;
 
-app->pg->migrations->from_dir('migrations')->migrate(3);
+app->pg->migrations->from_dir('migrations')->migrate(4);
 
 if (my $threads_per_page = app->config->{'threads_per_page'}) {
-    app->thread->threads_per_page($threads_per_page)
+    say $threads_per_page;
+    app->thread->threads_per_page($threads_per_page);
 }
 
 app->asset->process('main.css', 'css/PostText.css');

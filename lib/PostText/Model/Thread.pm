@@ -59,7 +59,7 @@ sub get_threads_by_page($self, $this_page = 1) {
 }
 
 sub threads_per_page($self, $value = undef) {
-    $self->{'threads_per_page'} = $value // $self->{'threads_per_page'}
+    $self->{'threads_per_page'} = $value // $self->{'threads_per_page'};
 }
 
 sub get_last_page($self) {
