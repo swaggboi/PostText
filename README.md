@@ -24,7 +24,7 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
+1. Make a view for single threads(!!)
 1. Default 'threads per page' is broken if config file isn't correct
    (should pick up the default value wtf)
 1. Pick a date format
-1. Reply model
