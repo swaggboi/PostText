@@ -1,13 +1,24 @@
 % layout 'main';
 % title "View Thread - #$thread->{'id'}";
 <h2><%= title %></h2>
-<div class="threads">
-  <% if (my $thread = $thread) { %>
+<% if (my $thread_body = %$thread{'body'}) { =%>
+  <div class="threads">
     <article class="thread">
       <h3 class="title"><%= %$thread{'title'} %></h3>
       <h4 class="date"><%= %$thread{'date'} %></h4>
       <h5 class="author"><%= %$thread{'author'} %></h5>
-      <p class="body"><%= %$thread{'body'} %></p>
+      <p class="body"><%= $thread_body %></p>
     </article>
-  <% } =%>
-</div>
+  </div>
+<% } =%>
+<% if (my $first_reply = @$replies[0]) { =%>
+  <div class="replies">
+    <% for my $reply (@$replies) { =%>
+      <article class="reply">
+        <h4 class="date"><%= %$reply{'date'} %></h4>
+        <h5 class="author"><%= %$reply{'author'} %></h5>
+        <p class="body"><%= %$reply{'body'} %></p>
+      </article>
+    <% } =%>
+  </div>
+<% } =%>

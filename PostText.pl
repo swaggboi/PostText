@@ -100,9 +100,13 @@ group {
     get '/:thread_id', [message_id => qr/[0-9]+/], sub ($c) {
         my $thread_id = $c->param('thread_id');
         my $thread    = $c->thread->get_thread_by_id($thread_id);
+        my $replies   = $c->reply->get_replies_by_thread_id($thread_id);
 
-        if (%$thread{'body'}) {
-            $c->stash(thread => $thread)
+        if (my $thread_body = %$thread{'body'}) {
+            $c->stash(
+                thread  => $thread,
+                replies => $replies
+                )
         }
         else {
             $c->stash(
