@@ -29,4 +29,6 @@ Run the tests locally (against development environment)
 1. Default 'threads per page' is broken if config file isn't correct
    (should pick up the default value wtf)
 1. Why aren't the built-in error handling things working anymore??
+   (Commenting out the Reply model fixes this, probably has something
+   to do with PostText::Model::Reply)
 1. Pick a date format
