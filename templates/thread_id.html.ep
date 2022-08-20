@@ -1,5 +1,5 @@
 % layout 'main';
-% title 'View Threads';
+% title "View Thread - #$thread->{'id'}";
 <h2><%= title %></h2>
 <div class="threads">
   <% if (my $thread = $thread) { %>
