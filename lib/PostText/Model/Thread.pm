@@ -92,8 +92,8 @@ sub get_thread_by_id($self, $thread_id) {
        END_SQL
 }
 
-sub exception($self, $exception) {
-    say $exception
-}
+#sub exception($self, $exception) {
+#    say $exception
+#}
 
 1;
