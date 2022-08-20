@@ -93,6 +93,28 @@ any [qw{GET POST}], '/post', sub ($c) {
     return $c->render();
 };
 
+# Thread
+group {
+    under '/thread';
+
+    get '/:thread_id', [message_id => qr/[0-9]+/], sub ($c) {
+        my $thread_id = $c->param('thread_id');
+        my $thread    = $c->thread->get_thread_by_id($thread_id);
+
+        if (%$thread{'body'}) {
+            $c->stash(thread => $thread)
+        }
+        else {
+            $c->stash(
+                thread => [],
+                status => 404
+                )
+        }
+
+        $c->render();
+    };
+};
+
 # Configure things
 app->secrets(app->config->{'secrets'}) || die $@;
 

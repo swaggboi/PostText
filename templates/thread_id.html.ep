@@ -1,0 +1,13 @@
+% layout 'main';
+% title 'View Threads';
+<h2><%= title %></h2>
+<div class="threads">
+  <% if (my $thread = $thread) { %>
+    <article class="thread">
+      <h3 class="title"><%= %$thread{'title'} %></h3>
+      <h4 class="date"><%= %$thread{'date'} %></h4>
+      <h5 class="author"><%= %$thread{'author'} %></h5>
+      <p class="body"><%= %$thread{'body'} %></p>
+    </article>
+  <% } =%>
+</div>

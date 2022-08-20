@@ -24,7 +24,8 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Make a view for single threads(!!)
+1. Retrieve replies in the single thread view
+1. Paging for replies in single thread view
 1. Default 'threads per page' is broken if config file isn't correct
    (should pick up the default value wtf)
 1. Pick a date format

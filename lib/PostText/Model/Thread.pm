@@ -80,4 +80,16 @@ sub get_thread_count($self) {
        END_SQL
 }
 
+sub get_thread_by_id($self, $thread_id) {
+    $self->pg->db->query(<<~'END_SQL', $thread_id)->hashes->[0]
+        SELECT thread_id                                             AS id,
+               TO_CHAR(thread_date, 'Dy Mon DD HH:MI:SS AM TZ YYYY') AS date,
+               thread_author                                         AS author,
+               thread_title                                          AS title,
+               thread_body                                           AS body
+          FROM threads
+         WHERE thread_id = ?;
+       END_SQL
+}
+
 1;
