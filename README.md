@@ -27,4 +27,3 @@ Run the tests locally (against development environment)
 1. Reply model needs to become Remark (to fix the error handling stuff)
 1. Add hyperlink somewhere to single thread view (whoopsie)
 1. Paging for replies in single thread view
-1. Pick a date format

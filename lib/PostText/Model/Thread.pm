@@ -9,7 +9,8 @@ has 'pg';
 sub new($class, $pg, $pg_reference) {
     bless {
         $pg              => $pg_reference,
-        threads_per_page => 5
+        threads_per_page => 5,
+        date_format      => 'Dy Mon FMDD FMHH24:MI TZ YYYY'
     }, $class
 }
 
@@ -29,12 +30,12 @@ sub create_thread($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
 }
 
 sub get_all_threads($self) {
-    $self->pg->db->query(<<~'END_SQL')->hashes()
-        SELECT thread_id                                             AS id,
-               TO_CHAR(thread_date, 'Dy Mon DD HH:MI:SS AM TZ YYYY') AS date,
-               thread_author                                         AS author,
-               thread_title                                          AS title,
-               thread_body                                           AS body
+    $self->pg->db->query(<<~'END_SQL', %$self{'date_format'})->hashes()
+        SELECT thread_id               AS id,
+               TO_CHAR(thread_date, ?) AS date,
+               thread_author           AS author,
+               thread_title            AS title,
+               thread_body             AS body
           FROM threads
          WHERE NOT hidden_status
          ORDER BY bump_date DESC;
@@ -42,20 +43,22 @@ sub get_all_threads($self) {
 }
 
 sub get_threads_by_page($self, $this_page = 1) {
+    my $date_format = %$self{'date_format'};
     my $row_count = $self->{'threads_per_page'};
     my $offset    = ($this_page - 1) * $row_count;
 
-    $self->pg->db->query(<<~'END_SQL', $row_count, $offset)->hashes();
-        SELECT thread_id                                             AS id,
-               TO_CHAR(thread_date, 'Dy Mon DD HH:MI:SS AM TZ YYYY') AS date,
-               thread_author                                         AS author,
-               thread_title                                          AS title,
-               thread_body                                           AS body
-          FROM threads
-         WHERE NOT hidden_status
-         ORDER BY bump_date DESC
-         LIMIT ? OFFSET ?;
-       END_SQL
+    $self->pg->db
+        ->query(<<~'END_SQL', $date_format, $row_count, $offset)->hashes();
+            SELECT thread_id               AS id,
+                   TO_CHAR(thread_date, ?) AS date,
+                   thread_author           AS author,
+                   thread_title            AS title,
+                   thread_body             AS body
+              FROM threads
+             WHERE NOT hidden_status
+             ORDER BY bump_date DESC
+             LIMIT ? OFFSET ?;
+           END_SQL
 }
 
 sub threads_per_page($self, $value = undef) {
@@ -81,19 +84,17 @@ sub get_thread_count($self) {
 }
 
 sub get_thread_by_id($self, $thread_id) {
-    $self->pg->db->query(<<~'END_SQL', $thread_id)->hashes->[0]
-        SELECT thread_id                                             AS id,
-               TO_CHAR(thread_date, 'Dy Mon DD HH:MI:SS AM TZ YYYY') AS date,
-               thread_author                                         AS author,
-               thread_title                                          AS title,
-               thread_body                                           AS body
+    my $date_format = %$self{'date_format'};
+
+    $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash();
+        SELECT thread_id               AS id,
+               TO_CHAR(thread_date, ?) AS date,
+               thread_author           AS author,
+               thread_title            AS title,
+               thread_body             AS body
           FROM threads
          WHERE thread_id = ?;
        END_SQL
 }
-
-#sub exception($self, $exception) {
-#    say $exception
-#}
 
 1;
