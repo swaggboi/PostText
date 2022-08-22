@@ -11,13 +11,13 @@
     </article>
   </div>
 <% } =%>
-<% if (my $first_reply = @$replies[0]) { =%>
-  <div class="replies">
-    <% for my $reply (@$replies) { =%>
-      <article class="reply">
-        <h4 class="date"><%= %$reply{'date'} %></h4>
-        <h5 class="author"><%= %$reply{'author'} %></h5>
-        <p class="body"><%= %$reply{'body'} %></p>
+<% if (my $first_remark = @$remarks[0]) { =%>
+  <div class="remarks">
+    <% for my $remark (@$remarks) { =%>
+      <article class="remark">
+        <h4 class="date"><%= %$remark{'date'} %></h4>
+        <h5 class="author"><%= %$remark{'author'} %></h5>
+        <p class="body"><%= %$remark{'body'} %></p>
       </article>
     <% } =%>
   </div>

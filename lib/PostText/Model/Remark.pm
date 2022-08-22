@@ -22,7 +22,7 @@ sub get_remarks_by_thread_id($self, $thread_id) {
                TO_CHAR(remark_date, ?) AS date,
                remark_author           AS author,
                remark_body             AS body
-          FROM replies
+          FROM remarks
          WHERE thread_id = ?
            AND NOT hidden_status
          ORDER BY remark_date ASC;

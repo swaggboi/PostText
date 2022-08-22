@@ -10,7 +10,7 @@ use Data::Dumper; # For your debugging pleasure
 # Load the local modules too
 use lib 'lib';
 use PostText::Model::Thread;
-use PostText::Model::Reply;
+use PostText::Model::Remark;
 
 # Load Mojo plugins
 plugin 'Config';
@@ -26,8 +26,8 @@ helper thread => sub {
     state $thread = PostText::Model::Thread->new(pg => shift->pg)
 };
 
-helper reply => sub {
-    state $reply = PostText::Model::Reply->new(pg => shift->pg)
+helper remark => sub {
+    state $remark = PostText::Model::Remark->new(pg => shift->pg)
 };
 
 # Begin routing
@@ -100,12 +100,12 @@ group {
     get '/:thread_id', [thread_id => qr/[0-9]+/], sub ($c) {
         my $thread_id = $c->param('thread_id');
         my $thread    = $c->thread->get_thread_by_id($thread_id);
-        my $replies   = $c->reply->get_replies_by_thread_id($thread_id);
+        my $remarks   = $c->remark->get_remarks_by_thread_id($thread_id);
 
         if (my $thread_body = %$thread{'body'}) {
             $c->stash(
                 thread  => $thread,
-                replies => $replies
+                remarks => $remarks
                 )
         }
         else {
@@ -122,7 +122,7 @@ group {
 # Configure things
 app->secrets(app->config->{'secrets'}) || die $@;
 
-app->pg->migrations->from_dir('migrations')->migrate(4);
+app->pg->migrations->from_dir('migrations')->migrate(5);
 
 if (my $threads_per_page = app->config->{'threads_per_page'}) {
     app->thread->threads_per_page($threads_per_page);
