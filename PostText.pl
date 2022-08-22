@@ -45,7 +45,7 @@ group {
     under 'view';
 
     get '/:page', [page => qr/[0-9]+/], {page => 1}, sub ($c) {
-        my $base_path = '/view';
+        my $base_path = $c->match->path_for(page => undef)->{'path'};
         my $this_page = $c->param('page');
         my $last_page = $c->thread->get_last_page();
         my $threads   = $c->thread->get_threads_by_page($this_page);
@@ -126,6 +126,10 @@ app->pg->migrations->from_dir('migrations')->migrate(5);
 
 if (my $threads_per_page = app->config->{'threads_per_page'}) {
     app->thread->threads_per_page($threads_per_page);
+}
+
+if (my $remarks_per_page = app->config->{'remarks_per_page'}) {
+    app->remark->remarks_per_page($remarks_per_page);
 }
 
 app->asset->process('main.css', 'css/PostText.css');

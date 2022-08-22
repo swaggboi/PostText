@@ -29,4 +29,8 @@ sub get_remarks_by_thread_id($self, $thread_id) {
        END_SQL
 }
 
+sub remarks_per_page($self, $value = undef) {
+    $self->{'remarks_per_page'} = $value // $self->{'remarks_per_page'};
+}
+
 1;
