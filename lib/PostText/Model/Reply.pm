@@ -10,7 +10,7 @@ sub new($class, $pg, $pg_reference) {
     bless {
         $pg              => $pg_reference,
         replies_per_page => 5,
-        date_format      => 'Dy Mon FMDD FMHH24:MI TZ YYYY'
+        date_format      => 'Dy Mon FMDD HH24:MI TZ YYYY'
     }, $class
 }
 
