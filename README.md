@@ -6,13 +6,13 @@ A textboard written in Perl
 
 Install dependencies
 
-    $ cpanm --installdeps .
+    cpanm --installdeps .
 
 ## Running locally
 
 Run it in development mode
 
-    $ morbo PostText.pl
+    morbo PostText.pl
 
 Now try requesting http://localhost:3000
 
@@ -20,9 +20,14 @@ Now try requesting http://localhost:3000
 
 Run the tests locally (against development environment)
 
-    $ prove -l
+    prove -l
 
 ## TODOs
 
-1. Add hyperlink somewhere to single thread view (whoopsie)
-1. Paging for replies in single thread view
+1. Paging for remarks in single thread view
+1. Form to create new remarks
+1. I'm kinda hardcoding the single-thread view `link_to` in the
+   templates because I cannot for the life of me figure out how to use
+   `url_for` to populate the `thread_id` placeholder. Probably need to
+   clean-up the HTML too, just used `<span>` cuz I didn't know what
+   else to use
