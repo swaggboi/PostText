@@ -44,8 +44,8 @@ sub get_all_threads($self) {
 
 sub get_threads_by_page($self, $this_page = 1) {
     my $date_format = %$self{'date_format'};
-    my $row_count = $self->{'threads_per_page'};
-    my $offset    = ($this_page - 1) * $row_count;
+    my $row_count   = $self->{'threads_per_page'};
+    my $offset      = ($this_page - 1) * $row_count;
 
     $self->pg->db
         ->query(<<~'END_SQL', $date_format, $row_count, $offset)->hashes();
