@@ -97,12 +97,12 @@ group {
     };
 
     any [qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/], sub ($c) {
-        my $v;
+        my ($thread_id, $v) = ($c->param('thread_id'), undef);
 
         $v = $c->validation() if $c->req->method eq 'POST';
 
         if ($v && $v->has_data) {
-            my $thread_id   = $c->param('thread_id');
+
             my $remark_name = $c->param('name');
             my $remark_body = $c->param('post');
 
@@ -126,6 +126,10 @@ group {
                     );
             }
         }
+
+        my $thread = $c->thread->get_thread_by_id($thread_id);
+
+        $c->stash(thread => $thread);
 
         return $c->render(template => 'post_remark');
     };

@@ -1,6 +1,17 @@
 % layout 'main';
 % title 'New Remark';
 <h2><%= title %></h2>
+<% if (my $thread_body = %$thread{'body'}) { =%>
+  <div class="threads">
+    <article class="thread">
+      <span class="id">#<%= %$thread{'id'} %></span>
+      <h3 class="title"><%= %$thread{'title'} %></h3>
+      <h4 class="date"><%= %$thread{'date'} %></h4>
+      <h5 class="author"><%= %$thread{'author'} %></h5>
+      <p class="body"><%= $thread_body %></p>
+    </article>
+  </div>
+<% } =%>
 <form method="post">
   <div class="name field">
     <%= label_for name => 'Author' %>
