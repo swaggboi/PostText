@@ -105,7 +105,8 @@ group {
         my $base_path = $c->match->path_for(remark_page => undef)->{'path'};
         my $this_page = $c->param('remark_page');
         my $last_page = $c->remark->get_last_page_by_thread_id($thread_id);
-        my $remarks   = $c->remark->get_remarks_by_thread_id($thread_id);
+        my $remarks   =
+            $c->remark->get_remarks_by_thread_id($thread_id, $this_page);
 
         if (my $thread_body = %$thread{'body'}) {
             $c->stash(

@@ -15,6 +15,7 @@
   <div class="remarks">
     <% for my $remark (@$remarks) { =%>
       <article class="remark">
+        <span class="id">#<%= %$remark{'id'} %></span>
         <h4 class="date"><%= %$remark{'date'} %></h4>
         <h5 class="author"><%= %$remark{'author'} %></h5>
         <p class="body"><%= %$remark{'body'} %></p>

@@ -24,11 +24,10 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Paging for remarks is broken because I conflated ascending and
-   descending... Need to come back to this I need sleep
 1. Form to create new remarks
 1. I'm kinda hardcoding the single-thread view `link_to` in the
    templates because I cannot for the life of me figure out how to use
    `url_for` to populate the `thread_id` placeholder. Probably need to
    clean-up the HTML too, just used `<span>` cuz I didn't know what
    else to use
+1. Just clean stuff up in general lol
