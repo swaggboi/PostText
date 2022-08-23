@@ -44,9 +44,9 @@ get '/', sub ($c) { $c->redirect_to('view') };
 group {
     under 'view';
 
-    get '/:page', [page => qr/[0-9]+/], {page => 1}, sub ($c) {
-        my $base_path = $c->match->path_for(page => undef)->{'path'};
-        my $this_page = $c->param('page');
+    get '/:view_page', [view_page => qr/[0-9]+/], {view_page => 1}, sub ($c) {
+        my $base_path = $c->match->path_for(view_page => undef)->{'path'};
+        my $this_page = $c->param('view_page');
         my $last_page = $c->thread->get_last_page();
         my $threads   = $c->thread->get_threads_by_page($this_page);
 
@@ -97,15 +97,23 @@ any [qw{GET POST}], '/post', sub ($c) {
 group {
     under '/thread';
 
-    get '/:thread_id', [thread_id => qr/[0-9]+/], sub ($c) {
+    get '/:thread_id/:remark_page',
+        [thread_id => qr/[0-9]+/, remark_page => qr/[0-9]+/],
+    {remark_page => 1}, sub ($c) {
         my $thread_id = $c->param('thread_id');
         my $thread    = $c->thread->get_thread_by_id($thread_id);
+        my $base_path = $c->match->path_for(remark_page => undef)->{'path'};
+        my $this_page = $c->param('remark_page');
+        my $last_page = $c->remark->get_last_page_by_thread_id($thread_id);
         my $remarks   = $c->remark->get_remarks_by_thread_id($thread_id);
 
         if (my $thread_body = %$thread{'body'}) {
             $c->stash(
-                thread  => $thread,
-                remarks => $remarks
+                thread    => $thread,
+                base_path => $base_path,
+                this_page => $this_page,
+                last_page => $last_page,
+                remarks   => $remarks
                 )
         }
         else {
@@ -115,7 +123,7 @@ group {
                 )
         }
 
-        $c->render();
+        $c->render(template => 'thread_id');
     };
 };
 
