@@ -135,6 +135,7 @@ group {
 group {
     under '/thread';
 
+    # This desperately needs clean-up
     get '/:thread_id/:remark_page',
         [thread_id => qr/[0-9]+/, remark_page => qr/[0-9]+/],
     {remark_page => 1}, sub ($c) {
