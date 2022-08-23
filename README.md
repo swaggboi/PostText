@@ -12,7 +12,7 @@ Install dependencies
 
 Run it in development mode
 
-    morbo PostText.pl
+    morbo -w assets/css/ -w lib/ -w migrations/ -w t/ -w templates/ PostText.pl
 
 Now try requesting http://localhost:3000
 
@@ -24,10 +24,11 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Form to create new remarks
+1. Hyperlink to remarks form
+1. Is there something I can do about route names?
 1. I'm kinda hardcoding the single-thread view `link_to` in the
    templates because I cannot for the life of me figure out how to use
    `url_for` to populate the `thread_id` placeholder. Probably need to
    clean-up the HTML too, just used `<span>` cuz I didn't know what
    else to use
-1. Just clean stuff up in general lol
+1. Tests for remark form

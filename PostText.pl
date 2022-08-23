@@ -62,35 +62,73 @@ group {
 };
 
 # Post
-any [qw{GET POST}], '/post', sub ($c) {
-    my $v;
+group {
+    under '/post';
 
-    $v = $c->validation() if $c->req->method eq 'POST';
+    any [qw{GET POST}], '/', sub ($c) {
+        my $v;
 
-    if ($v && $v->has_data) {
-        my $thread_author = $c->param('name' ) || 'Anonymous';
-        my $thread_title  = $c->param('title');
-        my $thread_body   = $c->param('post' );
+        $v = $c->validation() if $c->req->method eq 'POST';
 
-        $v->required('name' )->size(1, 63  );
-        $v->required('title')->size(1, 127 );
-        $v->required('post' )->size(2, 4000);
+        if ($v && $v->has_data) {
+            my $thread_author = $c->param('name' ) || 'Anonymous';
+            my $thread_title  = $c->param('title');
+            my $thread_body   = $c->param('post' );
 
-        if ($v->has_error) {
-            $c->stash(status => 400)
+            $v->required('name' )->size(1, 63  );
+            $v->required('title')->size(1, 127 );
+            $v->required('post' )->size(2, 4000);
+
+            if ($v->has_error) {
+                $c->stash(status => 400)
+            }
+            else {
+                $c->thread->create_thread(
+                    $thread_author,
+                    $thread_title,
+                    $thread_body
+                    );
+
+                return $c->redirect_to('view');
+            }
         }
-        else {
-            $c->thread->create_thread(
-                $thread_author,
-                $thread_title,
-                $thread_body
-                );
 
-            return $c->redirect_to('view');
+        return $c->render(template => 'post_thread');
+    };
+
+    any [qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/], sub ($c) {
+        my $v;
+
+        $v = $c->validation() if $c->req->method eq 'POST';
+
+        if ($v && $v->has_data) {
+            my $thread_id   = $c->param('thread_id');
+            my $remark_name = $c->param('name');
+            my $remark_body = $c->param('post');
+
+            $v->required('name' )->size(1, 63  );
+            $v->required('post' )->size(2, 4000);
+
+            if ($v->has_error) {
+                $c->stash(status => 400)
+            }
+            else {
+                $c->remark->create_remark(
+                    $thread_id,
+                    $remark_name,
+                    $remark_body
+                    );
+
+                # Gotta be a better way to name this route...
+                return $c->redirect_to(
+                    'thread_idremark_page',
+                    {thread_id => $thread_id}
+                    );
+            }
         }
-    }
 
-    return $c->render();
+        return $c->render(template => 'post_remark');
+    };
 };
 
 # Thread
