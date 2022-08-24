@@ -37,18 +37,11 @@ sub remarks_per_page($self, $value = undef) {
     $self->{'remarks_per_page'} = $value // $self->{'remarks_per_page'}
 }
 
-# Probably can clean this up too
-sub create_remark(
-    $self,
-    $thread_id,
-    $author,
-    $body,
-    $hidden  = 0,
-    $flagged = 0
-    )
+sub create_remark($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0)
 {
-    $self->pg->db
-        ->query(<<~'END_SQL', $thread_id, $author, $body, $hidden, $flagged)
+    my @data = ($thread_id, $author, $body, $hidden, $flagged);
+
+    $self->pg->db->query(<<~'END_SQL', @data);
             INSERT INTO remarks (
                 thread_id,
                 remark_author,
