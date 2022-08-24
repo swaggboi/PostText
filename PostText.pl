@@ -63,9 +63,7 @@ group {
 
 # Post
 group {
-    under '/post';
-
-    any [qw{GET POST}], '/', sub ($c) {
+    any [qw{GET POST}], '/post', sub ($c) {
         my $v;
 
         $v = $c->validation() if $c->req->method eq 'POST';
@@ -93,8 +91,10 @@ group {
             }
         }
 
-        return $c->render(template => 'post_thread');
+        return $c->render();
     };
+
+    under '/post';
 
     any [qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/], sub ($c) {
         my ($thread_id, $v) = ($c->param('thread_id'), undef);
@@ -131,7 +131,7 @@ group {
 
         $c->stash(thread => $thread);
 
-        return $c->render(template => 'post_remark');
+        return $c->render();
     };
 };
 
@@ -166,7 +166,7 @@ group {
                 )
         }
 
-        $c->render(template => 'thread_id');
+        $c->render();
     };
 };
 

@@ -1,21 +1,19 @@
 % layout 'main';
-% title 'New Remark';
+% title 'New Thread';
 <h2><%= title %></h2>
-<div class="threads">
-  <article class="thread">
-    <span class="id">#<%= %$thread{'id'} %></span>
-    <h3 class="title"><%= %$thread{'title'} %></h3>
-    <h4 class="date"><%= %$thread{'date'} %></h4>
-    <h5 class="author"><%= %$thread{'author'} %></h5>
-    <p class="body"><%= %$thread{'body'} %></p>
-  </article>
-</div>
 <form method="post">
   <div class="name field">
     <%= label_for name => 'Author' %>
     <%= text_field name =>'Anonymous', maxlength => 63, minlength => 1 %>
     <% if (my $error = validation->error('name')) { =%>
-    <p class="field-with-error">Invalid name: 1 to 63 characters please.</p>
+      <p class="field-with-error">Invalid name: 1 to 63 characters please.</p>
+    <% } =%>
+  </div>
+  <div class="title field">
+    <%= label_for title => 'Title' %>
+    <%= text_field 'title', maxlength => 127, minlength => 1 %>
+    <% if (my $error = validation->error('title')) { =%>
+      <p class="field-with-error">Invalid title: 1 to 127 characters please.</p>
     <% } =%>
   </div>
   <div class="text field">
@@ -27,7 +25,7 @@
         rows      => 6
     ) %>
     <% if (my $error = validation->error('post')) { =%>
-    <p class="field-with-error">Invalid post: Up to 4,000 characters only.</p>
+      <p class="field-with-error">Invalid post: Up to 4,000 characters only.</p>
     <% } =%>
   </div>
   <%= submit_button 'Post', class => 'post button' %>
