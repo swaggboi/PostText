@@ -183,11 +183,11 @@ app->secrets(app->config->{'secrets'}) || die $@;
 app->pg->migrations->from_dir('migrations')->migrate(5);
 
 if (my $threads_per_page = app->config->{'threads_per_page'}) {
-    app->thread->threads_per_page($threads_per_page);
+    app->thread->threads_per_page($threads_per_page)
 }
 
 if (my $remarks_per_page = app->config->{'remarks_per_page'}) {
-    app->remark->remarks_per_page($remarks_per_page);
+    app->remark->remarks_per_page($remarks_per_page)
 }
 
 app->asset->process('main.css', 'css/PostText.css');
