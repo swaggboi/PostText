@@ -119,7 +119,6 @@ group {
                     $remark_body
                     );
 
-                # Gotta be a better way to name this route...
                 return $c->redirect_to(
                     'remark_page',
                     {thread_id => $thread_id}
