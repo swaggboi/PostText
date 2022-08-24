@@ -151,6 +151,9 @@ group {
         my $remarks   =
             $c->remark->get_remarks_by_thread_id($thread_id, $this_page);
 
+        # Probably a better way to do this 404 stuff I reckon
+
+        # Check for existence of thread
         if (my $thread_body = %$thread{'body'}) {
             $c->stash(
                 thread    => $thread,
@@ -166,6 +169,9 @@ group {
                 status => 404
                 )
         }
+
+        # Check for existance of remark page number
+        $c->stash(status => 404) unless $remarks->[0] || 1 >= $this_page;
 
         $c->render();
     };
