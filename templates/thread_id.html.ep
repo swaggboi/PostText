@@ -1,18 +1,20 @@
 % layout 'main';
 % title "View Thread - #$thread->{'id'}";
 <h2><%= title %></h2>
-<% if (my $thread_body = %$thread{'body'}) { =%>
-  <div class="threads">
-    <article class="thread">
-      <h3 class="title"><%= %$thread{'title'} %></h3>
-      <h4 class="date"><%= %$thread{'date'} %></h4>
-      <h5 class="author"><%= %$thread{'author'} %></h5>
-      <p class="body"><%= $thread_body %></p>
-    </article>
-  </div>
-<% } =%>
+<div class="threads">
+  <article class="thread">
+    <h3 class="title"><%= %$thread{'title'} %></h3>
+    <h4 class="date"><%= %$thread{'date'} %></h4>
+    <h5 class="author"><%= %$thread{'author'} %></h5>
+    <p class="body"><%= %$thread{'body'} %></p>
+  </article>
+</div>
+<nav>
+  <%= link_to Remark => thread_id => {thread_id => $thread->{'id'}}  %>
+</nav>
 <% if (my $first_remark = @$remarks[0]) { =%>
   <div class="remarks">
+    <h3>Remarks</h3>
     <% for my $remark (@$remarks) { =%>
       <article class="remark">
         <span class="id">#<%= %$remark{'id'} %></span>
@@ -22,9 +24,10 @@
       </article>
     <% } =%>
   </div>
-  <% if ($last_page && $last_page != 1) { =%>
   <nav>
+    <%= link_to Remark => thread_id => {thread_id => $thread->{'id'}}  %>
+    <% if ($last_page && $last_page != 1) { =%>
     <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>
+    <% } %>
   </nav>
-  <% } %>
 <% } =%>
