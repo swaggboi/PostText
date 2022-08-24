@@ -121,7 +121,7 @@ group {
 
                 # Gotta be a better way to name this route...
                 return $c->redirect_to(
-                    'thread_idremark_page',
+                    'remark_page',
                     {thread_id => $thread_id}
                     );
             }
@@ -137,11 +137,10 @@ group {
 
 # Thread
 group {
-    under '/thread';
+    under '/thread/:thread_id', [thread_id => qr/[0-9]+/];
 
-    # This desperately needs clean-up
-    get '/:thread_id/:remark_page',
-        [thread_id => qr/[0-9]+/, remark_page => qr/[0-9]+/],
+    get '/:remark_page',
+        [remark_page => qr/[0-9]+/],
     {remark_page => 1}, sub ($c) {
         my $thread_id = $c->param('thread_id');
         my $thread    = $c->thread->get_thread_by_id($thread_id);
