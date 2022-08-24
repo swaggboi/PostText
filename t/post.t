@@ -40,6 +40,6 @@ $t->post_ok('/post', form => \%invalid_post)->status_is(400)
     ->text_like(p => qr/Invalid post/);
 
 $t->post_ok('/post', form => \%valid_params)->status_is(200)
-    ->text_like(h2 => qr/View Threads/);
+    ->text_like(h2 => qr/Threads List/);
 
 done_testing();
