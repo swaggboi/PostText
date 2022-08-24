@@ -71,7 +71,7 @@ group {
         $v = $c->validation() if $c->req->method eq 'POST';
 
         if ($v && $v->has_data) {
-            my $thread_author = $c->param('name' ) || 'Anonymous';
+            my $thread_author = $c->param('name' );
             my $thread_title  = $c->param('title');
             my $thread_body   = $c->param('post' );
 
