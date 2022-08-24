@@ -38,15 +38,15 @@ under sub ($c) {
 };
 
 # Root
-get '/', sub ($c) { $c->redirect_to('view') };
+get '/', sub ($c) { $c->redirect_to('list') };
 
-# View
+# List
 group {
-    under 'view';
+    under 'list';
 
-    get '/:view_page', [view_page => qr/[0-9]+/], {view_page => 1}, sub ($c) {
-        my $base_path = $c->match->path_for(view_page => undef)->{'path'};
-        my $this_page = $c->param('view_page');
+    get '/:list_page', [list_page => qr/[0-9]+/], {list_page => 1}, sub ($c) {
+        my $base_path = $c->match->path_for(list_page => undef)->{'path'};
+        my $this_page = $c->param('list_page');
         my $last_page = $c->thread->get_last_page();
         my $threads   = $c->thread->get_threads_by_page($this_page);
 
@@ -87,7 +87,7 @@ group {
                     $thread_body
                     );
 
-                return $c->redirect_to('view');
+                return $c->redirect_to('list');
             }
         }
 

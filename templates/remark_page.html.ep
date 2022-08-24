@@ -1,5 +1,5 @@
 % layout 'main';
-% title "View Thread - #$thread->{'id'}";
+% title "Thread - #$thread->{'id'}";
 <h2><%= title %></h2>
 <div class="threads">
   <article class="thread">

@@ -24,9 +24,8 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Is there something I can do about route names?
 1. Tests for remark form
+1. Fix tests broken when 'view' was switched to 'list'
 1. Return the last remark with remark form
 1. Marked some items for clean up with comments
 1. Method names may need to be shortened
-1. Change 'view' to something like 'list' or 'browse'

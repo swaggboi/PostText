@@ -1,5 +1,5 @@
 % layout 'main';
-% title 'View Threads';
+% title 'Threads List';
 <h2><%= title %></h2>
 <div class="threads">
   <% for my $thread (@$threads) { =%>
