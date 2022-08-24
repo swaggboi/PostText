@@ -50,6 +50,8 @@ group {
         my $last_page = $c->thread->get_last_page();
         my $threads   = $c->thread->get_threads_by_page($this_page);
 
+        $c->stash(status => 404) unless $threads->[0];
+
         $c->stash(
             threads   => $threads,
             this_page => $this_page,
