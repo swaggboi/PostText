@@ -24,14 +24,9 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Hyperlink to remarks form
 1. Is there something I can do about route names?
-1. I'm kinda hardcoding the single-thread view `link_to` in the
-   templates because I cannot for the life of me figure out how to use
-   `url_for` to populate the `thread_id` placeholder. Probably need to
-   clean-up the HTML too, just used `<span>` cuz I didn't know what
-   else to use
 1. Tests for remark form
+1. Return the last remark with remark form
 1. Marked some items for clean up with comments
 1. Method names may need to be shortened
 1. Change 'view' to something like 'list' or 'browse'
