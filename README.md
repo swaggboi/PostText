@@ -24,7 +24,6 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. Tests for remark form
 1. Return the last remark with remark form
 1. Marked some items for clean up with comments
 1. Method names may need to be shortened
