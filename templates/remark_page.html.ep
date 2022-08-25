@@ -25,9 +25,8 @@
   <% } =%>
 </div>
 <nav>
-  <%= link_to Remark => thread_id => {thread_id => $thread->{'id'}}  %>
   <% if ($last_page && $last_page != 1) { =%>
   <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>
-  <% } %>
+  <% } =%>
 </nav>
 <% } =%>

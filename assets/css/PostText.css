@@ -1,5 +1,9 @@
-.field-with-error {}
+.field-with-error {
+    border-style: solid;
+    border-color: red;
+}
 
-.thread, .remark {
+.thread, .remark, .field-with-error {
     border-style: dotted;
+    border-collapse: collapse;
 }
