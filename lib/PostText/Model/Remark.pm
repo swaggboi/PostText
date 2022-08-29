@@ -42,15 +42,15 @@ sub create_remark($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0)
     my @data = ($thread_id, $author, $body, $hidden, $flagged);
 
     $self->pg->db->query(<<~'END_SQL', @data);
-            INSERT INTO remarks (
-                thread_id,
-                remark_author,
-                remark_body,
-                hidden_status,
-                flagged_status
-                )
-            VALUES (?, ?, ?, ?, ?);
-           END_SQL
+        INSERT INTO remarks (
+            thread_id,
+            remark_author,
+            remark_body,
+            hidden_status,
+            flagged_status
+            )
+        VALUES (?, ?, ?, ?, ?);
+       END_SQL
 }
 
 sub get_remark_count_by_thread_id($self, $thread_id) {
@@ -70,6 +70,21 @@ sub get_last_page_by_thread_id($self, $thread_id) {
     $last_page++ if $remark_count % $self->{'remarks_per_page'};
 
     $last_page;
+}
+
+sub last_remark($self, $thread_id) {
+    my $date_format = $self->{'date_format'};
+
+    $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash();
+        SELECT remark_id               AS id,
+               TO_CHAR(remark_date, ?) AS date,
+               remark_author           AS author,
+               remark_body             AS body
+          FROM remarks
+         WHERE thread_id = ?
+         ORDER BY remark_date
+          DESC LIMIT 1;
+       END_SQL
 }
 
 1;
