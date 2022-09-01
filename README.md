@@ -27,3 +27,10 @@ Run the tests locally (against development environment)
 1. Return the last remark with remark form
 1. Method names may need to be shortened, should use POD instead to
    describe their function
+
+## Crazy future ideas
+
+### (Lord knows there's TODOs I could be working on...)
+
+1. Return a text response instead of HTML if a `.txt` extension is requested
+1. Post thread via SMS (twil.io??)
