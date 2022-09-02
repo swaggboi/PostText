@@ -5,7 +5,8 @@
   <% for my $thread (@$threads) { =%>
     <article class="thread">
       <span class="id">
-        <%= link_to "#$thread->{'id'}", remark_page => {thread_id => $thread->{'id'}} %>
+        <%= link_to "#$thread->{'id'}",
+          remark_page => {thread_id => $thread->{'id'}} %>
       </span>
       <h3 class="title"><%= %$thread{'title'} %></h3>
       <h4 class="date"><%= %$thread{'date'} %></h4>

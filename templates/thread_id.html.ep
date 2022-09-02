@@ -1,17 +1,6 @@
 % layout 'main';
 % title 'New Remark';
 <h2><%= title %></h2>
-<div class="threads">
-  <article class="thread">
-    <span class="id">
-      <%= link_to "#$thread->{'id'}", remark_page => {thread_id => $thread->{'id'}} %>
-    </span>
-    <h3 class="title"><%= %$thread{'title'} %></h3>
-    <h4 class="date"><%= %$thread{'date'} %></h4>
-    <h5 class="author"><%= %$thread{'author'} %></h5>
-    <p class="body"><%= %$thread{'body'} %></p>
-  </article>
-</div>
 <form method="post">
   <div class="name field">
     <%= label_for name => 'Author' %>
@@ -34,3 +23,27 @@
   </div>
   <%= submit_button 'Post', class => 'post button' %>
 </form>
+<div class="threads">
+  <h3>Thread</h3>
+  <article class="thread">
+    <span class="id">
+      <%= link_to "#$thread->{'id'}",
+        remark_page => {thread_id => $thread->{'id'}} %>
+    </span>
+    <h3 class="title"><%= %$thread{'title'} %></h3>
+    <h4 class="date"><%= %$thread{'date'} %></h4>
+    <h5 class="author"><%= %$thread{'author'} %></h5>
+    <p class="body"><%= %$thread{'body'} %></p>
+  </article>
+</div>
+<% if (my $last_remark_id = $last_remark->{'id'}) { =%>
+<div class="remarks">
+  <h3>Last Remark</h3>
+  <article class="remark">
+    <span class="id">#<%= $last_remark_id %></span>
+    <h4 class="date"><%= $last_remark->{'date'} %></h4>
+    <h5 class="author"><%= $last_remark->{'author'} %></h5>
+    <p class="body"><%= $last_remark->{'body'} %></p>
+  </article>
+</div>
+<% } =%>

@@ -128,9 +128,13 @@ group {
             }
         }
 
-        my $thread = $c->thread->get_thread_by_id($thread_id);
+        my $thread      = $c->thread->get_thread_by_id($thread_id);
+        my $last_remark = $c->remark->last_remark($thread_id);
 
-        $c->stash(thread => $thread);
+        $c->stash(
+            thread      => $thread,
+            last_remark => $last_remark
+            );
 
         return $c->render();
     };
