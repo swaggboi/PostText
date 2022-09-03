@@ -29,8 +29,6 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     END_SQL
 }
 
-*create_thread = \&create;
-
 sub dump_all($self) {
     $self->pg->db->query(<<~'END_SQL', %$self{'date_format'})->hashes
         SELECT thread_id               AS id,
@@ -43,8 +41,6 @@ sub dump_all($self) {
          ORDER BY bump_date DESC;
        END_SQL
 }
-
-*get_all_threads = \&dump_all;
 
 sub by_page($self, $this_page = 1) {
     my $date_format = %$self{'date_format'};
@@ -65,13 +61,9 @@ sub by_page($self, $this_page = 1) {
            END_SQL
 }
 
-*get_threads_by_page = \&by_page;
-
 sub per_page($self, $value = undef) {
     $self->{'threads_per_page'} = $value // $self->{'threads_per_page'}
 }
-
-*threads_per_page = \&per_page;
 
 sub last_page($self) {
     my $thread_count = $self->count;
@@ -83,8 +75,6 @@ sub last_page($self) {
     $last_page;
 }
 
-*get_last_page = \&last_page;
-
 sub count($self) {
     $self->pg->db->query(<<~'END_SQL')->hash->{'count'}
         SELECT COUNT(*) AS count
@@ -92,8 +82,6 @@ sub count($self) {
          WHERE NOT hidden_status;
        END_SQL
 }
-
-*get_thread_count = \&count;
 
 sub by_id($self, $thread_id) {
     my $date_format = %$self{'date_format'};
@@ -108,7 +96,5 @@ sub by_id($self, $thread_id) {
          WHERE thread_id = ?;
        END_SQL
 }
-
-*get_thread_by_id = \&by_id;
 
 1;

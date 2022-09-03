@@ -115,7 +115,7 @@ group {
                 $c->stash(status => 400)
             }
             else {
-                $c->remark->create_remark(
+                $c->remark->create(
                     $thread_id,
                     $remark_name,
                     $remark_body

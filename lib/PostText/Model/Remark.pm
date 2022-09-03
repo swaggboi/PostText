@@ -33,13 +33,9 @@ sub by_page_for($self, $thread_id, $this_page = 1) {
        END_SQL
 }
 
-*get_remarks_by_thread_id = \&by_page_for;
-
 sub per_page($self, $value = undef) {
     $self->{'remarks_per_page'} = $value // $self->{'remarks_per_page'}
 }
-
-*remarks_per_page = \&per_page;
 
 sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
     my @data = ($thread_id, $author, $body, $hidden, $flagged);
@@ -56,8 +52,6 @@ sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
        END_SQL
 }
 
-*create_remark = \&create;
-
 sub count_for($self, $thread_id) {
     $self->pg->db->query(<<~'END_SQL', $thread_id)->hash->{'count'}
         SELECT COUNT(*) AS count
@@ -66,8 +60,6 @@ sub count_for($self, $thread_id) {
            AND NOT hidden_status;
        END_SQL
 }
-
-*get_remark_count_by_thread_id = \&count_for;
 
 sub last_page_for($self, $thread_id) {
     my $remark_count = $self->count_for($thread_id);
@@ -78,8 +70,6 @@ sub last_page_for($self, $thread_id) {
 
     $last_page;
 }
-
-*get_last_page_by_thread_id = \&last_page_for;
 
 sub last_for($self, $thread_id) {
     my $date_format = $self->{'date_format'};
@@ -95,7 +85,5 @@ sub last_for($self, $thread_id) {
           DESC LIMIT 1;
        END_SQL
 }
-
-*last_remark = \&last_for;
 
 1;
