@@ -129,7 +129,7 @@ group {
         }
 
         my $thread      = $c->thread->by_id($thread_id);
-        my $last_remark = $c->remark->last_remark($thread_id);
+        my $last_remark = $c->remark->last_for($thread_id);
 
         $c->stash(
             thread      => $thread,
