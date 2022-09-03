@@ -104,12 +104,11 @@ group {
         $v = $c->validation if $c->req->method eq 'POST';
 
         if ($v && $v->has_data) {
-
             my $remark_name = $c->param('name');
             my $remark_body = $c->param('post');
 
-            $v->required('name' )->size(1, 63  );
-            $v->required('post' )->size(2, 4000);
+            $v->required('name')->size(1, 63  );
+            $v->required('post')->size(2, 4000);
 
             if ($v->has_error) {
                 $c->stash(status => 400)
