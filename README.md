@@ -24,7 +24,6 @@ Run the tests locally (against development environment)
 
 ## TODOs
 
-1. More tests (single remark view at least... maybe more)
 1. Grow into Mojo hybrid
 
 ## Crazy future ideas
