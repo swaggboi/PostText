@@ -14,7 +14,7 @@ sub new($class, $pg, $pg_reference) {
     }, $class
 }
 
-sub create_thread($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
+sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my @data = ($author, $title, $body, $hidden, $flagged);
 
     $self->pg->db->query(<<~'END_SQL', @data);
@@ -29,8 +29,10 @@ sub create_thread($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     END_SQL
 }
 
-sub get_all_threads($self) {
-    $self->pg->db->query(<<~'END_SQL', %$self{'date_format'})->hashes()
+*create_thread = \&create;
+
+sub dump_all($self) {
+    $self->pg->db->query(<<~'END_SQL', %$self{'date_format'})->hashes
         SELECT thread_id               AS id,
                TO_CHAR(thread_date, ?) AS date,
                thread_author           AS author,
@@ -42,13 +44,15 @@ sub get_all_threads($self) {
        END_SQL
 }
 
-sub get_threads_by_page($self, $this_page = 1) {
+*get_all_threads = \&dump_all;
+
+sub by_page($self, $this_page = 1) {
     my $date_format = %$self{'date_format'};
     my $row_count   = $self->{'threads_per_page'};
     my $offset      = ($this_page - 1) * $row_count;
 
     $self->pg->db
-        ->query(<<~'END_SQL', $date_format, $row_count, $offset)->hashes();
+        ->query(<<~'END_SQL', $date_format, $row_count, $offset)->hashes;
             SELECT thread_id               AS id,
                    TO_CHAR(thread_date, ?) AS date,
                    thread_author           AS author,
@@ -61,12 +65,16 @@ sub get_threads_by_page($self, $this_page = 1) {
            END_SQL
 }
 
-sub threads_per_page($self, $value = undef) {
-    $self->{'threads_per_page'} = $value // $self->{'threads_per_page'};
+*get_threads_by_page = \&by_page;
+
+sub per_page($self, $value = undef) {
+    $self->{'threads_per_page'} = $value // $self->{'threads_per_page'}
 }
 
-sub get_last_page($self) {
-    my $thread_count = $self->get_thread_count();
+*threads_per_page = \&per_page;
+
+sub last_page($self) {
+    my $thread_count = $self->count;
     my $last_page    = int($thread_count / $self->{'threads_per_page'});
 
     # Add a page for 'remainder' posts
@@ -75,7 +83,9 @@ sub get_last_page($self) {
     $last_page;
 }
 
-sub get_thread_count($self) {
+*get_last_page = \&last_page;
+
+sub count($self) {
     $self->pg->db->query(<<~'END_SQL')->hash->{'count'}
         SELECT COUNT(*) AS count
           FROM threads
@@ -83,10 +93,12 @@ sub get_thread_count($self) {
        END_SQL
 }
 
-sub get_thread_by_id($self, $thread_id) {
+*get_thread_count = \&count;
+
+sub by_id($self, $thread_id) {
     my $date_format = %$self{'date_format'};
 
-    $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash();
+    $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
         SELECT thread_id               AS id,
                TO_CHAR(thread_date, ?) AS date,
                thread_author           AS author,
@@ -96,5 +108,7 @@ sub get_thread_by_id($self, $thread_id) {
          WHERE thread_id = ?;
        END_SQL
 }
+
+*get_thread_by_id = \&by_id;
 
 1;

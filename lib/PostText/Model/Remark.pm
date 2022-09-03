@@ -14,13 +14,13 @@ sub new($class, $pg, $pg_reference) {
     }, $class
 }
 
-sub get_remarks_by_thread_id($self, $thread_id, $this_page = 1) {
+sub by_page_for($self, $thread_id, $this_page = 1) {
     my $date_format = %$self{'date_format'};
     my $row_count   = %$self{'remarks_per_page'};
     my $offset      = ($this_page - 1) * $row_count;
     my @data        = ($date_format, $thread_id, $row_count, $offset);
 
-    $self->pg->db->query(<<~'END_SQL', @data)->hashes();
+    $self->pg->db->query(<<~'END_SQL', @data)->hashes;
         SELECT remark_id               AS id,
                TO_CHAR(remark_date, ?) AS date,
                remark_author           AS author,
@@ -33,12 +33,15 @@ sub get_remarks_by_thread_id($self, $thread_id, $this_page = 1) {
        END_SQL
 }
 
-sub remarks_per_page($self, $value = undef) {
+*get_remarks_by_thread_id = \&by_page_for;
+
+sub per_page($self, $value = undef) {
     $self->{'remarks_per_page'} = $value // $self->{'remarks_per_page'}
 }
 
-sub create_remark($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0)
-{
+*remarks_per_page = \&per_page;
+
+sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
     my @data = ($thread_id, $author, $body, $hidden, $flagged);
 
     $self->pg->db->query(<<~'END_SQL', @data);
@@ -53,7 +56,9 @@ sub create_remark($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0)
        END_SQL
 }
 
-sub get_remark_count_by_thread_id($self, $thread_id) {
+*create_remark = \&create;
+
+sub count_for($self, $thread_id) {
     $self->pg->db->query(<<~'END_SQL', $thread_id)->hash->{'count'}
         SELECT COUNT(*) AS count
           FROM remarks
@@ -62,8 +67,10 @@ sub get_remark_count_by_thread_id($self, $thread_id) {
        END_SQL
 }
 
-sub get_last_page_by_thread_id($self, $thread_id) {
-    my $remark_count = $self->get_remark_count_by_thread_id($thread_id);
+*get_remark_count_by_thread_id = \&count_for;
+
+sub last_page_for($self, $thread_id) {
+    my $remark_count = $self->count_for($thread_id);
     my $last_page    = int($remark_count / $self->{'remarks_per_page'});
 
     # Add a page for 'remainder' posts
@@ -72,10 +79,12 @@ sub get_last_page_by_thread_id($self, $thread_id) {
     $last_page;
 }
 
-sub last_remark($self, $thread_id) {
+*get_last_page_by_thread_id = \&last_page_for;
+
+sub last_remark_for($self, $thread_id) {
     my $date_format = $self->{'date_format'};
 
-    $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash();
+    $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
         SELECT remark_id               AS id,
                TO_CHAR(remark_date, ?) AS date,
                remark_author           AS author,
@@ -86,5 +95,7 @@ sub last_remark($self, $thread_id) {
           DESC LIMIT 1;
        END_SQL
 }
+
+*last_remark = \&last_remark_for;
 
 1;
