@@ -122,7 +122,7 @@ group {
                     );
 
                 return $c->redirect_to(
-                    'remark_page',
+                    'thread_page',
                     {thread_id => $thread_id}
                     );
             }
@@ -144,13 +144,13 @@ group {
 group {
     under '/thread/:thread_id', [thread_id => qr/[0-9]+/];
 
-    get '/:remark_page',
-        [remark_page => qr/[0-9]+/],
-    {remark_page => 1}, sub ($c) { # My editor is so confused by this lol
+    get '/:thread_page',
+        [thread_page => qr/[0-9]+/],
+    {thread_page => 1}, sub ($c) { # My editor is so confused by this lol
         my $thread_id = $c->param('thread_id');
         my $thread    = $c->thread->by_id($thread_id);
-        my $base_path = $c->match->path_for(remark_page => undef)->{'path'};
-        my $this_page = $c->param('remark_page');
+        my $base_path = $c->match->path_for(thread_page => undef)->{'path'};
+        my $this_page = $c->param('thread_page');
         my $last_page = $c->remark->last_page_for($thread_id);
         my $remarks   = $c->remark->by_page_for($thread_id, $this_page);
 
@@ -172,6 +172,22 @@ group {
 
         # Check for remarks or remark page number
         $c->stash(status => 404) unless $remarks->[0] || 1 >= $this_page;
+
+        $c->render;
+    };
+};
+
+# Remark
+group {
+    under '/remark';
+
+    get '/:remark_id', [remark_id => qr/[0-9]+/], sub ($c) {
+        my $remark_id = $c->param('remark_id');
+        my $remark    = $c->remark->by_id($remark_id);
+
+        $c->stash(status => 404) unless $remark->{'id'};
+
+        $c->stash(remark => $remark);
 
         $c->render;
     };

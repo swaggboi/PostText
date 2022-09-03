@@ -86,4 +86,26 @@ sub last_for($self, $thread_id) {
        END_SQL
 }
 
+sub by_id($self, $remark_id) {
+    my $date_format = $self->{'date_format'};
+
+    $self->pg->db->query(<<~'END_SQL', $date_format, $remark_id)->hash;
+        SELECT remark_id               AS id,
+               TO_CHAR(remark_date, ?) AS date,
+               remark_author           AS author,
+               remark_body             AS body,
+               thread_id
+          FROM remarks
+         WHERE remark_id = ?;
+       END_SQL
+}
+
+sub thread_id_for($self, $remark_id) {
+    $self->pg->db->query(<<~'END_SQL', $remark_id)->hash->{'thread_id'}
+        SELECT thread_id
+          FROM remarks
+         WHERE remark_id = ?;
+       END_SQL
+}
+
 1;

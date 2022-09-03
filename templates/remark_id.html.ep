@@ -1,0 +1,14 @@
+% layout 'main';
+% title "Remark - #$remark->{'id'}";
+<h2><%= title %></h2>
+<div class="remarks">
+  <article class="remark">
+    <span class="id">#<%= %$remark{'id'} %></span>
+    <h4 class="date"><%= %$remark{'date'} %></h4>
+    <h5 class="author"><%= %$remark{'author'} %></h5>
+    <p class="body"><%= %$remark{'body'} %></p>
+  </article>
+</div>
+<nav>
+  <%= link_to Thread => thread_page => {thread_id => $remark->{'thread_id'}} %>
+</nav>
