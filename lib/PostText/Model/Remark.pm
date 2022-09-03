@@ -81,7 +81,7 @@ sub last_page_for($self, $thread_id) {
 
 *get_last_page_by_thread_id = \&last_page_for;
 
-sub last_remark_for($self, $thread_id) {
+sub last_for($self, $thread_id) {
     my $date_format = $self->{'date_format'};
 
     $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
@@ -96,6 +96,6 @@ sub last_remark_for($self, $thread_id) {
        END_SQL
 }
 
-*last_remark = \&last_remark_for;
+*last_remark = \&last_for;
 
 1;
