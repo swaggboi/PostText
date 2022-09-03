@@ -32,7 +32,7 @@ helper remark => sub {
 
 # Begin routing
 under sub ($c) {
-    $c->session(expires => time() + 31536000);
+    $c->session(expires => time + 31536000);
 
     1;
 };
@@ -47,8 +47,8 @@ group {
     get '/:list_page', [list_page => qr/[0-9]+/], {list_page => 1}, sub ($c) {
         my $base_path = $c->match->path_for(list_page => undef)->{'path'};
         my $this_page = $c->param('list_page');
-        my $last_page = $c->thread->get_last_page();
-        my $threads   = $c->thread->get_threads_by_page($this_page);
+        my $last_page = $c->thread->last_page;
+        my $threads   = $c->thread->by_page($this_page);
 
         $c->stash(status => 404) unless $threads->[0];
 
@@ -59,7 +59,7 @@ group {
             base_path => $base_path
             );
 
-        $c->render();
+        $c->render;
     };
 };
 
@@ -68,7 +68,7 @@ group {
     any [qw{GET POST}], '/post', sub ($c) {
         my $v;
 
-        $v = $c->validation() if $c->req->method eq 'POST';
+        $v = $c->validation if $c->req->method eq 'POST';
 
         if ($v && $v->has_data) {
             my $thread_author = $c->param('name' );
@@ -83,7 +83,7 @@ group {
                 $c->stash(status => 400)
             }
             else {
-                $c->thread->create_thread(
+                $c->thread->create(
                     $thread_author,
                     $thread_title,
                     $thread_body
@@ -93,7 +93,7 @@ group {
             }
         }
 
-        return $c->render();
+        return $c->render;
     };
 
     under '/post';
@@ -101,7 +101,7 @@ group {
     any [qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/], sub ($c) {
         my ($thread_id, $v) = ($c->param('thread_id'), undef);
 
-        $v = $c->validation() if $c->req->method eq 'POST';
+        $v = $c->validation if $c->req->method eq 'POST';
 
         if ($v && $v->has_data) {
 
@@ -128,7 +128,7 @@ group {
             }
         }
 
-        my $thread      = $c->thread->get_thread_by_id($thread_id);
+        my $thread      = $c->thread->by_id($thread_id);
         my $last_remark = $c->remark->last_remark($thread_id);
 
         $c->stash(
@@ -136,7 +136,7 @@ group {
             last_remark => $last_remark
             );
 
-        return $c->render();
+        return $c->render;
     };
 };
 
@@ -146,16 +146,14 @@ group {
 
     get '/:remark_page',
         [remark_page => qr/[0-9]+/],
-    {remark_page => 1}, sub ($c) {
+    {remark_page => 1}, sub ($c) { # My editor is so confused by this lol
         my $thread_id = $c->param('thread_id');
-        my $thread    = $c->thread->get_thread_by_id($thread_id);
+        my $thread    = $c->thread->by_id($thread_id);
         my $base_path = $c->match->path_for(remark_page => undef)->{'path'};
         my $this_page = $c->param('remark_page');
-        my $last_page = $c->remark->get_last_page_by_thread_id($thread_id);
-        my $remarks   =
-            $c->remark->get_remarks_by_thread_id($thread_id, $this_page);
+        my $last_page = $c->remark->last_page_for($thread_id);
+        my $remarks   = $c->remark->by_page_for($thread_id, $this_page);
 
-        # Check for existence of thread
         if (my $thread_body = %$thread{'body'}) {
             $c->stash(
                 thread    => $thread,
@@ -172,10 +170,10 @@ group {
                 )
         }
 
-        # Check for existance of remark page number
+        # Check for remarks or remark page number
         $c->stash(status => 404) unless $remarks->[0] || 1 >= $this_page;
 
-        $c->render();
+        $c->render;
     };
 };
 
@@ -185,14 +183,14 @@ app->secrets(app->config->{'secrets'}) || die $@;
 app->pg->migrations->from_dir('migrations')->migrate(5);
 
 if (my $threads_per_page = app->config->{'threads_per_page'}) {
-    app->thread->threads_per_page($threads_per_page)
+    app->thread->per_page($threads_per_page)
 }
 
 if (my $remarks_per_page = app->config->{'remarks_per_page'}) {
-    app->remark->remarks_per_page($remarks_per_page)
+    app->remark->per_page($remarks_per_page)
 }
 
 app->asset->process('main.css', 'css/PostText.css');
 
 # Send it
-app->start();
+app->start;
