@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS threads (
          thread_id SERIAL PRIMARY KEY,
-       thread_date TIMESTAMPTZ DEFAULT now(),
+       thread_date TIMESTAMPTZ DEFAULT NOW(),
      thread_author VARCHAR(64),
       thread_title VARCHAR(256),
        thread_body VARCHAR(4096),
