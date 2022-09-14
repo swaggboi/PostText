@@ -25,6 +25,7 @@ Run the tests locally (against development environment)
 ## TODOs
 
 1. Grow into Mojo hybrid
+1. More granular tests
 
 ## Crazy future ideas
 
