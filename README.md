@@ -28,6 +28,7 @@ Run the tests locally (against development environment)
 1. Grow into full blown Mojo?
 1. More granular tests
 1. Document post_text.conf (whoopsie)
+1. Configure `perlcritic`
 
 ## Crazy future ideas
 
