@@ -9,26 +9,26 @@ use Test::Mojo;
 my $script         = curfile->dirname->sibling('PostText.pl');
 my $t              = Test::Mojo->new($script);
 my %valid_params   = (
-    name  => 'Anonymous',
+    author  => 'Anonymous',
     title => 'hi',
     post  => 'ayy... lmao'
     );
 my %invalid_title  = (
-    name => 'Anonymous',
+    author => 'Anonymous',
     title => '',
     post => 'ayy... lmao'
     );
 my %invalid_post   = (
-    name => 'Anonymous',
+    author => 'Anonymous',
     title => 'hi',
     post => 'a'
     );
 my %valid_remark   = (
-    name => 'Anonymous',
+    author => 'Anonymous',
     post => 'hi'
     );
 my %invalid_remark = (
-    name => 'Anonymous',
+    author => 'Anonymous',
     post => 'a'
     );
 

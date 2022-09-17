@@ -76,13 +76,13 @@ sub startup($self) {
         $v = $c->validation if $c->req->method eq 'POST';
 
         if ($v && $v->has_data) {
-            my $thread_author = $c->param('name' );
-            my $thread_title  = $c->param('title');
-            my $thread_body   = $c->param('post' );
+            my $thread_author = $c->param('author');
+            my $thread_title  = $c->param('title' );
+            my $thread_body   = $c->param('post'  );
 
-            $v->required('name' )->size(1, 63  );
-            $v->required('title')->size(1, 127 );
-            $v->required('post' )->size(2, 4000);
+            $v->required('author')->size(1, 63  );
+            $v->required('title' )->size(1, 127 );
+            $v->required('post'  )->size(2, 4000);
 
             if ($v->has_error) {
                 $c->stash(status => 400)
@@ -109,11 +109,11 @@ sub startup($self) {
         $v = $c->validation if $c->req->method eq 'POST';
 
         if ($v && $v->has_data) {
-            my $remark_name = $c->param('name');
-            my $remark_body = $c->param('post');
+            my $remark_author = $c->param('author');
+            my $remark_body   = $c->param('post'  );
 
-            $v->required('name')->size(1, 63  );
-            $v->required('post')->size(2, 4000);
+            $v->required('author')->size(1, 63  );
+            $v->required('post'  )->size(2, 4000);
 
             if ($v->has_error) {
                 $c->stash(status => 400)
@@ -121,11 +121,11 @@ sub startup($self) {
             else {
                 $c->remark->create(
                     $thread_id,
-                    $remark_name,
+                    $remark_author,
                     $remark_body
                     );
 
-                $c->session(author => $remark_name);
+                $c->session(author => $remark_author);
 
                 return $c->redirect_to(
                     'thread_page',
