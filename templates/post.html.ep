@@ -4,7 +4,11 @@
 <form method="post">
   <div class="name field">
     <%= label_for name => 'Author' %>
-    <%= text_field name =>'Anonymous', maxlength => 63, minlength => 1 %>
+    <% if (my $previous_name = session->{'author'}) { %>
+      <%= text_field name => $previous_name, maxlength => 63, minlength => 1 %>
+    <% } else { %>
+      <%= text_field name => 'Anonymous', maxlength => 63, minlength => 1 %>
+    <% } %>
     <% if (my $error = validation->error('name')) { =%>
       <p class="field-with-error">Invalid name: 1 to 63 characters please.</p>
     <% } =%>

@@ -94,6 +94,8 @@ sub startup($self) {
                     $thread_body
                     );
 
+                $c->session(author => $thread_author);
+
                 return $c->redirect_to('list');
             }
         }
@@ -122,6 +124,8 @@ sub startup($self) {
                     $remark_name,
                     $remark_body
                     );
+
+                $c->session(author => $remark_name);
 
                 return $c->redirect_to(
                     'thread_page',
