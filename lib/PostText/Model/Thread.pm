@@ -49,14 +49,18 @@ sub by_page($self, $this_page = 1) {
 
     $self->pg->db
         ->query(<<~'END_SQL', $date_format, $row_count, $offset)->hashes;
-            SELECT thread_id               AS id,
-                   TO_CHAR(thread_date, ?) AS date,
-                   thread_author           AS author,
-                   thread_title            AS title,
-                   thread_body             AS body
-              FROM threads
-             WHERE NOT hidden_status
-             ORDER BY bump_date DESC
+            SELECT t.thread_id               AS id,
+                   TO_CHAR(t.thread_date, ?) AS date,
+                   t.thread_author           AS author,
+                   t.thread_title            AS title,
+                   t.thread_body             AS body,
+                   COUNT(r.*)                AS remark_count
+              FROM threads t
+              LEFT JOIN remarks r
+                ON t.thread_id = r.thread_id
+             WHERE NOT t.hidden_status
+             GROUP BY t.thread_id
+             ORDER BY t.bump_date DESC
              LIMIT ? OFFSET ?;
            END_SQL
 }
