@@ -35,11 +35,26 @@ my %invalid_remark = (
 $t->ua->max_redirects(1);
 
 # GET
-$t->get_ok('/post'  )->status_is(200)->text_like(h2 => qr/New Thread/);
-$t->get_ok('/post/1')->status_is(200)->text_like(h2 => qr/New Remark/);
+$t->get_ok('/post')->status_is(200)
+    ->element_exists('form input[name="author"]' )
+    ->element_exists('form input[name="title"]'  )
+    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form input[type="submit"]' )
+    ->text_like(h2 => qr/New Thread/);
+
+$t->get_ok('/post/1')->status_is(200)
+    ->element_exists('form input[name="author"]' )
+    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form input[type="submit"]' )
+    ->text_like(h2 => qr/New Remark/);
 
 # POST
-$t->post_ok('/post'  )->status_is(200)->text_like(h2 => qr/New Thread/);
+$t->post_ok('/post')->status_is(200)
+    ->element_exists('form input[name="author"]' )
+    ->element_exists('form input[name="title"]'  )
+    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form input[type="submit"]' )
+    ->text_like(h2 => qr/New Thread/);
 
 $t->post_ok('/post', form => \%invalid_title)->status_is(400)
     ->text_like(p => qr/Invalid title/);
@@ -48,7 +63,11 @@ $t->post_ok('/post', form => \%invalid_post)->status_is(400)
 $t->post_ok('/post', form => \%valid_params)->status_is(200)
     ->text_like(h2 => qr/Threads List/);
 
-$t->post_ok('/post/1')->status_is(200)->text_like(h2 => qr/New Remark/);
+$t->post_ok('/post/1')->status_is(200)
+    ->element_exists('form input[name="author"]' )
+    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form input[type="submit"]' )
+    ->text_like(h2 => qr/New Remark/);
 
 $t->post_ok('/post/1', form => \%valid_remark)->status_is(200)
     ->text_like(h2 => qr/Thread - #1/);
