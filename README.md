@@ -25,9 +25,9 @@ Run the tests locally (against development environment)
 ## TODOs
 
 1. Grow into full blown Mojo?
-1. More granular tests
 1. Document post_text.conf (whoopsie)
 1. Configure `perlcritic`
+1. CSS
 
 ## Crazy future ideas
 
