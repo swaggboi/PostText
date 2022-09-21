@@ -70,7 +70,7 @@ $t->post_ok('/post/1')->status_is(200)
     ->text_like(h2 => qr/New Remark/);
 
 $t->post_ok('/post/1', form => \%valid_remark)->status_is(200)
-    ->text_like(h2 => qr/Thread - #1/);
+    ->text_like(h2 => qr/Thread #1/);
 $t->post_ok('/post/1', form => \%invalid_remark)->status_is(400)
     ->text_like(h2 => qr/New Remark/);
 

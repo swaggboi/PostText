@@ -34,10 +34,10 @@
       <%= link_to "#$thread->{'id'}",
         thread_page => {thread_id => $thread->{'id'}} %>
     </span>
-    <h3 class="title"><%= %$thread{'title'} %></h3>
-    <h4 class="date"><%= %$thread{'date'} %></h4>
-    <h5 class="author"><%= %$thread{'author'} %></h5>
-    <p class="body"><%= %$thread{'body'} %></p>
+    <h3 class="title"><%= $thread->{'title'} %></h3>
+    <h4 class="date"><%= $thread->{'date'} %></h4>
+    <h5 class="author"><%= $thread->{'author'} %></h5>
+    <p class="body"><%= $thread->{'body'} %></p>
   </article>
 </div>
 <% if (my $last_remark_id = $last_remark->{'id'}) { =%>
