@@ -11,25 +11,25 @@ my $t              = Test::Mojo->new($script);
 my %valid_params   = (
     author  => 'Anonymous',
     title => 'hi',
-    post  => 'ayy... lmao'
+    body  => 'ayy... lmao'
     );
 my %invalid_title  = (
     author => 'Anonymous',
     title => '',
-    post => 'ayy... lmao'
+    body => 'ayy... lmao'
     );
 my %invalid_post   = (
     author => 'Anonymous',
     title => 'hi',
-    post => 'a'
+    body => 'a'
     );
 my %valid_remark   = (
     author => 'Anonymous',
-    post => 'hi'
+    body => 'hi'
     );
 my %invalid_remark = (
     author => 'Anonymous',
-    post => 'a'
+    body => 'a'
     );
 
 $t->ua->max_redirects(1);
@@ -38,13 +38,13 @@ $t->ua->max_redirects(1);
 $t->get_ok('/post')->status_is(200)
     ->element_exists('form input[name="author"]' )
     ->element_exists('form input[name="title"]'  )
-    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form textarea[name="body"]')
     ->element_exists('form input[type="submit"]' )
     ->text_like(h2 => qr/New Thread/);
 
 $t->get_ok('/post/1')->status_is(200)
     ->element_exists('form input[name="author"]' )
-    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form textarea[name="body"]')
     ->element_exists('form input[type="submit"]' )
     ->text_like(h2 => qr/New Remark/);
 
@@ -52,26 +52,26 @@ $t->get_ok('/post/1')->status_is(200)
 $t->post_ok('/post')->status_is(200)
     ->element_exists('form input[name="author"]' )
     ->element_exists('form input[name="title"]'  )
-    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form textarea[name="body"]')
     ->element_exists('form input[type="submit"]' )
     ->text_like(h2 => qr/New Thread/);
 
 $t->post_ok('/post', form => \%invalid_title)->status_is(400)
     ->text_like(p => qr/Invalid title/);
 $t->post_ok('/post', form => \%invalid_post)->status_is(400)
-    ->text_like(p => qr/Invalid post/);
+    ->text_like(p => qr/Invalid text/);
 $t->post_ok('/post', form => \%valid_params)->status_is(200)
     ->text_like(h2 => qr/Threads List/);
 
 $t->post_ok('/post/1')->status_is(200)
     ->element_exists('form input[name="author"]' )
-    ->element_exists('form textarea[name="post"]')
+    ->element_exists('form textarea[name="body"]')
     ->element_exists('form input[type="submit"]' )
     ->text_like(h2 => qr/New Remark/);
 
 $t->post_ok('/post/1', form => \%valid_remark)->status_is(200)
     ->text_like(h2 => qr/Thread #1/);
 $t->post_ok('/post/1', form => \%invalid_remark)->status_is(400)
-    ->text_like(h2 => qr/New Remark/);
+    ->text_like(p => qr/Invalid text/);
 
 done_testing();

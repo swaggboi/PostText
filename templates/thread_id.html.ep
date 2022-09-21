@@ -14,15 +14,15 @@
     <% } =%>
   </div>
   <div class="text field">
-    <%= label_for post => 'Text' %>
-    <%= text_area 'post', (
+    <%= label_for body => 'Text' %>
+    <%= text_area body => (
         maxlength => 4000,
         minlength => 2,
         required  => 'true',
         rows      => 6
     ) %>
-    <% if (my $error = validation->error('post')) { =%>
-    <p class="field-with-error">Invalid post: Up to 4,000 characters only.</p>
+    <% if (my $error = validation->error('body')) { =%>
+    <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
     <% } =%>
   </div>
   <%= submit_button 'Post', class => 'post button' %>

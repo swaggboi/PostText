@@ -78,11 +78,11 @@ sub startup($self) {
         if ($v && $v->has_data) {
             my $thread_author = $c->param('author');
             my $thread_title  = $c->param('title' );
-            my $thread_body   = $c->param('post'  );
+            my $thread_body   = $c->param('body'  );
 
             $v->required('author')->size(1, 63  );
             $v->required('title' )->size(1, 127 );
-            $v->required('post'  )->size(2, 4000);
+            $v->required('body'  )->size(2, 4000);
 
             if ($v->has_error) {
                 $c->stash(status => 400)
@@ -110,10 +110,10 @@ sub startup($self) {
 
         if ($v && $v->has_data) {
             my $remark_author = $c->param('author');
-            my $remark_body   = $c->param('post'  );
+            my $remark_body   = $c->param('body'  );
 
             $v->required('author')->size(1, 63  );
-            $v->required('post'  )->size(2, 4000);
+            $v->required('body'  )->size(2, 4000);
 
             if ($v->has_error) {
                 $c->stash(status => 400)
