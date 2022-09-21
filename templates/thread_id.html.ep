@@ -19,7 +19,8 @@
         maxlength => 4000,
         minlength => 2,
         required  => 'true',
-        rows      => 6
+        rows      => 6,
+        autofocus => 'autofocus'
     ) %>
     <% if (my $error = validation->error('body')) { =%>
     <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
@@ -30,10 +31,10 @@
 <div class="threads">
   <h3>Thread</h3>
   <article class="thread">
-    <span class="id">
+    <nav class="id">
       <%= link_to "#$thread->{'id'}",
         thread_page => {thread_id => $thread->{'id'}} %>
-    </span>
+    </nav>
     <h3 class="title"><%= $thread->{'title'} %></h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
     <h5 class="author"><%= $thread->{'author'} %></h5>
@@ -44,7 +45,7 @@
 <div class="remarks">
   <h3>Last Remark</h3>
   <article class="remark">
-    <span class="id">#<%= $last_remark_id %></span>
+    <nav class="id">#<%= $last_remark_id %></nav>
     <h4 class="date"><%= $last_remark->{'date'} %></h4>
     <h5 class="author"><%= $last_remark->{'author'} %></h5>
     <p class="body"><%= $last_remark->{'body'} %></p>

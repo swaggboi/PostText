@@ -3,7 +3,7 @@
 <h2><%= title %></h2>
 <div class="remarks">
   <article class="remark">
-    <span class="id">#<%= $remark->{'id'} %></span>
+    <nav class="id">#<%= $remark->{'id'} %></nav>
     <h4 class="date"><%= $remark->{'date'} %></h4>
     <h5 class="author"><%= $remark->{'author'} %></h5>
     <p class="body"><%= $remark->{'body'} %></p>

@@ -15,7 +15,11 @@
   </div>
   <div class="title field">
     <%= label_for title => 'Title' %>
-    <%= text_field 'title', maxlength => 127, minlength => 1 %>
+    <%= text_field title => (
+        maxlength => 127,
+        minlength => 1,
+        autofocus => 'autofocus'
+    ) %>
     <% if (my $error = validation->error('title')) { =%>
     <p class="field-with-error">Invalid title: 1 to 127 characters please.</p>
     <% } =%>

@@ -7,3 +7,7 @@
     border-style: dotted;
     border-collapse: collapse;
 }
+
+.thread .id, .remark .id {
+    float: right;
+}

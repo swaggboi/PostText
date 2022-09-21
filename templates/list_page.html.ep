@@ -4,20 +4,20 @@
 <div class="threads">
   <% for my $thread (@{$threads}) { =%>
     <article class="thread">
-      <span class="id">
+      <nav class="id">
         <%= link_to "#$thread->{'id'}",
           thread_page => {thread_id => $thread->{'id'}} %>
-      </span>
+      </nav>
       <h3 class="title"><%= $thread->{'title'} %></h3>
       <h4 class="date"><%= $thread->{'date'} %></h4>
       <h5 class="author"><%= $thread->{'author'} %></h5>
       <p class="body"><%= $thread->{'body'} %></p>
-      <span class="remarks">
+      <nav class="remarks">
         <%= link_to Remark => thread_id => {thread_id => $thread->{'id'}} %>
         <%= link_to thread_page => {thread_id => $thread->{'id'}}, begin %>
           (<%= $thread->{'remark_count'} %> remarks)
         <% end %>
-      </span>
+      </nav>
     </article>
   <% } =%>
 </div>
