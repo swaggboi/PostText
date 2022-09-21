@@ -9,27 +9,27 @@ use Test::Mojo;
 my $script         = curfile->dirname->sibling('PostText.pl');
 my $t              = Test::Mojo->new($script);
 my %valid_params   = (
-    author  => 'Anonymous',
-    title => 'hi',
-    body  => 'ayy... lmao'
+    author => 'Anonymous',
+    title  => 'hi',
+    body   => 'ayy... lmao'
     );
 my %invalid_title  = (
     author => 'Anonymous',
-    title => '',
-    body => 'ayy... lmao'
+    title  => '',
+    body   => 'ayy... lmao'
     );
 my %invalid_post   = (
     author => 'Anonymous',
-    title => 'hi',
-    body => 'a'
+    title  => 'hi',
+    body   => 'a'
     );
 my %valid_remark   = (
     author => 'Anonymous',
-    body => 'hi'
+    body   => 'hi'
     );
 my %invalid_remark = (
     author => 'Anonymous',
-    body => 'a'
+    body   => 'a'
     );
 
 $t->ua->max_redirects(1);

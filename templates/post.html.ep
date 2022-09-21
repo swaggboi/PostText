@@ -5,19 +5,19 @@
   <div class="author field">
     <%= label_for author => 'Author' %>
     <% if (my $previous_author = session->{'author'}) { =%>
-      <%= text_field author => $previous_author, maxlength => 63, minlength => 1 %>
+    <%= text_field author => $previous_author, maxlength => 63, minlength => 1 %>
     <% } else { =%>
-      <%= text_field author => 'Anonymous', maxlength => 63, minlength => 1 %>
+    <%= text_field author => 'Anonymous', maxlength => 63, minlength => 1 %>
     <% } =%>
     <% if (my $error = validation->error('author')) { =%>
-      <p class="field-with-error">Invalid author: 1 to 63 characters please.</p>
+    <p class="field-with-error">Invalid author: 1 to 63 characters please.</p>
     <% } =%>
   </div>
   <div class="title field">
     <%= label_for title => 'Title' %>
     <%= text_field 'title', maxlength => 127, minlength => 1 %>
     <% if (my $error = validation->error('title')) { =%>
-      <p class="field-with-error">Invalid title: 1 to 127 characters please.</p>
+    <p class="field-with-error">Invalid title: 1 to 127 characters please.</p>
     <% } =%>
   </div>
   <div class="text field">
@@ -29,7 +29,7 @@
         rows      => 6
     ) %>
     <% if (my $error = validation->error('body')) { =%>
-      <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
+    <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
     <% } =%>
   </div>
   <%= submit_button 'Post', class => 'post button' %>
