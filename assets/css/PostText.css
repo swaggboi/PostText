@@ -11,3 +11,7 @@
 .thread .id, .remark .id {
     float: right;
 }
+
+.thread .body, .remark .body {
+    white-space: pre-wrap;
+}
