@@ -17,7 +17,7 @@ sub new($class, $pg, $pg_reference) {
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my @data = ($author, $title, $body, $hidden, $flagged);
 
-    $self->pg->db->query(<<~'END_SQL', @data);
+    $self->pg->db->query(<<~'END_SQL', @data)->hash->{'thread_id'};
         INSERT INTO threads (
             thread_author,
             thread_title,
@@ -25,7 +25,8 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
             hidden_status,
             flagged_status
         )
-        VALUES (?, ?, ?, ?, ?);
+        VALUES (?, ?, ?, ?, ?)
+     RETURNING thread_id;
     END_SQL
 }
 

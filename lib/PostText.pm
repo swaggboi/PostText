@@ -88,7 +88,7 @@ sub startup($self) {
                 $c->stash(status => 400)
             }
             else {
-                $c->thread->create(
+                my $new_thread_id = $c->thread->create(
                     $thread_author,
                     $thread_title,
                     $thread_body
@@ -96,7 +96,9 @@ sub startup($self) {
 
                 $c->session(author => $thread_author);
 
-                return $c->redirect_to('list');
+                return $c->redirect_to(
+                    thread_page => {thread_id => $new_thread_id}
+                    );
             }
         }
 
@@ -128,8 +130,7 @@ sub startup($self) {
                 $c->session(author => $remark_author);
 
                 return $c->redirect_to(
-                    'thread_page',
-                    {thread_id => $thread_id}
+                    thread_page => {thread_id => $thread_id}
                     );
             }
         }
