@@ -14,14 +14,24 @@ sub startup($self) {
     $self->plugin('TagHelpers::Pagination');
     $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
 
-    $self->helper(pg => sub {
-        state $pg = Mojo::Pg->new($self->config->{$self->mode}{'pg_string'})
+    # Helpers
+    $self->helper(pg => sub ($c) {
+        state $pg = Mojo::Pg->new($c->config->{$self->mode}{'pg_string'})
     });
-    $self->helper(thread => sub {
-        state $thread = PostText::Model::Thread->new(pg => shift->pg)
+
+    $self->helper(thread => sub ($c) {
+        state $thread = PostText::Model::Thread->new(pg => $c->pg)
     });
-    $self->helper(remark => sub {
-        state $remark = PostText::Model::Remark->new(pg => shift->pg)
+
+    $self->helper(remark => sub ($c) {
+        state $remark = PostText::Model::Remark->new(pg => $c->pg)
+    });
+
+    $self->helper(truncate_text => sub ($c, $input_text) {
+        my $truncated_text = 500 < length($input_text)
+            ? substr($input_text, 0, 500) . '...' : $input_text;
+
+        return $truncated_text;
     });
 
     # Finish configuring some things
