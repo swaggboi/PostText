@@ -34,6 +34,8 @@ Run the tests locally (against development environment)
 
 ### (Lord knows there's TODOs I could be working on...)
 
+1. CAPTCHA with
+   [Lingua::EN::Inflexion](https://metacpan.org/pod/Lingua::EN::Inflexion#cardinal()-and-cardinal($threshold))
 1. Return a text response instead of HTML if a `.txt` extension [is
    requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
 1. Post thread via SMS (twil.io??)
