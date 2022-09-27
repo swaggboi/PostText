@@ -4,11 +4,10 @@
 <form method="post">
   <div class="author field">
     <%= label_for author => 'Author' %>
-    <% if (my $previous_author = session->{'author'}) { =%>
-    <%= text_field author => $previous_author, maxlength => 63, minlength => 1 %>
-    <% } else { =%>
-    <%= text_field author => 'Anonymous', maxlength => 63, minlength => 1 %>
-    <% } =%>
+    <%= text_field author => session->{'author'}, (
+        maxlength => 63,
+        minlength => 1
+    ) %>
     <% if (my $error = validation->error('author')) { =%>
     <p class="field-with-error">Invalid author: 1 to 63 characters please.</p>
     <% } =%>

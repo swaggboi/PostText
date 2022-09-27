@@ -61,7 +61,7 @@ $t->post_ok('/post', form => \%invalid_title)->status_is(400)
 $t->post_ok('/post', form => \%invalid_post)->status_is(400)
     ->text_like(p => qr/Invalid text/);
 $t->post_ok('/post', form => \%valid_params)->status_is(200)
-    ->text_like(h2 => qr/Threads List/);
+    ->text_like(h2 => qr/Thread #[0-9]+/);
 
 $t->post_ok('/post/1')->status_is(200)
     ->element_exists('form input[name="author"]' )

@@ -43,6 +43,8 @@ sub startup($self) {
     my $r = $self->routes->under(sub ($c) {
         $c->session(expires => time + 31536000);
 
+        $c->session(author => 'Anonymous') unless $c->session('author');
+
         1;
     });
 
