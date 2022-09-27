@@ -26,12 +26,14 @@ Run the tests locally (against development environment)
 
 1. Grow into full blown Mojo?
 1. Document post_text.conf (whoopsie)
-1. Configure `perlcritic`
+1. Bump button
 1. CSS
+1. Configure `perlcritic`
 
 ## Crazy future ideas
 
 ### (Lord knows there's TODOs I could be working on...)
 
-1. Return a text response instead of HTML if a `.txt` extension is requested
+1. Return a text response instead of HTML if a `.txt` extension [is
+   requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
 1. Post thread via SMS (twil.io??)
