@@ -32,7 +32,7 @@
   <article class="thread">
     <nav class="id">
       <%= link_to "#$thread->{'id'}",
-        thread_page => {thread_id => $thread->{'id'}} %>
+        single_thread => {thread_id => $thread->{'id'}} %>
     </nav>
     <h3 class="title"><%= $thread->{'title'} %></h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>

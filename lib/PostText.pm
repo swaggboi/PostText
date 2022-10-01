@@ -57,149 +57,37 @@ sub startup($self) {
     });
 
     # Root redirect
-    $r->get('/', sub ($c) { $c->redirect_to('list') });
-
-    my $list = $r->under('/list');
-    $list->get('/:list_page', [list_page => qr/[0-9]+/], {list_page => 1}, sub ($c) {
-        my $base_path = $c->match->path_for(list_page => undef)->{'path'};
-        my $this_page = $c->param('list_page');
-        my $last_page = $c->thread->last_page;
-        my $threads   = $c->thread->by_page($this_page);
-
-        $c->stash(status => 404) unless $threads->[0];
-
-        $c->stash(
-            threads   => $threads,
-            this_page => $this_page,
-            last_page => $last_page,
-            base_path => $base_path
-            );
-
-        $c->render;
-    });
-
-    # Post
-    my $post = $r->under;
-    $post->any([qw{GET POST}], '/post', sub ($c) {
-        my $v;
-
-        $v = $c->validation if $c->req->method eq 'POST';
-
-        if ($v && $v->has_data) {
-            my $thread_author = $c->param('author');
-            my $thread_title  = $c->param('title' );
-            my $thread_body   = $c->param('body'  );
-
-            $v->required('author')->size(1, 63  );
-            $v->required('title' )->size(1, 127 );
-            $v->required('body'  )->size(2, 4000);
-
-            if ($v->has_error) {
-                $c->stash(status => 400)
-            }
-            else {
-                my $new_thread_id = $c->thread->create(
-                    $thread_author,
-                    $thread_title,
-                    $thread_body
-                    );
-
-                $c->session(author => $thread_author);
-
-                return $c->redirect_to(
-                    thread_page => {thread_id => $new_thread_id}
-                    );
-            }
-        }
-
-        return $c->render;
-    });
-    $post = $post->under('/post');
-    $post->any([qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/], sub ($c) {
-        my ($thread_id, $v) = ($c->param('thread_id'), undef);
-
-        $v = $c->validation if $c->req->method eq 'POST';
-
-        if ($v && $v->has_data) {
-            my $remark_author = $c->param('author');
-            my $remark_body   = $c->param('body'  );
-
-            $v->required('author')->size(1, 63  );
-            $v->required('body'  )->size(2, 4000);
-
-            if ($v->has_error) {
-                $c->stash(status => 400)
-            }
-            else {
-                $c->remark->create(
-                    $thread_id,
-                    $remark_author,
-                    $remark_body
-                    );
-
-                $c->session(author => $remark_author);
-
-                return $c->redirect_to(
-                    thread_page => {thread_id => $thread_id}
-                    );
-            }
-        }
-
-        my $thread      = $c->thread->by_id($thread_id);
-        my $last_remark = $c->remark->last_for($thread_id);
-
-        $c->stash(
-            thread      => $thread,
-            last_remark => $last_remark
-            );
-
-        return $c->render;
-    });
+    $r->get('/', sub ($c) { $c->redirect_to('threads_list') });
 
     # Thread
-    my $thread = $r->under('/thread/:thread_id', [thread_id => qr/[0-9]+/]);
-    $thread->get('/:thread_page', [thread_page => qr/[0-9]+/], {thread_page => 1}, sub ($c) {
-        my $thread_id = $c->param('thread_id');
-        my $thread    = $c->thread->by_id($thread_id);
-        my $base_path = $c->match->path_for(thread_page => undef)->{'path'};
-        my $this_page = $c->param('thread_page');
-        my $last_page = $c->remark->last_page_for($thread_id);
-        my $remarks   = $c->remark->by_page_for($thread_id, $this_page);
+    my $threads_list = $r->under('/list');
+    $threads_list
+        ->get('/:list_page', [list_page => qr/[0-9]+/], {list_page => 1})
+        ->to('thread#by_page')
+        ->name('threads_list');
 
-        if (my $thread_body = %$thread{'body'}) {
-            $c->stash(
-                thread    => $thread,
-                base_path => $base_path,
-                this_page => $this_page,
-                last_page => $last_page,
-                remarks   => $remarks
-                )
-        }
-        else {
-            $c->stash(
-                thread => [],
-                status => 404
-                )
-        }
+    my $post_thread = $r->under;
+    $post_thread->any([qw{GET POST}], '/post')->to('thread#create')
+        ->name('post_thread');
 
-        # Check for remarks or remark page number
-        $c->stash(status => 404) unless $remarks->[0] || 1 >= $this_page;
-
-        $c->render;
-    });
+    my $single_thread =
+        $r->under('/thread/:thread_id', [thread_id => qr/[0-9]+/]);
+    $single_thread
+        ->get('/:thread_page', [thread_page => qr/[0-9]+/], {thread_page => 1})
+        ->to('thread#by_id')
+        ->name('single_thread');
 
     # Remark
-    my $remark = $r->under('/remark');
-    $remark->get('/:remark_id', [remark_id => qr/[0-9]+/], sub ($c) {
-        my $remark_id = $c->param('remark_id');
-        my $remark    = $c->remark->by_id($remark_id);
+    my $post_remark = $r->under('/post');
+    $post_remark
+        ->any([qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/])
+        ->to('remark#create')
+        ->name('post_remark');
 
-        $c->stash(status => 404) unless $remark->{'id'};
-
-        $c->stash(remark => $remark);
-
-        $c->render;
-    });
+    my $single_remark = $r->under('/remark');
+    $single_remark->get('/:remark_id', [remark_id => qr/[0-9]+/])
+        ->to('remark#by_id')
+        ->name('single_remark');
 }
 
 1;

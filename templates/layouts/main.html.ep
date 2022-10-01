@@ -7,8 +7,8 @@
 <body>
 <h1>Post::Text</h1>
 <nav>
-  <%= link_to List => 'list' %>
-  <%= link_to New  => 'post' %>
+  <%= link_to List => 'threads_list' %>
+  <%= link_to New  => 'post_thread' %>
 </nav>
 <hr>
 <%= content =%>

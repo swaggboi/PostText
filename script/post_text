@@ -3,8 +3,8 @@
 # PostText v0.1
 # Jul 22
 
-use Mojo::Base -strict;
-use lib qw{lib};
+use Mojo::File qw(curfile);
+use lib curfile->dirname->sibling('lib')->to_string;
 use Mojolicious::Commands;
 
 Mojolicious::Commands->start_app('PostText');

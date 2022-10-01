@@ -10,5 +10,5 @@
   </article>
 </div>
 <nav>
-  <%= link_to Thread => thread_page => {thread_id => $remark->{'thread_id'}} %>
+  <%= link_to Thread => single_thread => {thread_id => $remark->{'thread_id'}} %>
 </nav>

@@ -1,13 +1,10 @@
 #!/usr/bin/env perl
 
-use strict;
-use warnings;
+use Mojo::Base -strict;
 use Test::More;
-use Mojo::File qw{curfile};
 use Test::Mojo;
 
-my $script = curfile->dirname->sibling('PostText.pl');
-my $t      = Test::Mojo->new($script);
+my $t = Test::Mojo->new('PostText');
 
 $t->get_ok('/')->status_is(302);
 
