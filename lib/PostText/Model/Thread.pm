@@ -1,5 +1,3 @@
-#!/usr/bin/env perl
-
 package PostText::Model::Thread;
 
 use Mojo::Base -base, -signatures;

@@ -1,8 +1,6 @@
-#!/usr/bin/env perl
+package PostText;
 
 # Sep 22
-
-package PostText;
 
 use Mojo::Base 'Mojolicious', -signatures;
 use Mojo::Pg;
