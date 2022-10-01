@@ -39,3 +39,5 @@ Run the tests locally (against development environment)
 1. Return a text response instead of HTML if a `.txt` extension [is
    requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
 1. Post thread via SMS (twil.io??)
+1. Implement
+   [bcrypt](https://metacpan.org/pod/Mojolicious::Plugin::BcryptSecure)
