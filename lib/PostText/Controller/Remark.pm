@@ -52,7 +52,7 @@ sub create($self) {
     $self->stash(
         thread      => $thread,
         last_remark => $last_remark
-      );
+        );
 
     return $self->render;
 }

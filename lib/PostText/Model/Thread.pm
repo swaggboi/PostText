@@ -17,12 +17,12 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
 
     $self->pg->db->query(<<~'END_SQL', @data)->hash->{'thread_id'};
         INSERT INTO threads (
-            thread_author,
-            thread_title,
-            thread_body,
-            hidden_status,
-            flagged_status
-        )
+               thread_author,
+               thread_title,
+               thread_body,
+               hidden_status,
+               flagged_status
+               )
         VALUES (?, ?, ?, ?, ?)
      RETURNING thread_id;
     END_SQL
