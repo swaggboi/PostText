@@ -29,7 +29,7 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
 }
 
 sub dump_all($self) {
-    $self->pg->db->query(<<~'END_SQL', %$self{'date_format'})->hashes
+    $self->pg->db->query(<<~'END_SQL', $self->{'date_format'})->hashes
         SELECT thread_id               AS id,
                TO_CHAR(thread_date, ?) AS date,
                thread_author           AS author,
@@ -42,7 +42,7 @@ sub dump_all($self) {
 }
 
 sub by_page($self, $this_page = 1) {
-    my $date_format = %$self{'date_format'};
+    my $date_format = $self->{'date_format'};
     my $row_count   = $self->{'threads_per_page'};
     my $offset      = ($this_page - 1) * $row_count;
 
@@ -87,7 +87,7 @@ sub count($self) {
 }
 
 sub by_id($self, $thread_id) {
-    my $date_format = %$self{'date_format'};
+    my $date_format = $self->{'date_format'};
 
     $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
         SELECT thread_id               AS id,
@@ -96,6 +96,14 @@ sub by_id($self, $thread_id) {
                thread_title            AS title,
                thread_body             AS body
           FROM threads
+         WHERE thread_id = ?;
+       END_SQL
+}
+
+sub bump($self, $thread_id) {
+    $self->pg->db->query(<<~'END_SQL', $thread_id)
+        UPDATE threads
+           SET bump_date = NOW()
          WHERE thread_id = ?;
        END_SQL
 }

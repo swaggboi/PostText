@@ -33,13 +33,16 @@ sub create($self) {
                 $thread_id,
                 $remark_author,
                 $remark_body
-              );
+                );
 
             $self->session(author => $remark_author);
 
-            return $self->redirect_to(
-                single_thread => {thread_id => $thread_id}
-              );
+            $self->thread->bump($thread_id);
+
+            return $self->redirect_to(single_thread => {
+                thread_id   => $thread_id,
+                thread_page => $self->remark->last_page_for($thread_id)
+            });
         }
     }
 

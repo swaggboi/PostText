@@ -13,8 +13,8 @@ sub new($class, $pg, $pg_reference) {
 }
 
 sub by_page_for($self, $thread_id, $this_page = 1) {
-    my $date_format = %$self{'date_format'};
-    my $row_count   = %$self{'remarks_per_page'};
+    my $date_format = $self->{'date_format'};
+    my $row_count   = $self->{'remarks_per_page'};
     my $offset      = ($this_page - 1) * $row_count;
     my @data        = ($date_format, $thread_id, $row_count, $offset);
 
@@ -40,12 +40,12 @@ sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
 
     $self->pg->db->query(<<~'END_SQL', @data);
         INSERT INTO remarks (
-            thread_id,
-            remark_author,
-            remark_body,
-            hidden_status,
-            flagged_status
-            )
+               thread_id,
+               remark_author,
+               remark_body,
+               hidden_status,
+               flagged_status
+               )
         VALUES (?, ?, ?, ?, ?);
        END_SQL
 }
@@ -66,7 +66,7 @@ sub last_page_for($self, $thread_id) {
     # Add a page for 'remainder' posts
     $last_page++ if $remark_count % $self->{'remarks_per_page'};
 
-    $last_page;
+    return $last_page;
 }
 
 sub last_for($self, $thread_id) {

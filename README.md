@@ -19,7 +19,8 @@ should be YAML or XML or something better suited.
 
 Run it in development mode:
 
-    morbo -w assets/css/ -w lib/ -w migrations/ -w t/ -w templates/ PostText.pl
+    morbo -w assets/css/ -w lib/ -w migrations/ -w t/ -w templates/ \
+        script/post_text
 
 Now try requesting http://localhost:3000
 
