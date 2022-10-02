@@ -4,13 +4,20 @@ A textboard written in Perl
 
 ## Installing locally
 
-Install dependencies
+Install dependencies:
 
     cpanm --installdeps .
 
 ## Running locally
 
-Run it in development mode
+Create a config file:
+
+    cp example_post_text.conf post_text.conf
+
+This file right now just contains a Perl hash reference. Someday it
+should be YAML or XML or something better suited.
+
+Run it in development mode:
 
     morbo -w assets/css/ -w lib/ -w migrations/ -w t/ -w templates/ PostText.pl
 
@@ -18,13 +25,12 @@ Now try requesting http://localhost:3000
 
 ## Testing
 
-Run the tests locally (against development environment)
+Run the tests locally (against development environment):
 
     prove -l
 
 ## TODOs
 
-1. Document post_text.conf (whoopsie)
 1. Bump button
 1. CSS
 1. Configure `perlcritic`
