@@ -35,6 +35,7 @@ Run the tests locally (against development environment):
 1. Bump button/counter
 1. Some sort of admin/moderator login and view
 1. CSS
+1. Subtests for funsies
 
 ## Crazy future ideas
 
