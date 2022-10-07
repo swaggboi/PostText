@@ -1,5 +1,3 @@
-#!/usr/bin/env perl
-
 use Mojo::Base -strict;
 use Test::More;
 use Test::Mojo;
@@ -32,9 +30,9 @@ subtest 'View single thread', sub {
     $t->get_ok('/thread/1/1')->status_is(200)->text_like(h2 => qr/Thread #1/);
 };
 
-$t->ua->max_redirects(1);
-
 subtest 'Post new thread', sub {
+    $t->ua->max_redirects(1);
+
     # GET
     $t->get_ok('/post')->status_is(200)
         ->element_exists('form input[name="author"]' )

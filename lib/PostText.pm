@@ -67,7 +67,8 @@ sub startup($self) {
         ->name('threads_list');
 
     my $post_thread = $r->under;
-    $post_thread->any([qw{GET POST}], '/post')->to('thread#create')
+    $post_thread->any([qw{GET POST}], '/post')
+        ->to('thread#create')
         ->name('post_thread');
 
     my $single_thread =
@@ -88,6 +89,12 @@ sub startup($self) {
     $single_remark->get('/:remark_id', [remark_id => qr/[0-9]+/])
         ->to('remark#by_id')
         ->name('single_remark');
+
+    # Bump
+    my $bump_thread = $r->under('/bump');
+    $bump_thread->get('/:thread_id', [thread_id => qr/[0-9]+/])
+        ->to('bump#create')
+        ->name('bump_thread');
 }
 
 1;

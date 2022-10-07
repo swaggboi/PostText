@@ -1,5 +1,3 @@
-#!/usr/bin/env perl
-
 use Mojo::Base -strict;
 use Test::More;
 use Test::Mojo;
@@ -19,9 +17,9 @@ subtest 'View single remark', sub {
     $t->get_ok('/remark/1')->status_is(200)->text_like(h2 => qr/Remark #1/);
 };
 
-$t->ua->max_redirects(1);
-
 subtest 'Post new remark', sub {
+    $t->ua->max_redirects(1);
+
     # GET
     $t->get_ok('/post/1')->status_is(200)
         ->element_exists('form input[name="author"]' )
