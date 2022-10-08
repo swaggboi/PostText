@@ -1,9 +1,14 @@
+.field-with-info {
+    border-style: solid;
+    border-color: green;
+}
+
 .field-with-error {
     border-style: solid;
     border-color: red;
 }
 
-.thread, .remark, .field-with-error {
+.thread, .remark, .field-with-error, .field-with-info {
     border-style: dotted;
     border-collapse: collapse;
 }

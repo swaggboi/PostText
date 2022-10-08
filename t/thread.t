@@ -30,18 +30,9 @@ subtest 'View single thread', sub {
     $t->get_ok('/thread/1/1')->status_is(200)->text_like(h2 => qr/Thread #1/);
 };
 
-subtest 'Bumping thread', sub {
-    $t->get_ok('/list')->status_is(200)
-        ->element_exists('a[href~="bump"]')
-        ->text_like(h2 => qr/Threads List/);
-
-    $t->get_ok('/bump/1')->status_is(302)
-        ->header_like(Location => qr/list/);
-};
+$t->ua->max_redirects(1);
 
 subtest 'Post new thread', sub {
-    $t->ua->max_redirects(1);
-
     # GET
     $t->get_ok('/post')->status_is(200)
         ->element_exists('form input[name="author"]' )
@@ -64,6 +55,16 @@ subtest 'Post new thread', sub {
         ->text_like(p => qr/Invalid text/);
     $t->post_ok('/post', form => \%valid_params)->status_is(200)
         ->text_like(h2 => qr/Thread #[0-9]+/);
+};
+
+subtest 'Bumping thread', sub {
+    $t->get_ok('/list')->status_is(200)
+        ->element_exists('a[href*="bump"]')
+        ->text_like(h2 => qr/Threads List/);
+
+    $t->get_ok('/bump/1')->status_is(200)
+        ->element_exists('p[class="field-with-info"]')
+        ->text_like(p => qr/Thread #[0-9]+ has been bumped/);
 };
 
 done_testing();

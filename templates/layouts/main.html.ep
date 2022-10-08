@@ -5,6 +5,9 @@
   <%= asset 'main.css' %>
 </head>
 <body>
+<% if (flash 'info') { =%>
+<p class="field-with-info"><%= flash 'info' %></p>
+<% } =%>
 <h1>Post::Text</h1>
 <nav>
   <%= link_to List => 'threads_list' %>

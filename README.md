@@ -32,7 +32,6 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Bump button/counter (need the migration and model next)
 1. Implement
    [bcrypt](https://metacpan.org/pod/Mojolicious::Plugin::BcryptSecure)
 1. Some sort of admin/moderator login and view
@@ -48,6 +47,4 @@ Run the tests locally (against development environment):
    requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
    (JSON?)
 1. Post thread via SMS (twil.io??)
-1. CAPTCHA with
-   [Lingua::EN::Inflexion](https://metacpan.org/pod/Lingua::EN::Inflexion#cardinal()-and-cardinal($threshold))
-   (This may not even be necessary with proper admin/moderation stuff)
+1. Option to remark without bumping?

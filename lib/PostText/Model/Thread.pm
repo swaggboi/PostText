@@ -28,19 +28,6 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     END_SQL
 }
 
-sub dump_all($self) {
-    $self->pg->db->query(<<~'END_SQL', $self->{'date_format'})->hashes
-        SELECT thread_id               AS id,
-               TO_CHAR(thread_date, ?) AS date,
-               thread_author           AS author,
-               thread_title            AS title,
-               thread_body             AS body
-          FROM threads
-         WHERE NOT hidden_status
-         ORDER BY bump_date DESC;
-       END_SQL
-}
-
 sub by_page($self, $this_page = 1) {
     my $date_format = $self->{'date_format'};
     my $row_count   = $self->{'threads_per_page'};
@@ -53,7 +40,8 @@ sub by_page($self, $this_page = 1) {
                    t.thread_author           AS author,
                    t.thread_title            AS title,
                    t.thread_body             AS body,
-                   COUNT(r.*)                AS remark_count
+                   COUNT(r.*)                AS remark_count,
+                   t.bump_count              AS bump_count
               FROM threads t
               LEFT JOIN remarks r
                 ON t.thread_id = r.thread_id
@@ -103,7 +91,8 @@ sub by_id($self, $thread_id) {
 sub bump($self, $thread_id) {
     $self->pg->db->query(<<~'END_SQL', $thread_id)
         UPDATE threads
-           SET bump_date = NOW()
+           SET bump_date = NOW(),
+               bump_count = bump_count + 1
          WHERE thread_id = ?;
        END_SQL
 }

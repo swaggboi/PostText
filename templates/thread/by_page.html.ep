@@ -18,6 +18,11 @@
         (<%= $thread->{'remark_count'} %> remarks)
       <% end %>
     </nav>
+    <nav class="bumps">
+      <%= link_to bump_thread => {thread_id => $thread->{'id'}}, begin %>
+        Bump (<%= $thread->{'bump_count'} %> bumps)
+      <% end %>
+    </nav>
   </article>
   <% } =%>
 </div>
