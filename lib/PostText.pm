@@ -35,7 +35,7 @@ sub startup($self) {
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
-    $self->pg->migrations->from_dir('migrations')->migrate(5);
+    $self->pg->migrations->from_dir('migrations')->migrate(6);
 
     if (my $threads_per_page = $self->config->{'threads_per_page'}) {
         $self->thread->per_page($threads_per_page)
@@ -93,7 +93,7 @@ sub startup($self) {
     # Bump
     my $bump_thread = $r->under('/bump');
     $bump_thread->get('/:thread_id', [thread_id => qr/[0-9]+/])
-        ->to('bump#create')
+        ->to('thread#bump')
         ->name('bump_thread');
 }
 

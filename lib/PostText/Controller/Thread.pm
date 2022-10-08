@@ -85,4 +85,13 @@ sub by_page($self) {
     $self->render;
 }
 
+sub bump($self) {
+    my $thread_id = $self->param('thread_id');
+
+    $self->thread->bump($thread_id);
+    $self->flash(info => "Thread #$thread_id has been bumped.🔝");
+
+    $self->redirect_to('threads_list');
+}
+
 1;

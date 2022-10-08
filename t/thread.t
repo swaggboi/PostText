@@ -30,6 +30,15 @@ subtest 'View single thread', sub {
     $t->get_ok('/thread/1/1')->status_is(200)->text_like(h2 => qr/Thread #1/);
 };
 
+subtest 'Bumping thread', sub {
+    $t->get_ok('/list')->status_is(200)
+        ->element_exists('a[href~="bump"]')
+        ->text_like(h2 => qr/Threads List/);
+
+    $t->get_ok('/bump/1')->status_is(302)
+        ->header_like(Location => qr/list/);
+};
+
 subtest 'Post new thread', sub {
     $t->ua->max_redirects(1);
 
