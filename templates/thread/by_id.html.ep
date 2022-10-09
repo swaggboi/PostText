@@ -13,7 +13,7 @@
   <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
 </nav>
 <% if (my $first_remark = $remarks->[0]) { =%>
-<div class="remarks">
+<div class="remarks" id="remarks">
   <h3>Remarks</h3>
   <% for my $remark (@{$remarks}) { =%>
   <article class="remark">

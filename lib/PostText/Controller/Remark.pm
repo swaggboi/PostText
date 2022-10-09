@@ -29,6 +29,11 @@ sub create($self) {
             $self->stash(status => 400)
         }
         else {
+            my $thread_url = $self->url_for(single_thread => {
+                thread_id   => $thread_id,
+                thread_page => $self->remark->last_page_for($thread_id)
+            })->fragment('remarks');
+
             $self->remark->create(
                 $thread_id,
                 $remark_author,
@@ -39,10 +44,7 @@ sub create($self) {
 
             $self->thread->bump($thread_id);
 
-            return $self->redirect_to(single_thread => {
-                thread_id   => $thread_id,
-                thread_page => $self->remark->last_page_for($thread_id)
-            });
+            return $self->redirect_to($thread_url);
         }
     }
 
