@@ -11,6 +11,7 @@
 </div>
 <nav>
   <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
+  <%= link_to Bump   => bump_thread => {thread_id => $thread->{'id'}} %>
 </nav>
 <% if (my $first_remark = $remarks->[0]) { =%>
 <div class="remarks" id="remarks">
