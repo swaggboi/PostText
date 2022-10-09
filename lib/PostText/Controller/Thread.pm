@@ -91,7 +91,9 @@ sub bump($self) {
     $self->thread->bump($thread_id);
     $self->flash(info => "Thread #$thread_id has been bumped.🔝");
 
-    $self->redirect_to('threads_list');
+    $self->redirect_to(
+        $self->url_for('threads_list')->fragment('info')->to_abs
+        );
 }
 
 1;
