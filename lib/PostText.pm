@@ -84,14 +84,15 @@ sub startup($self) {
         ->name('bump_thread');
 
     # Remark
-    my $post_remark = $r->under('/post');
-    $post_remark
+    my $remark = $r->under('/remark');
+
+    $remark->under('/post')
         ->any([qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/])
         ->to('remark#create')
         ->name('post_remark');
 
-    my $single_remark = $r->under('/remark');
-    $single_remark->get('/:remark_id', [remark_id => qr/[0-9]+/])
+    $remark->under('/single')
+        ->get('/:remark_id', [remark_id => qr/[0-9]+/])
         ->to('remark#by_id')
         ->name('single_remark');
 }
