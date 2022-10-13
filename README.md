@@ -32,6 +32,7 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
+1. Implement flag post button
 1. Implement
    [bcrypt](https://metacpan.org/pod/Mojolicious::Plugin::BcryptSecure)
 1. Some sort of admin/moderator login and view
