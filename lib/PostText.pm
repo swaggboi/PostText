@@ -60,26 +60,24 @@ sub startup($self) {
     $r->get('/', sub ($c) { $c->redirect_to('threads_list') });
 
     # Thread
-    my $threads_list = $r->under('/list');
-    $threads_list
+    my $thread = $r->under('/thread');
+
+    $thread->under('/list')
         ->get('/:list_page', [list_page => qr/[0-9]+/], {list_page => 1})
         ->to('thread#by_page')
         ->name('threads_list');
 
-    my $post_thread = $r->under;
-    $post_thread->any([qw{GET POST}], '/post')
+    $thread->any([qw{GET POST}], '/post')
         ->to('thread#create')
         ->name('post_thread');
 
-    my $single_thread =
-        $r->under('/thread/:thread_id', [thread_id => qr/[0-9]+/]);
-    $single_thread
+    $thread->under('/:thread_id', [thread_id => qr/[0-9]+/])
         ->get('/:thread_page', [thread_page => qr/[0-9]+/], {thread_page => 1})
         ->to('thread#by_id')
         ->name('single_thread');
 
-    my $bump_thread = $r->under('/bump');
-    $bump_thread->get('/:thread_id', [thread_id => qr/[0-9]+/])
+    $thread->under('/bump')
+        ->get('/:thread_id', [thread_id => qr/[0-9]+/])
         ->to('thread#bump')
         ->name('bump_thread');
 

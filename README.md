@@ -32,7 +32,6 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Consolidate routes
 1. Implement flag post button
 1. Implement
    [bcrypt](https://metacpan.org/pod/Mojolicious::Plugin::BcryptSecure)
