@@ -17,6 +17,12 @@ subtest 'View single remark', sub {
     $t->get_ok('/remark/1')->status_is(200)->text_like(h2 => qr/Remark #1/);
 };
 
+subtest 'Flagging remark', sub {
+    $t->get_ok('/remark/1')->status_is(200)
+        ->element_exists('a[href*="flag"]')
+        ->text_like(h2 => qr/Thread #1/);
+}
+
 $t->ua->max_redirects(1);
 
 subtest 'Post new remark', sub {

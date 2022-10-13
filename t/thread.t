@@ -67,4 +67,14 @@ subtest 'Bumping thread', sub {
         ->text_like(p => qr/Thread #[0-9]+ has been bumped/);
 };
 
+subtest 'Flagging thread', sub {
+    $t->get_ok('/list')->status_is(200)
+        ->element_exists('a[href*="flag"]')
+        ->text_like(h2 => qr/Threads List/);
+
+    $t->get_ok('/thread/1')->status_is(200)
+        ->element_exists('a[href*="flag"]')
+        ->text_like(h2 => qr/Thread #1/);
+}
+
 done_testing();
