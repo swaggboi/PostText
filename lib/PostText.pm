@@ -13,16 +13,16 @@ sub startup($self) {
     $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
 
     # Helpers
-    $self->helper(pg => sub {
-        state $pg = Mojo::Pg->new(shift->config->{$self->mode}{'pg_string'})
+    $self->helper(pg => sub ($c) {
+        state $pg = Mojo::Pg->new($c->config->{$self->mode}{'pg_string'})
     });
 
-    $self->helper(thread => sub {
-        state $thread = PostText::Model::Thread->new(pg => shift->pg)
+    $self->helper(thread => sub ($c) {
+        state $thread = PostText::Model::Thread->new(pg => $c->pg)
     });
 
-    $self->helper(remark => sub {
-        state $remark = PostText::Model::Remark->new(pg => shift->pg)
+    $self->helper(remark => sub ($c) {
+        state $remark = PostText::Model::Remark->new(pg => $c->pg)
     });
 
     $self->helper(truncate_text => sub ($c, $input_text) {
@@ -71,7 +71,7 @@ sub startup($self) {
         ->to('thread#create')
         ->name('post_thread');
 
-    $thread->under('/:thread_id', [thread_id => qr/[0-9]+/])
+    $thread->under('/single/:thread_id', [thread_id => qr/[0-9]+/])
         ->get('/:thread_page', [thread_page => qr/[0-9]+/], {thread_page => 1})
         ->to('thread#by_id')
         ->name('single_thread');
