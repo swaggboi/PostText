@@ -12,6 +12,7 @@
 <nav>
   <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
   <%= link_to Bump   => bump_thread => {thread_id => $thread->{'id'}} %>
+  <%= link_to Flag   => flag_thread => {thread_id => $thread->{'id'}} %>
 </nav>
 <% if (my $first_remark = $remarks->[0]) { =%>
 <div class="remarks" id="remarks">
@@ -25,6 +26,9 @@
     <h4 class="date"><%= $remark->{'date'} %></h4>
     <h5 class="author"><%= $remark->{'author'} %></h5>
     <p class="body"><%= $remark->{'body'} %></p>
+    <nav>
+      <%= link_to Flag => flag_remark => {remark_id => $remark->{'id'}} %>
+    </nav>
   </article>
   <% } =%>
 </div>

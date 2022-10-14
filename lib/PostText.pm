@@ -81,6 +81,11 @@ sub startup($self) {
         ->to('thread#bump')
         ->name('bump_thread');
 
+    $thread->under('/flag')
+        ->get('/:thread_id', [thread_id => qr/[0-9]+/])
+        ->to('thread#flag')
+        ->name('flag_thread');
+
     # Remark
     my $remark = $r->under('/remark');
 
@@ -93,6 +98,11 @@ sub startup($self) {
         ->get('/:remark_id', [remark_id => qr/[0-9]+/])
         ->to('remark#by_id')
         ->name('single_remark');
+
+    $remark->under('/flag')
+        ->get('/:remark_id', [remark_id => qr/[0-9]+/])
+        ->to('remark#flag')
+        ->name('flag_remark');
 }
 
 1;

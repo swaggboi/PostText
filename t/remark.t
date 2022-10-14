@@ -46,7 +46,11 @@ subtest 'Post new remark', sub {
 subtest 'Flagging remark', sub {
     $t->get_ok('/remark/single/1')->status_is(200)
         ->element_exists('a[href*="flag"]')
-        ->text_like(h2 => qr/Thread #1/);
-}
+        ->text_like(h2 => qr/Remark #1/);
+
+    $t->get_ok('/remark/flag/1')->status_is(200)
+        ->element_exists('p[class="field-with-info"]')
+        ->text_like(p => qr/Remark #1 has been flagged/);
+};
 
 done_testing();

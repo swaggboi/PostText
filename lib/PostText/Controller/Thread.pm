@@ -89,11 +89,21 @@ sub bump($self) {
     my $thread_id = $self->param('thread_id');
 
     $self->thread->bump($thread_id);
-    $self->flash(info => "Thread #$thread_id has been bumped.🔝");
+    $self->flash(info => "Thread #$thread_id has been bumped. 🔝");
 
     $self->redirect_to(
         $self->url_for('threads_list')->fragment('info')->to_abs
         );
+}
+
+sub flag($self) {
+    my $thread_id    = $self->param('thread_id');
+    my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
+
+    $self->thread->flag($thread_id);
+    $self->flash(info => "Thread #$thread_id has been flagged. 🚩");
+
+    $self->redirect_to($redirect_url);
 }
 
 1;

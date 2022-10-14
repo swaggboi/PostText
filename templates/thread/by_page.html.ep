@@ -24,6 +24,9 @@
         Bump (<%= $thread->{'bump_count'} %> bumps)
       <% end %>
     </nav>
+    <nav>
+      <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}} %>
+    </nav>
   </article>
   <% } =%>
 </div>

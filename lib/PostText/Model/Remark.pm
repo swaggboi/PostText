@@ -106,4 +106,20 @@ sub thread_id_for($self, $remark_id) {
        END_SQL
 }
 
+sub flag($self, $remark_id) {
+    $self->pg->db->query(<<~'END_SQL', $remark_id)
+        UPDATE remarks
+           SET flagged_status = TRUE
+         WHERE remark_id = ?;
+       END_SQL
+}
+
+sub unflag($self, $remark_id) {
+    $self->pg->db->query(<<~'END_SQL', $remark_id)
+        UPDATE remarks
+           SET flagged_status = FALSE
+         WHERE remark_id = ?;
+       END_SQL
+}
+
 1;

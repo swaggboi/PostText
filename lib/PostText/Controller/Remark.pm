@@ -57,4 +57,18 @@ sub create($self) {
     return $self->render;
 }
 
+sub flag($self) {
+    my $remark_id    = $self->param('remark_id');
+    my $thread_id    = $self->remark->thread_id_for($remark_id);
+    my $redirect_url =
+        $self->url_for('single_thread', thread_id => $thread_id)
+            ->fragment('info')->to_abs;
+
+
+    $self->remark->flag($remark_id);
+    $self->flash(info => "Remark #$remark_id has been flagged. 🚩");
+
+    $self->redirect_to($redirect_url);
+}
+
 1;

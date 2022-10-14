@@ -72,9 +72,13 @@ subtest 'Bumping thread', sub {
         ->element_exists('a[href*="bump"]')
         ->text_like(h2 => qr/Threads List/);
 
+    $t->get_ok('/thread/single/1')->status_is(200)
+        ->element_exists('a[href*="bump"]')
+        ->text_like(h2 => qr/Thread #1/);
+
     $t->get_ok('/thread/bump/1')->status_is(200)
         ->element_exists('p[class="field-with-info"]')
-        ->text_like(p => qr/Thread #[0-9]+ has been bumped/);
+        ->text_like(p => qr/Thread #1 has been bumped/);
 };
 
 subtest 'Flagging thread', sub {
@@ -85,6 +89,10 @@ subtest 'Flagging thread', sub {
     $t->get_ok('/thread/single/1')->status_is(200)
         ->element_exists('a[href*="flag"]')
         ->text_like(h2 => qr/Thread #1/);
-}
+
+    $t->get_ok('/thread/flag/1')->status_is(200)
+        ->element_exists('p[class="field-with-info"]')
+        ->text_like(p => qr/Thread #1 has been flagged/);
+};
 
 done_testing();
