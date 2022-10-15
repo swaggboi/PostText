@@ -11,6 +11,7 @@ sub startup($self) {
     $self->plugin('Config');
     $self->plugin('TagHelpers::Pagination');
     $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
+    $self->plugin('BcryptSecure');
 
     # Helpers
     $self->helper(pg => sub ($c) {
@@ -35,7 +36,7 @@ sub startup($self) {
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
-    $self->pg->migrations->from_dir('migrations')->migrate(6);
+    $self->pg->migrations->from_dir('migrations')->migrate(7);
 
     if (my $threads_per_page = $self->config->{'threads_per_page'}) {
         $self->thread->per_page($threads_per_page)

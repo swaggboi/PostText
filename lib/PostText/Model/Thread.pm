@@ -42,8 +42,8 @@ sub by_page($self, $this_page = 1) {
                    t.thread_body             AS body,
                    COUNT(r.*)                AS remark_count,
                    t.bump_count              AS bump_count
-              FROM threads t
-              LEFT JOIN remarks r
+              FROM threads      AS t
+              LEFT JOIN remarks AS r
                 ON t.thread_id = r.thread_id
              WHERE NOT t.hidden_status
              GROUP BY t.thread_id
