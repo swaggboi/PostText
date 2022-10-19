@@ -48,6 +48,8 @@ sub startup($self) {
 
     $self->asset->process('main.css', 'css/PostText.css');
 
+    push @{$self->commands->namespaces}, 'PostText::Command';
+
     # Begin routing
     my $r = $self->routes->under(sub ($c) {
         $c->session(expires => time + 31536000);
