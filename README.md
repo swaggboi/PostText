@@ -33,6 +33,7 @@ Run the tests locally (against development environment):
 ## TODOs
 
 1. Some sort of admin/moderator login and view
+1. Implement tripcodes
 1. CSS
 
 ## Crazy future ideas

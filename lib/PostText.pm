@@ -11,7 +11,7 @@ sub startup($self) {
     $self->plugin('Config');
     $self->plugin('TagHelpers::Pagination');
     $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
-    $self->plugin('BcryptSecure');
+    $self->plugin('BcryptSecure', {cost => $self->config->{'bcrypt_cost'}});
 
     # Helpers
     $self->helper(pg => sub ($c) {
