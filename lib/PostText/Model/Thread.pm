@@ -41,7 +41,7 @@ sub by_page($self, $this_page = 1) {
                    t.thread_title            AS title,
                    t.thread_body             AS body,
                    COUNT(r.*)                AS remark_count,
-                   t.bump_count              AS bump_count
+                   t.bump_tally              AS bump_tally
               FROM threads      AS t
               LEFT JOIN remarks AS r
                 ON t.thread_id = r.thread_id
@@ -92,7 +92,7 @@ sub bump($self, $thread_id) {
     $self->pg->db->query(<<~'END_SQL', $thread_id)
         UPDATE threads
            SET bump_date = NOW(),
-               bump_count = bump_count + 1
+               bump_tally = bump_tally + 1
          WHERE thread_id = ?;
        END_SQL
 }

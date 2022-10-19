@@ -36,8 +36,6 @@ Run the tests locally (against development environment):
    [bcrypt](https://metacpan.org/pod/Mojolicious::Plugin::BcryptSecure)
 1. Some sort of admin/moderator login and view
 1. CSS
-1. Use [_tally](https://www.sqlstyle.guide/#uniform-suffixes) suffix
-   instead of _counter or _count
 
 ## Crazy future ideas
 
