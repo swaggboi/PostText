@@ -4,14 +4,6 @@ use Mojo::Base -base, -signatures;
 
 has 'pg';
 
-sub new($class, $pg, $pg_reference) {
-    bless {
-        $pg              => $pg_reference,
-        threads_per_page => 5,
-        date_format      => 'Dy Mon FMDD HH24:MI TZ YYYY'
-    }, $class
-}
-
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my @data = ($author, $title, $body, $hidden, $flagged);
 

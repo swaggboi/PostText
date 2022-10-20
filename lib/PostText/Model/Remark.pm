@@ -4,14 +4,6 @@ use Mojo::Base -base, -signatures;
 
 has 'pg';
 
-sub new($class, $pg, $pg_reference) {
-    bless {
-        $pg              => $pg_reference,
-        remarks_per_page => 5,
-        date_format      => 'Dy Mon FMDD HH24:MI TZ YYYY'
-    }, $class
-}
-
 sub by_page_for($self, $thread_id, $this_page = 1) {
     my $date_format = $self->{'date_format'};
     my $row_count   = $self->{'remarks_per_page'};
