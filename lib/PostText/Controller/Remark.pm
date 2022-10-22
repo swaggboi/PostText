@@ -19,16 +19,18 @@ sub create($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        my $remark_author = $self->param('author');
-        my $remark_body   = $self->param('body'  );
+        my ($remark_author, $remark_body);
 
-        $v->required('author')->size(1, 63  );
+        $v->required('author')->size(1,   63);
         $v->required('body'  )->size(2, 4000);
 
         if ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
+            $remark_author = $v->param('author');
+            $remark_body   = $v->param('body'  );
+
             $self->remark->create(
                 $thread_id,
                 $remark_author,

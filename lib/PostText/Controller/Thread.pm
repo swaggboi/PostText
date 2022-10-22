@@ -8,18 +8,20 @@ sub create($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        my $thread_author = $self->param('author');
-        my $thread_title  = $self->param('title' );
-        my $thread_body   = $self->param('body'  );
+        my ($thread_author, $thread_title, $thread_body);
 
-        $v->required('author')->size(1, 63  );
-        $v->required('title' )->size(1, 127 );
+        $v->required('author')->size(1,   63);
+        $v->required('title' )->size(1,  127);
         $v->required('body'  )->size(2, 4000);
 
         if ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
+            $thread_author = $v->param('author');
+            $thread_title  = $v->param('title' );
+            $thread_body   = $v->param('body'  );
+
             my $new_thread_id = $self->thread->create(
                 $thread_author,
                 $thread_title,
