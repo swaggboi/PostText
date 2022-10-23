@@ -6,12 +6,12 @@ use Mojo::Base 'Mojolicious', -signatures;
 use Mojo::Pg;
 use PostText::Model::Thread;
 use PostText::Model::Remark;
+use PostText::Model::Moderator;
 
 sub startup($self) {
     $self->plugin('Config');
     $self->plugin('TagHelpers::Pagination');
     $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
-    $self->plugin('BcryptSecure', {cost => $self->config->{'bcrypt_cost'}});
 
     # Helpers
     $self->helper(pg => sub ($c) {
@@ -24,6 +24,10 @@ sub startup($self) {
 
     $self->helper(remark => sub ($c) {
         state $remark = PostText::Model::Remark->new(pg => $c->pg)
+    });
+
+    $self->helper(moderator => sub ($c) {
+        state $moderator = PostText::Model::Moderator->new(pg => $c->pg)
     });
 
     $self->helper(truncate_text => sub ($c, $input_text) {

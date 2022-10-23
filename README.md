@@ -32,6 +32,8 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
+1. Need to pass `config` to the Moderator model for bcrypt cost
+1. Re-write bcrypt command to use Authen::Passphrase::BlowfishCrypt
 1. Some sort of admin/moderator login and view
 1. Implement tripcodes
 1. CSS
