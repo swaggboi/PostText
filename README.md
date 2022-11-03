@@ -33,7 +33,6 @@ Run the tests locally (against development environment):
 ## TODOs
 
 1. Some sort of admin/moderator login and view
-1. Implement tripcodes
 1. CSS
 
 ## Crazy future ideas
@@ -42,6 +41,7 @@ Run the tests locally (against development environment):
 
 1. Support at least some Markdown, specifically the code blocks
 1. RSS feed!!
+1. Implement tripcodes (moving this down in priority due to complexity...)
 1. Return a text response instead of HTML if a `.txt` extension [is
    requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
    (JSON?)
