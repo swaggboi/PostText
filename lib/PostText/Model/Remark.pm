@@ -25,10 +25,6 @@ sub by_page_for($self, $thread_id, $this_page = 1) {
        END_SQL
 }
 
-sub per_page($self, $value = undef) {
-    $self->per_page = $value // $self->per_page
-}
-
 sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
     my @data = ($thread_id, $author, $body, $hidden, $flagged);
 
