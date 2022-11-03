@@ -4,6 +4,9 @@ package PostText;
 
 use Mojo::Base 'Mojolicious', -signatures;
 use Mojo::Pg;
+use Crypt::Passphrase;
+
+# The local libs
 use PostText::Model::Thread;
 use PostText::Model::Remark;
 use PostText::Model::Moderator;
@@ -18,6 +21,13 @@ sub startup($self) {
         state $pg = Mojo::Pg->new($c->config->{$self->mode}{'pg_string'})
     });
 
+    $self->helper(authenticator => sub ($c) {
+        state $authenticator = Crypt::Passphrase->new(
+            encoder    => 'Argon2',
+            validators => ['Bcrypt'], # For old passphrases
+          )
+    });
+
     $self->helper(thread => sub ($c) {
         state $thread = PostText::Model::Thread->new(pg => $c->pg)
     });
@@ -27,7 +37,10 @@ sub startup($self) {
     });
 
     $self->helper(moderator => sub ($c) {
-        state $moderator = PostText::Model::Moderator->new(pg => $c->pg)
+        state $moderator = PostText::Model::Moderator->new(
+            pg            => $c->pg,
+            authenticator => $c->authenticator
+          )
     });
 
     $self->helper(truncate_text => sub ($c, $input_text) {
@@ -40,7 +53,7 @@ sub startup($self) {
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
-    $self->pg->migrations->from_dir('migrations')->migrate(8);
+    $self->pg->migrations->from_dir('migrations')->migrate(9);
 
     if (my $threads_per_page = $self->config->{'threads_per_page'}) {
         $self->thread->per_page($threads_per_page)

@@ -1,10 +1,9 @@
 package PostText::Model::Moderator;
 
 use Mojo::Base -base, -signatures;
-use Authen::Passphrase::BlowfishCrypt;
-use Data::Dumper;
 
 has 'pg';
+has 'authenticator';
 
 sub check_password($self, $email, $password) {
     my $moderator =
@@ -17,9 +16,8 @@ sub check_password($self, $email, $password) {
 
     return undef unless $moderator->{'id'};
 
-    return Authen::Passphrase::BlowfishCrypt
-        ->from_crypt($moderator->{'password_hash'})
-        ->match($password);
+    return $self->authenticator
+        ->verify_password($password, $moderator->{'password_hash'});
 }
 
 1;
