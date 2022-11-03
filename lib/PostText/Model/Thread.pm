@@ -4,6 +4,8 @@ use Mojo::Base -base, -signatures;
 
 has 'pg';
 
+has per_page => sub { 5 };
+
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my @data = ($author, $title, $body, $hidden, $flagged);
 
@@ -22,7 +24,7 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
 
 sub by_page($self, $this_page = 1) {
     my $date_format = $self->{'date_format'};
-    my $row_count   = $self->{'threads_per_page'};
+    my $row_count   = $self->per_page;
     my $offset      = ($this_page - 1) * $row_count;
 
     $self->pg->db
@@ -44,16 +46,12 @@ sub by_page($self, $this_page = 1) {
            END_SQL
 }
 
-sub per_page($self, $value = undef) {
-    $self->{'threads_per_page'} = $value // $self->{'threads_per_page'}
-}
-
 sub last_page($self) {
     my $thread_count = $self->count;
-    my $last_page    = int($thread_count / $self->{'threads_per_page'});
+    my $last_page    = int($thread_count / $self->per_page);
 
     # Add a page for 'remainder' posts
-    $last_page++ if $thread_count % $self->{'threads_per_page'};
+    $last_page++ if $thread_count % $self->per_page;
 
     $last_page;
 }

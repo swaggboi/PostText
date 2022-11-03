@@ -4,9 +4,11 @@ use Mojo::Base -base, -signatures;
 
 has 'pg';
 
+has per_page => sub { 5 };
+
 sub by_page_for($self, $thread_id, $this_page = 1) {
     my $date_format = $self->{'date_format'};
-    my $row_count   = $self->{'remarks_per_page'};
+    my $row_count   = $self->per_page;
     my $offset      = ($this_page - 1) * $row_count;
     my @data        = ($date_format, $thread_id, $row_count, $offset);
 
@@ -24,7 +26,7 @@ sub by_page_for($self, $thread_id, $this_page = 1) {
 }
 
 sub per_page($self, $value = undef) {
-    $self->{'remarks_per_page'} = $value // $self->{'remarks_per_page'}
+    $self->per_page = $value // $self->per_page
 }
 
 sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
@@ -53,10 +55,10 @@ sub count_for($self, $thread_id) {
 
 sub last_page_for($self, $thread_id) {
     my $remark_count = $self->count_for($thread_id);
-    my $last_page    = int($remark_count / $self->{'remarks_per_page'});
+    my $last_page    = int($remark_count / $self->per_page);
 
     # Add a page for 'remainder' posts
-    $last_page++ if $remark_count % $self->{'remarks_per_page'};
+    $last_page++ if $remark_count % $self->per_page;
 
     return $last_page;
 }
