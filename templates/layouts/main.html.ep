@@ -11,6 +11,9 @@
   <%= link_to New  => 'post_thread' %>
 </nav>
 <hr>
+<% if (flash 'error') { =%>
+<p class="field-with-error" id="error"><%= flash 'error' %></p>
+<% } =%>
 <% if (flash 'info') { =%>
 <p class="field-with-info" id="info"><%= flash 'info' %></p>
 <% } =%>

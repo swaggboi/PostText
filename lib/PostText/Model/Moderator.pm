@@ -5,7 +5,7 @@ use Mojo::Base -base, -signatures;
 has 'pg';
 has 'authenticator';
 
-sub check_password($self, $email, $password) {
+sub check($self, $email, $password) {
     my $moderator =
         $self->pg->db->query(<<~'END_SQL', $email)->hash;
             SELECT moderator_id  AS id,

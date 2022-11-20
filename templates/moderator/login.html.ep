@@ -1,0 +1,14 @@
+% layout 'main';
+% title 'Moderator Login';
+<h2><%= title %></h2>
+<form method="post">
+  <div class="email field">
+    <%= label_for email => 'Email' %>
+    <%= email_field 'email' %>
+  </div>
+  <div class="password field">
+    <%= label_for password => 'Password' %>
+    <%= password_field 'password' %>
+  </div>
+  <%= submit_button 'Login' %>
+</form>

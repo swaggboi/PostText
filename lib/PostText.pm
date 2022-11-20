@@ -123,6 +123,22 @@ sub startup($self) {
         ->get('/:remark_id', [remark_id => qr/[0-9]+/])
         ->to('remark#flag')
         ->name('flag_remark');
+
+    # Login
+    $r->any([qw{GET POST}], '/login')
+        ->to('moderator#login')
+        ->name('mod_login');
+
+    # Moderator
+    my $moderator = $r->under('/moderator', sub ($c) {
+        return 1 if $c->session('moderator');
+
+        $c->redirect_to('mod_login');
+
+        return undef;
+    });
+
+    $moderator->get('/list')->to('moderator#list')->name('mod_list');
 }
 
 1;
