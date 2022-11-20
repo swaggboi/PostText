@@ -53,7 +53,7 @@ sub startup($self) {
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
-    $self->pg->migrations->from_dir('migrations')->migrate(9);
+    $self->pg->migrations->from_dir('migrations')->migrate(10);
 
     if (my $threads_per_page = $self->config->{'threads_per_page'}) {
         $self->thread->per_page($threads_per_page)
