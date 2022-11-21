@@ -4,7 +4,7 @@ use Mojo::Base -base, -signatures;
 
 has 'pg';
 
-has per_page => sub { 5 };
+has per_page => 5;
 
 sub by_page_for($self, $thread_id, $this_page = 1) {
     my $date_format = $self->{'date_format'};

@@ -2,8 +2,7 @@ package PostText::Model::Moderator;
 
 use Mojo::Base -base, -signatures;
 
-has 'pg';
-has 'authenticator';
+has [qw{pg authenticator}];
 
 sub check($self, $email, $password) {
     my $moderator =

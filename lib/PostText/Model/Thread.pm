@@ -4,7 +4,7 @@ use Mojo::Base -base, -signatures;
 
 has 'pg';
 
-has per_page => sub { 5 };
+has per_page => 5;
 
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my @data = ($author, $title, $body, $hidden, $flagged);
