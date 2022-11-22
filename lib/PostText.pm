@@ -83,7 +83,7 @@ sub startup($self) {
     my $thread = $r->under('/thread');
 
     $thread->under('/list')
-        ->get('/:list_page', [list_page => qr/[0-9]+/], {list_page => 1})
+        ->get('/:list_page', [list_page => qr/\d+/], {list_page => 1})
         ->to('thread#by_page')
         ->name('threads_list');
 
@@ -91,18 +91,18 @@ sub startup($self) {
         ->to('thread#create')
         ->name('post_thread');
 
-    $thread->under('/single/:thread_id', [thread_id => qr/[0-9]+/])
-        ->get('/:thread_page', [thread_page => qr/[0-9]+/], {thread_page => 1})
+    $thread->under('/single/:thread_id', [thread_id => qr/\d+/])
+        ->get('/:thread_page', [thread_page => qr/\d+/], {thread_page => 1})
         ->to('thread#by_id')
         ->name('single_thread');
 
     $thread->under('/bump')
-        ->get('/:thread_id', [thread_id => qr/[0-9]+/])
+        ->get('/:thread_id', [thread_id => qr/\d+/])
         ->to('thread#bump')
         ->name('bump_thread');
 
     $thread->under('/flag')
-        ->get('/:thread_id', [thread_id => qr/[0-9]+/])
+        ->get('/:thread_id', [thread_id => qr/\d+/])
         ->to('thread#flag')
         ->name('flag_thread');
 
@@ -110,35 +110,41 @@ sub startup($self) {
     my $remark = $r->under('/remark');
 
     $remark->under('/post')
-        ->any([qw{GET POST}], '/:thread_id', [thread_id => qr/[0-9]+/])
+        ->any([qw{GET POST}], '/:thread_id', [thread_id => qr/\d+/])
         ->to('remark#create')
         ->name('post_remark');
 
     $remark->under('/single')
-        ->get('/:remark_id', [remark_id => qr/[0-9]+/])
+        ->get('/:remark_id', [remark_id => qr/\d+/])
         ->to('remark#by_id')
         ->name('single_remark');
 
     $remark->under('/flag')
-        ->get('/:remark_id', [remark_id => qr/[0-9]+/])
+        ->get('/:remark_id', [remark_id => qr/\d+/])
         ->to('remark#flag')
         ->name('flag_remark');
 
-    # Login
+    # Login/out
     $r->any([qw{GET POST}], '/login')
         ->to('moderator#login')
         ->name('mod_login');
 
+    $r->get('/logout')
+        ->to('moderator#logout')
+        ->name('mod_logout');
+
     # Moderator
     my $moderator = $r->under('/moderator', sub ($c) {
-        return 1 if $c->session('moderator');
+        return 1 if $c->session('mod_id') =~ /^\d+$/;
 
         $c->redirect_to('mod_login');
-
+        # Return false otherwise a body is rendered with the redirect...
         return undef;
     });
 
-    $moderator->get('/list')->to('moderator#list')->name('mod_list');
+    $moderator->get('/list')
+        ->to('moderator#list')
+        ->name('mod_list');
 }
 
 1;

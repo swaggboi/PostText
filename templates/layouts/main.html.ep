@@ -7,8 +7,9 @@
 <body>
 <h1>Post::Text</h1>
 <nav>
-  <%= link_to List => 'threads_list' %>
-  <%= link_to New  => 'post_thread' %>
+  <%= link_to List     => 'threads_list' %>
+  <%= link_to New      => 'post_thread'  %>
+  <%= link_to Moderate => 'mod_list'     %>
 </nav>
 <hr>
 <% if (flash 'error') { =%>
