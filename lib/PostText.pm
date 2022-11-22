@@ -45,7 +45,7 @@ sub startup($self) {
 
     $self->helper(truncate_text => sub ($c, $input_text) {
         my $truncated_text = 500 < length($input_text)
-            ? substr($input_text, 0, 500) . '...' : $input_text;
+            ? substr($input_text, 0, 500) . '…' : $input_text;
 
         return $truncated_text;
     });
