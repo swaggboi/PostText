@@ -64,7 +64,7 @@ subtest 'Post new thread', sub {
         ->text_like(p => qr/Invalid text/);
 
     $t->post_ok('/thread/post', form => \%valid_params)->status_is(200)
-        ->text_like(h2 => qr/Thread #[0-9]+/);
+        ->text_like(h2 => qr/Thread #\d+/);
 };
 
 subtest 'Bumping thread', sub {
