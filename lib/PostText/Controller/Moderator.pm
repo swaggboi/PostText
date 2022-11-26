@@ -26,10 +26,10 @@ sub login($self) {
             $email    = $self->param('email'   );
             $password = $self->param('password');
 
-            $mod_id   = $self->moderator->get_id($email);
-            $mod_name = $self->moderator->get_name($mod_id);
-
             if ($self->moderator->check($email, $password)) {
+                $mod_id   = $self->moderator->get_id($email);
+                $mod_name = $self->moderator->get_name($mod_id);
+
                 $self->session(mod_id => $mod_id);
                 $self->flash(info => "Hello, $mod_name 😎");
 
