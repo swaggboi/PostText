@@ -8,8 +8,8 @@ sub login($self) {
     my $v;
 
     #Already logged in?
-    return $self->redirect_to('mod_list')
-        if $self->session('mod_id') =~ /^\d$/;
+        return $self->redirect_to('mod_list')
+            if defined $self->session('mod_id');
 
     $v = $self->validation if $self->req->method eq 'POST';
 
@@ -36,13 +36,15 @@ sub login($self) {
                 return $self->redirect_to('mod_list');
             }
             else {
-                $self->stash(status => 403);
-                $self->flash(error => 'Invalid login! 🧐')
+                $self->stash(
+                    status => 403,
+                    error  => 'Invalid login! 🧐'
+                    );
             }
         }
     }
 
-    $self->render;
+    return $self->render;
 }
 
 sub logout($self) {

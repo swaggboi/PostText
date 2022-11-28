@@ -15,7 +15,13 @@ my %invalid_login = (
     );
 
 subtest Login => sub {
-    $t->post_ok('/login', form => \%invalid_login)->status_is(403);
+    $t->get_ok('/login')
+        ->status_is(200)
+        ->text_like(h2 => qr/Moderator Login/);
+
+    $t->post_ok('/login', form => \%invalid_login)
+        ->status_is(403)
+        ->text_like(p => qr/Invalid login/);
 
     $t->post_ok('/login', form => \%valid_login)
         ->status_is(302)

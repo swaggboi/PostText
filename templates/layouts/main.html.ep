@@ -14,6 +14,8 @@
 <hr>
 <% if (flash 'error') { =%>
 <p class="field-with-error" id="error"><%= flash 'error' %></p>
+<% } elsif (stash 'error') { =%>
+<p class="field-with-error" id="error"><%= stash 'error' %></p>
 <% } =%>
 <% if (flash 'info') { =%>
 <p class="field-with-info" id="info"><%= flash 'info' %></p>
