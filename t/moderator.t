@@ -17,15 +17,23 @@ my %invalid_login = (
 subtest Login => sub {
     $t->get_ok('/login')
         ->status_is(200)
+        ->element_exists('form input[name="email"]')
+        ->element_exists('form input[name="password"]')
         ->text_like(h2 => qr/Moderator Login/);
 
     $t->post_ok('/login', form => \%invalid_login)
         ->status_is(403)
+        ->element_exists('form input[name="email"]')
+        ->element_exists('form input[name="password"]')
         ->text_like(p => qr/Invalid login/);
 
     $t->post_ok('/login', form => \%valid_login)
         ->status_is(302)
         ->header_like(Location => qr{moderator/list});
+
+    $t->get_ok('/moderator/list')
+        ->status_is(200)
+        ->text_like(h2 => qr/Top Secret/);
 
     $t->get_ok('/logout')
         ->status_is(302)
