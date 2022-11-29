@@ -9,7 +9,7 @@ sub login($self) {
 
     #Already logged in?
         return $self->redirect_to('mod_list')
-            if defined $self->session('mod_id');
+            if defined $self->session->{'mod_id'};
 
     $v = $self->validation if $self->req->method eq 'POST';
 
@@ -30,7 +30,10 @@ sub login($self) {
                 $mod_id   = $self->moderator->get_id($email);
                 $mod_name = $self->moderator->get_name($mod_id);
 
-                $self->session(mod_id => $mod_id);
+                $self->session(
+                    mod_id => $mod_id,
+                    author => $mod_name
+                    );
                 $self->flash(info => "Hello, $mod_name 😎");
 
                 return $self->redirect_to('mod_list');

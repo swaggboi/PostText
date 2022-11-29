@@ -35,6 +35,10 @@ subtest Login => sub {
         ->status_is(200)
         ->text_like(h2 => qr/Top Secret/);
 
+    $t->get_ok('/login')
+        ->status_is(302)
+        ->header_like(Location => qr{moderator/list});
+
     $t->get_ok('/logout')
         ->status_is(302)
         ->header_like(Location => qr{thread/list});
