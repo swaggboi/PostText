@@ -50,6 +50,14 @@ sub startup($self) {
         return $truncated_text;
     });
 
+    $self->helper(is_mod => sub ($c) {
+        if (my $mod_id = $c->session->{'mod_id'}) {
+            return 1 if $mod_id =~ /\d/
+        }
+
+        return undef;
+    });
+
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
@@ -135,7 +143,7 @@ sub startup($self) {
 
     # Moderator
     my $moderator = $r->under('/moderator', sub ($c) {
-        return 1 if $c->session('mod_id') =~ /^\d+$/;
+        return 1 if $c->is_mod;
 
         $c->redirect_to('mod_login');
         # Return false otherwise a body is rendered with the redirect...

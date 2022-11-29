@@ -8,8 +8,7 @@ sub login($self) {
     my $v;
 
     #Already logged in?
-        return $self->redirect_to('mod_list')
-            if defined $self->session->{'mod_id'};
+    return $self->redirect_to('mod_list') if $self->is_mod;
 
     $v = $self->validation if $self->req->method eq 'POST';
 
