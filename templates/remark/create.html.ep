@@ -1,4 +1,4 @@
-% layout 'main';
+% layout 'default';
 % title 'New Remark';
 <h2><%= title %></h2>
 <form method="post">

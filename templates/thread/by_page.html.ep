@@ -1,4 +1,4 @@
-% layout 'main';
+% layout 'default';
 % title 'Threads List';
 <h2><%= title %></h2>
 <div class="threads">

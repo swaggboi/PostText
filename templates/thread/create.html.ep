@@ -1,4 +1,4 @@
-% layout 'main';
+% layout 'default';
 % title 'New Thread';
 <h2><%= title %></h2>
 <form method="post">
