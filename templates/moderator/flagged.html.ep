@@ -1,0 +1,4 @@
+% layout 'default';
+% title 'Flagged Posts';
+<h2><%= title %></h2>
+<p>Coming soon, stay tuned.</p>

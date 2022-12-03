@@ -150,9 +150,9 @@ sub startup($self) {
         return undef;
     });
 
-    $moderator->get('/list')
-        ->to('moderator#list')
-        ->name('mod_list');
+    $moderator->get('/flagged')
+        ->to('moderator#flagged')
+        ->name('flagged_list');
 }
 
 1;

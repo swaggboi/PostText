@@ -8,7 +8,7 @@ sub login($self) {
     my $v;
 
     #Already logged in?
-    return $self->redirect_to('mod_list') if $self->is_mod;
+    return $self->redirect_to('flagged_list') if $self->is_mod;
 
     $v = $self->validation if $self->req->method eq 'POST';
 
@@ -35,7 +35,7 @@ sub login($self) {
                     );
                 $self->flash(info => "Hello, $mod_name 😎");
 
-                return $self->redirect_to('mod_list');
+                return $self->redirect_to('flagged_list');
             }
             else {
                 $self->stash(

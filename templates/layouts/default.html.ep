@@ -7,10 +7,16 @@
 <body>
 <h1>Post::Text</h1>
 <nav>
-  <%= link_to List     => 'threads_list' %>
-  <%= link_to New      => 'post_thread'  %>
-  <%= link_to Moderate => 'mod_list'     %>
+  <%= link_to List  => 'threads_list' %>
+  <%= link_to New   => 'post_thread'  %>
+  <%= link_to Login => 'mod_login'    %>
 </nav>
+<% if (is_mod) { =%>
+<nav>
+  <%= link_to Flagged => 'flagged_list' %>
+  <%= link_to Logout  => 'mod_logout'   %>
+</nav>
+<% } =%>
 <hr>
 <% if (flash 'error') { =%>
 <p class="field-with-error" id="error"><%= flash 'error' %></p>

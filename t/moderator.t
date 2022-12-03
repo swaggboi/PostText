@@ -29,15 +29,15 @@ subtest Login => sub {
 
     $t->post_ok('/login', form => \%valid_login)
         ->status_is(302)
-        ->header_like(Location => qr{moderator/list});
+        ->header_like(Location => qr{moderator/flagged});
 
-    $t->get_ok('/moderator/list')
+    $t->get_ok('/moderator/flagged')
         ->status_is(200)
-        ->text_like(h2 => qr/Top Secret/);
+        ->text_like(h2 => qr/Flagged Posts/);
 
     $t->get_ok('/login')
         ->status_is(302)
-        ->header_like(Location => qr{moderator/list});
+        ->header_like(Location => qr{moderator/flagged});
 
     $t->get_ok('/logout')
         ->status_is(302)
