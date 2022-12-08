@@ -85,4 +85,18 @@ sub unhide_remark($self, $remark_id) {
        END_SQL
 }
 
+sub flagged($self) {
+    $self->pg->db->query(<<~'END_SQL')->hashes
+        SELECT 'thread'  AS type,
+               thread_id AS id
+          FROM threads
+         WHERE flagged_status
+         UNION
+        SELECT 'remark',
+               remark_id
+          FROM remarks
+         WHERE flagged_status;
+       END_SQL
+}
+
 1;

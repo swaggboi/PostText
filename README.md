@@ -32,10 +32,7 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Something like
-   [this](https://paste.lgts.xyz/?575618a432427bd1#DogvKr3pq6LUdezx5MrzccaANybAr6TjUV31iShdxfjB)
-   for the flagged list which will link to the single remark|thread
-   views
+1. Tests for flagged view? Not much to it but got pulled into work stuff
 1. Actions for creating moderators and resetting passwords
 1. CSS
 
