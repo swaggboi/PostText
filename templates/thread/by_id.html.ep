@@ -14,6 +14,13 @@
   <%= link_to Bump   => bump_thread => {thread_id => $thread->{'id'}} %>
   <%= link_to Flag   => flag_thread => {thread_id => $thread->{'id'}} %>
 </nav>
+<% if (is_mod) { =%>
+<nav>
+  <%= link_to Hide   => hide_thread   => {thread_id => $thread->{'id'}} %>
+  <%= link_to Unhide => unhide_thread => {thread_id => $thread->{'id'}} %>
+  <%= link_to Unflag => unflag_thread => {thread_id => $thread->{'id'}} %>
+</nav>
+<% } =%>
 <% if (my $first_remark = $remarks->[0]) { =%>
 <div class="remarks" id="remarks">
   <h3>Remarks</h3>

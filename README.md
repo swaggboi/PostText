@@ -32,8 +32,7 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Add buttons in single thread and single remark views for mods to
-   hide flagged posts; something like
+1. Something like
    [this](https://paste.lgts.xyz/?575618a432427bd1#DogvKr3pq6LUdezx5MrzccaANybAr6TjUV31iShdxfjB)
    for the flagged list which will link to the single remark|thread
    views

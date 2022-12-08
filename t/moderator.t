@@ -41,19 +41,43 @@ subtest Login => sub {
 
     # Do these subs while logged in
     subtest Flag => sub {
-        $t->get_ok('/moderator/unflag/1')
+        $t->get_ok('/moderator/thread/unflag/1')
             ->status_is(302)
             ->header_like(Location => qr{thread/list});
+
+        #$t->get_ok('/moderator/remark/unflag/1')
+        #    ->status_is(302)
+        #    ->header_like(Location => qr{thread/single});
     };
 
     subtest Hide => sub {
-        $t->get_ok('/moderator/hide/1')
+        $t->get_ok('/moderator/thread/hide/1')
             ->status_is(302)
-            ->header_like(Location => qr{thread/single/1});
-
-        $t->get_ok('/moderator/unhide/1')
+            ->header_like(Location => qr{thread/single});
+        $t->get_ok('/moderator/thread/unhide/1')
             ->status_is(302)
             ->header_like(Location => qr{thread/list});
+
+        #$t->get_ok('/moderator/remark/hide/1')
+        #    ->status_is(302)
+        #    ->header_like(Location => qr{thread/single});
+        #$t->get_ok('/moderator/remark/unhide/1')
+        #    ->status_is(302)
+        #    ->header_like(Location => qr{thread/single});
+    };
+
+    subtest 'Buttons for mods', sub {
+        $t->get_ok('/thread/single/1')
+            ->status_is(200)
+            ->element_exists('a[href*="/hide/1"]'  )
+            ->element_exists('a[href*="/unhide/1"]')
+            ->element_exists('a[href*="/unflag/1"]');
+
+        #$t->get_ok('/remark/single/1')
+        #    ->status_is(200)
+        #    ->element_exists('a[href*="/hide/1"]'  )
+        #    ->element_exists('a[href*="/unhide/1"]')
+        #    ->element_exists('a[href*="/unflag/1"]');
     };
 
     $t->get_ok('/logout')

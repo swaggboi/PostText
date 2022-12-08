@@ -57,32 +57,32 @@ sub logout($self) {
     $self->redirect_to('threads_list');
 }
 
-sub unflag($self) {
+sub unflag_thread($self) {
     my $thread_id    = $self->param('thread_id');
     my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
 
-    $self->moderator->unflag($thread_id);
+    $self->moderator->unflag_thread($thread_id);
     $self->flash(info => "Thread #$thread_id has been unflagged. ◀️");
 
     $self->redirect_to($redirect_url);
 }
 
-sub hide($self) {
+sub hide_thread($self) {
     my $thread_id    = $self->param('thread_id');
     my $redirect_url = $self->url_for(single_thread => thread_id => $thread_id)
         ->fragment('info')->to_abs;
 
-    $self->moderator->hide($thread_id);
+    $self->moderator->hide_thread($thread_id);
     $self->flash(info => "Thread #$thread_id has been hidden. 🫥");
 
     $self->redirect_to($redirect_url);
 }
 
-sub unhide($self) {
+sub unhide_thread($self) {
     my $thread_id    = $self->param('thread_id');
     my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
 
-    $self->moderator->unhide($thread_id);
+    $self->moderator->unhide_thread($thread_id);
     $self->flash(info => "Thread #$thread_id has been unhidden. ⏪");
 
     $self->redirect_to($redirect_url);

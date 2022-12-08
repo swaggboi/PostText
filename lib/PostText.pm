@@ -147,16 +147,18 @@ sub startup($self) {
         ->to('moderator#flagged')
         ->name('flagged_list');
 
-    $moderator->get('/unflag/:thread_id', [thread_id => qr/\d+/])
-        ->to('moderator#unflag')
+    my $mod_thread = $moderator->under('/thread');
+
+    $mod_thread->get('/unflag/:thread_id', [thread_id => qr/\d+/])
+        ->to('moderator#unflag_thread')
         ->name('unflag_thread');
 
-    $moderator->get('/hide/:thread_id', [thread_id => qr/\d+/])
-        ->to('moderator#hide')
+    $mod_thread->get('/hide/:thread_id', [thread_id => qr/\d+/])
+        ->to('moderator#hide_thread')
         ->name('hide_thread');
 
-    $moderator->get('/unhide/:thread_id', [thread_id => qr/\d+/])
-        ->to('moderator#unhide')
+    $mod_thread->get('/unhide/:thread_id', [thread_id => qr/\d+/])
+        ->to('moderator#unhide_thread')
         ->name('unhide_thread');
 }
 
