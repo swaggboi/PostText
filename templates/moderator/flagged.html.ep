@@ -4,7 +4,7 @@
 <% if ($post_links->[0]) { =%>
 <ul>
   <% for my $link (@{$post_links}) { =%>
-    <%= link_to $link, $link %><br>
+  <li><%= link_to $link, $link %></li>
   <% } =%>
 </ul>
 <% } =%>
