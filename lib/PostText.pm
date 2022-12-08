@@ -52,7 +52,7 @@ sub startup($self) {
 
     $self->helper(is_mod => sub ($c) {
         if (my $mod_id = $c->session->{'mod_id'}) {
-            return 1 if $mod_id =~ /\d/
+            return 1 if $mod_id =~ /\d+/
         }
 
         return undef;
