@@ -31,10 +31,6 @@ subtest Login => sub {
         ->status_is(302)
         ->header_like(Location => qr{moderator/flagged});
 
-    $t->get_ok('/moderator/flagged')
-        ->status_is(200)
-        ->text_like(h2 => qr/Flagged Posts/);
-
     $t->get_ok('/login')
         ->status_is(302)
         ->header_like(Location => qr{moderator/flagged});
@@ -80,6 +76,18 @@ subtest Login => sub {
             ->element_exists('a[href*="/unflag/1"]');
     };
 
+    subtest Flagged => sub {
+        $t->get_ok('/moderator/flagged')
+            ->status_is(200)
+            ->text_like(h2 => qr/Flagged Posts/)
+    };
+
+    #subtest Hidden => sub {
+    #    $t->get_ok('/moderator/hidden')
+    #        ->status_is(200)
+    #        ->text_like(h2 => qr/Hidden Posts/)
+    #};
+
     # Mod session ends
     $t->get_ok('/logout')
         ->status_is(302)
@@ -97,6 +105,14 @@ subtest Login => sub {
             ->element_exists_not('a[href*="/hide/1"]'  )
             ->element_exists_not('a[href*="/unhide/1"]')
             ->element_exists_not('a[href*="/unflag/1"]');
+
+        $t->get_ok('/moderator/flagged')
+            ->status_is(302)
+            ->header_like(Location => qr/login/);
+
+        #$t->get_ok('/moderator/hidden')
+        #    ->status_is(302)
+        #    ->header_like(Location => qr/login/);
     };
 };
 
