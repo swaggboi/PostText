@@ -145,14 +145,25 @@ sub startup($self) {
     my $moderator = $r->under('/moderator', sub ($c) {
         return 1 if $c->is_mod;
 
-        $c->redirect_to('mod_login');
         # Return false otherwise a body is rendered with the redirect...
-        return undef;
+        return $c->redirect_to('mod_login'), undef;
     });
 
     $moderator->get('/flagged')
         ->to('moderator#flagged')
         ->name('flagged_list');
+
+    $moderator->get('/unflag/:thread_id', [thread_id => qr/\d+/])
+        ->to('moderator#unflag')
+        ->name('unflag_thread');
+
+    $moderator->get('/hide/:thread_id', [thread_id => qr/\d+/])
+        ->to('moderator#hide')
+        ->name('hide_thread');
+
+    $moderator->get('/unhide/:thread_id', [thread_id => qr/\d+/])
+        ->to('moderator#unhide')
+        ->name('unhide_thread');
 }
 
 1;

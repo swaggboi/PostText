@@ -95,12 +95,4 @@ sub flag($self, $thread_id) {
        END_SQL
 }
 
-sub unflag($self, $thread_id) {
-    $self->pg->db->query(<<~'END_SQL', $thread_id)
-        UPDATE threads
-           SET flagged_status = FALSE
-         WHERE thread_id = ?;
-       END_SQL
-}
-
 1;
