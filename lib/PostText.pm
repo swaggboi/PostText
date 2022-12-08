@@ -90,8 +90,7 @@ sub startup($self) {
     # Thread
     my $thread = $r->under('/thread');
 
-    $thread->under('/list')
-        ->get('/:list_page', [list_page => qr/\d+/], {list_page => 1})
+    $thread->get('/list/:list_page', [list_page => qr/\d+/], {list_page => 1})
         ->to('thread#by_page')
         ->name('threads_list');
 
@@ -104,31 +103,26 @@ sub startup($self) {
         ->to('thread#by_id')
         ->name('single_thread');
 
-    $thread->under('/bump')
-        ->get('/:thread_id', [thread_id => qr/\d+/])
+    $thread->get('/bump/:thread_id', [thread_id => qr/\d+/])
         ->to('thread#bump')
         ->name('bump_thread');
 
-    $thread->under('/flag')
-        ->get('/:thread_id', [thread_id => qr/\d+/])
+    $thread->get('/flag/:thread_id', [thread_id => qr/\d+/])
         ->to('thread#flag')
         ->name('flag_thread');
 
     # Remark
     my $remark = $r->under('/remark');
 
-    $remark->under('/post')
-        ->any([qw{GET POST}], '/:thread_id', [thread_id => qr/\d+/])
+    $remark->any([qw{GET POST}], '/post/:thread_id', [thread_id => qr/\d+/])
         ->to('remark#create')
         ->name('post_remark');
 
-    $remark->under('/single')
-        ->get('/:remark_id', [remark_id => qr/\d+/])
+    $remark->get('/single/:remark_id', [remark_id => qr/\d+/])
         ->to('remark#by_id')
         ->name('single_remark');
 
-    $remark->under('/flag')
-        ->get('/:remark_id', [remark_id => qr/\d+/])
+    $remark->get('/flag/:remark_id', [remark_id => qr/\d+/])
         ->to('remark#flag')
         ->name('flag_remark');
 
