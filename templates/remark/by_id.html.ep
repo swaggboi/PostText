@@ -13,3 +13,10 @@
   <%= link_to Thread => single_thread => {thread_id => $remark->{'thread_id'}} %>
   <%= link_to Flag   => flag_remark   => {remark_id => $remark->{'id'}       } %>
 </nav>
+<% if (is_mod) { =%>
+<nav>
+  <%= link_to Hide   => hide_remark   => {remark_id => $remark->{'id'}} %>
+  <%= link_to Unhide => unhide_remark => {remark_id => $remark->{'id'}} %>
+  <%= link_to Unflag => unflag_remark => {remark_id => $remark->{'id'}} %>
+</nav>
+<% } =%>

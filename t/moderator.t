@@ -73,13 +73,14 @@ subtest Login => sub {
             ->element_exists('a[href*="/unhide/1"]')
             ->element_exists('a[href*="/unflag/1"]');
 
-        #$t->get_ok('/remark/single/1')
-        #    ->status_is(200)
-        #    ->element_exists('a[href*="/hide/1"]'  )
-        #    ->element_exists('a[href*="/unhide/1"]')
-        #    ->element_exists('a[href*="/unflag/1"]');
+        $t->get_ok('/remark/single/1')
+            ->status_is(200)
+            ->element_exists('a[href*="/hide/1"]'  )
+            ->element_exists('a[href*="/unhide/1"]')
+            ->element_exists('a[href*="/unflag/1"]');
     };
 
+    # Mod session ends
     $t->get_ok('/logout')
         ->status_is(302)
         ->header_like(Location => qr{thread/list});
