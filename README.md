@@ -33,6 +33,7 @@ Run the tests locally (against development environment):
 ## TODOs
 
 1. Tests for flagged view? Not much to it but got pulled into work stuff
+1. View for hidden posts
 1. Actions for creating moderators and resetting passwords
 1. CSS
 
