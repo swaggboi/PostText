@@ -88,4 +88,39 @@ sub unhide_thread($self) {
     $self->redirect_to($redirect_url);
 }
 
+sub unflag_remark($self) {
+    my $remark_id    = $self->param('remark_id');
+    my $thread_id    = $self->remark->thread_id_for($remark_id);
+    my $redirect_url = $self->url_for(single_thread => thread_id => $thread_id)
+        ->fragment('info')->to_abs;
+
+    $self->moderator->unflag_remark($remark_id);
+    $self->flash(info => "Remark #$remark_id has been unflagged. ◀️");
+
+    $self->redirect_to($redirect_url);
+}
+
+sub hide_remark($self) {
+    my $remark_id    = $self->param('remark_id');
+    my $redirect_url = $self->url_for(single_remark => remark_id => $remark_id)
+        ->fragment('info')->to_abs;
+
+    $self->moderator->hide_remark($remark_id);
+    $self->flash(info => "Remark #$remark_id has been hidden. 🫥");
+
+    $self->redirect_to($redirect_url);
+}
+
+sub unhide_remark($self) {
+    my $remark_id    = $self->param('remark_id');
+    my $thread_id    = $self->remark->thread_id_for($remark_id);
+    my $redirect_url = $self->url_for(single_thread => thread_id => $thread_id)
+        ->fragment('info')->to_abs;
+
+    $self->moderator->unhide_remark($remark_id);
+    $self->flash(info => "Remark #$remark_id has been unhidden. ⏪");
+
+    $self->redirect_to($redirect_url);
+}
+
 1;

@@ -9,14 +9,14 @@
 <nav>
   <%= link_to List  => 'threads_list' %>
   <%= link_to New   => 'post_thread'  %>
+  <% unless (is_mod) { =%>
   <%= link_to Login => 'mod_login'    %>
-</nav>
-<% if (is_mod) { =%>
-<nav>
+  <% } =%>
+  <% if (is_mod) { =%>
   <%= link_to Flagged => 'flagged_list' %>
   <%= link_to Logout  => 'mod_logout'   %>
-</nav>
 <% } =%>
+</nav>
 <hr>
 <% if (flash 'error') { =%>
 <p class="field-with-error" id="error"><%= flash 'error' %></p>

@@ -6,6 +6,8 @@ has 'pg';
 
 has per_page => 5;
 
+has date_format => 'Dy Mon FMDD HH24:MI TZ YYYY';
+
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my @data = ($author, $title, $body, $hidden, $flagged);
 
@@ -23,7 +25,7 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
 }
 
 sub by_page($self, $this_page = 1) {
-    my $date_format = $self->{'date_format'};
+    my $date_format = $self->date_format;
     my $row_count   = $self->per_page;
     my $offset      = ($this_page - 1) * $row_count;
 
@@ -65,7 +67,7 @@ sub count($self) {
 }
 
 sub by_id($self, $thread_id) {
-    my $date_format = $self->{'date_format'};
+    my $date_format = $self->date_format;
 
     $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
         SELECT thread_id               AS id,

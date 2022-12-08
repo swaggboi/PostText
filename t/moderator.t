@@ -45,9 +45,9 @@ subtest Login => sub {
             ->status_is(302)
             ->header_like(Location => qr{thread/list});
 
-        #$t->get_ok('/moderator/remark/unflag/1')
-        #    ->status_is(302)
-        #    ->header_like(Location => qr{thread/single});
+        $t->get_ok('/moderator/remark/unflag/1')
+            ->status_is(302)
+            ->header_like(Location => qr{thread/single});
     };
 
     subtest Hide => sub {
@@ -58,12 +58,12 @@ subtest Login => sub {
             ->status_is(302)
             ->header_like(Location => qr{thread/list});
 
-        #$t->get_ok('/moderator/remark/hide/1')
-        #    ->status_is(302)
-        #    ->header_like(Location => qr{thread/single});
-        #$t->get_ok('/moderator/remark/unhide/1')
-        #    ->status_is(302)
-        #    ->header_like(Location => qr{thread/single});
+        $t->get_ok('/moderator/remark/hide/1')
+            ->status_is(302)
+            ->header_like(Location => qr{remark/single});
+        $t->get_ok('/moderator/remark/unhide/1')
+            ->status_is(302)
+            ->header_like(Location => qr{thread/single});
     };
 
     subtest 'Buttons for mods', sub {
@@ -83,6 +83,20 @@ subtest Login => sub {
     $t->get_ok('/logout')
         ->status_is(302)
         ->header_like(Location => qr{thread/list});
+
+    subtest 'No mod, no buttons', sub {
+        $t->get_ok('/thread/single/1')
+            ->status_is(200)
+            ->element_exists_not('a[href*="/hide/1"]'  )
+            ->element_exists_not('a[href*="/unhide/1"]')
+            ->element_exists_not('a[href*="/unflag/1"]');
+
+        $t->get_ok('/remark/single/1')
+            ->status_is(200)
+            ->element_exists_not('a[href*="/hide/1"]'  )
+            ->element_exists_not('a[href*="/unhide/1"]')
+            ->element_exists_not('a[href*="/unflag/1"]');
+    };
 };
 
 done_testing();

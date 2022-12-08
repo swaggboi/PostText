@@ -71,6 +71,11 @@ sub startup($self) {
         $self->remark->per_page($remarks_per_page)
     }
 
+    if (my $date_format = $self->config->{'date_format'}) {
+        $self->thread->date_format($date_format);
+        $self->remark->date_format($date_format);
+    }
+
     $self->asset->process('main.css', 'css/PostText.css');
 
     push @{$self->commands->namespaces}, 'PostText::Command';
@@ -160,6 +165,20 @@ sub startup($self) {
     $mod_thread->get('/unhide/:thread_id', [thread_id => qr/\d+/])
         ->to('moderator#unhide_thread')
         ->name('unhide_thread');
+
+    my $mod_remark = $moderator->under('/remark');
+
+    $mod_remark->get('/unflag/:remark_id', [remark_id => qr/\d+/])
+        ->to('moderator#unflag_remark')
+        ->name('unflag_remark');
+
+    $mod_remark->get('/hide/:remark_id', [remark_id => qr/\d+/])
+        ->to('moderator#hide_remark')
+        ->name('hide_remark');
+
+    $mod_remark->get('/unhide/:remark_id', [remark_id => qr/\d+/])
+        ->to('moderator#unhide_remark')
+        ->name('unhide_remark');
 }
 
 1;

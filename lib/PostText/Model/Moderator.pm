@@ -60,4 +60,29 @@ sub unhide_thread($self, $thread_id) {
        END_SQL
 }
 
+sub unflag_remark($self, $remark_id) {
+    $self->pg->db->query(<<~'END_SQL', $remark_id)
+        UPDATE remarks
+           SET flagged_status = FALSE
+         WHERE remark_id = ?;
+       END_SQL
+}
+
+sub hide_remark($self, $remark_id) {
+    $self->pg->db->query(<<~'END_SQL', $remark_id)
+        UPDATE remarks
+           SET hidden_status = TRUE,
+               flagged_status = FALSE
+         WHERE remark_id = ?;
+       END_SQL
+}
+
+sub unhide_remark($self, $remark_id) {
+    $self->pg->db->query(<<~'END_SQL', $remark_id)
+        UPDATE remarks
+           SET hidden_status = FALSE
+         WHERE remark_id = ?;
+       END_SQL
+}
+
 1;

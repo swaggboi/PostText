@@ -6,8 +6,10 @@ has 'pg';
 
 has per_page => 5;
 
+has date_format => 'Dy Mon FMDD HH24:MI TZ YYYY';
+
 sub by_page_for($self, $thread_id, $this_page = 1) {
-    my $date_format = $self->{'date_format'};
+    my $date_format = $self->date_format;
     my $row_count   = $self->per_page;
     my $offset      = ($this_page - 1) * $row_count;
     my @data        = ($date_format, $thread_id, $row_count, $offset);
@@ -60,7 +62,7 @@ sub last_page_for($self, $thread_id) {
 }
 
 sub last_for($self, $thread_id) {
-    my $date_format = $self->{'date_format'};
+    my $date_format = $self->date_format;
 
     $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
         SELECT remark_id               AS id,
@@ -75,7 +77,7 @@ sub last_for($self, $thread_id) {
 }
 
 sub by_id($self, $remark_id) {
-    my $date_format = $self->{'date_format'};
+    my $date_format = $self->date_format;
 
     $self->pg->db->query(<<~'END_SQL', $date_format, $remark_id)->hash;
         SELECT remark_id               AS id,
