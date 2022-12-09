@@ -4,18 +4,13 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 
 sub flagged($self) {
     my $flagged_posts = $self->moderator->flagged;
-    my $post_links    = [
-        map {
-            if ($_->{'type'} eq 'thread') {
-                $self->url_for(single_thread => thread_id => $_->{'id'})
-            }
-            else {
-                $self->url_for(single_remark => remark_id => $_->{'id'})
-            }
-        } @{$flagged_posts}
-      ];
+    my @post_links    = map {
+        $self->url_for(
+            'single_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
+          )
+    } @{$flagged_posts};
 
-    $self->stash(post_links => $post_links);
+    $self->stash(post_links => \@post_links);
 
     $self->render;
 }
