@@ -82,11 +82,11 @@ subtest Login => sub {
             ->text_like(h2 => qr/Flagged Posts/)
     };
 
-    #subtest Hidden => sub {
-    #    $t->get_ok('/moderator/hidden')
-    #        ->status_is(200)
-    #        ->text_like(h2 => qr/Hidden Posts/)
-    #};
+    subtest Hidden => sub {
+        $t->get_ok('/moderator/hidden')
+            ->status_is(200)
+            ->text_like(h2 => qr/Hidden Posts/)
+    };
 
     # Mod session ends
     $t->get_ok('/logout')
@@ -110,9 +110,9 @@ subtest Login => sub {
             ->status_is(302)
             ->header_like(Location => qr/login/);
 
-        #$t->get_ok('/moderator/hidden')
-        #    ->status_is(302)
-        #    ->header_like(Location => qr/login/);
+        $t->get_ok('/moderator/hidden')
+            ->status_is(302)
+            ->header_like(Location => qr/login/);
     };
 };
 

@@ -152,6 +152,10 @@ sub startup($self) {
         ->to('moderator#flagged')
         ->name('flagged_list');
 
+    $moderator->get('/hidden')
+        ->to('moderator#hidden')
+        ->name('hidden_list');
+
     my $mod_thread = $moderator->under('/thread');
 
     $mod_thread->get('/unflag/:thread_id', [thread_id => qr/\d+/])

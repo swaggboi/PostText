@@ -32,7 +32,6 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. View for hidden posts
 1. Actions for creating moderators and resetting passwords
 1. CSS
 
@@ -40,8 +39,8 @@ Run the tests locally (against development environment):
 
 ### (Lord knows there's TODOs I could be working on...)
 
-1. Support at least some Markdown, specifically the code blocks
 1. RSS feed!!
+1. Support at least some Markdown, specifically the code blocks
 1. Implement tripcodes (moving this down in priority due to complexity...)
 1. Return a text response instead of HTML if a `.txt` extension [is
    requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)

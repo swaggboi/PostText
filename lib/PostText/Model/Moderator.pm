@@ -99,4 +99,18 @@ sub flagged($self) {
        END_SQL
 }
 
+sub hidden($self) {
+    $self->pg->db->query(<<~'END_SQL')->hashes
+        SELECT 'thread'  AS type,
+               thread_id AS id
+          FROM threads
+         WHERE hidden_status
+         UNION
+        SELECT 'remark',
+               remark_id
+          FROM remarks
+         WHERE hidden_status;
+       END_SQL
+}
+
 1;

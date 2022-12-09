@@ -15,6 +15,19 @@ sub flagged($self) {
     $self->render;
 }
 
+sub hidden($self) {
+    my $hidden_posts = $self->moderator->hidden;
+    my @post_links    = map {
+        $self->url_for(
+            'single_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
+          )
+    } @{$hidden_posts};
+
+    $self->stash(post_links => \@post_links);
+
+    $self->render;
+}
+
 sub login($self) {
     my $v;
 
