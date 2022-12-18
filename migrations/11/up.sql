@@ -1,2 +1,4 @@
-ALTER TABLE moderators
-  ADD admin_status BOOLEAN NOT NULL DEFAULT FALSE;
+  ALTER TABLE moderators
+    ADD admin_status BOOLEAN
+    NOT NULL
+DEFAULT FALSE;
