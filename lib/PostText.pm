@@ -58,14 +58,6 @@ sub startup($self) {
         return undef;
     });
 
-    $self->helper(is_admin => sub ($c) {
-        if (my $admin_id = $c->session->{'admin_id'}) {
-            return 1 if $admin_id =~ /\d+/
-        }
-
-        return undef;
-    });
-
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
@@ -192,12 +184,7 @@ sub startup($self) {
         ->to('moderator#unhide_remark')
         ->name('unhide_remark');
 
-    my $admin = $moderator->under('/admin', sub ($c) {
-        return 1 if $c->is_admin;
-
-        # Return undef otherwise a body is rendered with the redirect...
-        return $c->recirect_to('mod_login'), undef;
-    });
+    # under() for admins
 
     # Actions to create mods...
 }
