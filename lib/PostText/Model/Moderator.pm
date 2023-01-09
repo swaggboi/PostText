@@ -17,7 +17,9 @@ sub create($self, $name, $email, $password) {
 }
 
 sub check($self, $email, $password) {
-    my $moderator =
+    my ($moderator, $mod_id);
+
+    $moderator =
         $self->pg->db->query(<<~'END_SQL', $email)->hash;
             SELECT moderator_id AS id,
                    password_hash
@@ -25,10 +27,22 @@ sub check($self, $email, $password) {
              WHERE email_addr = ?;
            END_SQL
 
-    return undef unless $moderator->{'id'};
+    $mod_id = $moderator->{'id'};
 
-    return $self->authenticator
-        ->verify_password($password, $moderator->{'password_hash'});
+    if ($mod_id && !$self->lock_status($mod_id)) {
+        return $self->authenticator
+            ->verify_password($password, $moderator->{'password_hash'});
+    }
+
+    return undef;
+}
+
+sub lock_out($self, $mod_id) {
+    $self->pg->db->query(<<~'END_SQL', $mod_id)
+        UPDATE moderators
+           SET lock_status = TRUE
+         WHERE moderator_id = ?;
+       END_SQL
 }
 
 sub get_id($self, $email) {
@@ -42,6 +56,14 @@ sub get_id($self, $email) {
 sub get_name($self, $mod_id) {
     $self->pg->db->query(<<~'END_SQL', $mod_id)->hash->{'moderator_name'}
         SELECT moderator_name
+          FROM moderators
+         WHERE moderator_id = ?;
+       END_SQL
+}
+
+sub lock_status($self, $mod_id) {
+    $self->pg->db->query(<<~'END_SQL', $mod_id)->hash->{'lock_status'}
+        SELECT lock_status
           FROM moderators
          WHERE moderator_id = ?;
        END_SQL
