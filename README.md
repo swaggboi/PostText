@@ -34,6 +34,7 @@ Run the tests locally (against development environment):
 
 1. Actions for creating moderators and resetting passwords
 1. CSS
+1. "All new posts flagged" mode (require approval for new posts)
 
 ## Crazy future ideas
 
