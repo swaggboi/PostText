@@ -4,6 +4,18 @@ use Mojo::Base -base, -signatures;
 
 has [qw{pg authenticator}];
 
+sub create($self, $name, $email, $password) {
+    my $password_hash = $self->authenticator->hash_password($password);
+
+    $self->pg->db->query(<<~'END_SQL', $name, $email, $password_hash);
+        INSERT INTO moderators
+               (moderator_name,
+                email_addr,
+                password_hash)
+        VALUES (?, ?, ?);
+       END_SQL
+}
+
 sub check($self, $email, $password) {
     my $moderator =
         $self->pg->db->query(<<~'END_SQL', $email)->hash;
