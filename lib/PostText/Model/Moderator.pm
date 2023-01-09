@@ -47,6 +47,14 @@ sub get_name($self, $mod_id) {
        END_SQL
 }
 
+sub login_timestamp($self, $mod_id) {
+    $self->pg->db->query(<<~'END_SQL', $mod_id);
+        UPDATE moderators
+           SET last_login_date = NOW()
+         WHERE moderator_id = ?;
+       END_SQL
+}
+
 sub unflag_thread($self, $thread_id) {
     $self->pg->db->query(<<~'END_SQL', $thread_id)
         UPDATE threads

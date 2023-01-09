@@ -58,6 +58,7 @@ sub login($self) {
                     author => $mod_name
                     );
                 $self->flash(info => "Hello, $mod_name 😎");
+                $self->moderator->login_timestamp($mod_id);
 
                 return $self->redirect_to('flagged_list');
             }
