@@ -14,6 +14,7 @@
   <% } =%>
   <% if (is_mod) { =%>
   <%= link_to Flagged => 'flagged_list' %>
+  <%= link_to Hidden  => 'hidden_list'  %>
   <%= link_to Logout  => 'mod_logout'   %>
 <% } =%>
 </nav>
