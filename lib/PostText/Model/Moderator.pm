@@ -53,14 +53,6 @@ sub unlock($self, $mod_id) {
        END_SQL
 }
 
-sub admin_status($self, $mod_id) {
-    $self->pg->db->query(<<~'END_SQL', $mod_id)->hash->{'admin_status'}
-        SELECT admin_status
-          FROM moderators
-         WHERE moderator_id = ?;
-       END_SQL
-}
-
 sub get_id($self, $email) {
     $self->pg->db->query(<<~'END_SQL', $email)->hash->{'moderator_id'}
         SELECT moderator_id
@@ -72,6 +64,14 @@ sub get_id($self, $email) {
 sub get_name($self, $mod_id) {
     $self->pg->db->query(<<~'END_SQL', $mod_id)->hash->{'moderator_name'}
         SELECT moderator_name
+          FROM moderators
+         WHERE moderator_id = ?;
+       END_SQL
+}
+
+sub admin_status($self, $mod_id) {
+    $self->pg->db->query(<<~'END_SQL', $mod_id)->hash->{'admin_status'}
+        SELECT admin_status
           FROM moderators
          WHERE moderator_id = ?;
        END_SQL
