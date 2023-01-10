@@ -80,12 +80,16 @@ subtest Login => sub {
         $t->get_ok('/moderator/flagged')
             ->status_is(200)
             ->text_like(h2 => qr/Flagged Posts/)
+            ->element_exists('a[href*="/moderator/flagged"]')
+            ->element_exists('a[href*="/moderator/hidden"]' )
     };
 
     subtest Hidden => sub {
         $t->get_ok('/moderator/hidden')
             ->status_is(200)
             ->text_like(h2 => qr/Hidden Posts/)
+            ->element_exists('a[href*="/moderator/flagged"]')
+            ->element_exists('a[href*="/moderator/hidden"]' )
     };
 
     # Mod session ends

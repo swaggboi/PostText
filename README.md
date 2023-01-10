@@ -33,7 +33,6 @@ Run the tests locally (against development environment):
 ## TODOs
 
 1. Actions for creating moderators and resetting passwords
-1. Probably tests for that 'hidden' button
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)
 
