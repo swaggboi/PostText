@@ -37,8 +37,6 @@ sub login($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        my ($email, $password, $mod_id, $mod_name);
-
         $v->required('email'   );
         $v->required('password');
 
@@ -46,16 +44,22 @@ sub login($self) {
             $self->stash(status => 400)
         }
         else {
+            my ($email, $password);
+
             $email    = $self->param('email'   );
             $password = $self->param('password');
 
             if ($self->moderator->check($email, $password)) {
-                $mod_id   = $self->moderator->get_id($email);
-                $mod_name = $self->moderator->get_name($mod_id);
+                my ($mod_id, $mod_name, $admin_status);
+
+                $mod_id       = $self->moderator->get_id($email);
+                $mod_name     = $self->moderator->get_name($mod_id);
+                $admin_status = $self->moderator->admin_status($mod_id);
 
                 $self->session(
-                    mod_id => $mod_id,
-                    author => $mod_name
+                    mod_id   => $mod_id,
+                    author   => $mod_name,
+                    is_admin => $admin_status
                     );
                 $self->flash(info => "Hello, $mod_name 😎");
                 $self->moderator->login_timestamp($mod_id);
@@ -66,7 +70,7 @@ sub login($self) {
                 $self->stash(
                     status => 403,
                     error  => 'Invalid login! 🧐'
-                    );
+                    )
             }
         }
     }
