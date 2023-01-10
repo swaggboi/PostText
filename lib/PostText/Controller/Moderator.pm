@@ -79,7 +79,7 @@ sub login($self) {
 }
 
 sub logout($self) {
-    delete $self->session->{'mod_id'};
+    delete $self->session->%{qw(mod_id is_admin)};
 
     $self->flash(info => 'Logged out successfully 👋');
 

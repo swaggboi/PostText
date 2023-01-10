@@ -82,6 +82,7 @@ subtest Login => sub {
             ->text_like(h2 => qr/Flagged Posts/)
             ->element_exists('a[href*="/moderator/flagged"]')
             ->element_exists('a[href*="/moderator/hidden"]' )
+            ->element_exists('a[href*="/logout"]'           )
     };
 
     subtest Hidden => sub {
@@ -90,6 +91,7 @@ subtest Login => sub {
             ->text_like(h2 => qr/Hidden Posts/)
             ->element_exists('a[href*="/moderator/flagged"]')
             ->element_exists('a[href*="/moderator/hidden"]' )
+            ->element_exists('a[href*="/logout"]'           )
     };
 
     # Mod session ends
@@ -100,15 +102,21 @@ subtest Login => sub {
     subtest 'No mod, no buttons', sub {
         $t->get_ok('/thread/single/1')
             ->status_is(200)
-            ->element_exists_not('a[href*="/hide/1"]'  )
-            ->element_exists_not('a[href*="/unhide/1"]')
-            ->element_exists_not('a[href*="/unflag/1"]');
+            ->element_exists_not('a[href*="/hide/1"]'           )
+            ->element_exists_not('a[href*="/unhide/1"]'         )
+            ->element_exists_not('a[href*="/unflag/1"]'         )
+            ->element_exists_not('a[href*="/moderator/flagged"]')
+            ->element_exists_not('a[href*="/moderator/hidden"]' )
+            ->element_exists_not('a[href*="/logout"]'           );
 
         $t->get_ok('/remark/single/1')
             ->status_is(200)
-            ->element_exists_not('a[href*="/hide/1"]'  )
-            ->element_exists_not('a[href*="/unhide/1"]')
-            ->element_exists_not('a[href*="/unflag/1"]');
+            ->element_exists_not('a[href*="/hide/1"]'           )
+            ->element_exists_not('a[href*="/unhide/1"]'         )
+            ->element_exists_not('a[href*="/unflag/1"]'         )
+            ->element_exists_not('a[href*="/moderator/flagged"]')
+            ->element_exists_not('a[href*="/moderator/hidden"]' )
+            ->element_exists_not('a[href*="/logout"]'           );
 
         $t->get_ok('/moderator/flagged')
             ->status_is(302)
