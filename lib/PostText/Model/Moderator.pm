@@ -8,10 +8,11 @@ sub create($self, $name, $email, $password) {
     my $password_hash = $self->authenticator->hash_password($password);
 
     $self->pg->db->query(<<~'END_SQL', $name, $email, $password_hash);
-        INSERT INTO moderators
-               (moderator_name,
-                email_addr,
-                password_hash)
+        INSERT INTO moderators (
+               moderator_name,
+               email_addr,
+               password_hash
+               )
         VALUES (?, ?, ?);
        END_SQL
 }

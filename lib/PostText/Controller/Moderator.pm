@@ -168,8 +168,8 @@ sub create($self) {
         else {
             my ($name, $email, $password);
 
-            $name     = $self->param('name');
-            $email    = $self->param('email');
+            $name     = $self->param('name'    );
+            $email    = $self->param('email'   );
             $password = $self->param('password');
 
             $self->moderator->create($name, $email, $password);
