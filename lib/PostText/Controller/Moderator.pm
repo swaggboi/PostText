@@ -91,7 +91,7 @@ sub unflag_thread($self) {
     my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
 
     $self->moderator->unflag_thread($thread_id);
-    $self->flash(info => "Thread #$thread_id has been unflagged. ◀");
+    $self->flash(info => "Thread #$thread_id has been unflagged. ◀️");
 
     $self->redirect_to($redirect_url);
 }
@@ -124,7 +124,7 @@ sub unflag_remark($self) {
         ->fragment('info')->to_abs;
 
     $self->moderator->unflag_remark($remark_id);
-    $self->flash(info => "Remark #$remark_id has been unflagged. ◀");
+    $self->flash(info => "Remark #$remark_id has been unflagged. ◀️");
 
     $self->redirect_to($redirect_url);
 }
