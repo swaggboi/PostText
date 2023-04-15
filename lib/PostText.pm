@@ -58,10 +58,6 @@ sub startup($self) {
         return undef;
     });
 
-    $self->helper(is_admin => sub ($c) {
-        $self->session->{'is_admin'} || undef
-    });
-
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
@@ -160,6 +156,10 @@ sub startup($self) {
         ->to('moderator#hidden')
         ->name('hidden_list');
 
+    $moderator->any([qw{GET POST}], '/create')
+        ->to('moderator#create')
+        ->name('create_mod');
+
     my $mod_thread = $moderator->under('/thread');
 
     $mod_thread->get('/unflag/:thread_id', [thread_id => qr/\d+/])
@@ -188,9 +188,6 @@ sub startup($self) {
         ->to('moderator#unhide_remark')
         ->name('unhide_remark');
 
-    # under() for admins
-
-    # Actions to create mods...
 }
 
 1;

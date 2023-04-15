@@ -91,7 +91,7 @@ sub unflag_thread($self) {
     my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
 
     $self->moderator->unflag_thread($thread_id);
-    $self->flash(info => "Thread #$thread_id has been unflagged. ◀️");
+    $self->flash(info => "Thread #$thread_id has been unflagged. ◀");
 
     $self->redirect_to($redirect_url);
 }
@@ -124,7 +124,7 @@ sub unflag_remark($self) {
         ->fragment('info')->to_abs;
 
     $self->moderator->unflag_remark($remark_id);
-    $self->flash(info => "Remark #$remark_id has been unflagged. ◀️");
+    $self->flash(info => "Remark #$remark_id has been unflagged. ◀");
 
     $self->redirect_to($redirect_url);
 }
@@ -150,6 +150,34 @@ sub unhide_remark($self) {
     $self->flash(info => "Remark #$remark_id has been unhidden. ⏪");
 
     $self->redirect_to($redirect_url);
+}
+
+sub create($self) {
+    my $v;
+
+    $v = $self->validation if $self->req->method eq 'POST';
+
+    if ($v && $v->has_data) {
+        $v->required('name'    );
+        $v->required('email'   );
+        $v->required('password');
+
+        if ($v->has_error) {
+            $self->stash(status => 400)
+        }
+        else {
+            my ($name, $email, $password);
+
+            $name     = $self->param('name');
+            $email    = $self->param('email');
+            $password = $self->param('password');
+
+            $self->moderator->create($name, $email, $password);
+            $self->stash(info => "Created moderator account for $name 🧑‍🏭");
+        }
+    }
+
+    return $self->render;
 }
 
 1;

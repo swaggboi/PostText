@@ -32,7 +32,8 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Actions for creating moderators and resetting passwords
+1. Action for resetting passwords
+1. Action for locking/unlocking accounts
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)
 

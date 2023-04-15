@@ -7,16 +7,28 @@
 <body>
 <h1>Post::Text</h1>
 <nav>
-  <%= link_to List  => 'threads_list' %>
-  <%= link_to New   => 'post_thread'  %>
-  <% unless (is_mod) { =%>
-  <%= link_to Login => 'mod_login'    %>
-  <% } =%>
-  <% if (is_mod) { =%>
-  <%= link_to Flagged => 'flagged_list' %>
-  <%= link_to Hidden  => 'hidden_list'  %>
-  <%= link_to Logout  => 'mod_logout'   %>
-<% } =%>
+  <div>
+    <span>Navigate:</span>
+    <%= link_to List  => 'threads_list' %>
+    <%= link_to New   => 'post_thread'  %>
+    <% unless (is_mod) { =%>
+    <%= link_to Login => 'mod_login'    %>
+    <% } =%>
+  </div>
+  <div>
+    <% if (is_mod) { =%>
+    <span>Moderate:</span>
+    <%= link_to Flagged => 'flagged_list' %>
+    <%= link_to Hidden  => 'hidden_list'  %>
+    <%= link_to Logout  => 'mod_logout'   %>
+    <% } =%>
+  </div>
+  <div>
+    <% if (is_mod && session->{'is_admin'}) { =%>
+    <span>Admin:</span>
+    <%= link_to Create => 'create_mod' %>
+    <% } =%>
+  </div>
 </nav>
 <hr>
 <% if (flash 'error') { =%>
@@ -26,6 +38,9 @@
 <% } =%>
 <% if (flash 'info') { =%>
 <p class="field-with-info" id="info"><%= flash 'info' %></p>
+<% } =%>
+<% if (stash 'info') { =%>
+<p class="field-with-info" id="info"><%= stash 'info' %></p>
 <% } =%>
 <%= content =%>
 <footer>
