@@ -8,7 +8,6 @@
 <h1>Post::Text</h1>
 <nav>
   <div>
-    <span>Navigate:</span>
     <%= link_to List  => 'threads_list' %>
     <%= link_to New   => 'post_thread'  %>
     <% unless (is_mod) { =%>
@@ -24,7 +23,7 @@
     <% } =%>
   </div>
   <div>
-    <% if (is_mod && session->{'is_admin'}) { =%>
+    <% if (is_mod && is_admin) { =%>
     <span>Admin:</span>
     <%= link_to Create => 'create_mod' %>
     <% } =%>

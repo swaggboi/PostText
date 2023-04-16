@@ -58,6 +58,10 @@ sub startup($self) {
         return undef;
     });
 
+    $self->helper(is_admin => sub ($c) {
+        $c->session->{'is_admin'} || undef
+    });
+
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
