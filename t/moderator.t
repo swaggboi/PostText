@@ -83,7 +83,6 @@ subtest Login => sub {
             ->element_exists('a[href*="/moderator/flagged"]'      )
             ->element_exists('a[href*="/moderator/hidden"]'       )
             ->element_exists('a[href*="/logout"]'                 )
-            ->element_exists('a[href*="/moderator/admin/create"]' )
     };
 
     subtest Hidden => sub {
@@ -93,17 +92,6 @@ subtest Login => sub {
             ->element_exists('a[href*="/moderator/flagged"]'      )
             ->element_exists('a[href*="/moderator/hidden"]'       )
             ->element_exists('a[href*="/logout"]'                 )
-            ->element_exists('a[href*="/moderator/admin/create"]' )
-    };
-
-    subtest Create => sub {
-        $t->get_ok('/moderator/admin/create')
-            ->status_is(200)
-            ->text_like(h2 => qr/Create Moderator/)
-            ->element_exists('a[href*="/moderator/flagged"]'      )
-            ->element_exists('a[href*="/moderator/hidden"]'       )
-            ->element_exists('a[href*="/logout"]'                 )
-            ->element_exists('a[href*="/moderator/admin/create"]' )
     };
 
     # Mod session ends
@@ -135,10 +123,6 @@ subtest Login => sub {
             ->header_like(Location => qr/login/);
 
         $t->get_ok('/moderator/hidden')
-            ->status_is(302)
-            ->header_like(Location => qr/login/);
-
-        $t->get_ok('/moderator/admin/create')
             ->status_is(302)
             ->header_like(Location => qr/login/);
     };
