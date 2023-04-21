@@ -160,10 +160,6 @@ sub startup($self) {
         ->to('moderator#hidden')
         ->name('hidden_list');
 
-    $moderator->any([qw{GET POST}], '/create')
-        ->to('moderator#create')
-        ->name('create_mod');
-
     my $mod_thread = $moderator->under('/thread');
 
     $mod_thread->get('/unflag/:thread_id', [thread_id => qr/\d+/])
@@ -192,6 +188,16 @@ sub startup($self) {
         ->to('moderator#unhide_remark')
         ->name('unhide_remark');
 
+    my $mod_admin = $moderator->under('/admin', sub ($c) {
+        return 1 if $c->is_admin;
+
+        # Return undef otherwise a body is rendered with the redirect...
+        return $c->redirect_to('mod_login'), undef;
+    });
+
+    $mod_admin->any([qw{GET POST}], '/create')
+        ->to('moderator#create')
+        ->name('create_mod');
 }
 
 1;

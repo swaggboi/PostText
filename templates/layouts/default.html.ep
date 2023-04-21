@@ -23,7 +23,7 @@
     <% } =%>
   </div>
   <div>
-    <% if (is_mod && is_admin) { =%>
+    <% if (is_admin) { =%>
     <span>Admin:</span>
     <%= link_to Create => 'create_mod' %>
     <% } =%>

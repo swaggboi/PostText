@@ -80,30 +80,30 @@ subtest Login => sub {
         $t->get_ok('/moderator/flagged')
             ->status_is(200)
             ->text_like(h2 => qr/Flagged Posts/)
-            ->element_exists('a[href*="/moderator/flagged"]')
-            ->element_exists('a[href*="/moderator/hidden"]' )
-            ->element_exists('a[href*="/logout"]'           )
-            ->element_exists('a[href*="/moderator/create"]' )
+            ->element_exists('a[href*="/moderator/flagged"]'      )
+            ->element_exists('a[href*="/moderator/hidden"]'       )
+            ->element_exists('a[href*="/logout"]'                 )
+            ->element_exists('a[href*="/moderator/admin/create"]' )
     };
 
     subtest Hidden => sub {
         $t->get_ok('/moderator/hidden')
             ->status_is(200)
             ->text_like(h2 => qr/Hidden Posts/)
-            ->element_exists('a[href*="/moderator/flagged"]')
-            ->element_exists('a[href*="/moderator/hidden"]' )
-            ->element_exists('a[href*="/logout"]'           )
-            ->element_exists('a[href*="/moderator/create"]' )
+            ->element_exists('a[href*="/moderator/flagged"]'      )
+            ->element_exists('a[href*="/moderator/hidden"]'       )
+            ->element_exists('a[href*="/logout"]'                 )
+            ->element_exists('a[href*="/moderator/admin/create"]' )
     };
 
     subtest Create => sub {
-        $t->get_ok('/moderator/create')
+        $t->get_ok('/moderator/admin/create')
             ->status_is(200)
             ->text_like(h2 => qr/Create Moderator/)
-            ->element_exists('a[href*="/moderator/flagged"]')
-            ->element_exists('a[href*="/moderator/hidden"]' )
-            ->element_exists('a[href*="/logout"]'           )
-            ->element_exists('a[href*="/moderator/create"]' )
+            ->element_exists('a[href*="/moderator/flagged"]'      )
+            ->element_exists('a[href*="/moderator/hidden"]'       )
+            ->element_exists('a[href*="/logout"]'                 )
+            ->element_exists('a[href*="/moderator/admin/create"]' )
     };
 
     # Mod session ends
@@ -138,7 +138,7 @@ subtest Login => sub {
             ->status_is(302)
             ->header_like(Location => qr/login/);
 
-        $t->get_ok('/moderator/create')
+        $t->get_ok('/moderator/admin/create')
             ->status_is(302)
             ->header_like(Location => qr/login/);
     };
