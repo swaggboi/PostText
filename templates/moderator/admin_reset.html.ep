@@ -12,4 +12,3 @@
   </div>
   <%= submit_button 'Reset' %>
 </form>
-

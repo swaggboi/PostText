@@ -208,4 +208,20 @@ sub unlock_acct($self, $email) {
        END_SQL
 }
 
+sub promote($self, $email) {
+    $self->pg->db->query(<<~'END_SQL', $email)
+        UPDATE moderators
+           SET admin_status = TRUE
+         WHERE email_addr = ?;
+       END_SQL
+}
+
+sub demote($self, $email) {
+    $self->pg->db->query(<<~'END_SQL', $email)
+        UPDATE moderators
+           SET admin_status = FALSE
+         WHERE email_addr = ?;
+       END_SQL
+}
+
 1;

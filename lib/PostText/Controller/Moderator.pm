@@ -277,4 +277,48 @@ sub unlock_acct($self) {
     return $self->render;
 }
 
+sub promote($self) {
+    my $v;
+
+    $v = $self->validation if $self->req->method eq 'POST';
+
+    if ($v && $v->has_data) {
+        $v->required('email');
+
+        if ($v->has_error) {
+            $self->stash(status => 404)
+        }
+        else {
+            my $email = $self->param('email');
+
+            $self->moderator->promote($email);
+            $self->stash(info => "Account $email has been promoted to admin 🧑‍🎓");
+        }
+    }
+
+    return $self->render;
+}
+
+sub demote($self) {
+    my $v;
+
+    $v = $self->validation if $self->req->method eq 'POST';
+
+    if ($v && $v->has_data) {
+        $v->required('email');
+
+        if ($v->has_error) {
+            $self->stash(status => 404)
+        }
+        else {
+            my $email = $self->param('email');
+
+            $self->moderator->demote($email);
+            $self->stash(info => "Account $email has been demoted to mod 🧒");
+        }
+    }
+
+    return $self->render;
+}
+
 1;

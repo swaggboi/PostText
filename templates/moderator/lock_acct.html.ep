@@ -2,7 +2,9 @@
 % title 'Lock Account';
 <h2><%= title %></h2>
 <form method="post">
-  <%= label_for email => 'Email' %>
-  <%= email_field 'email' %>
+  <div class="email field">
+    <%= label_for email => 'Email' %>
+    <%= email_field 'email' %>
+  </div>
   <%= submit_button 'Lock' %>
 </form>

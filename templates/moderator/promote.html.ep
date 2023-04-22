@@ -1,10 +1,10 @@
 % layout 'default';
-% title 'Unlock Account';
+% title 'Promote Moderator';
 <h2><%= title %></h2>
 <form method="post">
   <div class="email field">
     <%= label_for email => 'Email' %>
     <%= email_field 'email' %>
   </div>
-  <%= submit_button 'Unlock' %>
+  <%= submit_button 'Promote' %>
 </form>

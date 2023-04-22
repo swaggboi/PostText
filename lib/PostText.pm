@@ -215,6 +215,14 @@ sub startup($self) {
     $mod_admin->any([qw{GET POST}], '/unlock')
         ->to('moderator#unlock_acct')
         ->name('unlock_acct');
+
+    $mod_admin->any([qw{GET POST}], '/promote')
+        ->to('moderator#promote')
+        ->name('promote_mod');
+
+    $mod_admin->any([qw{GET POST}], '/demote')
+        ->to('moderator#demote')
+        ->name('demote_admin');
 }
 
 1;
