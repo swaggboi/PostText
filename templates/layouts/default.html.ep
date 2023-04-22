@@ -8,10 +8,10 @@
 <h1>Post::Text</h1>
 <nav>
   <div>
-    <%= link_to List  => 'threads_list' %>
-    <%= link_to New   => 'post_thread'  %>
+    <%= link_to List  => threads_list => {list_page => 1} %>
+    <%= link_to New   => 'post_thread' %>
     <% unless (is_mod) { =%>
-    <%= link_to Login => 'mod_login'    %>
+    <%= link_to Login => 'mod_login' %>
     <% } =%>
   </div>
   <div>
