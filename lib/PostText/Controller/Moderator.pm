@@ -233,4 +233,48 @@ sub mod_reset($self) {
     return $self->render;
 }
 
+sub lock_acct($self) {
+    my $v;
+
+    $v = $self->validation if $self->req->method eq 'POST';
+
+    if ($v && $v->has_data) {
+        $v->required('email');
+
+        if ($v->has_error) {
+            $self->stash(status => 400)
+        }
+        else {
+            my $email = $self->param('email');
+
+            $self->moderator->lock_acct($email);
+            $self->stash(info => "Account $email has been locked 🔒");
+        }
+    }
+
+    return $self->render;
+}
+
+sub unlock_acct($self) {
+    my $v;
+
+    $v = $self->validation if $self->req->method eq 'POST';
+
+    if ($v && $v->has_data) {
+        $v->required('email');
+
+        if ($v->has_error) {
+            $self->stash(status => 400)
+        }
+        else {
+            my $email = $self->param('email');
+
+            $self->moderator->unlock_acct($email);
+            $self->stash(info => "Account $email has been unlocked 🔓");
+        }
+    }
+
+    return $self->render;
+}
+
 1;

@@ -206,6 +206,15 @@ sub startup($self) {
     $mod_admin->any([qw{GET POST}], '/reset')
         ->to('moderator#admin_reset')
         ->name('admin_reset');
+
+    # lock() is a builtin so use _acct suffix
+    $mod_admin->any([qw{GET POST}], '/lock')
+        ->to('moderator#lock_acct')
+        ->name('lock_acct');
+
+    $mod_admin->any([qw{GET POST}], '/unlock')
+        ->to('moderator#unlock_acct')
+        ->name('unlock_acct');
 }
 
 1;

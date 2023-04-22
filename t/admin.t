@@ -41,6 +41,24 @@ subtest Login => sub {
             ->status_is(200)
             ->text_like(h2 => qr/Reset Password/)
             ->element_exists('a[href*="/moderator/admin/reset"]')
+            ->element_exists('form input[name="email"]'         )
+            ->element_exists('form input[name="password"]'      )
+    };
+
+    subtest Lock => sub {
+        $t->get_ok('/moderator/admin/lock')
+            ->status_is(200)
+            ->text_like(h2 => qr/Lock Account/)
+            ->element_exists('a[href*="/moderator/admin/lock"]')
+            ->element_exists('form input[name="email"]'        )
+    };
+
+    subtest Unlock => sub {
+        $t->get_ok('/moderator/admin/unlock')
+            ->status_is(200)
+            ->text_like(h2 => qr/Unlock Account/)
+            ->element_exists('a[href*="/moderator/admin/unlock"]')
+            ->element_exists('form input[name="email"]'          )
     };
 
     # Admin session ends
@@ -51,13 +69,31 @@ subtest Login => sub {
     subtest 'No admin, no buttons', sub {
         $t->get_ok('/thread/single/1')
             ->status_is(200)
-            ->element_exists_not('a[href*="/moderator/admin/create"]');
+            ->element_exists_not('a[href*="/moderator/admin/create"]')
+            ->element_exists_not('a[href*="/moderator/admin/reset"]' )
+            ->element_exists_not('a[href*="/moderator/admin/lock"]'  )
+            ->element_exists_not('a[href*="/moderator/admin/unlock"]');
 
         $t->get_ok('/remark/single/1')
             ->status_is(200)
-            ->element_exists_not('a[href*="/moderator/admin/create"]');
+            ->element_exists_not('a[href*="/moderator/admin/create"]')
+            ->element_exists_not('a[href*="/moderator/admin/reset"]' )
+            ->element_exists_not('a[href*="/moderator/admin/lock"]'  )
+            ->element_exists_not('a[href*="/moderator/admin/unlock"]');
 
         $t->get_ok('/moderator/admin/create')
+            ->status_is(302)
+            ->header_like(Location => qr/login/);
+
+        $t->get_ok('/moderator/admin/reset')
+            ->status_is(302)
+            ->header_like(Location => qr/login/);
+
+        $t->get_ok('/moderator/admin/lock')
+            ->status_is(302)
+            ->header_like(Location => qr/login/);
+
+        $t->get_ok('/moderator/admin/unlock')
             ->status_is(302)
             ->header_like(Location => qr/login/);
     };

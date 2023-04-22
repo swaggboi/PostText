@@ -28,6 +28,8 @@
     <span>Admin:</span>
     <%= link_to Create => 'create_mod'  %>
     <%= link_to Reset  => 'admin_reset' %>
+    <%= link_to Lock   => 'lock_acct'   %>
+    <%= link_to Unlock => 'unlock_acct' %>
     <% } =%>
   </div>
 </nav>

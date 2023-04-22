@@ -192,4 +192,20 @@ sub mod_reset($self, $mod_id, $password) {
        END_SQL
 }
 
+sub lock_acct($self, $email) {
+    $self->pg->db->query(<<~'END_SQL', $email)
+        UPDATE moderators
+           SET lock_status = TRUE
+         WHERE email_addr = ?;
+       END_SQL
+}
+
+sub unlock_acct($self, $email) {
+    $self->pg->db->query(<<~'END_SQL', $email)
+        UPDATE moderators
+           SET lock_status = FALSE
+         WHERE email_addr = ?;
+       END_SQL
+}
+
 1;
