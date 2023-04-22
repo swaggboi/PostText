@@ -6,6 +6,8 @@ has description => 'Hash a string with Argon2';
 has usage       => sub ($self) { $self->extract_usage };
 
 sub run($self, @args) {
+    die $self->usage unless $args[0];
+
     say $self->app->authenticator->hash_password($_) for @args
 }
 
