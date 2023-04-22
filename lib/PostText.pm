@@ -210,11 +210,11 @@ sub startup($self) {
     # lock() is a builtin so use _acct suffix
     $mod_admin->any([qw{GET POST}], '/lock')
         ->to('moderator#lock_acct')
-        ->name('lock_acct');
+        ->name('lock_mod');
 
     $mod_admin->any([qw{GET POST}], '/unlock')
         ->to('moderator#unlock_acct')
-        ->name('unlock_acct');
+        ->name('unlock_mod');
 
     $mod_admin->any([qw{GET POST}], '/promote')
         ->to('moderator#promote')
