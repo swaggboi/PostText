@@ -180,4 +180,57 @@ sub create($self) {
     return $self->render;
 }
 
+sub admin_reset($self) {
+    my $v;
+
+    $v = $self->validation if $self->req->method eq 'POST';
+
+    if ($v && $v->has_data) {
+        $v->required('email'   );
+        $v->required('password');
+
+        if ($v->has_error) {
+            $self->stash(status => 400)
+        }
+        else {
+            my ($email, $password);
+
+            $email    = $self->param('email'   );
+            $password = $self->param('password');
+
+            $self->moderator->admin_reset($email, $password);
+            $self->stash(info => "Reset password for $email 🔐");
+        }
+    }
+
+    return $self->render;
+}
+
+sub mod_reset($self) {
+    my $v;
+
+    $v = $self->validation if $self->req->method eq 'POST';
+
+    if ($v && $v->has_data) {
+        $v->required('password');
+
+        if ($v->has_error) {
+            $self->stash(status => 400)
+        }
+        else {
+            my ($password, $mod_id);
+
+            $password = $self->param('password');
+            $mod_id   = $self->session->{'mod_id'};
+
+            $self->moderator->mod_reset($mod_id, $password);
+            $self->flash(info => "Password has been reset 🔐");
+
+            return $self->redirect_to('flagged_list');
+        }
+    }
+
+    return $self->render;
+}
+
 1;

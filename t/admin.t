@@ -23,19 +23,24 @@ subtest Login => sub {
         $t->get_ok('/moderator/flagged')
             ->status_is(200)
             ->text_like(h2 => qr/Flagged Posts/)
-            ->element_exists('a[href*="/moderator/admin/create"]' );
-
-        $t->get_ok('/moderator/hidden')
-            ->status_is(200)
-            ->text_like(h2 => qr/Hidden Posts/)
-            ->element_exists('a[href*="/moderator/admin/create"]' );
+            ->element_exists('a[href*="/moderator/admin/create"]')
+            ->element_exists('a[href*="/moderator/admin/reset"]' )
     };
 
     subtest Create => sub {
         $t->get_ok('/moderator/admin/create')
             ->status_is(200)
             ->text_like(h2 => qr/Create Moderator/)
-            ->element_exists('a[href*="/moderator/admin/create"]' )
+            ->element_exists('form input[name="name"]'    )
+            ->element_exists('form input[name="email"]'   )
+            ->element_exists('form input[name="password"]')
+    };
+
+    subtest Reset => sub {
+        $t->get_ok('/moderator/admin/reset')
+            ->status_is(200)
+            ->text_like(h2 => qr/Reset Password/)
+            ->element_exists('a[href*="/moderator/admin/reset"]')
     };
 
     # Admin session ends
@@ -46,11 +51,11 @@ subtest Login => sub {
     subtest 'No admin, no buttons', sub {
         $t->get_ok('/thread/single/1')
             ->status_is(200)
-            ->element_exists_not('a[href*="/moderator/admin/create"]' );
+            ->element_exists_not('a[href*="/moderator/admin/create"]');
 
         $t->get_ok('/remark/single/1')
             ->status_is(200)
-            ->element_exists_not('a[href*="/moderator/admin/create"]' );
+            ->element_exists_not('a[href*="/moderator/admin/create"]');
 
         $t->get_ok('/moderator/admin/create')
             ->status_is(302)

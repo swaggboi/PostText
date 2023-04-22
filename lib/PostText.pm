@@ -160,6 +160,10 @@ sub startup($self) {
         ->to('moderator#hidden')
         ->name('hidden_list');
 
+    $moderator->any([qw{GET POST}], '/reset')
+        ->to('moderator#mod_reset')
+        ->name('mod_reset');
+
     my $mod_thread = $moderator->under('/thread');
 
     $mod_thread->get('/unflag/:thread_id', [thread_id => qr/\d+/])
@@ -198,6 +202,10 @@ sub startup($self) {
     $mod_admin->any([qw{GET POST}], '/create')
         ->to('moderator#create')
         ->name('create_mod');
+
+    $mod_admin->any([qw{GET POST}], '/reset')
+        ->to('moderator#admin_reset')
+        ->name('admin_reset');
 }
 
 1;

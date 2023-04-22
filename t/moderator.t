@@ -80,18 +80,26 @@ subtest Login => sub {
         $t->get_ok('/moderator/flagged')
             ->status_is(200)
             ->text_like(h2 => qr/Flagged Posts/)
-            ->element_exists('a[href*="/moderator/flagged"]'      )
-            ->element_exists('a[href*="/moderator/hidden"]'       )
-            ->element_exists('a[href*="/logout"]'                 )
+            ->element_exists('a[href*="/moderator/flagged"]')
+            ->element_exists('a[href*="/moderator/hidden"]' )
+            ->element_exists('a[href*="/logout"]'           )
     };
 
     subtest Hidden => sub {
         $t->get_ok('/moderator/hidden')
             ->status_is(200)
             ->text_like(h2 => qr/Hidden Posts/)
-            ->element_exists('a[href*="/moderator/flagged"]'      )
-            ->element_exists('a[href*="/moderator/hidden"]'       )
-            ->element_exists('a[href*="/logout"]'                 )
+            ->element_exists('a[href*="/moderator/flagged"]')
+            ->element_exists('a[href*="/moderator/hidden"]' )
+            ->element_exists('a[href*="/logout"]'           )
+    };
+
+    subtest Reset => sub {
+        $t->get_ok('/moderator/reset')
+            ->status_is(200)
+            ->text_like(h2 => qr/Reset Password/)
+            ->element_exists('a[href*="/moderator/reset"]')
+            ->element_exists('form input[name="password"]')
     };
 
     # Mod session ends

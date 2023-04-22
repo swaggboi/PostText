@@ -172,4 +172,24 @@ sub hidden($self) {
        END_SQL
 }
 
+sub admin_reset($self, $email, $password) {
+    my $password_hash = $self->authenticator->hash_password($password);
+
+    $self->pg->db->query(<<~'END_SQL', $password_hash, $email);
+        UPDATE moderators
+           SET password_hash = ?
+         WHERE email_addr = ?;
+       END_SQL
+}
+
+sub mod_reset($self, $mod_id, $password) {
+    my $password_hash = $self->authenticator->hash_password($password);
+
+    $self->pg->db->query(<<~'END_SQL', $password_hash, $mod_id);
+        UPDATE moderators
+           SET password_hash = ?
+         WHERE moderator_id = ?;
+       END_SQL
+}
+
 1;
