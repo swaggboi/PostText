@@ -6,7 +6,7 @@ has 'pg';
 
 has per_page => 5;
 
-has date_format => 'Dy Mon FMDD HH24:MI TZ YYYY';
+has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS TZ';
 
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my @data = ($author, $title, $body, $hidden, $flagged);

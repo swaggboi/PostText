@@ -6,7 +6,7 @@ has 'pg';
 
 has per_page => 5;
 
-has date_format => 'Dy Mon FMDD HH24:MI TZ YYYY';
+has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS TZ';
 
 sub by_page_for($self, $thread_id, $this_page = 1) {
     my $date_format = $self->date_format;
