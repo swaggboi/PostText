@@ -32,6 +32,7 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
+1. Rules/about page
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)
 

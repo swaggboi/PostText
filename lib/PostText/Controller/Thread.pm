@@ -115,6 +115,7 @@ sub feed($self) {
             link        => $item_link,
             description => $self->truncate_text($thread->{'body'}),
             author      => $thread->{'author'},
+            guid        => $thread->{'id'},
             pubDate     => $thread->{'date'}
             );
     }
