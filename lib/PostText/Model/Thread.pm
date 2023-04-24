@@ -100,8 +100,7 @@ sub flag($self, $thread_id) {
 sub feed($self) {
     my $date_format = $self->date_format;
 
-    $self->pg->db
-        ->query(<<~'END_SQL', $date_format)->hashes;
+    $self->pg->db->query(<<~'END_SQL', $date_format)->hashes;
             SELECT t.thread_id               AS id,
                    TO_CHAR(t.thread_date, ?) AS date,
                    t.thread_author           AS author,
