@@ -93,7 +93,7 @@ sub by_page($self) {
 }
 
 sub feed($self) {
-    my $threads   = $self->thread->by_page(1);
+    my $threads   = $self->thread->feed;
     my $rss       = XML::RSS->new(version => '2.0');
     my $chan_link = $self->url_for(threads_list => {list_page => 1})->to_abs;
 
