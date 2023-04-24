@@ -1,7 +1,8 @@
 package PostText::Controller::Thread;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-#use XML::RSS;
+use Date::Format;
+use XML::RSS;
 
 sub create($self) {
     my $v;
@@ -91,16 +92,35 @@ sub by_page($self) {
     $self->render;
 }
 
-#sub feed($self) {
-#    my $threads = $self->thread->by_page(1);
-#    my $rss     = XML::RSS->new(version => '2.0');
-#
-#    $rss->channel(
-#        title => 'Post::Text',
-#        description => 'In UTF-8 we trust. 🫡',
-#        link => $self->url_for('thread_list')->to_abs,
-#        );
-#}
+sub feed($self) {
+    my $threads   = $self->thread->by_page(1);
+    my $rss       = XML::RSS->new(version => '2.0');
+    my $chan_link = $self->url_for(threads_list => {list_page => 1})->to_abs;
+
+    $rss->channel(
+        title         => 'Post::Text',
+        description   => 'In UTF-8 we trust. 🫡',
+        link          => $chan_link,
+        lastBuildDate => time2str('%a, %d %b %Y %X %Z', time)
+        );
+
+    for my $thread (@{$threads}) {
+        my $item_link =
+            $self->url_for(
+                single_thread => {thread_id => $thread->{'id'}}
+                )->to_abs;
+
+        $rss->add_item(
+            title       => $thread->{'title'},
+            link        => $item_link,
+            description => $self->truncate_text($thread->{'body'}),
+            author      => $thread->{'author'},
+            pubDate     => $thread->{'date'}
+            );
+    }
+
+    $self->render(text => $rss->as_string);
+}
 
 sub bump($self) {
     my $thread_id = $self->param('thread_id');

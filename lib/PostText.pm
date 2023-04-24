@@ -115,7 +115,9 @@ sub startup($self) {
         ->to('thread#flag')
         ->name('flag_thread');
 
-    #$thread->get('feed', [format => ['rss']])->to('thread#feed');
+    $thread->get('feed', [format => [qw{rss xml}]])
+        ->to('thread#feed')
+        ->name('threads_feed');
 
     # Remark
     my $remark = $r->any('/remark');

@@ -8,23 +8,24 @@
 <h1>Post::Text</h1>
 <nav>
   <div>
-    <%= link_to List  => threads_list => {list_page => 1} %>
-    <%= link_to New   => 'post_thread' %>
+    <%= link_to List => threads_list => {list_page => 1} %>
+    <%= link_to New  => 'post_thread' %>
     <% unless (is_mod) { =%>
     <%= link_to Login => 'mod_login' %>
     <% } =%>
+    <%= link_to RSS => threads_feed => {format => 'rss'} %>
   </div>
+  <% if (is_mod) { =%>
   <div>
-    <% if (is_mod) { =%>
     <span>Moderate:</span>
     <%= link_to Flagged => 'flagged_list' %>
     <%= link_to Hidden  => 'hidden_list'  %>
     <%= link_to Reset   => 'mod_reset'    %>
     <%= link_to Logout  => 'mod_logout'   %>
-    <% } =%>
   </div>
+  <% } =%>
+  <% if (is_admin) { =%>
   <div>
-    <% if (is_admin) { =%>
     <span>Admin:</span>
     <%= link_to Create  => 'create_mod'   %>
     <%= link_to Reset   => 'admin_reset'  %>
@@ -32,8 +33,8 @@
     <%= link_to Unlock  => 'unlock_mod'   %>
     <%= link_to Promote => 'promote_mod'  %>
     <%= link_to Demote  => 'demote_admin' %>
-    <% } =%>
   </div>
+  <% } =%>
 </nav>
 <hr>
 <% if (flash 'error') { =%>

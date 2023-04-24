@@ -38,6 +38,11 @@ subtest 'View single thread', sub {
         ->text_like(h2 => qr/Thread #1/);
 };
 
+subtest 'Threads feed', sub {
+    $t->get_ok('/thread/feed.rss')->status_is(200)
+        ->content_type_is('application/rss+xml')
+};
+
 $t->ua->max_redirects(1);
 
 subtest 'Post new thread', sub {
