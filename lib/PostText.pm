@@ -75,11 +75,6 @@ sub startup($self) {
         $self->remark->per_page($remarks_per_page)
     }
 
-    if (my $date_format = $self->config->{'date_format'}) {
-        $self->thread->date_format($date_format);
-        $self->remark->date_format($date_format);
-    }
-
     $self->asset->process('main.css', 'css/PostText.css');
 
     push @{$self->commands->namespaces}, 'PostText::Command';
@@ -119,6 +114,8 @@ sub startup($self) {
     $thread->get('/flag/:thread_id', [thread_id => qr/\d+/])
         ->to('thread#flag')
         ->name('flag_thread');
+
+    #$thread->get('feed', [format => ['rss']])->to('thread#feed');
 
     # Remark
     my $remark = $r->any('/remark');

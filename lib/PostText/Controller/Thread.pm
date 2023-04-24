@@ -1,6 +1,7 @@
 package PostText::Controller::Thread;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+#use XML::RSS;
 
 sub create($self) {
     my $v;
@@ -89,6 +90,17 @@ sub by_page($self) {
 
     $self->render;
 }
+
+#sub feed($self) {
+#    my $threads = $self->thread->by_page(1);
+#    my $rss     = XML::RSS->new(version => '2.0');
+#
+#    $rss->channel(
+#        title => 'Post::Text',
+#        description => 'In UTF-8 we trust. 🫡',
+#        link => $self->url_for('thread_list')->to_abs,
+#        );
+#}
 
 sub bump($self) {
     my $thread_id = $self->param('thread_id');
