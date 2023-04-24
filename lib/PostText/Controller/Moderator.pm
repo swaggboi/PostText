@@ -321,4 +321,17 @@ sub demote($self) {
     return $self->render;
 }
 
+sub check($self) {
+    return 1 if $self->is_mod;
+
+    # Return undef otherwise body is rendered with redirect
+    return $self->redirect_to('mod_login'), undef;
+}
+
+sub admin_check($self) {
+    return 1 if $self->is_admin;
+
+    return $self->redirect_to('mod_login'), undef;
+}
+
 1;

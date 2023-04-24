@@ -97,7 +97,7 @@ sub startup($self) {
     $r->get('/', sub ($c) { $c->redirect_to('threads_list') });
 
     # Thread
-    my $thread = $r->under('/thread');
+    my $thread = $r->any('/thread');
 
     $thread->get('/list/:list_page', [list_page => qr/\d+/], {list_page => 1})
         ->to('thread#by_page')
@@ -107,7 +107,7 @@ sub startup($self) {
         ->to('thread#create')
         ->name('post_thread');
 
-    $thread->under('/single/:thread_id', [thread_id => qr/\d+/])
+    $thread->any('/single/:thread_id', [thread_id => qr/\d+/])
         ->get('/:thread_page', [thread_page => qr/\d+/], {thread_page => 1})
         ->to('thread#by_id')
         ->name('single_thread');
@@ -121,7 +121,7 @@ sub startup($self) {
         ->name('flag_thread');
 
     # Remark
-    my $remark = $r->under('/remark');
+    my $remark = $r->any('/remark');
 
     $remark->any([qw{GET POST}], '/post/:thread_id', [thread_id => qr/\d+/])
         ->to('remark#create')
@@ -145,12 +145,7 @@ sub startup($self) {
         ->name('mod_logout');
 
     # Moderator
-    my $moderator = $r->under('/moderator', sub ($c) {
-        return 1 if $c->is_mod;
-
-        # Return undef otherwise a body is rendered with the redirect...
-        return $c->redirect_to('mod_login'), undef;
-    });
+    my $moderator = $r->under('/moderator')->to('moderator#check');
 
     $moderator->get('/flagged')
         ->to('moderator#flagged')
@@ -164,7 +159,7 @@ sub startup($self) {
         ->to('moderator#mod_reset')
         ->name('mod_reset');
 
-    my $mod_thread = $moderator->under('/thread');
+    my $mod_thread = $moderator->any('/thread');
 
     $mod_thread->get('/unflag/:thread_id', [thread_id => qr/\d+/])
         ->to('moderator#unflag_thread')
@@ -178,7 +173,7 @@ sub startup($self) {
         ->to('moderator#unhide_thread')
         ->name('unhide_thread');
 
-    my $mod_remark = $moderator->under('/remark');
+    my $mod_remark = $moderator->any('/remark');
 
     $mod_remark->get('/unflag/:remark_id', [remark_id => qr/\d+/])
         ->to('moderator#unflag_remark')
@@ -192,12 +187,8 @@ sub startup($self) {
         ->to('moderator#unhide_remark')
         ->name('unhide_remark');
 
-    my $mod_admin = $moderator->under('/admin', sub ($c) {
-        return 1 if $c->is_admin;
-
-        # Return undef otherwise a body is rendered with the redirect...
-        return $c->redirect_to('mod_login'), undef;
-    });
+    # Admin
+    my $mod_admin = $moderator->under('/admin')->to('moderator#admin_check');
 
     $mod_admin->any([qw{GET POST}], '/create')
         ->to('moderator#create')
