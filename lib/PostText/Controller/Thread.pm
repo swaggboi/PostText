@@ -40,12 +40,14 @@ sub create($self) {
 }
 
 sub by_id($self) {
-    my $thread_id = $self->param('thread_id');
-    my $thread    = $self->thread->by_id($thread_id);
-    my $base_path = $self->match->path_for(thread_page => undef)->{'path'};
-    my $this_page = $self->param('thread_page');
-    my $last_page = $self->remark->last_page_for($thread_id);
-    my $remarks   = $self->remark->by_page_for($thread_id, $this_page);
+    my ($thread_id, $thread, $base_path, $this_page, $last_page, $remarks);
+
+    $thread_id = $self->param('thread_id');
+    $thread    = $self->thread->by_id($thread_id);
+    $base_path = $self->match->path_for(thread_page => undef)->{'path'};
+    $this_page = $self->param('thread_page');
+    $last_page = $self->remark->last_page_for($thread_id);
+    $remarks   = $self->remark->by_page_for($thread_id, $this_page);
 
     if (my $thread_body = $thread->{'body'}) {
         $self->stash(
@@ -63,7 +65,8 @@ sub by_id($self) {
             )
     }
 
-    # Check for remarks or remark page number
+    # Check for remarks or thread page number to make sure
+    # remark->by_page_for did its job
     $self->stash(status => 404) unless $remarks->[0] || 1 >= $this_page;
 
     $self->render;
