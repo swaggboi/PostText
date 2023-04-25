@@ -14,6 +14,9 @@ use v5.36;
 use Digest::MD5 qw(md5_hex);
 use vars qw($VERSION);
 $VERSION = '1.0.1';
+
+use Exporter qw{import};
+our @EXPORT = qw{Markdown};
 # Tue 14 Dec 2004
 
 ## Disabled; causes problems under Perl 5.6.1:

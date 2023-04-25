@@ -64,7 +64,7 @@ sub startup($self) {
     });
 
     $self->helper(markdown => sub ($c, $input_text) {
-        PostText::Markdown::Markdown($input_text)
+        Markdown($input_text)
     });
 
     # Finish configuring some things
