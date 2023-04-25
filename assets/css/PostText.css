@@ -17,7 +17,7 @@
     float: right;
 }
 
-.thread .body, .remark .body {
+code {
     white-space: pre-wrap;
 }
 
