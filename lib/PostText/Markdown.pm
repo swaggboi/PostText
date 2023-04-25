@@ -12,11 +12,13 @@ package PostText::Markdown;
 use v5.36;
 
 use Digest::MD5 qw(md5_hex);
+use Encode qw(encode_utf8);
 use vars qw($VERSION);
 $VERSION = '1.0.1';
 
 use Exporter qw{import};
 our @EXPORT = qw{Markdown};
+
 # Tue 14 Dec 2004
 
 ## Disabled; causes problems under Perl 5.6.1:
@@ -188,7 +190,7 @@ sub _HashHTMLBlocks {
 					(?=\n+|\Z)	# followed by a newline or end of document
 				)
 			}{
-				my $key = md5_hex($1);
+				my $key = md5_hex(encode_utf8($1));
 				$g_html_blocks{$key} = $1;
 				"\n\n" . $key . "\n\n";
 			}egmx;
@@ -208,7 +210,7 @@ sub _HashHTMLBlocks {
 					(?=\n+|\Z)	# followed by a newline or end of document
 				)
 			}{
-				my $key = md5_hex($1);
+				my $key = md5_hex(encode_utf8($1));
 				$g_html_blocks{$key} = $1;
 				"\n\n" . $key . "\n\n";
 			}egmx;
@@ -230,7 +232,7 @@ sub _HashHTMLBlocks {
 					(?=\n{2,}|\Z)		# followed by a blank line or end of document
 				)
 			}{
-				my $key = md5_hex($1);
+				my $key = md5_hex(encode_utf8($1));
 				$g_html_blocks{$key} = $1;
 				"\n\n" . $key . "\n\n";
 			}egx;
@@ -253,7 +255,7 @@ sub _HashHTMLBlocks {
 					(?=\n{2,}|\Z)		# followed by a blank line or end of document
 				)
 			}{
-				my $key = md5_hex($1);
+				my $key = md5_hex(encode_utf8($1));
 				$g_html_blocks{$key} = $1;
 				"\n\n" . $key . "\n\n";
 			}egx;
@@ -846,7 +848,7 @@ sub _EncodeCode {
 
 	# Encode all ampersands; HTML entities are not
 	# entities within a Markdown code span.
-	s/&/&amp;/g;
+	#s/&/&amp;/g;
 
 	# Encode $'s, but only if we're running under Blosxom.
 	# (Blosxom interpolates Perl variables in article bodies.)
