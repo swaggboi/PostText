@@ -30,6 +30,32 @@ Run the tests locally (against development environment):
 
     prove -l
 
+## Building/running container
+
+### Build
+
+    podman build -t post_text .
+
+### Tag
+
+    podman tag post_text git.n4vn33t.com/swag/post_text
+
+### Push
+
+    podman push git.n4vn33t.com/swag/post_text
+
+### Pull
+
+    podman pull git.n4vn33t.com/swag/post_text
+
+### Run
+
+    podman run -dt --rm --name post_text -p 3002:3000 post_text:latest
+
+### Generate unit file
+
+    podman generate systemd --files --new --name post_text
+
 ## TODOs
 
 1. Rules/about page

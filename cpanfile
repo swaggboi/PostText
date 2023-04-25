@@ -7,3 +7,4 @@ requires 'Crypt::Passphrase::Bcrypt'; # Needed for old passphrases
 requires 'Perl::Critic::Community';
 requires 'Date::Format';
 requires 'XML::RSS';
+requires 'CSS::Minifier::XS';
