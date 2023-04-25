@@ -10,6 +10,7 @@ use Crypt::Passphrase;
 use PostText::Model::Thread;
 use PostText::Model::Remark;
 use PostText::Model::Moderator;
+use PostText::Markdown;
 
 sub startup($self) {
     $self->plugin('Config');
@@ -60,6 +61,10 @@ sub startup($self) {
 
     $self->helper(is_admin => sub ($c) {
         $c->session->{'is_admin'} || undef
+    });
+
+    $self->helper(markdown => sub ($c, $input_text) {
+        PostText::Markdown::Markdown($input_text)
     });
 
     # Finish configuring some things

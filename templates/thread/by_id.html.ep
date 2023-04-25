@@ -6,7 +6,7 @@
     <h3 class="title"><%= $thread->{'title'} %></h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
     <h5 class="author"><%= $thread->{'author'} %></h5>
-    <p class="body"><%== $thread->{'body'} %></p>
+    <div class="body"><%== markdown $thread->{'body'} %></div>
   </article>
 </div>
 <nav>
@@ -32,7 +32,7 @@
     </nav>
     <h4 class="date"><%= $remark->{'date'} %></h4>
     <h5 class="author"><%= $remark->{'author'} %></h5>
-    <p class="body"><%== $remark->{'body'} %></p>
+    <div class="body"><%== markdown $remark->{'body'} %></div>
     <nav class="flag">
       <%= link_to Flag => flag_remark => {remark_id => $remark->{'id'}} %>
     </nav>
