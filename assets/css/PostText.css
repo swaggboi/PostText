@@ -13,7 +13,7 @@
     border-collapse: collapse;
 }
 
-.thread .id, .remark .id {
+.thread .id, .remark .id, .thread .flag, nav .login {
     float: right;
 }
 

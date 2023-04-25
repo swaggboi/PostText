@@ -44,7 +44,10 @@
 <div class="remarks">
   <h3>Last Remark</h3>
   <article class="remark">
-    <nav class="id">#<%= $last_remark_id %></nav>
+    <nav class="id">
+      <%= link_to "#$last_remark_id",
+          single_remark => {remark_id => $last_remark_id} %>
+    </nav>
     <h4 class="date"><%= $last_remark->{'date'} %></h4>
     <h5 class="author"><%= $last_remark->{'author'} %></h5>
     <p class="body"><%= $last_remark->{'body'} %></p>

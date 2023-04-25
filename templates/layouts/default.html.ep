@@ -10,10 +10,12 @@
   <div>
     <%= link_to List => threads_list => {list_page => 1} %>
     <%= link_to New  => 'post_thread' %>
-    <% unless (is_mod) { =%>
-    <%= link_to Login => 'mod_login' %>
-    <% } =%>
     <%= link_to RSS => threads_feed => {format => 'rss'} %>
+    <% unless (is_mod) { =%>
+    <span class="login">
+      <%= link_to Login => 'mod_login' %>
+    </span>
+    <% } =%>
   </div>
   <% if (is_mod) { =%>
   <div>
