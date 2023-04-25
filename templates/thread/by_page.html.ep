@@ -15,7 +15,7 @@
     </h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
     <h5 class="author"><%= $thread->{'author'} %></h5>
-    <p class="body"><%= truncate_text $thread->{'body'} %></p>
+    <p class="body"><%== truncate_text $thread->{'body'} %></p>
     <nav>
       <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
       <%= link_to url_for(single_thread => {thread_id => $thread->{'id'}})

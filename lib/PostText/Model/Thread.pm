@@ -1,6 +1,7 @@
 package PostText::Model::Thread;
 
 use Mojo::Base -base, -signatures;
+use Mojo::Util qw{xml_escape};
 
 has 'pg';
 
@@ -9,7 +10,7 @@ has per_page => 5;
 has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS TZ';
 
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
-    my @data = ($author, $title, $body, $hidden, $flagged);
+    my @data = ($author, $title, xml_escape($body), $hidden, $flagged);
 
     $self->pg->db->query(<<~'END_SQL', @data)->hash->{'thread_id'};
         INSERT INTO threads (

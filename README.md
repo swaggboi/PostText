@@ -32,7 +32,6 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. `xml_escape` on INSERT (needed for the Markdown stuff later)
 1. Rules/about page
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)

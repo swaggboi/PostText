@@ -37,7 +37,7 @@
     <h3 class="title"><%= $thread->{'title'} %></h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
     <h5 class="author"><%= $thread->{'author'} %></h5>
-    <p class="body"><%= $thread->{'body'} %></p>
+    <p class="body"><%== $thread->{'body'} %></p>
   </article>
 </div>
 <% if (my $last_remark_id = $last_remark->{'id'}) { =%>
@@ -50,7 +50,7 @@
     </nav>
     <h4 class="date"><%= $last_remark->{'date'} %></h4>
     <h5 class="author"><%= $last_remark->{'author'} %></h5>
-    <p class="body"><%= $last_remark->{'body'} %></p>
+    <p class="body"><%== $last_remark->{'body'} %></p>
   </article>
 </div>
 <% } =%>
