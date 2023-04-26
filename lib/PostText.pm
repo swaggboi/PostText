@@ -96,6 +96,11 @@ sub startup($self) {
     # Root redirect
     $r->get('/', sub ($c) { $c->redirect_to('threads_list') });
 
+    # Static pages
+    $r->get('/about')->to('page#about')->name('about_page');
+
+    $r->get('/rules')->to('page#rules')->name('rules_page');
+
     # Thread
     my $thread = $r->any('/thread');
 

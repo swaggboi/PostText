@@ -100,4 +100,4 @@ subtest 'Flagging thread', sub {
         ->text_like(p => qr/Thread #1 has been flagged/);
 };
 
-done_testing();
+done_testing;

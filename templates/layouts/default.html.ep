@@ -8,9 +8,11 @@
 <h1>Post::Text</h1>
 <nav>
   <div>
-    <%= link_to List => threads_list => {list_page => 1} %>
-    <%= link_to New  => 'post_thread' %>
-    <%= link_to RSS => threads_feed => {format => 'rss'} %>
+    <%= link_to List  => threads_list => {list_page => 1}  %>
+    <%= link_to New   => 'post_thread'                     %>
+    <%= link_to About => 'about_page'                      %>
+    <%= link_to Rules => 'rules_page'                      %>
+    <%= link_to RSS   => threads_feed => {format => 'rss'} %>
     <% unless (is_mod) { =%>
     <span class="login">
       <%= link_to Login => 'mod_login' %>

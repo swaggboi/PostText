@@ -136,4 +136,4 @@ subtest Login => sub {
     };
 };
 
-done_testing();
+done_testing;

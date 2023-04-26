@@ -53,4 +53,4 @@ subtest 'Flagging remark', sub {
         ->text_like(p => qr/Remark #1 has been flagged/);
 };
 
-done_testing();
+done_testing;
