@@ -8,3 +8,4 @@ requires 'Perl::Critic::Community';
 requires 'Date::Format';
 requires 'XML::RSS';
 requires 'CSS::Minifier::XS';
+requires 'Text::Markdown';

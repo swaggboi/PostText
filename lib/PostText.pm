@@ -5,12 +5,12 @@ package PostText;
 use Mojo::Base 'Mojolicious', -signatures;
 use Mojo::Pg;
 use Crypt::Passphrase;
+use Text::Markdown qw{markdown};
 
 # The local libs
 use PostText::Model::Thread;
 use PostText::Model::Remark;
 use PostText::Model::Moderator;
-use PostText::Markdown;
 
 sub startup($self) {
     $self->plugin('Config');
@@ -64,7 +64,7 @@ sub startup($self) {
     });
 
     $self->helper(markdown => sub ($c, $input_text) {
-        Markdown($input_text)
+        markdown($input_text, {empty_element_suffix => '>'})
     });
 
     # Finish configuring some things

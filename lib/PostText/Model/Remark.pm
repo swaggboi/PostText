@@ -1,7 +1,6 @@
 package PostText::Model::Remark;
 
 use Mojo::Base -base, -signatures;
-use Mojo::Util qw{xml_escape};
 
 has 'pg';
 
@@ -29,7 +28,7 @@ sub by_page_for($self, $thread_id, $this_page = 1) {
 }
 
 sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
-    my @data = ($thread_id, $author, xml_escape($body), $hidden, $flagged);
+    my @data = ($thread_id, $author, $body, $hidden, $flagged);
 
     $self->pg->db->query(<<~'END_SQL', @data);
         INSERT INTO remarks (
