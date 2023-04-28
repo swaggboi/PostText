@@ -58,6 +58,7 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
+1. `xml_escape()` the body when rendered rather than saving XML escaped
 1. Rules/about page
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)
