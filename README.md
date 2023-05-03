@@ -58,7 +58,7 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Rules/about page
+1. Use something like HTML::Restrict on thread/remark body
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)
 
