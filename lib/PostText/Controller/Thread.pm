@@ -3,6 +3,7 @@ package PostText::Controller::Thread;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Date::Format;
 use XML::RSS;
+use XML::Entities;
 
 sub create($self) {
     my $v;
@@ -105,7 +106,12 @@ sub feed($self) {
         );
 
     for my $thread (@{$threads}) {
-        my $item_link =
+        my $description =
+            XML::Entities::decode(
+                'all',
+                $self->markdown($self->truncate_text($thread->{'body'}))
+              );
+        my $item_link   =
             $self->url_for(
                 single_thread => {thread_id => $thread->{'id'}}
                 )->to_abs;
@@ -113,7 +119,7 @@ sub feed($self) {
         $rss->add_item(
             title       => $thread->{'title'},
             link        => $item_link,
-            description => $self->truncate_text($thread->{'body'}),
+            description => $description,
             author      => $thread->{'author'},
             guid        => $thread->{'id'},
             pubDate     => $thread->{'date'}
