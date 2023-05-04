@@ -6,7 +6,9 @@
     <nav class="id">#<%= $remark->{'id'} %></nav>
     <h4 class="date"><%= $remark->{'date'} %></h4>
     <h5 class="author"><%= $remark->{'author'} %></h5>
-    <div class="body"><%== markdown $remark->{'body'} %></div>
+    <div class="body">
+      <%== markdown $remark->{'body'} =%>
+    </div>
   </article>
 </div>
 <nav>

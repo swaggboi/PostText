@@ -2,7 +2,7 @@ package PostText::Model::Remark;
 
 use Mojo::Base -base, -signatures;
 
-has 'pg';
+has [qw{pg hr}];
 
 has per_page => 5;
 
@@ -28,7 +28,8 @@ sub by_page_for($self, $thread_id, $this_page = 1) {
 }
 
 sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
-    my @data = ($thread_id, $author, $body, $hidden, $flagged);
+    my $clean_body = $self->hr->process($body);
+    my @data       = ($thread_id, $author, $clean_body, $hidden, $flagged);
 
     $self->pg->db->query(<<~'END_SQL', @data);
         INSERT INTO remarks (
