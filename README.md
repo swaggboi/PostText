@@ -58,9 +58,10 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Rules/about page
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)
+1. Tests for mod-only user?
+1. Check input validation
 
 ## Crazy future ideas
 

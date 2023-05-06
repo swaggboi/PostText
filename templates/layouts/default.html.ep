@@ -13,11 +13,13 @@
     <%= link_to About => 'about_page'                      %>
     <%= link_to Rules => 'rules_page'                      %>
     <%= link_to RSS   => threads_feed => {format => 'rss'} %>
-    <% unless (is_mod) { =%>
     <span class="login">
+      <% if (is_mod) { =%>
+      <%= link_to Logout => 'mod_logout'   %>
+      <% } else { =%>
       <%= link_to Login => 'mod_login' %>
+      <% } =%>
     </span>
-    <% } =%>
   </div>
   <% if (is_mod) { =%>
   <div>
@@ -25,7 +27,6 @@
     <%= link_to Flagged => 'flagged_list' %>
     <%= link_to Hidden  => 'hidden_list'  %>
     <%= link_to Reset   => 'mod_reset'    %>
-    <%= link_to Logout  => 'mod_logout'   %>
   </div>
   <% } =%>
   <% if (is_admin) { =%>

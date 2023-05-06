@@ -9,3 +9,4 @@ requires 'Date::Format';
 requires 'XML::RSS';
 requires 'CSS::Minifier::XS';
 requires 'Text::Markdown';
+requires 'HTML::Restrict';

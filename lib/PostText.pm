@@ -6,6 +6,7 @@ use Mojo::Base 'Mojolicious', -signatures;
 use Mojo::Pg;
 use Crypt::Passphrase;
 use Text::Markdown qw{markdown};
+use HTML::Restrict;
 
 # The local libs
 use PostText::Model::Thread;
@@ -29,12 +30,22 @@ sub startup($self) {
           )
     });
 
+    $self->helper(hr => sub ($c) {
+        state $hr = HTML::Restrict->new(strip_enclosed_content => [])
+    });
+
     $self->helper(thread => sub ($c) {
-        state $thread = PostText::Model::Thread->new(pg => $c->pg)
+        state $thread = PostText::Model::Thread->new(
+            pg => $c->pg,
+            hr => $c->hr
+            )
     });
 
     $self->helper(remark => sub ($c) {
-        state $remark = PostText::Model::Remark->new(pg => $c->pg)
+        state $remark = PostText::Model::Remark->new(
+            pg => $c->pg,
+            hr => $c->hr
+            )
     });
 
     $self->helper(moderator => sub ($c) {
@@ -70,7 +81,7 @@ sub startup($self) {
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
-    $self->pg->migrations->from_dir('migrations')->migrate(11);
+    $self->pg->migrations->from_dir('migrations')->migrate(12);
 
     if (my $threads_per_page = $self->config->{'threads_per_page'}) {
         $self->thread->per_page($threads_per_page)
