@@ -15,7 +15,7 @@
     <%= link_to RSS   => threads_feed => {format => 'rss'} %>
     <span class="login">
       <% if (is_mod) { =%>
-      <%= link_to Logout => 'mod_logout'   %>
+      <%= link_to Logout => 'mod_logout' %>
       <% } else { =%>
       <%= link_to Login => 'mod_login' %>
       <% } =%>
