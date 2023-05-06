@@ -31,7 +31,10 @@ sub startup($self) {
     });
 
     $self->helper(hr => sub ($c) {
-        state $hr = HTML::Restrict->new(strip_enclosed_content => [])
+        state $hr = HTML::Restrict->new(
+            filter_text            => 0,
+            strip_enclosed_content => []
+            )
     });
 
     $self->helper(thread => sub ($c) {

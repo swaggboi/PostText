@@ -105,15 +105,16 @@ sub feed($self) {
         );
 
     for my $thread (@{$threads}) {
-        my $item_link =
-            $self->url_for(
-                single_thread => {thread_id => $thread->{'id'}}
-                )->to_abs;
+        my $description =
+            $self->markdown($self->truncate_text($thread->{'body'}));
+        my $item_link   = $self->url_for(
+            single_thread => {thread_id => $thread->{'id'}}
+            )->to_abs;
 
         $rss->add_item(
             title       => $thread->{'title'},
             link        => $item_link,
-            description => $self->truncate_text($thread->{'body'}),
+            description => $description,
             author      => $thread->{'author'},
             guid        => $thread->{'id'},
             pubDate     => $thread->{'date'}
