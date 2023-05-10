@@ -50,7 +50,7 @@ Run the tests locally (against development environment):
 
 ### Run
 
-    podman run -dt --rm --name post_text -p 3002:3000 post_text:latest
+    podman run -dt --rm --name post_text -p 3002:3000 post_text
 
 ### Generate unit file
 
