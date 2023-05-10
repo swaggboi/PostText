@@ -5,6 +5,7 @@
   <div class="author field">
     <%= label_for author => 'Author' %>
     <%= text_field author => session->{'author'}, (
+        id        => 'author',
         maxlength => 63,
         minlength => 1
     ) %>
@@ -15,9 +16,10 @@
   <div class="title field">
     <%= label_for title => 'Title' %>
     <%= text_field title => (
+        id        => 'title',
         maxlength => 127,
         minlength => 1,
-        autofocus => 'autofocus'
+        autofocus => undef
     ) %>
     <% if (my $error = validation->error('title')) { =%>
     <p class="field-with-error">Invalid title: 1 to 127 characters please.</p>
@@ -26,6 +28,7 @@
   <div class="text field">
     <%= label_for body => 'Text' %>
     <%= text_area body => (
+        id        => 'body',
         maxlength => 4000,
         minlength => 2,
         required  => 'true',

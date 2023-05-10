@@ -4,7 +4,7 @@
 <form method="post">
   <div class="email field">
     <%= label_for email => 'Email' %>
-    <%= email_field 'email' %>
+    <%= email_field email => (id => 'email') %>
   </div>
   <%= submit_button 'Unlock' %>
 </form>
