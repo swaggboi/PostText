@@ -101,7 +101,7 @@ sub feed($self) {
         title         => 'Post::Text',
         description   => 'In UTF-8 we trust. 🫡',
         link          => $chan_link,
-        lastBuildDate => time2str('%a, %d %b %Y %X %Z', time)
+        lastBuildDate => time2str('%a, %d %b %Y %X %z', time)
         );
 
     for my $thread (@{$threads}) {
@@ -115,8 +115,6 @@ sub feed($self) {
             title       => $thread->{'title'},
             link        => $item_link,
             description => $description,
-            author      => $thread->{'author'},
-            guid        => $thread->{'id'},
             pubDate     => $thread->{'date'}
             );
     }

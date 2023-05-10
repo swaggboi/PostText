@@ -104,7 +104,6 @@ sub feed($self) {
     $self->pg->db->query(<<~'END_SQL', $date_format)->hashes;
             SELECT thread_id               AS id,
                    TO_CHAR(thread_date, ?) AS date,
-                   thread_author           AS author,
                    thread_title            AS title,
                    thread_body             AS body
               FROM threads
