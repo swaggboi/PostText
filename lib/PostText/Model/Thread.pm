@@ -6,7 +6,7 @@ has [qw{pg hr}];
 
 has per_page => 5;
 
-has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS TZ';
+has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS OF';
 
 sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
     my $clean_body = $self->hr->process($body);
