@@ -1,17 +1,17 @@
 % layout 'default';
 % title 'Threads List';
 <h2><%= title %></h2>
-<div class="threads">
+<main class="threads">
   <% for my $thread (@{$threads}) { =%>
   <article class="thread">
-    <nav class="id">
-      <%= link_to "#$thread->{'id'}",
-        single_thread => {thread_id => $thread->{'id'}} %>
-    </nav>
     <h3 class="title">
       <%= link_to single_thread => {thread_id => $thread->{'id'}}, begin %>
         <%= $thread->{'title'} %>
       <% end %>
+      <span class="id">
+        <%= link_to "#$thread->{'id'}",
+            single_thread => {thread_id => $thread->{'id'}} %>
+      </span>
     </h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
     <h5 class="author"><%= $thread->{'author'} %></h5>
@@ -32,7 +32,7 @@
     </nav>
   </article>
   <% } =%>
-</div>
+</main>
 <% if ($last_page && $last_page != 1) { =%>
 <nav>
   <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>

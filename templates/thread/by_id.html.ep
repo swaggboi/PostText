@@ -1,7 +1,7 @@
 % layout 'default';
 % title "Thread #$thread->{'id'}";
 <h2><%= title %></h2>
-<div class="threads">
+<main class="threads">
   <article class="thread">
     <h3 class="title"><%= $thread->{'title'} %></h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
@@ -9,43 +9,47 @@
     <div class="body">
       <%== markdown $thread->{'body'} =%>
     </div>
+    <nav>
+      <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
+      <%= link_to Bump   => bump_thread => {thread_id => $thread->{'id'}} %>
+      <span class="flag">
+        <%= link_to Flag   => flag_thread => {thread_id => $thread->{'id'}} %>
+      </span>
+    </nav>
+    <% if (is_mod) { =%>
+    <nav>
+      <%= link_to Hide   => hide_thread   => {thread_id => $thread->{'id'}} %>
+      <%= link_to Unhide => unhide_thread => {thread_id => $thread->{'id'}} %>
+      <%= link_to Unflag => unflag_thread => {thread_id => $thread->{'id'}} %>
+    </nav>
+    <% } =%>
   </article>
-</div>
-<nav>
-  <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
-  <%= link_to Bump   => bump_thread => {thread_id => $thread->{'id'}} %>
-  <%= link_to Flag   => flag_thread => {thread_id => $thread->{'id'}} %>
-</nav>
-<% if (is_mod) { =%>
-<nav>
-  <%= link_to Hide   => hide_thread   => {thread_id => $thread->{'id'}} %>
-  <%= link_to Unhide => unhide_thread => {thread_id => $thread->{'id'}} %>
-  <%= link_to Unflag => unflag_thread => {thread_id => $thread->{'id'}} %>
-</nav>
-<% } =%>
+</main>
 <% if (my $first_remark = $remarks->[0]) { =%>
-<div class="remarks" id="remarks">
+<section class="remarks" id="remarks">
   <h3>Remarks</h3>
   <% for my $remark (@{$remarks}) { =%>
   <article class="remark">
-    <nav class="id">
-      <%= link_to "#$remark->{'id'}",
-        single_remark => {remark_id => $remark->{'id'}} %>
-    </nav>
-    <h4 class="date"><%= $remark->{'date'} %></h4>
+    <h4 class="date">
+      <%= $remark->{'date'} %>
+      <span class="id">
+        <%= link_to "#$remark->{'id'}",
+            single_remark => {remark_id => $remark->{'id'}} %>
+      </span>
+    </h4>
     <h5 class="author"><%= $remark->{'author'} %></h5>
     <div class="body">
       <%== markdown $remark->{'body'} =%>
     </div>
-    <nav class="flag">
-      <%= link_to Flag => flag_remark => {remark_id => $remark->{'id'}} %>
+    <nav>
+      <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
+      <span class="flag">
+        <%= link_to Flag => flag_remark => {remark_id => $remark->{'id'}} %>
+      </span>
     </nav>
   </article>
   <% } =%>
-</div>
-<nav>
-  <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
-</nav>
+</section>
 <nav>
   <% if ($last_page && $last_page != 1) { =%>
   <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>

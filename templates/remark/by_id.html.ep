@@ -1,24 +1,26 @@
 % layout 'default';
 % title "Remark #$remark->{'id'}";
 <h2><%= title %></h2>
-<div class="remarks">
+<main class="remarks">
   <article class="remark">
-    <nav class="id">#<%= $remark->{'id'} %></nav>
     <h4 class="date"><%= $remark->{'date'} %></h4>
     <h5 class="author"><%= $remark->{'author'} %></h5>
     <div class="body">
       <%== markdown $remark->{'body'} =%>
     </div>
+    <nav>
+      <%= link_to Thread => single_thread => {thread_id => $remark->{'thread_id'}} %>
+      <%= link_to Remark => post_remark   => {thread_id => $remark->{'thread_id'}} %>
+      <span class="flag">
+        <%= link_to Flag => flag_remark => {remark_id => $remark->{'id'}} %>
+      </span>
+    </nav>
+    <% if (is_mod) { =%>
+    <nav>
+      <%= link_to Hide   => hide_remark   => {remark_id => $remark->{'id'}} %>
+      <%= link_to Unhide => unhide_remark => {remark_id => $remark->{'id'}} %>
+      <%= link_to Unflag => unflag_remark => {remark_id => $remark->{'id'}} %>
+    </nav>
+    <% } =%>
   </article>
-</div>
-<nav>
-  <%= link_to Thread => single_thread => {thread_id => $remark->{'thread_id'}} %>
-  <%= link_to Flag   => flag_remark   => {remark_id => $remark->{'id'}       } %>
-</nav>
-<% if (is_mod) { =%>
-<nav>
-  <%= link_to Hide   => hide_remark   => {remark_id => $remark->{'id'}} %>
-  <%= link_to Unhide => unhide_remark => {remark_id => $remark->{'id'}} %>
-  <%= link_to Unflag => unflag_remark => {remark_id => $remark->{'id'}} %>
-</nav>
-<% } =%>
+</main>

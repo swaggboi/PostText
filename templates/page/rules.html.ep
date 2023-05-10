@@ -1,7 +1,7 @@
 % layout 'default';
 % title 'The Rules™';
 <h2><%= title %></h2>
-<div class="rules body">
+<main class="rules body">
   <p>The rules here are pretty simple:</p>
   <ul>
     <li>No hate speech (e.g. racism, sexism, homophobia, transphobia, etc.)</li>
@@ -19,4 +19,5 @@
       should download your own copy of that content.</li>
     <li>You are liable for what you post, and we are not liable for it.</li>
     <li>We may modifiy these rules at any time.</li>
-</div>
+  </ul>
+</main>

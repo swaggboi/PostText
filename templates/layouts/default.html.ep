@@ -5,9 +5,9 @@
   <%= asset 'main.css' %>
 </head>
 <body>
-<h1>Post::Text</h1>
-<nav>
-  <div>
+<header>
+  <h1>Post::Text</h1>
+  <nav>
     <%= link_to List  => threads_list => {list_page => 1}  %>
     <%= link_to New   => 'post_thread'                     %>
     <%= link_to About => 'about_page'                      %>
@@ -20,17 +20,17 @@
       <%= link_to Login => 'mod_login' %>
       <% } =%>
     </span>
-  </div>
+  </nav>
   <% if (is_mod) { =%>
-  <div>
+  <nav>
     <span>Moderate:</span>
     <%= link_to Flagged => 'flagged_list' %>
     <%= link_to Hidden  => 'hidden_list'  %>
     <%= link_to Reset   => 'mod_reset'    %>
-  </div>
+  </nav>
   <% } =%>
   <% if (is_admin) { =%>
-  <div>
+  <nav>
     <span>Admin:</span>
     <%= link_to Create  => 'create_mod'   %>
     <%= link_to Reset   => 'admin_reset'  %>
@@ -38,9 +38,9 @@
     <%= link_to Unlock  => 'unlock_mod'   %>
     <%= link_to Promote => 'promote_mod'  %>
     <%= link_to Demote  => 'demote_admin' %>
-  </div>
+  </nav>
   <% } =%>
-</nav>
+</header>
 <hr>
 <% if (flash 'error') { =%>
 <p class="field-with-error" id="error"><%= flash 'error' %></p>
@@ -49,8 +49,7 @@
 <% } =%>
 <% if (flash 'info') { =%>
 <p class="field-with-info" id="info"><%= flash 'info' %></p>
-<% } =%>
-<% if (stash 'info') { =%>
+<% } elsif (stash 'info') { =%>
 <p class="field-with-info" id="info"><%= stash 'info' %></p>
 <% } =%>
 <%= content =%>

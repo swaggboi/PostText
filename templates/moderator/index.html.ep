@@ -1,4 +1,0 @@
-% layout 'default';
-% title 'Top Secret';
-<h2><%= title %></h2>
-<p>For mods only!!</p>

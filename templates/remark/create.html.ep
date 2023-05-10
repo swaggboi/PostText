@@ -27,34 +27,40 @@
   </div>
   <%= submit_button 'Post', class => 'post button' %>
 </form>
-<div class="threads">
+<section class="threads">
   <h3>Thread</h3>
   <article class="thread">
-    <nav class="id">
-      <%= link_to "#$thread->{'id'}",
+    <h3 class="title">
+      <%= link_to single_thread => {thread_id => $thread->{'id'}}, begin %>
+        <%= $thread->{'title'} %>
+      <% end %>
+      <span class="id">
+        <%= link_to "#$thread->{'id'}",
         single_thread => {thread_id => $thread->{'id'}} %>
-    </nav>
-    <h3 class="title"><%= $thread->{'title'} %></h3>
+      </span>
+    </h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
     <h5 class="author"><%= $thread->{'author'} %></h5>
     <div class="body">
       <%== markdown $thread->{'body'} =%>
     </div>
   </article>
-</div>
+</section>
 <% if (my $last_remark_id = $last_remark->{'id'}) { =%>
-<div class="remarks">
+<section class="remarks">
   <h3>Last Remark</h3>
   <article class="remark">
-    <nav class="id">
-      <%= link_to "#$last_remark_id",
-          single_remark => {remark_id => $last_remark_id} %>
-    </nav>
-    <h4 class="date"><%= $last_remark->{'date'} %></h4>
+    <h4 class="date">
+      <%= $last_remark->{'date'} %>
+      <span class="id">
+        <%= link_to "#$last_remark_id",
+            single_remark => {remark_id => $last_remark_id} %>
+      </span>
+    </h4>
     <h5 class="author"><%= $last_remark->{'author'} %></h5>
     <div class="body">
       <%== markdown $last_remark->{'body'} =%>
     </div>
   </article>
-</div>
+</section>
 <% } =%>

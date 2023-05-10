@@ -1,12 +1,13 @@
 % layout 'default';
 % title 'About Post::Text';
 <h2><%= title %></h2>
-<div class="about body">
-  <p>Post::Text is a <a href="">textboard</a> a bit like 2channel. You
-    can post whatever you want anonymously just please mind the <%=
-    link_to rules => 'rules_page' %>. Markdown is supported for
-    formatting posts using the <a
-    href="https://daringfireball.net/projects/markdown/syntax">
+<main class="about body">
+  <p>Post::Text is a
+    <a href="https://en.wikipedia.org/wiki/Textboard">textboard</a>
+    a bit like 2channel. You can post whatever you want anonymously
+    just please mind the <%= link_to rules => 'rules_page' %>.
+    Markdown is supported for formatting posts using the
+    <a href="https://daringfireball.net/projects/markdown/syntax">
     original implementation from The Daring Fireball</a>. For example,
     back-ticks are for <em>inline code</em> while indentation should
     be used if you want an entire code bock:</p>
@@ -28,7 +29,7 @@ This is correct for a multi-line code block:
   <p>You can use an actual tab character or four spaces to indent.
     <strong>Only Markdown is supported, HTML will be filtered
     out.</strong></p>
-    <p>There is a button for users to 'flag' a post for review by a
+  <p>There is a button for users to 'flag' a post for review by a
     moderator. If you need further assistance you can reach out to the
     <a href="mailto:swaggboi@slackware.uk">webmaster</a>. There is
     also a 'bump' button you're free to use and abuse to your heart's
@@ -36,5 +37,5 @@ This is correct for a multi-line code block:
     email client you can check out the
     <%= link_to 'RSS feed', threads_feed => {format => 'rss'} %>.</p>
   <p>Click 'New' in the top navigation bar to start a new thread and
-    make some <s>enemies</s> friends!</p>
-</div>
+    make some <del>enemies</del> <ins>friends</ins>!</p>
+</main>
