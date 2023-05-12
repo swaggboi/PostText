@@ -95,13 +95,25 @@ sub by_page($self) {
 sub feed($self) {
     my $threads   = $self->thread->feed;
     my $rss       = XML::RSS->new(version => '2.0');
-    my $chan_link = $self->url_for(threads_list => {list_page => 1})->to_abs;
+    my $chan_link = $self->url_for(threads_list => {list_page => 1} )->to_abs;
+    my $rss_link  = $self->url_for(threads_feed => {format => 'rss'})->to_abs;
+
+    $rss->add_module(
+        prefix => 'atom',
+        uri    => 'http://www.w3.org/2005/Atom'
+        );
 
     $rss->channel(
         title         => 'Post::Text',
         description   => 'In UTF-8 we trust. 🫡',
         link          => $chan_link,
-        lastBuildDate => time2str('%a, %d %b %Y %X %z', time)
+        lastBuildDate => time2str('%a, %d %b %Y %X %z', time),
+        atom          => {
+            link => {
+                href => $rss_link,
+                rel  => 'self'
+            }
+        }
         );
 
     for my $thread (@{$threads}) {
