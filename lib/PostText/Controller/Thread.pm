@@ -114,6 +114,7 @@ sub feed($self) {
         $rss->add_item(
             title       => $thread->{'title'},
             link        => $item_link,
+            permaLink   => $item_link,
             description => $description,
             pubDate     => $thread->{'date'}
             );
