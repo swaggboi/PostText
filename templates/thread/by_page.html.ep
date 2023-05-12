@@ -22,7 +22,7 @@
       <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
       <%= link_to url_for(single_thread => {thread_id => $thread->{'id'}})
           ->fragment('remarks'), begin %>
-        (<%= $thread->{'remark_count'} %> remarks)\
+        (<%= $thread->{'remark_tally'} %> remarks)\
       <% end =%>
       <%= link_to Bump => bump_thread => {thread_id => $thread->{'id'}} %>
       (<%= $thread->{'bump_tally'} %> bumps)
