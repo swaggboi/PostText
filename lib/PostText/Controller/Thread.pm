@@ -110,8 +110,9 @@ sub feed($self) {
         lastBuildDate => time2str('%a, %d %b %Y %X %z', time),
         atom          => {
             link => {
-                href => $rss_link,
-                rel  => 'self'
+                href => "$rss_link", # I have no idea why this needs quotes??
+                rel  => 'self',
+                type => 'application/rss+xml'
             }
         }
         );
