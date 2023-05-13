@@ -44,8 +44,8 @@ sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
 }
 
 sub count_for($self, $thread_id) {
-    $self->pg->db->query(<<~'END_SQL', $thread_id)->hash->{'count'}
-        SELECT COUNT(*) AS count
+    $self->pg->db->query(<<~'END_SQL', $thread_id)->hash->{'tally'}
+        SELECT COUNT(*) AS tally
           FROM remarks
          WHERE thread_id = ?
            AND NOT hidden_status;

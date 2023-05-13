@@ -60,8 +60,8 @@ sub last_page($self) {
 }
 
 sub count($self) {
-    $self->pg->db->query(<<~'END_SQL')->hash->{'count'}
-        SELECT COUNT(*) AS count
+    $self->pg->db->query(<<~'END_SQL')->hash->{'tally'}
+        SELECT COUNT(*) AS tally
           FROM threads
          WHERE NOT hidden_status;
        END_SQL
