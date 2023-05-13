@@ -39,27 +39,27 @@ subtest Login => sub {
     subtest Flag => sub {
         $t->get_ok('/moderator/thread/unflag/1')
             ->status_is(302)
-            ->header_like(Location => qr{thread/list});
+            ->header_like(Location => qr{moderator/flagged});
 
         $t->get_ok('/moderator/remark/unflag/1')
             ->status_is(302)
-            ->header_like(Location => qr{thread/single});
+            ->header_like(Location => qr{moderator/flagged});
     };
 
     subtest Hide => sub {
         $t->get_ok('/moderator/thread/hide/1')
             ->status_is(302)
-            ->header_like(Location => qr{thread/single});
+            ->header_like(Location => qr{moderator/flagged});
         $t->get_ok('/moderator/thread/unhide/1')
             ->status_is(302)
-            ->header_like(Location => qr{thread/list});
+            ->header_like(Location => qr{moderator/hidden});
 
         $t->get_ok('/moderator/remark/hide/1')
             ->status_is(302)
-            ->header_like(Location => qr{remark/single});
+            ->header_like(Location => qr{moderator/flagged});
         $t->get_ok('/moderator/remark/unhide/1')
             ->status_is(302)
-            ->header_like(Location => qr{thread/single});
+            ->header_like(Location => qr{moderator/hidden});
     };
 
     subtest 'Buttons for mods', sub {

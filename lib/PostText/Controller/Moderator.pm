@@ -88,7 +88,7 @@ sub logout($self) {
 
 sub unflag_thread($self) {
     my $thread_id    = $self->param('thread_id');
-    my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
+    my $redirect_url = $self->url_for('flagged_list')->fragment('info')->to_abs;
 
     $self->moderator->unflag_thread($thread_id);
     $self->flash(info => "Thread #$thread_id has been unflagged. ◀️");
@@ -98,8 +98,7 @@ sub unflag_thread($self) {
 
 sub hide_thread($self) {
     my $thread_id    = $self->param('thread_id');
-    my $redirect_url = $self->url_for(single_thread => thread_id => $thread_id)
-        ->fragment('info')->to_abs;
+    my $redirect_url = $self->url_for('flagged_list')->fragment('info')->to_abs;
 
     $self->moderator->hide_thread($thread_id);
     $self->flash(info => "Thread #$thread_id has been hidden. 🫥");
@@ -109,7 +108,7 @@ sub hide_thread($self) {
 
 sub unhide_thread($self) {
     my $thread_id    = $self->param('thread_id');
-    my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
+    my $redirect_url = $self->url_for('hidden_list')->fragment('info')->to_abs;
 
     $self->moderator->unhide_thread($thread_id);
     $self->flash(info => "Thread #$thread_id has been unhidden. ⏪");
@@ -120,8 +119,7 @@ sub unhide_thread($self) {
 sub unflag_remark($self) {
     my $remark_id    = $self->param('remark_id');
     my $thread_id    = $self->remark->thread_id_for($remark_id);
-    my $redirect_url = $self->url_for(single_thread => thread_id => $thread_id)
-        ->fragment('info')->to_abs;
+    my $redirect_url = $self->url_for('flagged_list')->fragment('info')->to_abs;
 
     $self->moderator->unflag_remark($remark_id);
     $self->flash(info => "Remark #$remark_id has been unflagged. ◀️");
@@ -131,8 +129,7 @@ sub unflag_remark($self) {
 
 sub hide_remark($self) {
     my $remark_id    = $self->param('remark_id');
-    my $redirect_url = $self->url_for(single_remark => remark_id => $remark_id)
-        ->fragment('info')->to_abs;
+    my $redirect_url = $self->url_for('flagged_list')->fragment('info')->to_abs;
 
     $self->moderator->hide_remark($remark_id);
     $self->flash(info => "Remark #$remark_id has been hidden. 🫥");
@@ -143,8 +140,7 @@ sub hide_remark($self) {
 sub unhide_remark($self) {
     my $remark_id    = $self->param('remark_id');
     my $thread_id    = $self->remark->thread_id_for($remark_id);
-    my $redirect_url = $self->url_for(single_thread => thread_id => $thread_id)
-        ->fragment('info')->to_abs;
+    my $redirect_url = $self->url_for('hidden_list')->fragment('info')->to_abs;
 
     $self->moderator->unhide_remark($remark_id);
     $self->flash(info => "Remark #$remark_id has been unhidden. ⏪");

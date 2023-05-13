@@ -58,8 +58,6 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Show `bump_tally` and `remark_count` in single thread view
-1. Redirect mod/admin back to hidden/flagged where it makes sense
 1. CSS
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
