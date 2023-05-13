@@ -53,10 +53,10 @@
     </nav>
   </article>
   <% } =%>
+  <nav>
+    <% if ($last_page && $last_page != 1) { =%>
+    <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>
+    <% } =%>
+  </nav>
 </section>
-<nav>
-  <% if ($last_page && $last_page != 1) { =%>
-  <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>
-  <% } =%>
-</nav>
 <% } =%>
