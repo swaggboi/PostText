@@ -71,13 +71,18 @@ sub by_id($self, $thread_id) {
     my $date_format = $self->date_format;
 
     $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
-        SELECT thread_id               AS id,
-               TO_CHAR(thread_date, ?) AS date,
-               thread_author           AS author,
-               thread_title            AS title,
-               thread_body             AS body
-          FROM threads
-         WHERE thread_id = ?;
+        SELECT t.thread_id               AS id,
+               TO_CHAR(t.thread_date, ?) AS date,
+               t.thread_author           AS author,
+               t.thread_title            AS title,
+               t.thread_body             AS body,
+               COUNT(r.*)                AS remark_tally,
+               t.bump_tally              AS bump_tally
+          FROM threads      AS t
+          LEFT JOIN remarks AS r
+            ON t.thread_id = r.thread_id
+         WHERE t.thread_id = ?
+         GROUP BY t.thread_id;
        END_SQL
 }
 

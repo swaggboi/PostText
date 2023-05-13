@@ -69,6 +69,9 @@ Run the tests locally (against development environment):
 
 ### (Lord knows there's TODOs I could be working on...)
 
+1. Is `remark_tally` counting hidden remarks? Tried to add a `WHERE
+   NOT hidden_status` but that returns null, probably need a different
+   `JOIN` which may not be worth the trouble/processing
 1. Implement tripcodes (moving this down in priority due to complexity...)
 1. Return a text response instead of HTML if a `.txt` extension [is
    requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
