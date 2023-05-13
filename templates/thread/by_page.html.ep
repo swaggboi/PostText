@@ -33,9 +33,9 @@
     </nav>
   </article>
   <% } =%>
-</main>
-<% if ($last_page && $last_page != 1) { =%>
-<nav>
-  <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>
-</nav>
+  <% if ($last_page && $last_page != 1) { =%>
+  <nav>
+    <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>
+  </nav>
 <% } =%>
+</main>
