@@ -10,10 +10,14 @@
       <%== markdown $thread->{'body'} =%>
     </div>
     <nav>
-      <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
-      <%= link_to Bump   => bump_thread => {thread_id => $thread->{'id'}} %>
+      <%= link_to post_remark => {thread_id => $thread->{'id'}}, begin %>
+        Remark (<%= $thread->{'remark_tally'} %> remarks)
+      <% end %>
+      <%= link_to bump_thread => {thread_id => $thread->{'id'}}, begin %>
+        Bump (<%= $thread->{'bump_tally'} %> bumps)
+      <% end %>
       <span class="flag">
-        <%= link_to Flag   => flag_thread => {thread_id => $thread->{'id'}} %>
+        <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}} %>
       </span>
     </nav>
     <% if (is_mod) { =%>
