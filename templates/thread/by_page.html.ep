@@ -8,10 +8,8 @@
       <%= link_to single_thread => {thread_id => $thread->{'id'}}, begin %>
         <%= $thread->{'title'} %>
       <% end %>
-      <span class="id">
-        <%= link_to "#$thread->{'id'}",
-            single_thread => {thread_id => $thread->{'id'}} %>
-      </span>
+      <%= link_to "#$thread->{'id'}",
+          single_thread => {thread_id => $thread->{'id'}}, (class => 'id') %>
     </h3>
     <h4 class="date"><%= $thread->{'date'} %></h4>
     <h5 class="author"><%= $thread->{'author'} %></h5>
@@ -22,14 +20,13 @@
       <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
       <%= link_to url_for(single_thread => {thread_id => $thread->{'id'}})
           ->fragment('remarks'), begin %>
-        (<%= $thread->{'remark_tally'} %> remarks)
+        <%= $thread->{'remark_tally'} %> Remarks
       <% end %>
       <%= link_to bump_thread => {thread_id => $thread->{'id'}}, begin %>
-        Bump (<%= $thread->{'bump_tally'} %> bumps)
+        Bump (<%= $thread->{'bump_tally'} %>)
       <% end %>
-      <span class="flag">
-        <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}} %>
-      </span>
+      <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}},
+          (class => 'flag') %>
     </nav>
   </article>
   <% } =%>
