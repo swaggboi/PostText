@@ -36,6 +36,9 @@ subtest 'View single thread', sub {
 
     $t->get_ok('/thread/single/1/1')->status_is(200)
         ->text_like(h2 => qr/Thread #1/);
+
+    $t->get_ok('/thread/single/65536')->status_is(404)
+        ->text_like(h2 => qr/Thread #/);
 };
 
 subtest 'Threads feed', sub {

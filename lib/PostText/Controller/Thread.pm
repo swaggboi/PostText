@@ -62,8 +62,9 @@ sub by_id($self) {
     }
     else {
         $self->stash(
-            thread => [],
-            status => 404
+            thread  => {},
+            remarks => [],
+            status  => 404
             )
     }
 
