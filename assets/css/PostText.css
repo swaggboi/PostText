@@ -45,7 +45,7 @@ header > nav a {
   background-color: #8C97A8;
 }
 
-.threads {
+.threads, .remarks {
   display: flex;
   flex-direction: column;
   /* border: dashed; */
@@ -53,12 +53,12 @@ header > nav a {
   padding: 0.5em 0;
 }
 
-.thread {
+.thread, .remark {
   background-color: #C2B3A9;
   border: outset;
 }
 
-.thread .title {
+.thread .title, .remark .date {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -69,7 +69,7 @@ header > nav a {
   border: inset;
 }
 
-.thread .title .id {
+.thread .title .id, .remark .id {
   border: outset;
   padding: 0.25em;
   background-color: #999999;
@@ -80,12 +80,17 @@ header > nav a {
   padding: 0.25em 0.5em;
 }
 
-.thread .body {
+.remark .date, .remark .author, .remark .body {
+  margin: 1em 0.5em;
+  padding: 0.25em 0.5em;
+}
+
+.thread .body, .remark .body {
     background-color: #A59990;
     border: inset;
 }
 
-.thread nav {
+.thread nav, .remark nav {
   display: flex;
   justify-content: flex-end;
   flex-flow: row wrap;
@@ -94,7 +99,7 @@ header > nav a {
   align-items: center;
 }
 
-.thread nav a {
+.thread nav a, .remark nav a {
   flex: 1 0;
   text-align: center;
   border: outset;
