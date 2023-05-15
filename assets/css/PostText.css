@@ -1,3 +1,135 @@
+:root {
+  font-size: calc(8px + 1vmin);
+  box-sizing: border-box;
+}
+
+*, ::before, ::after {
+  box-sizing: inherit;
+}
+
+body {
+    background-image: url('/images/halloween_background_1.gif');
+    background-attachment: fixed;
+    width: 99vmin;
+    margin: 0 auto;
+}
+
+header > h1, footer > p {
+  text-align: center;
+  border: outset;
+  background-color: #C2B3A9;
+  padding: 0.5em 0;
+}
+
+hr + h2 {
+  text-align: center;
+  border: inset;
+  padding: 0.5em 0;
+  background-color: #A59990;
+}
+
+header > nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  gap: 0.25em;
+  border: outset;
+  padding: 0.5em 0.25em;
+  background-color: #C2B3A9;
+}
+
+header > nav a {
+  border: outset;
+  flex: 1;
+  padding-left: 0.5em;
+  background-color: #8C97A8;
+}
+
+.threads {
+  display: flex;
+  flex-direction: column;
+  /* border: dashed; */
+  gap: 1em;
+  padding: 0.5em 0;
+}
+
+.thread {
+  background-color: #C2B3A9;
+  border: outset;
+}
+
+.thread .title {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #5B90A4;
+  margin: 0;
+  padding: 0.25em 0.5em 0.25em 0.75em;
+  align-items: center;
+  border: inset;
+}
+
+.thread .title .id {
+  border: outset;
+  padding: 0.25em;
+  background-color: #999999;
+}
+
+.thread .date, .thread .author, .thread .body {
+  margin: 1em 0.5em;
+  padding: 0.25em 0.5em;
+}
+
+.thread .body {
+    background-color: #A59990;
+    border: inset;
+}
+
+.thread nav {
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row wrap;
+  padding: 0 1em 0.5em 1em;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.thread nav a {
+  flex: 1 0;
+  text-align: center;
+  border: outset;
+  padding: 0.25em 0;
+  white-space: nowrap;
+  background-color: #8C97A8;
+}
+
+article + nav {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  border: inset;
+  background-color: #A59990;
+  padding: 0.5em 0.25em;
+  gap: 0.25em;
+}
+
+article + nav > a {
+  border: outset;
+  flex: 1;
+  /* border-bottom-style: none; */
+  text-align: center;
+  background-color: #8C97A8;
+}
+
+article + nav > a[rel="self"] {
+  border-style: inset;
+  background-color: #696F80;
+}
+
+article + nav > span {
+
+}
+
 .field-with-info {
     border-style: solid;
     border-color: green;
@@ -6,15 +138,6 @@
 .field-with-error {
     border-style: solid;
     border-color: red;
-}
-
-.thread, .remark, .field-with-error, .field-with-info {
-    border-style: dotted;
-    border-collapse: collapse;
-}
-
-.thread .id, .remark .id, nav .flag, nav .login {
-    float: right;
 }
 
 pre {
