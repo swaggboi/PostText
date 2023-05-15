@@ -80,7 +80,7 @@ header > nav a {
   padding: 0.25em 0.5em;
 }
 
-.remark .date, .remark .author, .remark .body {
+.remark .author, .remark .body {
   margin: 1em 0.5em;
   padding: 0.25em 0.5em;
 }
