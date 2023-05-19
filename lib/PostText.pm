@@ -16,7 +16,7 @@ use PostText::Model::Moderator;
 sub startup($self) {
     $self->plugin('Config');
     $self->plugin('TagHelpers::Pagination');
-    $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
+    $self->plugin(AssetPack => {pipes => [qw{Sass Css Combine}]});
 
     # Helpers
     $self->helper(pg => sub ($c) {
@@ -94,7 +94,7 @@ sub startup($self) {
         $self->remark->per_page($remarks_per_page)
     }
 
-    $self->asset->process('main.css', 'css/PostText.css');
+    $self->asset->process;
 
     push @{$self->commands->namespaces}, 'PostText::Command';
 

@@ -6,3 +6,7 @@ minified=1
 checksum=4f089bc53f
 format=css
 minified=1
+[sass:sass/post_text.scss]
+checksum=ecda188939
+format=css
+minified=0

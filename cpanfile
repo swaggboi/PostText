@@ -10,3 +10,5 @@ requires 'XML::RSS';
 requires 'CSS::Minifier::XS';
 requires 'Text::Markdown';
 requires 'HTML::Restrict';
+requires 'IO::Socket::SSL';
+requires 'CSS::Sass';

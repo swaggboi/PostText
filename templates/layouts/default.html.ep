@@ -3,26 +3,26 @@
 <head>
   <title>Post::Text - <%= title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= asset 'main.css' %>
+  <%= asset 'app.css' %>
 </head>
 <body>
 <header>
-  <h1>Post::Text</h1>
-  <nav>
+  <h1 class="site-title">Post::Text</h1>
+  <nav class="site-nav">
     <%= link_to List  => threads_list => {list_page => 1}  %>
     <%= link_to New   => 'post_thread'                     %>
     <%= link_to About => 'about_page'                      %>
     <%= link_to Rules => 'rules_page'                      %>
     <%= link_to RSS   => threads_feed => {format => 'rss'} %>
     <% if (is_mod) { =%>
-    <%= link_to Logout => mod_logout => (class => 'login') %>
+    <%= link_to Logout => 'mod_logout' %>
     <% } else { =%>
-    <%= link_to Login => mod_login => (class => 'login') %>
+    <%= link_to Login => 'mod_login' %>
     <% } =%>
     </span>
   </nav>
   <% if (is_mod) { =%>
-  <nav>
+  <nav class="site-nav">
     <span>Moderate:</span>
     <%= link_to Flagged => 'flagged_list' %>
     <%= link_to Hidden  => 'hidden_list'  %>
@@ -30,7 +30,7 @@
   </nav>
   <% } =%>
   <% if (is_admin) { =%>
-  <nav>
+  <nav class="site-nav">
     <span>Admin:</span>
     <%= link_to Create  => 'create_mod'   %>
     <%= link_to Reset   => 'admin_reset'  %>
@@ -41,7 +41,6 @@
   </nav>
   <% } =%>
 </header>
-<hr>
 <% if (flash 'error') { =%>
 <p class="field-with-error" id="error"><%= flash 'error' %></p>
 <% } elsif (stash 'error') { =%>
@@ -53,7 +52,7 @@
 <p class="field-with-info" id="info"><%= stash 'info' %></p>
 <% } =%>
 <%= content =%>
-<footer>
+<footer class="site-footer">
   <p>In UTF-8 we trust. 🫡</p>
 </footer>
 </body>
