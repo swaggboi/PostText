@@ -28,7 +28,7 @@ body {
 
 code {
     background-color: black;
-    color: white;
+    color: lime;
     font-size: 0.75em; /* Why tho?? */
 }
 
@@ -46,14 +46,14 @@ pre > code {
 
 .site-title {
   text-align: center;
-  border: outset;
+  border: outset var(--light-warm-gray);
   background-color: var(--light-warm-gray);
   padding: 0.5em 0;
 }
 
 .site-footer {
   text-align: center;
-  border: outset;
+  border: outset var(--light-warm-gray);
   background-color: var(--light-warm-gray);
   padding: 0;
   margin: 1em 0;
@@ -64,13 +64,13 @@ pre > code {
   flex-flow: row wrap;
   justify-content: flex-start;
   gap: 0.25em;
-  border: outset;
+  border: outset var(--light-warm-gray);
   padding: 0.5em 0.25em;
   background-color: var(--light-warm-gray);
 }
 
 .site-nav > a {
-  border: outset;
+  border: outset var(--light-blue);
   flex: 1;
   padding: 0 0.5em 0 0.5em;
   background-color: var(--light-blue);
@@ -78,14 +78,14 @@ pre > code {
 
 .page-title {
   text-align: center;
-  border: inset;
+  border: inset var(--dark-warm-gray);
   padding: 0.5em 0;
   background-color: var(--dark-warm-gray);
 }
 
 .page-body {
   background-color: var(--light-warm-gray);
-  border: outset;
+  border: outset var(--light-warm-gray);
   padding: 0.5em 1em;
 }
 
@@ -114,27 +114,27 @@ pre > code {
   display: flex;
   justify-content: flex-start;
   flex-flow: row wrap;
-  border: inset;
+  border: inset var(--dark-warm-gray);
   background-color: var(--dark-warm-gray);
   padding: 0.5em 0.25em;
   gap: 0.25em;
 }
 
 .pager__nav > a {
-  border: outset;
+  border: outset var(--light-blue);
   flex: 1;
   text-align: center;
   background-color: var(--light-blue);
 }
 
 .pager__nav > a[rel="self"] {
-  border-style: inset;
-  background-color: #696F80;
+  border: inset var(--dark-blue);
+  background-color: var(--dark-blue);
 }
 
 .post {
   background-color: var(--light-warm-gray);
-  border: outset;
+  border: outset var(--light-warm-gray);
 }
 
 .post__title {
@@ -145,11 +145,11 @@ pre > code {
   margin: 0;
   padding: 0.25em 0.5em 0.25em 0.75em;
   align-items: center;
-  border: inset;
+  border: inset var(--teal);
 }
 
 .post__id {
-  border: outset;
+  border: outset var(--true-gray);
   padding: 0.25em;
   background-color: var(--true-gray);
 }
@@ -167,12 +167,12 @@ pre > code {
   margin: 0;
   padding: 0.25em 0.5em 0.25em 0.75em;
   align-items: center;
-  border: inset;
+  border: inset var(--teal);
 }
 
 .post__body {
     background-color: var(--dark-warm-gray);
-    border: inset;
+    border: inset var(--dark-warm-gray);
 }
 
 .post__nav {
@@ -187,7 +187,7 @@ pre > code {
 .post__nav > a {
   flex: 1 0;
   text-align: center;
-  border: outset;
+  border: outset var(--light-blue);
   padding: 0.25em 0;
   white-space: nowrap;
   background-color: var(--light-blue);
