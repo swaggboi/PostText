@@ -1,7 +1,7 @@
 % layout 'default';
 % title 'About Post::Text';
-<h2><%= title %></h2>
-<main class="about body">
+<h2 class="page-title"><%= title %></h2>
+<main class="page-body">
   <p>Post::Text is a
     <a href="https://en.wikipedia.org/wiki/Textboard">textboard</a>
     a bit like 2channel. You can post whatever you want anonymously

@@ -1,7 +1,7 @@
 % layout 'default';
 % title 'The Rules™';
-<h2><%= title %></h2>
-<main class="rules body">
+<h2 class="page-title"><%= title %></h2>
+<main class="page-body">
   <p>The rules here are pretty simple:</p>
   <ul>
     <li>No hate speech (e.g. racism, sexism, homophobia, transphobia, etc.)</li>
