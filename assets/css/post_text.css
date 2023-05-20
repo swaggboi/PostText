@@ -89,6 +89,26 @@ pre > code {
   padding: 0.5em 1em;
 }
 
+.form-body {
+  background-color: var(--light-warm-gray);
+  border: outset var(--light-warm-gray);
+  padding: 0.5em 1em;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 1em;
+}
+
+.form-field {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.form-button {
+    border: outset var(--light-blue);
+    background-color: var(--light-blue);
+    padding: 0.5em 0;
+}
+
 .field-with-info {
     border-style: solid;
     border-color: var(--highlight-green);

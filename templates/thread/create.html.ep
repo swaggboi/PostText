@@ -1,8 +1,8 @@
 % layout 'default';
 % title 'New Thread';
 <h2 class="page-title"><%= title %></h2>
-<form method="post" class="field">
-  <div class="field__author">
+<form method="post" class="form-body">
+  <div class="form-field">
     <%= label_for author => 'Author' %>
     <%= text_field author => session->{'author'}, (
         id        => 'author',
@@ -14,7 +14,7 @@
     <p class="field-with-error">Invalid author: 1 to 63 characters please.</p>
     <% } =%>
   </div>
-  <div class="field__title">
+  <div class="form-field">
     <%= label_for title => 'Title' %>
     <%= text_field title => (
         id        => 'title',
@@ -27,7 +27,7 @@
     <p class="field-with-error">Invalid title: 1 to 127 characters please.</p>
     <% } =%>
   </div>
-  <div class="field__text">
+  <div class="form-field">
     <%= label_for body => 'Text' %>
     <%= text_area body => (
         id        => 'body',
@@ -40,5 +40,5 @@
     <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
     <% } =%>
   </div>
-  <%= submit_button 'Post', class => 'field__submit' %>
+  <%= submit_button 'Post', class => 'form-button' %>
 </form>
