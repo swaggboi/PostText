@@ -34,7 +34,6 @@ code {
 
 pre > code {
     white-space: pre-wrap;
-    overflow-wrap: anywhere;
     padding: 0.5em 1em;
     display: inline-block;
     width: 100%;
@@ -168,6 +167,7 @@ pre > code {
 .post {
   background-color: var(--light-warm-gray);
   border: outset var(--light-warm-gray);
+  overflow-wrap: anywhere;
 }
 
 .post__title {
