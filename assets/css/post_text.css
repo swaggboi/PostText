@@ -44,25 +44,23 @@ pre > code {
  * Simple classes
  */
 
+.site-header {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1em;
+}
+
 .site-title {
   text-align: center;
   border: outset var(--light-warm-gray);
   background-color: var(--light-warm-gray);
   padding: 0.5em 0;
-}
-
-.site-footer {
-  text-align: center;
-  border: outset var(--light-warm-gray);
-  background-color: var(--light-warm-gray);
-  padding: 0;
-  margin: 1em 0;
+  margin-bottom: 0;
 }
 
 .site-nav {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
   gap: 0.25em;
   border: outset var(--light-warm-gray);
   padding: 0.5em 0.25em;
@@ -74,6 +72,14 @@ pre > code {
   flex: 1;
   padding: 0 0.5em 0 0.5em;
   background-color: var(--light-blue);
+}
+
+.site-footer {
+  text-align: center;
+  border: outset var(--light-warm-gray);
+  background-color: var(--light-warm-gray);
+  padding: 0;
+  margin: 1em 0;
 }
 
 .page-title {
@@ -103,20 +109,28 @@ pre > code {
     flex-flow: column wrap;
 }
 
+.form-field > textarea {
+    overflow: scroll;
+    resize: vertical;
+}
+
 .form-button {
     border: outset var(--light-blue);
     background-color: var(--light-blue);
-    padding: 0.5em 0;
+    padding: 0.5em 1.5em;
+    text-align: left;
 }
 
 .field-with-info {
-    border-style: solid;
-    border-color: var(--highlight-green);
+    border: dashed var(--highlight-green) 0.5em;
+    background-color: var(--true-gray);
+    padding: 1em;
 }
 
 .field-with-error {
-    border-style: solid;
-    border-color: var(--highlight-red);
+    border: dashed var(--highlight-red) 0.5em;
+    background-color: var(--true-gray);
+    padding: 1em;
 }
 
 /*
@@ -132,7 +146,6 @@ pre > code {
 
 .pager__nav {
   display: flex;
-  justify-content: flex-start;
   flex-flow: row wrap;
   border: inset var(--dark-warm-gray);
   background-color: var(--dark-warm-gray);

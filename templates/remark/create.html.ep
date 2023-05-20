@@ -1,8 +1,8 @@
 % layout 'default';
 % title 'New Remark';
-<h2><%= title %></h2>
-<form method="post">
-  <div class="author field">
+<h2 class="page-title"><%= title %></h2>
+<form method="post" class="form-body">
+  <div class="form-field">
     <%= label_for author => 'Author' %>
     <%= text_field author => session->{'author'}, (
         id        => 'author',
@@ -14,7 +14,7 @@
     <p class="field-with-error">Invalid author: 1 to 63 characters please.</p>
     <% } =%>
   </div>
-  <div class="text field">
+  <div class="form-field">
     <%= label_for body => 'Text' %>
     <%= text_area body => (
         id        => 'body',
@@ -28,40 +28,40 @@
     <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
     <% } =%>
   </div>
-  <%= submit_button 'Post', class => 'post button' %>
+  <%= submit_button 'Post', class => 'form-button' %>
 </form>
-<section class="threads">
-  <h3>Thread</h3>
-  <article class="thread">
-    <h3 class="title">
+<section class="pager">
+  <h3 class="page-title">Thread</h3>
+  <article class="post">
+    <h3 class="post__title">
       <%= link_to single_thread => {thread_id => $thread->{'id'}}, begin %>
         <%= $thread->{'title'} %>
       <% end %>
-      <span class="id">
+      <span class="post__id">
         <%= link_to "#$thread->{'id'}",
         single_thread => {thread_id => $thread->{'id'}} %>
       </span>
     </h3>
-    <h4 class="date"><%= $thread->{'date'} %></h4>
-    <h5 class="author"><%= $thread->{'author'} %></h5>
-    <div class="body">
+    <h4 class="post__date"><%= $thread->{'date'} %></h4>
+    <h5 class="post__author"><%= $thread->{'author'} %></h5>
+    <div class="post__body">
       <%== markdown $thread->{'body'} =%>
     </div>
   </article>
 </section>
 <% if (my $last_remark_id = $last_remark->{'id'}) { =%>
-<section class="remarks">
-  <h3>Last Remark</h3>
-  <article class="remark">
-    <h4 class="date">
+<section class="pager">
+  <h3 class="page-title">Last Remark</h3>
+  <article class="post">
+    <h4 class="post--remark__date">
       <%= $last_remark->{'date'} %>
-      <span class="id">
+      <span class="post__id">
         <%= link_to "#$last_remark_id",
             single_remark => {remark_id => $last_remark_id} %>
       </span>
     </h4>
-    <h5 class="author"><%= $last_remark->{'author'} %></h5>
-    <div class="body">
+    <h5 class="post__author"><%= $last_remark->{'author'} %></h5>
+    <div class="post__body">
       <%== markdown $last_remark->{'body'} =%>
     </div>
   </article>

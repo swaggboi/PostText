@@ -1,10 +1,10 @@
 % layout 'default';
 % title 'Unlock Account';
-<h2><%= title %></h2>
-<form method="post">
-  <div class="email field">
+<h2 class="page-title"><%= title %></h2>
+<form method="post" class="form-body">
+  <div class="form-field">
     <%= label_for email => 'Email' %>
     <%= email_field email => (id => 'email') %>
   </div>
-  <%= submit_button 'Unlock' %>
+  <%= submit_button Unlock => (class => 'form-button') %>
 </form>

@@ -1,11 +1,11 @@
 % layout 'default';
 % title 'Reset Password';
-<h2><%= title %></h2>
-<form method="post">
-  <div class="password field">
+<h2 class="page-title"><%= title %></h2>
+<form method="post" class="form-body">
+  <div class="form-field">
     <%= label_for password => 'Password' %>
     <%= password_field password => (id => 'password') %>
   </div>
-  <%= submit_button 'Reset' %>
+  <%= submit_button Reset => (class => 'form-button') %>
 </form>
 

@@ -1,18 +1,18 @@
 % layout 'default';
 % title 'Create Moderator';
-<h2><%= title %></h2>
-<form method="post">
-  <div class="name field">
+<h2 class="page-title"><%= title %></h2>
+<form method="post" class="form-body">
+  <div class="form-field">
     <%= label_for name => 'Name' %>
     <%= text_field name => (id => 'name') %>
   </div>
-  <div class="email field">
+  <div class="form-field">
     <%= label_for email => 'Email' %>
     <%= email_field email => (id => 'email') %>
   </div>
-  <div class="password field">
+  <div class="form-field">
     <%= label_for password => 'Password' %>
     <%= password_field password => (id => 'password') %>
   </div>
-  <%= submit_button 'Create' %>
+  <%= submit_button Create => (class => 'form-button') %>
 </form>

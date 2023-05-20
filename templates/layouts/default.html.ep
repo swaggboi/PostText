@@ -6,7 +6,7 @@
   <%= asset 'app.css' %>
 </head>
 <body>
-<header>
+<header class="site-header">
   <h1 class="site-title">Post::Text</h1>
   <nav class="site-nav">
     <%= link_to List  => threads_list => {list_page => 1}  %>

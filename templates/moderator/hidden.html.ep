@@ -1,7 +1,7 @@
 % layout 'default';
 % title 'Hidden Posts';
-<h2><%= title %></h2>
-<main>
+<h2 class="page-title"><%= title %></h2>
+<main class="page-body">
   <% if ($post_links->[0]) { =%>
   <ul>
     <% for my $link (@{$post_links}) { =%>

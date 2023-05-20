@@ -1,10 +1,10 @@
 % layout 'default';
 % title 'Lock Account';
-<h2><%= title %></h2>
-<form method="post">
-  <div class="email field">
+<h2 class="page-title"><%= title %></h2>
+<form method="post" class="form-body">
+  <div class="form-field">
     <%= label_for email => 'Email' %>
     <%= email_field email => (id => 'email') %>
   </div>
-  <%= submit_button 'Lock' %>
+  <%= submit_button Lock => (class => 'form-button') %>
 </form>
