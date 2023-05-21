@@ -15,9 +15,7 @@
     box-sizing: border-box;
 }
 
-*, ::before, ::after {
-  box-sizing: inherit;
-}
+*, ::before, ::after { box-sizing: inherit; }
 
 body {
     background-image: url('/images/background2.gif');
@@ -66,11 +64,9 @@ pre > code {
   background-color: var(--light-warm-gray);
 }
 
-.site-nav > a {
-  border: outset var(--light-blue);
-  flex: 1;
-  padding: 0 0.5em 0 0.5em;
-  background-color: var(--light-blue);
+.site-nav > .click {
+    flex: 1;
+    padding: 0 0.5em 0 0.5em;
 }
 
 .site-footer {
@@ -132,6 +128,20 @@ pre > code {
     padding: 1em;
 }
 
+.click {
+    color: black;
+    text-decoration: none;
+    border: outset var(--light-blue);
+    background-color: var(--light-blue);
+}
+
+.click::first-letter { text-decoration: underline; }
+
+.click:active {
+    border: inset var(--dark-blue);
+    background-color: var(--dark-blue);
+}
+
 /*
  * Nested/layered classes
  */
@@ -152,17 +162,35 @@ pre > code {
   gap: 0.25em;
 }
 
+/* ================================================================== */
+
+/*
+ * Can't really add a class to these nav elements with
+ * Mojolicious::Plugin::TagHelpers::Pagination...
+ */
+
 .pager__nav > a {
   border: outset var(--light-blue);
   flex: 1;
   text-align: center;
   background-color: var(--light-blue);
+  text-decoration: none;
+  color: black;
 }
 
 .pager__nav > a[rel="self"] {
   border: inset var(--dark-blue);
   background-color: var(--dark-blue);
 }
+
+.pager__nav > a:link::first-letter { text-decoration: underline; }
+
+.pager__nav > a:active {
+  border: inset var(--dark-blue);
+  background-color: var(--dark-blue);
+}
+
+/* ================================================================== */
 
 .post {
   background-color: var(--light-warm-gray);
@@ -185,7 +213,12 @@ pre > code {
   border: outset var(--true-gray);
   padding: 0.25em;
   background-color: var(--true-gray);
+  text-decoration: none;
 }
+
+.post__id:link::first-letter { text-decoration: underline; }
+
+.post__id:active { border: inset; }
 
 .post__date, .post__author, .post__body {
   margin: 1em 0.5em;
@@ -217,11 +250,8 @@ pre > code {
   align-items: center;
 }
 
-.post__nav > a {
+.post__nav > .click {
   flex: 1 0;
   text-align: center;
-  border: outset var(--light-blue);
   padding: 0.25em 0;
-  white-space: nowrap;
-  background-color: var(--light-blue);
 }

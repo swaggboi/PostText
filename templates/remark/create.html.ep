@@ -54,11 +54,10 @@
   <h3 class="page-title">Last Remark</h3>
   <article class="post">
     <h4 class="post--remark__date">
-      <%= $last_remark->{'date'} %>
-      <span class="post__id">
-        <%= link_to "#$last_remark_id",
-            single_remark => {remark_id => $last_remark_id} %>
-      </span>
+      <%= link_to $last_remark->{'date'}, single_remark =>
+          {remark_id => $last_remark_id} %>
+      <%= link_to "#$last_remark_id", single_remark =>
+          {remark_id => $last_remark_id}, (class => 'post__id') %>
     </h4>
     <h5 class="post__author"><%= $last_remark->{'author'} %></h5>
     <div class="post__body">

@@ -17,15 +17,18 @@
       <%== markdown truncate_text $thread->{'body'} =%>
     </div>
     <nav class="post__nav">
-      <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}} %>
+      <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}},
+      (class => 'click') %>
       <%= link_to url_for(single_thread => {thread_id => $thread->{'id'}})
-          ->fragment('remarks'), begin %>
+          ->fragment('remarks'), (class => 'click'), begin %>
         <%= $thread->{'remark_tally'} %> Remarks
-      <% end %>
-      <%= link_to bump_thread => {thread_id => $thread->{'id'}}, begin %>
+      <% end =%>
+      <%= link_to bump_thread => {thread_id => $thread->{'id'}},
+      (class => 'click'), begin %>
         Bump (<%= $thread->{'bump_tally'} %>)
       <% end %>
-      <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}} %>
+      <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}},
+          (class => 'click') %>
     </nav>
   </article>
   <% } =%>
