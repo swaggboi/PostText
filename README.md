@@ -59,6 +59,7 @@ Run the tests locally (against development environment):
 ## TODOs
 
 1. CSS
+1. `post--remark__date` should be `post--remark__title`
 1. Create mod takes null input??
 1. Check status for items not found, should be 404 but getting 5xx
 1. "All new posts flagged" mode (require approval for new posts)
