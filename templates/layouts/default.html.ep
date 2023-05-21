@@ -26,20 +26,20 @@
   <% if (is_mod) { =%>
   <nav class="site-nav">
     <span>Moderate:</span>
-    <%= link_to Flagged => 'flagged_list' %>
-    <%= link_to Hidden  => 'hidden_list'  %>
-    <%= link_to Reset   => 'mod_reset'    %>
+    <%= link_to Flagged => flagged_list => (class => 'click') %>
+    <%= link_to Hidden  => hidden_list  => (class => 'click') %>
+    <%= link_to Reset   => mod_reset    => (class => 'click') %>
   </nav>
   <% } =%>
   <% if (is_admin) { =%>
   <nav class="site-nav">
     <span>Admin:</span>
-    <%= link_to Create  => 'create_mod'   %>
-    <%= link_to Reset   => 'admin_reset'  %>
-    <%= link_to Lock    => 'lock_mod'     %>
-    <%= link_to Unlock  => 'unlock_mod'   %>
-    <%= link_to Promote => 'promote_mod'  %>
-    <%= link_to Demote  => 'demote_admin' %>
+    <%= link_to Create  => create_mod   => (class => 'click') %>
+    <%= link_to Reset   => admin_reset  => (class => 'click') %>
+    <%= link_to Lock    => lock_mod     => (class => 'click') %>
+    <%= link_to Unlock  => unlock_mod   => (class => 'click') %>
+    <%= link_to Promote => promote_mod  => (class => 'click') %>
+    <%= link_to Demote  => demote_admin => (class => 'click') %>
   </nav>
   <% } =%>
 </header>

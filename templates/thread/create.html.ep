@@ -40,5 +40,5 @@
     <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
     <% } =%>
   </div>
-  <%= submit_button 'Post', class => 'form-button' %>
+  <button type="submit" class="form-button">Post</button>
 </form>

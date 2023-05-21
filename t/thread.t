@@ -54,7 +54,7 @@ subtest 'Post new thread', sub {
         ->element_exists('form input[name="author"]' )
         ->element_exists('form input[name="title"]'  )
         ->element_exists('form textarea[name="body"]')
-        ->element_exists('form input[type="submit"]' )
+        ->element_exists('form button[type="submit"]' )
         ->text_like(h2 => qr/New Thread/);
 
     # POST
@@ -62,7 +62,7 @@ subtest 'Post new thread', sub {
         ->element_exists('form input[name="author"]' )
         ->element_exists('form input[name="title"]'  )
         ->element_exists('form textarea[name="body"]')
-        ->element_exists('form input[type="submit"]' )
+        ->element_exists('form button[type="submit"]' )
         ->text_like(h2 => qr/New Thread/);
 
     $t->post_ok('/thread/post', form => \%invalid_title)->status_is(400)

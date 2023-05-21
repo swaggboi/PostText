@@ -7,4 +7,5 @@
     <%= email_field email => (id => 'email') %>
   </div>
   <%= submit_button Unlock => (class => 'form-button') %>
+  <button type="submit" class="form-button">Unlock</button>
 </form>

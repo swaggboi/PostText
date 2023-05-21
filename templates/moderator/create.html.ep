@@ -14,5 +14,5 @@
     <%= label_for password => 'Password' %>
     <%= password_field password => (id => 'password') %>
   </div>
-  <%= submit_button Create => (class => 'form-button') %>
+  <button type="submit" class="form-button">Create</button>
 </form>

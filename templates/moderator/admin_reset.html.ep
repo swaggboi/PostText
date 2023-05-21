@@ -10,5 +10,5 @@
     <%= label_for password => 'Password' %>
     <%= password_field password => (id => 'password') %>
   </div>
-  <%= submit_button Reset => (class => 'form-button') %>
+  <button type="submit" class="form-button">Reset</button>
 </form>

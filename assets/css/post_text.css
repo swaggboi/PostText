@@ -11,6 +11,7 @@
     --true-gray: #999999;
     --highlight-green: green;
     --highlight-red: red;
+    --transparent: #FFFFFFDD;
 
     box-sizing: border-box;
 }
@@ -40,6 +41,21 @@ pre > code {
 /*
  * Simple classes
  */
+
+.click {
+    color: black;
+    text-decoration: none;
+    border: outset var(--light-blue);
+    background-color: var(--light-blue);
+    white-space: nowrap; /* Prevent the button from going multi-line */
+}
+
+.click::first-letter { text-decoration: underline; }
+
+.click:active {
+    border: inset var(--dark-blue);
+    background-color: var(--dark-blue);
+}
 
 .site-header {
     display: flex;
@@ -116,30 +132,23 @@ pre > code {
     text-align: left;
 }
 
+.form-button::first-letter { text-decoration: underline; }
+
+.form-button:active {
+    border: inset var(--dark-blue);
+    background-color: var(--dark-blue);
+}
+
 .field-with-info {
     border: dashed var(--highlight-green) 0.5em;
-    background-color: var(--true-gray);
     padding: 1em;
+    background-color: var(--transparent);
 }
 
 .field-with-error {
     border: dashed var(--highlight-red) 0.5em;
-    background-color: var(--true-gray);
     padding: 1em;
-}
-
-.click {
-    color: black;
-    text-decoration: none;
-    border: outset var(--light-blue);
-    background-color: var(--light-blue);
-}
-
-.click::first-letter { text-decoration: underline; }
-
-.click:active {
-    border: inset var(--dark-blue);
-    background-color: var(--dark-blue);
+    background-color: var(--transparent);
 }
 
 /*
