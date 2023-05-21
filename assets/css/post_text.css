@@ -235,16 +235,6 @@ pre > code {
   padding: 0.25em 0.5em;
 }
 
-.post--remark__date {
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--teal);
-  margin: 0;
-  padding: 0.25em 0.5em 0.25em 0.75em;
-  align-items: center;
-  border: inset var(--teal);
-}
-
 .post__body {
     background-color: var(--dark-warm-gray);
     border: inset var(--dark-warm-gray);

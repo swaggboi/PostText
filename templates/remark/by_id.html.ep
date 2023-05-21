@@ -3,7 +3,7 @@
 <h2 class="page-title"><%= title %></h2>
 <main class="pager">
   <article class="post">
-    <h4 class="post--remark__date">
+    <h4 class="post__title">
       <%= $remark->{'date'} %>
       <span class="post__id">#<%= $remark->{'id'} %></span>
     </h4>

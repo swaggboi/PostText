@@ -41,7 +41,7 @@
   <h3 class="page-title">Remarks</h3>
   <% for my $remark (@{$remarks}) { =%>
   <article class="post">
-    <h4 class="post--remark__date">
+    <h4 class="post__title">
       <%= link_to $remark->{'date'}, single_remark =>
           {remark_id => $remark->{'id'}} %>
       <%= link_to "#$remark->{'id'}", single_remark =>

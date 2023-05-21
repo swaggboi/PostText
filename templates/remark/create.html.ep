@@ -53,7 +53,7 @@
 <section class="pager">
   <h3 class="page-title">Last Remark</h3>
   <article class="post">
-    <h4 class="post--remark__date">
+    <h4 class="post__title">
       <%= link_to $last_remark->{'date'}, single_remark =>
           {remark_id => $last_remark_id} %>
       <%= link_to "#$last_remark_id", single_remark =>
