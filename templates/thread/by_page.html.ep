@@ -22,7 +22,7 @@
       <%= link_to url_for(single_thread => {thread_id => $thread->{'id'}})
           ->fragment('remarks'), (class => 'click'), begin %>
         <%= $thread->{'remark_tally'} %> Remarks
-      <% end =%>
+      <% end %>
       <%= link_to bump_thread => {thread_id => $thread->{'id'}},
       (class => 'click'), begin %>
         Bump (<%= $thread->{'bump_tally'} %>)
