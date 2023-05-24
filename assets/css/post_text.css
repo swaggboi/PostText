@@ -14,6 +14,7 @@
     --transparent: #FFFFFFDD;
 
     box-sizing: border-box;
+    font-size: calc(8px + 1vmin);
 }
 
 *, ::before, ::after { box-sizing: inherit; }
@@ -22,13 +23,12 @@ body {
     background-image: url('/images/background2.gif');
     width: 95vmin;
     margin: 0 auto;
-    font-size: calc(8px + 1vmin);
 }
 
 code {
     background-color: black;
     color: lime;
-    font-size: 0.75em; /* Why tho?? */
+    font-size: 0.75rem; /* Why tho?? */
 }
 
 pre > code {
