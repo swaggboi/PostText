@@ -224,9 +224,8 @@ pre > code {
   background-color: var(--true-gray);
   text-decoration: none;
   white-space: nowrap;
+  color: black;
 }
-
-.post__id:link { color: black; }
 
 .post__id:link::first-letter { text-decoration: underline; }
 
