@@ -215,7 +215,7 @@ pre > code {
   margin: 0;
   padding: 0.25em 0.5em 0.25em 0.75em;
   align-items: center;
-  border: inset var(--teal);
+  border: inset var(--dark-warm-gray);
 }
 
 .post__id {
