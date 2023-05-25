@@ -230,6 +230,8 @@ pre > code {
 
 .post__id:link::first-letter { text-decoration: underline; }
 
+.post__id:visited { color: black; }
+
 .post__id:active {
     color: black;
     border: inset;
