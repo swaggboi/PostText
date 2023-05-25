@@ -5,9 +5,9 @@
   <% for my $thread (@{$threads}) { =%>
   <article class="post">
     <h3 class="post__title">
-      <%= link_to single_thread => {thread_id => $thread->{'id'}}, begin %>
+      <span>
         <%= $thread->{'title'} %>
-      <% end %>
+      </span>
       <%= link_to "#$thread->{'id'}", single_thread =>
           {thread_id => $thread->{'id'}}, (class => 'post__id') %>
     </h3>

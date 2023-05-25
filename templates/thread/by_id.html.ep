@@ -42,8 +42,9 @@
   <% for my $remark (@{$remarks}) { =%>
   <article class="post">
     <h4 class="post__title">
-      <%= link_to $remark->{'date'}, single_remark =>
-          {remark_id => $remark->{'id'}} %>
+      <span>
+        <%= $remark->{'date'} %>
+      </span>
       <%= link_to "#$remark->{'id'}", single_remark =>
           {remark_id => $remark->{'id'}}, (class => 'post__id') %>
     </h4>
