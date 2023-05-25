@@ -229,7 +229,7 @@ pre > code {
 
 .post__id:link::first-letter { text-decoration: underline; }
 
-.post__id:active { border: inset; }
+.post__id:active { border: inset var(--true-gray); }
 
 .post__date, .post__author, .post__body {
   margin: 1em 0.5em;
