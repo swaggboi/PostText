@@ -1,0 +1,99 @@
+.pager {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+  padding: 0;
+}
+
+.pager__nav {
+  display: flex;
+  flex-flow: row wrap;
+  border: inset var(--dark-warm-gray);
+  background-color: var(--dark-warm-gray);
+  padding: 0.5em 0.25em;
+  gap: 0.25em;
+}
+
+/* ================================================================== */
+
+/*
+ * Can't really add a class to these nav elements with
+ * Mojolicious::Plugin::TagHelpers::Pagination...
+ */
+
+.pager__nav > a {
+  border: outset var(--light-blue);
+  flex: 1;
+  text-align: center;
+  background-color: var(--light-blue);
+  text-decoration: none;
+  color: black;
+}
+
+.pager__nav > a[rel="self"] {
+  border: inset var(--dark-blue);
+  background-color: var(--dark-blue);
+}
+
+.pager__nav > a:link::first-letter { text-decoration: underline; }
+
+.pager__nav > a:active {
+  border: inset var(--dark-blue);
+  background-color: var(--dark-blue);
+}
+
+/* ================================================================== */
+
+.post {
+  background-color: var(--light-warm-gray);
+  border: outset var(--light-warm-gray);
+  overflow-wrap: anywhere;
+}
+
+.post__title {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--teal);
+  margin: 0;
+  padding: 0.25em 0.5em 0.25em 0.75em;
+  align-items: center;
+  border: inset var(--dark-warm-gray);
+}
+
+.post__id {
+  border: outset var(--true-gray);
+  padding: 0.25em;
+  background-color: var(--true-gray);
+  text-decoration: none;
+  white-space: nowrap;
+  color: black;
+}
+
+.post__id:link::first-letter { text-decoration: underline; }
+
+.post__id:active { border: inset var(--true-gray); }
+
+.post__date, .post__author, .post__body {
+  margin: 1em 0.5em;
+  padding: 0.25em 0.5em;
+}
+
+.post__body {
+    background-color: var(--dark-warm-gray);
+    border: inset var(--dark-warm-gray);
+}
+
+.post__nav {
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row wrap;
+  padding: 0 1em 0.5em 1em;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.post__nav > .click {
+  flex: 1 0;
+  text-align: center;
+  padding: 0.25em 0;
+}

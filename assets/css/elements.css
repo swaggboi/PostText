@@ -1,0 +1,35 @@
+:root {
+    --light-warm-gray: #C2B3A9;
+    --dark-warm-gray: #A59990;
+    --teal: #5B90A4;
+    --light-blue: #8C97A8;
+    --dark-blue: #696F80;
+    --true-gray: #999999;
+    --highlight-green: green;
+    --highlight-red: red;
+    --transparent: #FFFFFFDD;
+
+    box-sizing: border-box;
+    font-size: calc(8px + 1vmin);
+}
+
+*, ::before, ::after { box-sizing: inherit; }
+
+body {
+    background-image: url('/images/background2.gif');
+    width: 95vmin;
+    margin: 0 auto;
+}
+
+code {
+    background-color: black;
+    color: lime;
+    font-size: 0.75rem; /* Why tho?? */
+}
+
+pre > code {
+    white-space: pre-wrap;
+    padding: 0.5em 1em;
+    display: inline-block;
+    width: 100%;
+}
