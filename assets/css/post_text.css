@@ -68,7 +68,7 @@ pre > code {
   border: outset var(--light-warm-gray);
   background-color: var(--light-warm-gray);
   padding: 0.5em 0;
-  margin-bottom: 0;
+  margin-bottom: 0.15em;
   overflow-wrap: anywhere;
 }
 
@@ -91,13 +91,14 @@ pre > code {
   border: outset var(--light-warm-gray);
   background-color: var(--light-warm-gray);
   padding: 0;
-  margin: 1em 0;
+  margin: 1.25em 0;
 }
 
 .page-title {
   text-align: center;
   border: inset var(--dark-warm-gray);
   padding: 0.5em 0;
+  margin: 0.75em 0;
   background-color: var(--dark-warm-gray);
 }
 
@@ -159,8 +160,8 @@ pre > code {
 .pager {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  padding: 0.5em 0;
+  gap: 1.25em;
+  padding: 0;
 }
 
 .pager__nav {
