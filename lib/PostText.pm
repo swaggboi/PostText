@@ -37,8 +37,7 @@ sub startup($self) {
             rules                  => {
                 br => [],
                 s  => []
-            }
-            )
+            })
     });
 
     $self->helper(thread => sub ($c) {
