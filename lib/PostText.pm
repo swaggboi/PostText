@@ -110,6 +110,13 @@ sub startup($self) {
     # Root redirect
     $r->get('/', sub ($c) { $c->redirect_to('threads_list') });
 
+    # Shortcut to new session cookie/identity
+    $r->get('/new', sub ($c) {
+        $c->session(expires => 1);
+
+        $c->redirect_to('threads_list');
+    });
+
     # Static pages
     $r->get('/about')->to('page#about')->name('about_page');
 
