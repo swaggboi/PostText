@@ -31,7 +31,7 @@
   <button type="submit" class="form-button">Post</button>
 </form>
 <section class="pager">
-  <h3 class="page-title">Thread</h3>
+  <h3 class="pager__title">Thread</h3>
   <article class="post">
     <h3 class="post__title">
       <span>
@@ -49,7 +49,7 @@
 </section>
 <% if (my $last_remark_id = $last_remark->{'id'}) { =%>
 <section class="pager">
-  <h3 class="page-title">Last Remark</h3>
+  <h3 class="pager__title">Last Remark</h3>
   <article class="post">
     <h4 class="post__title">
       <span>

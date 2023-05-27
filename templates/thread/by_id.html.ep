@@ -38,7 +38,7 @@
 </main>
 <% if (my $first_remark = $remarks->[0]) { =%>
 <section class="pager" id="remarks">
-  <h3 class="page-title">Remarks</h3>
+  <h3 class="pager__title">Remarks</h3>
   <% for my $remark (@{$remarks}) { =%>
   <article class="post">
     <h4 class="post__title">
