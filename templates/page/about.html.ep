@@ -37,5 +37,5 @@ This is correct for a multi-line code block:
     email client you can check out the
     <%= link_to 'RSS feed', threads_feed => {format => 'rss'} %>.</p>
   <p>Click 'New' in the top navigation bar to start a new thread and
-    make some <del>enemies</del> <ins>friends</ins>!</p>
+    post your manifesto.</p>
 </main>

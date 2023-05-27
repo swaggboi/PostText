@@ -16,7 +16,7 @@
 *, ::before, ::after { box-sizing: inherit; }
 
 body {
-    background-image: url('/images/background2.gif');
+    background-image: url('/images/background_stars_anm.gif');
     width: 95vmin;
     margin: 0 auto;
 }
