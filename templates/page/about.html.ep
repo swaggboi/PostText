@@ -27,8 +27,9 @@ This is correct for a multi-line code block:
     }
   </code></pre>
   <p>You can use an actual tab character or four spaces to indent.
-    <strong>Only Markdown is supported, HTML will be filtered
-    out.</strong></p>
+    Only Markdown as well as the HTML tags <code>&lt;br&gt;</code> and
+    <code>&lt;s&gt;</code> are supported. <strong>All other HTML will
+    be filtered out.</strong></p>
   <p>There is a button for users to 'flag' a post for review by a
     moderator. If you need further assistance you can reach out to the
     <a href="mailto:swaggboi@slackware.uk">webmaster</a>. There is
