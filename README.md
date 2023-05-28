@@ -58,7 +58,9 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Report 404s better (thread by id and remark by id)
+1. Clean-up 404 stuff and variable checking (what's up with
+   `$last_page` checking?)
+1. Don't allow non-mods to view hidden posts at all
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
 
