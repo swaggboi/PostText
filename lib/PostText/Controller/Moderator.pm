@@ -37,8 +37,8 @@ sub login($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('email'   );
-        $v->required('password');
+        $v->required('email'   )->size(6,    320);
+        $v->required('password')->size(12, undef);
 
         if ($v->has_error) {
             $self->stash(status => 400)
@@ -154,9 +154,9 @@ sub create($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('name'    );
-        $v->required('email'   );
-        $v->required('password');
+        $v->required('name'    )->size(1,     64);
+        $v->required('email'   )->size(6,    320);
+        $v->required('password')->size(12, undef);
 
         if ($v->has_error) {
             $self->stash(status => 400)
@@ -182,8 +182,8 @@ sub admin_reset($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('email'   );
-        $v->required('password');
+        $v->required('email'   )->size(6,    320);
+        $v->required('password')->size(12, undef);
 
         if ($v->has_error) {
             $self->stash(status => 400)
@@ -208,7 +208,7 @@ sub mod_reset($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('password');
+        $v->required('password')->size(12, undef);
 
         if ($v->has_error) {
             $self->stash(status => 400)
@@ -235,7 +235,7 @@ sub lock_acct($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('email');
+        $v->required('email')->size(6, 320);
 
         if ($v->has_error) {
             $self->stash(status => 400)
@@ -257,7 +257,7 @@ sub unlock_acct($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('email');
+        $v->required('email')->size(6, 320);
 
         if ($v->has_error) {
             $self->stash(status => 400)
@@ -279,7 +279,7 @@ sub promote($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('email');
+        $v->required('email')->size(6, 320);
 
         if ($v->has_error) {
             $self->stash(status => 404)
@@ -301,7 +301,7 @@ sub demote($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('email');
+        $v->required('email')->size(6, 320);
 
         if ($v->has_error) {
             $self->stash(status => 404)

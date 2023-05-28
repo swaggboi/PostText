@@ -11,7 +11,7 @@ my %valid_login   = (
 
 my %invalid_login = (
     email    => 'fuck@example.com',
-    password => 'ah fuck'
+    password => 'ah fuck goddamn'
     );
 
 subtest Login => sub {

@@ -3,6 +3,10 @@
 <h2 class="page-title"><%= title %></h2>
 <form method="post" class="form-body">
   <div class="form-field">
+    <% if (my $error = validation->error('author')) { =%>
+    <p class="field-with-error">Must be between <%= $error->[2] %>
+      and <%= $error->[3] %> characters.</p>
+    <% } =%>
     <%= label_for author => 'Author' %>
     <%= text_field author => session->{'author'}, (
         id        => 'author',
@@ -10,11 +14,12 @@
         minlength => 1,
         required  => undef
     ) %>
-    <% if (my $error = validation->error('author')) { =%>
-    <p class="field-with-error">Invalid author: 1 to 63 characters please.</p>
-    <% } =%>
   </div>
   <div class="form-field">
+    <% if (my $error = validation->error('title')) { =%>
+    <p class="field-with-error">Must be between <%= $error->[2] %>
+      and <%= $error->[3] %> characters.</p>
+    <% } =%>
     <%= label_for title => 'Title' %>
     <%= text_field title => (
         id        => 'title',
@@ -23,11 +28,12 @@
         autofocus => undef,
         required  => undef
     ) %>
-    <% if (my $error = validation->error('title')) { =%>
-    <p class="field-with-error">Invalid title: 1 to 127 characters please.</p>
-    <% } =%>
   </div>
   <div class="form-field">
+    <% if (my $error = validation->error('body')) { =%>
+    <p class="field-with-error">Must be between <%= $error->[2] %>
+      and <%= $error->[3] %> characters.</p>
+    <% } =%>
     <%= label_for body => 'Text' %>
     <%= text_area body => (
         id        => 'body',
@@ -36,9 +42,6 @@
         required  => undef,
         rows      => 6
     ) %>
-    <% if (my $error = validation->error('body')) { =%>
-    <p class="field-with-error">Invalid text: Up to 4,000 characters only.</p>
-    <% } =%>
   </div>
   <button type="submit" class="form-button">Post</button>
 </form>

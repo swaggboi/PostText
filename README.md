@@ -58,11 +58,9 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Create mod takes null input??
-1. Check status for items not found, should be 404 but getting 5xx
+1. Report 404s better (thread by id and remark by id)
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
-1. Check input validation
 
 ## Crazy future ideas
 

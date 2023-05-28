@@ -76,6 +76,7 @@
 .form-field {
     display: flex;
     flex-flow: column;
+    gap: 0.25em;
 }
 
 .form-field > textarea {
@@ -97,13 +98,18 @@
     background-color: var(--dark-blue);
 }
 
-.field-with-info {
+.field-with-error {
+    border: dashed var(--highlight-red);
+    padding: 0.5em 0.25em;
+}
+
+.stash-with-info {
     border: dashed var(--highlight-green) 0.5em;
     padding: 1em;
     background-color: var(--transparent);
 }
 
-.field-with-error {
+.stash-with-error {
     border: dashed var(--highlight-red) 0.5em;
     padding: 1em;
     background-color: var(--transparent);

@@ -40,7 +40,7 @@ subtest 'Post new remark', sub {
         ->text_like(h2 => qr/Thread #1/);
 
     $t->post_ok('/remark/post/1', form => \%invalid_remark)->status_is(400)
-        ->text_like(p => qr/Invalid text/);
+        ->text_like(p => qr/Must be between/);
 };
 
 subtest 'Flagging remark', sub {
@@ -49,7 +49,7 @@ subtest 'Flagging remark', sub {
         ->text_like(h2 => qr/Remark #1/);
 
     $t->get_ok('/remark/flag/1')->status_is(200)
-        ->element_exists('p[class="field-with-info"]')
+        ->element_exists('p[class="stash-with-info"]')
         ->text_like(p => qr/Remark #1 has been flagged/);
 };
 

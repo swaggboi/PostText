@@ -66,10 +66,10 @@ subtest 'Post new thread', sub {
         ->text_like(h2 => qr/New Thread/);
 
     $t->post_ok('/thread/post', form => \%invalid_title)->status_is(400)
-        ->text_like(p => qr/Invalid title/);
+        ->text_like(p => qr/Must be between/);
 
     $t->post_ok('/thread/post', form => \%invalid_post)->status_is(400)
-        ->text_like(p => qr/Invalid text/);
+        ->text_like(p => qr/Must be between/);
 
     $t->post_ok('/thread/post', form => \%valid_params)->status_is(200)
         ->text_like(h2 => qr/Thread #\d+/);
@@ -85,7 +85,7 @@ subtest 'Bumping thread', sub {
         ->text_like(h2 => qr/Thread #1/);
 
     $t->get_ok('/thread/bump/1')->status_is(200)
-        ->element_exists('p[class="field-with-info"]')
+        ->element_exists('p[class="stash-with-info"]')
         ->text_like(p => qr/Thread #1 has been bumped/);
 };
 
@@ -99,7 +99,7 @@ subtest 'Flagging thread', sub {
         ->text_like(h2 => qr/Thread #1/);
 
     $t->get_ok('/thread/flag/1')->status_is(200)
-        ->element_exists('p[class="field-with-info"]')
+        ->element_exists('p[class="stash-with-info"]')
         ->text_like(p => qr/Thread #1 has been flagged/);
 };
 
