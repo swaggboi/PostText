@@ -57,6 +57,9 @@ sub create($self) {
         last_remark => $last_remark
         );
 
+    $self->stash(status => 404, error => 'Thread not found 🤷')
+        unless keys %{$thread};
+
     return $self->render;
 }
 
