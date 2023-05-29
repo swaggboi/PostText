@@ -51,32 +51,21 @@ sub by_id($self) {
     $last_page = $self->remark->last_page_for($thread_id);
     $remarks   = $self->remark->by_page_for($thread_id, $this_page);
 
-    if (my $thread_body = $thread->{'body'}) {
-        $self->stash(
-            thread    => $thread,
-            base_path => $base_path,
-            this_page => $this_page,
-            last_page => $last_page,
-            remarks   => $remarks
-            )
-    }
-    else {
-        $self->stash(
-            thread  => {},
-            remarks => [],
-            status  => 404,
-            error   => 'Thread not found 🤷'
-            )
-    }
+    $self->stash(
+        thread    => $thread,
+        base_path => $base_path,
+        this_page => $this_page,
+        last_page => $last_page,
+        remarks   => $remarks
+        );
+
+    $self->stash(status => 404, error => 'Thread not found 🤷')
+        unless keys %{$thread};
 
     # Check for remarks or thread page number to make sure
     # remark->by_page_for did its job
-    unless ((my $first_remark = $remarks->[0]) || 1 >= $this_page) {
-        $self->stash(
-            status => 404,
-            error  => 'Page not found 🕵️'
-            )
-    }
+    $self->stash(status => 404, error => 'Page not found 🕵️')
+        unless 1 >= $this_page || scalar @{$remarks};
 
     $self->render;
 }

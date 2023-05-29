@@ -1,12 +1,12 @@
 % layout 'default';
 % title my $thread_id = $thread->{'id'} ? "Thread #$thread_id" : '?';
 <h2 class="page-title"><%= title %></h2>
-<% if (my $thread_id = $thread->{'id'}) { =%>
+<% if (keys %{$thread}) { =%>
 <main class="pager">
   <article class="post">
     <h3 class="post__title">
       <%= $thread->{'title'} %>
-      <span class="post__id">#<%= $thread_id %></span>
+      <span class="post__id">#<%= $thread->{'id'} %></span>
     </h3>
     <h4 class="post__date"><%= $thread->{'date'} %></h4>
     <h5 class="post__author"><%= $thread->{'author'} %></h5>
@@ -38,7 +38,7 @@
   </article>
 </main>
 <% } =%>
-<% if (my $first_remark = $remarks->[0]) { =%>
+<% if (scalar @{$remarks}) { =%>
 <section class="pager" id="remarks">
   <h3 class="pager__title">Remarks</h3>
   <% for my $remark (@{$remarks}) { =%>
