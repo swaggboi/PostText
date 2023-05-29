@@ -6,15 +6,10 @@ sub by_id($self) {
     my $remark_id = $self->param('remark_id');
     my $remark    = $self->remark->by_id($remark_id);
 
-    if (my $remark_id = $remark->{'id'}) {
-        $self->stash(remark => $remark)
-    }
-    else {
-        $self->stash(
-            remark => {},
-            error  => 'Remark not found 🤷'
-            )
-    }
+    $self->stash(remark => $remark);
+
+    $self->stash(error => 'Remark not found 🤷')
+        unless keys %{$remark};
 
     $self->render;
 }

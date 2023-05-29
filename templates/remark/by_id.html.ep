@@ -1,12 +1,12 @@
 % layout 'default';
 % title my $remark_id = $remark->{'id'} ? "Remark #$remark_id" : '?';
 <h2 class="page-title"><%= title %></h2>
-<% if (my $remark_id = $remark->{'id'}) { =%>
+<% if (keys %{$remark}) { =%>
 <main class="pager">
   <article class="post">
     <h4 class="post__title">
       <%= $remark->{'date'} %>
-      <span class="post__id">#<%= $remark_id %></span>
+      <span class="post__id">#<%= $remark->{'id'} %></span>
     </h4>
     <h5 class="post__author"><%= $remark->{'author'} %></h5>
     <div class="post__body">
