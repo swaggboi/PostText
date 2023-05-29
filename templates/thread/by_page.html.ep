@@ -1,7 +1,7 @@
 % layout 'default';
 % title 'Threads List';
 <h2 class="page-title"><%= title %></h2>
-<% if (my $first_thread = $threads->[0]) { =%>
+<% if (scalar @{$threads}) { =%>
 <main class="pager">
   <% for my $thread (@{$threads}) { =%>
   <article class="post">

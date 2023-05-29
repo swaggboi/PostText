@@ -76,24 +76,15 @@ sub by_page($self) {
     my $last_page = $self->thread->last_page;
     my $threads   = $self->thread->by_page($this_page);
 
-    if (my $first_thread = $threads->[0]) {
-        $self->stash(
-            threads   => $threads,
-            this_page => $this_page,
-            last_page => $last_page,
-            base_path => $base_path
-            )
-    }
-    else {
-        $self->stash(
-            threads   => [],
-            this_page => undef,
-            last_page => undef,
-            base_path => undef,
-            status    => 404,
-            error     => 'Page not found 🕵️'
-            )
-    }
+    $self->stash(
+        threads   => $threads,
+        this_page => $this_page,
+        last_page => $last_page,
+        base_path => $base_path
+        );
+
+    $self->stash(status => 404, error => 'Page not found 🕵️')
+        unless scalar @{$threads};
 
     $self->render;
 }
