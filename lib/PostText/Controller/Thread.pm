@@ -107,16 +107,14 @@ sub feed($self) {
         lastBuildDate => time2str('%a, %d %b %Y %X %z', time),
         atom          => {
             link => {
-                href => "$rss_link", # I have no idea why this needs quotes??
+                href => $rss_link,
                 rel  => 'self',
                 type => 'application/rss+xml'
             }
-        }
-        );
+        });
 
     for my $thread (@{$threads}) {
-        my $description =
-            $self->markdown($self->truncate_text($thread->{'body'}));
+        my $description = $self->markdown($thread->{'body'});
         my $item_link   = $self->url_for(
             single_thread => {thread_id => $thread->{'id'}}
             )->to_abs;
