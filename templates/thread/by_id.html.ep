@@ -38,7 +38,7 @@
   </article>
 </main>
 <% } =%>
-<% if (scalar @{$remarks}) { =%>
+<% if (keys %{$thread} && scalar @{$remarks}) { =%>
 <section class="pager" id="remarks">
   <h3 class="pager__title">Remarks</h3>
   <% for my $remark (@{$remarks}) { =%>

@@ -82,6 +82,7 @@ sub by_id($self, $thread_id) {
           LEFT JOIN remarks AS r
             ON t.thread_id = r.thread_id
          WHERE t.thread_id = ?
+           AND NOT t.hidden_status
          GROUP BY t.thread_id;
        END_SQL
 }

@@ -87,7 +87,8 @@ sub by_id($self, $remark_id) {
                remark_body             AS body,
                thread_id
           FROM remarks
-         WHERE remark_id = ?;
+         WHERE remark_id = ?
+           AND NOT hidden_status;
        END_SQL
 }
 
