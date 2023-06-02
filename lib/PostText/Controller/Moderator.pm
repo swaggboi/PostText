@@ -332,7 +332,7 @@ sub admin_check($self) {
 
 sub thread_by_id($self) {
     my $thread_id = $self->param('thread_id');
-    my $thread    = $self->thread->by_id($thread_id);
+    my $thread    = $self->moderator->thread_by_id($thread_id);
 
     $self->stash(thread => $thread);
 
@@ -344,7 +344,7 @@ sub thread_by_id($self) {
 
 sub remark_by_id($self) {
     my $remark_id = $self->param('remark_id');
-    my $remark    = $self->remark->by_id($remark_id);
+    my $remark    = $self->moderator->remark_by_id($remark_id);
 
     $self->stash(remark => $remark);
 
