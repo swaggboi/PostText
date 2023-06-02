@@ -104,6 +104,8 @@ sub startup($self) {
     # Begin routing
     my $r = $self->routes->under(sub ($c) {
         $c->session(expires => time + 31536000);
+        $c->session(expires => time +     3600) if $c->is_mod;
+        $c->session(expires => time +     1800) if $c->is_admin;
 
         $c->session(author => 'Anonymous') unless $c->session('author');
 
