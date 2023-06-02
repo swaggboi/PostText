@@ -109,7 +109,7 @@ sub feed($self) {
         lastBuildDate => time2str('%a, %d %b %Y %X %z', time),
         atom          => {
             link => {
-                href => $rss_link,
+                href => "$rss_link", # This has to be quoted idk why
                 rel  => 'self',
                 type => 'application/rss+xml'
             }
@@ -118,7 +118,7 @@ sub feed($self) {
     $rss->image(
         title       => $rss_title,
         url         => $rss_image,
-        link        => $rss_link,
+        link        => $chan_link,
         width       => 144,
         height      => 144,
         description => 'A small nerdy anime girl'
