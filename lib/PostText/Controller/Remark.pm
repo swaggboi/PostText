@@ -8,7 +8,7 @@ sub by_id($self) {
 
     $self->stash(remark => $remark);
 
-    $self->stash(error => 'Remark not found 🤷')
+    $self->stash(status => 404, error => 'Remark not found 🤷')
         unless keys %{$remark};
 
     $self->render;

@@ -50,6 +50,12 @@ subtest Login => sub {
         $t->get_ok('/moderator/thread/hide/1')
             ->status_is(302)
             ->header_like(Location => qr{moderator/flagged});
+        $t->get_ok('/moderator/thread/single/1')
+            ->status_is(200)
+            ->text_like(h2 => qr/Thread #/);
+        $t->get_ok('/thread/single/1')
+            ->status_is(404)
+            ->text_like(p => qr/Thread not found/);
         $t->get_ok('/moderator/thread/unhide/1')
             ->status_is(302)
             ->header_like(Location => qr{moderator/hidden});
@@ -57,6 +63,12 @@ subtest Login => sub {
         $t->get_ok('/moderator/remark/hide/1')
             ->status_is(302)
             ->header_like(Location => qr{moderator/flagged});
+        $t->get_ok('/moderator/remark/single/1')
+            ->status_is(200)
+            ->text_like(h2 => qr/Remark #/);
+        $t->get_ok('/remark/single/1')
+            ->status_is(404)
+            ->text_like(p => qr/Remark not found/);
         $t->get_ok('/moderator/remark/unhide/1')
             ->status_is(302)
             ->header_like(Location => qr{moderator/hidden});
