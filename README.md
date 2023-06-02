@@ -58,9 +58,7 @@ Run the tests locally (against development environment):
 
 ## TODOs
 
-1. Don't allow non-mods to view hidden posts at all
 1. "All new posts flagged" mode (require approval for new posts)
-1. Check tests for all the 404 responses
 1. Tests for mod-only user?
 
 ## Crazy future ideas
