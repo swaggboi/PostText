@@ -6,7 +6,7 @@ sub flagged($self) {
     my $flagged_posts = $self->moderator->flagged;
     my @post_links    = map {
         $self->url_for(
-            'single_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
+            'hidden_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
           )
     } @{$flagged_posts};
 
@@ -19,7 +19,7 @@ sub hidden($self) {
     my $hidden_posts = $self->moderator->hidden;
     my @post_links    = map {
         $self->url_for(
-            'single_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
+            'hidden_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
           )
     } @{$hidden_posts};
 
