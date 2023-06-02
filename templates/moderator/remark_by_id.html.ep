@@ -1,0 +1,35 @@
+% layout 'default';
+% title my $remark_id = $remark->{'id'} ? "Remark #$remark_id" : '?';
+<h2 class="page-title"><%= title %></h2>
+<% if (keys %{$remark}) { =%>
+<main class="pager">
+  <article class="post">
+    <h4 class="post__title">
+      <%= $remark->{'date'} %>
+      <span class="post__id">#<%= $remark->{'id'} %></span>
+    </h4>
+    <h5 class="post__author"><%= $remark->{'author'} %></h5>
+    <div class="post__body">
+      <%== markdown $remark->{'body'} =%>
+    </div>
+    <nav class="post__nav">
+      <%= link_to Thread => single_thread =>
+          {thread_id => $remark->{'thread_id'}}, (class => 'click') %>
+      <%= link_to Remark => post_remark =>
+          {thread_id => $remark->{'thread_id'}}, (class => 'click') %>
+      <%= link_to Flag => flag_remark => {remark_id => $remark->{'id'}},
+          (class => 'click') %>
+    </nav>
+    <% if (is_mod) { =%>
+    <nav class="post__nav">
+      <%= link_to Hide => hide_remark => {remark_id => $remark->{'id'}},
+          (class => 'click') %>
+      <%= link_to Unhide => unhide_remark => {remark_id => $remark->{'id'}},
+          (class => 'click') %>
+      <%= link_to Unflag => unflag_remark => {remark_id => $remark->{'id'}},
+          (class => 'click') %>
+    </nav>
+    <% } =%>
+  </article>
+</main>
+<% } =%>

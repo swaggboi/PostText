@@ -206,6 +206,10 @@ sub startup($self) {
         ->to('moderator#unhide_thread')
         ->name('unhide_thread');
 
+    $mod_thread->get('/single/:thread_id', [thread_id => qr/\d+/])
+        ->to('moderator#thread_by_id')
+        ->name('hidden_thread');
+
     my $mod_remark = $moderator->any('/remark');
 
     $mod_remark->get('/unflag/:remark_id', [remark_id => qr/\d+/])
@@ -219,6 +223,10 @@ sub startup($self) {
     $mod_remark->get('/unhide/:remark_id', [remark_id => qr/\d+/])
         ->to('moderator#unhide_remark')
         ->name('unhide_remark');
+
+    $mod_remark->get('/single/:remark_id', [remark_id => qr/\d+/])
+        ->to('moderator#remark_by_id')
+        ->name('hidden_remark');
 
     # Admin
     my $mod_admin = $moderator->under('/admin')->to('moderator#admin_check');

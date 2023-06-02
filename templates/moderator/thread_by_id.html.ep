@@ -1,0 +1,40 @@
+% layout 'default';
+% title my $thread_id = $thread->{'id'} ? "Thread #$thread_id" : '?';
+<h2 class="page-title"><%= title %></h2>
+<% if (keys %{$thread}) { =%>
+<main class="pager">
+  <article class="post">
+    <h3 class="post__title">
+      <%= $thread->{'title'} %>
+      <span class="post__id">#<%= $thread->{'id'} %></span>
+    </h3>
+    <h4 class="post__date"><%= $thread->{'date'} %></h4>
+    <h5 class="post__author"><%= $thread->{'author'} %></h5>
+    <div class="post__body">
+      <%== markdown $thread->{'body'} =%>
+    </div>
+    <nav class="post__nav">
+      <%= link_to post_remark => {thread_id => $thread->{'id'}},
+          (class => 'click'), begin %>
+        Remark (<%= $thread->{'remark_tally'} %>)
+      <% end %>
+      <%= link_to bump_thread => {thread_id => $thread->{'id'}},
+          (class => 'click'), begin %>
+        Bump (<%= $thread->{'bump_tally'} %>)
+      <% end %>
+      <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}},
+          (class => 'click') %>
+    </nav>
+    <% if (is_mod) { =%>
+    <nav class="post__nav">
+      <%= link_to Hide => hide_thread => {thread_id => $thread->{'id'}},
+          (class => 'click') %>
+      <%= link_to Unhide => unhide_thread => {thread_id => $thread->{'id'}},
+          (class => 'click') %>
+      <%= link_to Unflag => unflag_thread => {thread_id => $thread->{'id'}},
+          (class => 'click') %>
+    </nav>
+    <% } =%>
+  </article>
+</main>
+<% } =%>

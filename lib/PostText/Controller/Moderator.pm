@@ -330,4 +330,28 @@ sub admin_check($self) {
     return $self->redirect_to('mod_login'), undef;
 }
 
+sub thread_by_id($self) {
+    my $thread_id = $self->param('thread_id');
+    my $thread    = $self->thread->by_id($thread_id);
+
+    $self->stash(thread => $thread);
+
+    $self->stash(status => 404, error => 'Thread not found 🤷')
+        unless keys %{$thread};
+
+    $self->render;
+}
+
+sub remark_by_id($self) {
+    my $remark_id = $self->param('remark_id');
+    my $remark    = $self->remark->by_id($remark_id);
+
+    $self->stash(remark => $remark);
+
+    $self->stash(error => 'Remark not found 🤷')
+        unless keys %{$remark};
+
+    $self->render;
+}
+
 1;

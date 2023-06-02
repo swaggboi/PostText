@@ -4,6 +4,8 @@ use Mojo::Base -base, -signatures;
 
 has [qw{pg authenticator}];
 
+has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS TZHTZM';
+
 sub create($self, $name, $email, $password) {
     my $password_hash = $self->authenticator->hash_password($password);
 
@@ -221,6 +223,39 @@ sub demote($self, $email) {
         UPDATE moderators
            SET admin_status = FALSE
          WHERE email_addr = ?;
+       END_SQL
+}
+
+sub thread_by_id($self, $thread_id) {
+    my $date_format = $self->date_format;
+
+    $self->pg->db->query(<<~'END_SQL', $date_format, $thread_id)->hash;
+        SELECT t.thread_id               AS id,
+               TO_CHAR(t.thread_date, ?) AS date,
+               t.thread_author           AS author,
+               t.thread_title            AS title,
+               t.thread_body             AS body,
+               COUNT(r.*)                AS remark_tally,
+               t.bump_tally              AS bump_tally
+          FROM threads      AS t
+          LEFT JOIN remarks AS r
+            ON t.thread_id = r.thread_id
+         WHERE t.thread_id = ?
+         GROUP BY t.thread_id;
+       END_SQL
+}
+
+sub remark_by_id($self, $remark_id) {
+    my $date_format = $self->date_format;
+
+    $self->pg->db->query(<<~'END_SQL', $date_format, $remark_id)->hash;
+        SELECT remark_id               AS id,
+               TO_CHAR(remark_date, ?) AS date,
+               remark_author           AS author,
+               remark_body             AS body,
+               thread_id
+          FROM remarks
+         WHERE remark_id = ?;
        END_SQL
 }
 
