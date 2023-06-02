@@ -94,6 +94,8 @@ sub feed($self) {
     my $rss       = XML::RSS->new(version => '2.0');
     my $chan_link = $self->url_for(threads_list => {list_page => 1} )->to_abs;
     my $rss_link  = $self->url_for(threads_feed => {format => 'rss'})->to_abs;
+    my $rss_title = 'Post::Text';
+    my $rss_image = $self->url_for('/images/logo_small.png')->to_abs;
 
     $rss->add_module(
         prefix => 'atom',
@@ -101,7 +103,7 @@ sub feed($self) {
         );
 
     $rss->channel(
-        title         => 'Post::Text',
+        title         => $rss_title,
         description   => 'In UTF-8 we trust. 🫡',
         link          => $chan_link,
         lastBuildDate => time2str('%a, %d %b %Y %X %z', time),
@@ -112,6 +114,15 @@ sub feed($self) {
                 type => 'application/rss+xml'
             }
         });
+
+    $rss->image(
+        title       => $rss_title,
+        url         => $rss_image,
+        link        => $rss_link,
+        width       => 144,
+        height      => 144,
+        description => 'A small nerdy anime girl'
+        );
 
     for my $thread (@{$threads}) {
         my $description = $self->markdown($thread->{'body'});
