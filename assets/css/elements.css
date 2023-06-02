@@ -10,7 +10,7 @@
     --transparent: #FFFFFFBB;
 
     box-sizing: border-box;
-    font-size: calc(8px + 1vmin);
+    font-size: calc(10px + 1vmin);
 }
 
 *, ::before, ::after { box-sizing: inherit; }
