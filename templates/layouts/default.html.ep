@@ -25,8 +25,6 @@
         (class => 'click') %>
     <% if (is_mod) { =%>
     <%= link_to Logout => mod_logout => (class => 'click') %>
-    <% } else { =%>
-    <%= link_to Login => mod_login => (class => 'click') %>
     <% } =%>
     </span>
   </nav>
