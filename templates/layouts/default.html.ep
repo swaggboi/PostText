@@ -11,6 +11,8 @@
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="theme-color" content="#5b90a4">
   <%= content 'open_graph' =%>
+  <meta property="og:url" content="<%= url_for->to_abs %>">
+  <meta property="og:site_name" content="Post::Text">
   <%= asset 'app.css' %>
 </head>
 <body>
