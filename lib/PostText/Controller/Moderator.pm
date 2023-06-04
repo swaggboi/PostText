@@ -272,7 +272,7 @@ sub promote($self) {
         $v->required('email')->size(6, 320);
 
         if ($v->has_error) {
-            $self->stash(status => 404)
+            $self->stash(status => 400)
         }
         else {
             my $email = $v->param('email');
@@ -294,7 +294,7 @@ sub demote($self) {
         $v->required('email')->size(6, 320);
 
         if ($v->has_error) {
-            $self->stash(status => 404)
+            $self->stash(status => 400)
         }
         else {
             my $email = $v->param('email');
