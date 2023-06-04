@@ -5,9 +5,7 @@
   <meta property="og:title" content="<%= title %>">
   <meta
       property="og:description"
-      content="Post::Text is a textboard a bit like 2channel. You can
-                post whatever you want anonymously just please mind
-                the rules."
+      content="Post::Text is a textboard a bit like 2channel. You can post whatever you want anonymously just please mind the rules."
   >
 % end
 <h2 class="page-title"><%= title %></h2>
