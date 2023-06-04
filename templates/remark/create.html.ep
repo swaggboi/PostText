@@ -31,6 +31,10 @@
         autofocus => undef
     ) %>
   </div>
+  <div class="form-field">
+    <%= label_for bump => 'Bump' %>
+    <%= check_box bump => 1, id => 'bump', checked => undef %>
+  </div>
   <button type="submit" class="form-button">Post</button>
 </form>
 <section class="pager">

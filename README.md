@@ -73,4 +73,3 @@ Run the tests locally (against development environment):
    requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
    (JSON?)
 1. Post thread via SMS (twil.io??)
-1. Option to remark without bumping?
