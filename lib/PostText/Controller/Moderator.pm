@@ -31,7 +31,7 @@ sub hidden($self) {
 sub login($self) {
     my $v;
 
-    #Already logged in?
+    # Already logged in?
     return $self->redirect_to('flagged_list') if $self->is_mod;
 
     $v = $self->validation if $self->req->method eq 'POST';
