@@ -1,5 +1,12 @@
 % layout 'default';
 % title 'Threads List';
+% content_for open_graph => begin
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= url_for->to_abs %>">
+  <meta property="og:site_name" content="Post::Text">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="In UTF-8 we trust. 🫡">
+% end
 <h2 class="page-title"><%= title %></h2>
 <% if (scalar @{$threads}) { =%>
 <main class="pager">
