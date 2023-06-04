@@ -27,14 +27,14 @@ subtest 'Post new remark', sub {
         ->element_exists('form input[name="author"]' )
         ->element_exists('form textarea[name="body"]')
         ->element_exists('form button[type="submit"]' )
-        ->text_like(h2 => qr/New Remark/);
+        ->text_like(h2 => qr/Remark on Thread #/);
 
     # POST
     $t->post_ok('/remark/post/1')->status_is(200)
         ->element_exists('form input[name="author"]' )
         ->element_exists('form textarea[name="body"]')
         ->element_exists('form button[type="submit"]' )
-        ->text_like(h2 => qr/New Remark/);
+        ->text_like(h2 => qr/Remark on Thread #/);
 
     $t->post_ok('/remark/post/1', form => \%valid_remark)->status_is(200)
         ->text_like(h2 => qr/Thread #1/);
