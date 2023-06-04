@@ -44,17 +44,13 @@ sub login($self) {
             $self->stash(status => 400)
         }
         else {
-            my ($email, $password);
-
-            $email    = $self->param('email'   );
-            $password = $self->param('password');
+            my $email    = $self->param('email'   );
+            my $password = $self->param('password');
 
             if ($self->moderator->check($email, $password)) {
-                my ($mod_id, $mod_name, $admin_status);
-
-                $mod_id       = $self->moderator->get_id($email);
-                $mod_name     = $self->moderator->get_name($mod_id);
-                $admin_status = $self->moderator->admin_status($mod_id);
+                my $mod_id       = $self->moderator->get_id($email);
+                my $mod_name     = $self->moderator->get_name($mod_id);
+                my $admin_status = $self->moderator->admin_status($mod_id);
 
                 $self->session(
                     mod_id   => $mod_id,
@@ -162,11 +158,9 @@ sub create($self) {
             $self->stash(status => 400)
         }
         else {
-            my ($name, $email, $password);
-
-            $name     = $self->param('name'    );
-            $email    = $self->param('email'   );
-            $password = $self->param('password');
+            my $name     = $self->param('name'    );
+            my $email    = $self->param('email'   );
+            my $password = $self->param('password');
 
             $self->moderator->create($name, $email, $password);
             $self->stash(info => "Created moderator account for $name 🧑‍🏭");
@@ -189,10 +183,8 @@ sub admin_reset($self) {
             $self->stash(status => 400)
         }
         else {
-            my ($email, $password);
-
-            $email    = $self->param('email'   );
-            $password = $self->param('password');
+            my $email    = $self->param('email'   );
+            my $password = $self->param('password');
 
             $self->moderator->admin_reset($email, $password);
             $self->stash(info => "Reset password for $email 🔐");
@@ -214,10 +206,8 @@ sub mod_reset($self) {
             $self->stash(status => 400)
         }
         else {
-            my ($password, $mod_id);
-
-            $password = $self->param('password');
-            $mod_id   = $self->session->{'mod_id'};
+            my $password = $self->param('password');
+            my $mod_id   = $self->session->{'mod_id'};
 
             $self->moderator->mod_reset($mod_id, $password);
             $self->flash(info => "Password has been reset 🔐");

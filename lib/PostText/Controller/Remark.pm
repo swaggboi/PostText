@@ -20,8 +20,6 @@ sub create($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        my ($remark_author, $remark_body, $bump_thread);
-
         $v->required('author')->size(1,   63);
         $v->required('body'  )->size(2, 4000);
         $v->optional('bump'  );
@@ -30,9 +28,9 @@ sub create($self) {
             $self->stash(status => 400)
         }
         else {
-            $remark_author = $v->param('author');
-            $remark_body   = $v->param('body'  );
-            $bump_thread   = $v->param('bump'  );
+            my $remark_author = $v->param('author');
+            my $remark_body   = $v->param('body'  );
+            my $bump_thread   = $v->param('bump'  );
 
             $self->remark->create(
                 $thread_id,

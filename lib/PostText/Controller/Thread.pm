@@ -10,8 +10,6 @@ sub create($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        my ($thread_author, $thread_title, $thread_body);
-
         $v->required('author')->size(1,   63);
         $v->required('title' )->size(1,  127);
         $v->required('body'  )->size(2, 4000);
@@ -20,9 +18,9 @@ sub create($self) {
             $self->stash(status => 400)
         }
         else {
-            $thread_author = $v->param('author');
-            $thread_title  = $v->param('title' );
-            $thread_body   = $v->param('body'  );
+            my $thread_author = $v->param('author');
+            my $thread_title  = $v->param('title' );
+            my $thread_body   = $v->param('body'  );
 
             my $new_thread_id = $self->thread->create(
                 $thread_author,
@@ -42,14 +40,12 @@ sub create($self) {
 }
 
 sub by_id($self) {
-    my ($thread_id, $thread, $base_path, $this_page, $last_page, $remarks);
-
-    $thread_id = $self->param('thread_id');
-    $thread    = $self->thread->by_id($thread_id);
-    $base_path = $self->match->path_for(thread_page => undef)->{'path'};
-    $this_page = $self->param('thread_page');
-    $last_page = $self->remark->last_page_for($thread_id);
-    $remarks   = $self->remark->by_page_for($thread_id, $this_page);
+    my $thread_id = $self->param('thread_id');
+    my $thread    = $self->thread->by_id($thread_id);
+    my $base_path = $self->match->path_for(thread_page => undef)->{'path'};
+    my $this_page = $self->param('thread_page');
+    my $last_page = $self->remark->last_page_for($thread_id);
+    my $remarks   = $self->remark->by_page_for($thread_id, $this_page);
 
     $self->stash(
         thread    => $thread,
