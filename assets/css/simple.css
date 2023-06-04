@@ -89,6 +89,7 @@
     background-color: var(--light-blue);
     padding: 0.5em 1.5em;
     text-align: left;
+    color: black;
 }
 
 .form-button::first-letter { text-decoration: underline; }
@@ -105,12 +106,14 @@
 
 .stash-with-info {
     border: dashed var(--highlight-green) 0.5em;
+    border-clip: padding-box;
     padding: 1em;
     background-color: var(--transparent);
 }
 
 .stash-with-error {
     border: dashed var(--highlight-red) 0.5em;
+    border-clip: padding-box;
     padding: 1em;
     background-color: var(--transparent);
 }
