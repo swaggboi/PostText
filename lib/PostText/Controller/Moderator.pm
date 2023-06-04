@@ -44,8 +44,8 @@ sub login($self) {
             $self->stash(status => 400)
         }
         else {
-            my $email    = $self->param('email'   );
-            my $password = $self->param('password');
+            my $email    = $v->param('email'   );
+            my $password = $v->param('password');
 
             if ($self->moderator->check($email, $password)) {
                 my $mod_id       = $self->moderator->get_id($email);
@@ -158,9 +158,9 @@ sub create($self) {
             $self->stash(status => 400)
         }
         else {
-            my $name     = $self->param('name'    );
-            my $email    = $self->param('email'   );
-            my $password = $self->param('password');
+            my $name     = $v->param('name'    );
+            my $email    = $v->param('email'   );
+            my $password = $v->param('password');
 
             $self->moderator->create($name, $email, $password);
             $self->stash(info => "Created moderator account for $name 🧑‍🏭");
@@ -183,8 +183,8 @@ sub admin_reset($self) {
             $self->stash(status => 400)
         }
         else {
-            my $email    = $self->param('email'   );
-            my $password = $self->param('password');
+            my $email    = $v->param('email'   );
+            my $password = $v->param('password');
 
             $self->moderator->admin_reset($email, $password);
             $self->stash(info => "Reset password for $email 🔐");
@@ -206,7 +206,7 @@ sub mod_reset($self) {
             $self->stash(status => 400)
         }
         else {
-            my $password = $self->param('password');
+            my $password = $v->param('password');
             my $mod_id   = $self->session->{'mod_id'};
 
             $self->moderator->mod_reset($mod_id, $password);
@@ -231,7 +231,7 @@ sub lock_acct($self) {
             $self->stash(status => 400)
         }
         else {
-            my $email = $self->param('email');
+            my $email = $v->param('email');
 
             $self->moderator->lock_acct($email);
             $self->stash(info => "Account $email has been locked 🔒");
@@ -253,7 +253,7 @@ sub unlock_acct($self) {
             $self->stash(status => 400)
         }
         else {
-            my $email = $self->param('email');
+            my $email = $v->param('email');
 
             $self->moderator->unlock_acct($email);
             $self->stash(info => "Account $email has been unlocked 🔓");
@@ -275,7 +275,7 @@ sub promote($self) {
             $self->stash(status => 404)
         }
         else {
-            my $email = $self->param('email');
+            my $email = $v->param('email');
 
             $self->moderator->promote($email);
             $self->stash(info => "Account $email has been promoted to admin 🧑‍🎓");
@@ -297,7 +297,7 @@ sub demote($self) {
             $self->stash(status => 404)
         }
         else {
-            my $email = $self->param('email');
+            my $email = $v->param('email');
 
             $self->moderator->demote($email);
             $self->stash(info => "Account $email has been demoted to mod 🧒");
