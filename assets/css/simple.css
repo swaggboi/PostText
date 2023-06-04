@@ -84,6 +84,13 @@
     resize: vertical;
 }
 
+.form-checkbox {
+    display: flex;
+    flex-flow: row;
+    gap: 1em;
+    align-items: center;
+}
+
 .form-button {
     border: outset var(--light-blue);
     background-color: var(--light-blue);

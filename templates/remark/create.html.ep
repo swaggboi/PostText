@@ -37,9 +37,9 @@
         autofocus => undef
     ) %>
   </div>
-  <div class="form-field">
-    <%= label_for bump => 'Bump' %>
+  <div class="form-checkbox">
     <%= check_box bump => 1, id => 'bump', checked => undef %>
+    <%= label_for bump => 'Bump' %>
   </div>
   <button type="submit" class="form-button">Post</button>
 </form>
