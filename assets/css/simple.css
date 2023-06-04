@@ -106,14 +106,14 @@
 
 .stash-with-info {
     border: dashed var(--highlight-green) 0.5em;
-    border-clip: padding-box;
+    background-clip: padding-box;
     padding: 1em;
     background-color: var(--transparent);
 }
 
 .stash-with-error {
     border: dashed var(--highlight-red) 0.5em;
-    border-clip: padding-box;
+    background-clip: padding-box;
     padding: 1em;
     background-color: var(--transparent);
 }
