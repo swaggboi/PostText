@@ -2,6 +2,13 @@
 % title my $remark_id = $remark->{'id'} ? "Remark #$remark_id" : '?';
 <h2 class="page-title"><%= title %></h2>
 <% if (keys %{$remark}) { =%>
+<% content_for open_graph => begin %>
+  <meta property="og:type" content="article">
+  <meta property="og:title"
+        content="Thread #<%= $remark->{'thread_id'} %>, <%= title %>">
+  <meta property="og:description"
+        content="<%= truncate_text $remark->{'body'} %>">
+<% end %>
 <main class="pager">
   <article class="post">
     <h4 class="post__title">

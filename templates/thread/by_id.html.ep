@@ -4,7 +4,7 @@
 <% if (keys %{$thread}) { =%>
 <% content_for open_graph => begin %>
   <meta property="og:type" content="article">
-  <meta property="og:title" content="<%= title %>: <%= $thread->{'title'} %>">
+  <meta property="og:title" content="<%= $thread->{'title'} %>">
   <meta property="og:description"
         content="<%= truncate_text $thread->{'body'} %>">
 <% end %>

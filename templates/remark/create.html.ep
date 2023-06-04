@@ -1,7 +1,13 @@
 % layout 'default';
-% title 'New Remark';
+% title my $thread_id = $thread->{'id'} ? "Remark on Thread #$thread_id" : '?';
 <h2 class="page-title"><%= title %></h2>
 <% if (keys %{$thread}) { =%>
+<% content_for open_graph => begin %>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description"
+        content="Remark on thread #<%= $thread->{'id'} %>.">
+<% end %>
 <form method="post" class="form-body">
   <div class="form-field">
     <% if (my $error = validation->error('author')) { =%>

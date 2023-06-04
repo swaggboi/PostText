@@ -1,5 +1,15 @@
 % layout 'default';
 % title 'The Rules™';
+% content_for open_graph => begin
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta
+      property="og:description"
+      content="Post::Text is a textboard a bit like 2channel. You can
+                post whatever you want anonymously just please mind
+                the rules."
+  >
+% end
 <h2 class="page-title"><%= title %></h2>
 <main class="page-body">
   <p>The rules here are pretty simple:</p>

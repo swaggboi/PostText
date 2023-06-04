@@ -1,5 +1,10 @@
 % layout 'default';
 % title 'New Thread';
+% content_for open_graph => begin
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="Start a new thread.">
+% end
 <h2 class="page-title"><%= title %></h2>
 <form method="post" class="form-body">
   <div class="form-field">
