@@ -15,16 +15,28 @@
 
 *, ::before, ::after { box-sizing: inherit; }
 
+@font-face {
+    font-family: 'w95fa';
+    src: url('/fonts/w95fa.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'fsex300';
+    src: url('/fonts/fsex300.woff2') format('woff2');
+}
+
 body {
     background-image: url('/images/background_stars_anm.gif');
     width: 95vmin;
     margin: 0 auto;
+    font-family: 'w95fa', sans-serif;
 }
 
 code {
     background-color: black;
     color: lime;
-    font-size: 0.75rem; /* Why tho?? */
+    /* font-size: 0.75rem; /* Why tho?? */
+    font-family: "fsex300", monospace;
 }
 
 pre > code {
