@@ -11,6 +11,7 @@
 
     box-sizing: border-box;
     font-size: calc(10px + 1vmin);
+    cursor: url('/cursors/arrow.cur'), auto;
 }
 
 *, ::before, ::after { box-sizing: inherit; }
@@ -35,7 +36,6 @@ body {
 code {
     background-color: black;
     color: lime;
-    /* font-size: 0.75rem; /* Why tho?? */
     font-family: "fsex300", monospace;
 }
 
@@ -45,3 +45,5 @@ pre > code {
     display: inline-block;
     width: 100%;
 }
+
+a:hover { cursor: url('/cursors/finger.cur'), auto; }
