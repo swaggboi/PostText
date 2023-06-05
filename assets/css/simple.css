@@ -102,6 +102,7 @@
     padding: 0.5em 1.5em;
     text-align: left;
     color: black;
+    width: 33%;
 }
 
 .form-button::first-letter { text-decoration: underline; }
