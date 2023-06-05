@@ -79,7 +79,10 @@
     gap: 0.25em;
 }
 
+.form-field > input { border: inset var(--dark-warm-gray); }
+
 .form-field > textarea {
+    border: inset var(--dark-warm-gray);
     overflow: scroll;
     resize: vertical;
 }
@@ -90,6 +93,8 @@
     gap: 1em;
     align-items: center;
 }
+
+.form-checkbox > input { outline: inset var(--dark-warm-gray); }
 
 .form-button {
     border: outset var(--light-blue);
