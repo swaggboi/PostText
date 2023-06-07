@@ -19,30 +19,14 @@
     gap: 1em;
 }
 
-.site-logo {
-    border: outset var(--light-warm-gray);
-    background-color: var(--light-warm-gray);
-    width: 100%;
-    margin: 0.25em auto;
+.site-title {
+  text-align: center;
+  border: outset var(--light-warm-gray);
+  background-color: var(--light-warm-gray);
+  padding: 0.5em 0;
+  margin-bottom: 0.15em;
+  overflow-wrap: anywhere;
 }
-
-.site-logo img {
-    display: block;
-    margin: 0 auto;
-    object-fit: contain;
-    max-width: 50%;
-}
-
-/*
- *.site-title {
- *  text-align: center;
- *  border: outset var(--light-warm-gray);
- *  background-color: var(--light-warm-gray);
- *  padding: 0.5em 0;
- *  margin-bottom: 0.15em;
- *  overflow-wrap: anywhere;
- *}
- */
 
 .site-nav {
   display: flex;
