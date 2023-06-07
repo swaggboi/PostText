@@ -8,6 +8,11 @@
   <meta property="og:description"
         content="Remark on thread #<%= $thread->{'id'} %>.">
 <% end %>
+<% content_for twitter_card => begin %>
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description"
+        content="Remark on thread #<%= $thread->{'id'} %>.">
+<% end %>
 <form method="post" class="form-body">
   <div class="form-field">
     <% if (my $error = validation->error('author')) { =%>

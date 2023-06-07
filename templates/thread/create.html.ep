@@ -5,6 +5,10 @@
   <meta property="og:title" content="<%= title %>">
   <meta property="og:description" content="Start a new thread.">
 % end
+% content_for twitter_card => begin
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="Start a new thread.">
+% end
 <h2 class="page-title"><%= title %></h2>
 <form method="post" class="form-body">
   <div class="form-field">

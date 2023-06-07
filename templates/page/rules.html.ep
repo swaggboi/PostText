@@ -8,6 +8,13 @@
       content="Post::Text is a textboard a bit like 2channel. You can post whatever you want anonymously just please mind the rules."
   >
 % end
+% content_for twitter_card => begin
+  <meta name="twitter:title" content="<%= title %>">
+  <meta
+      name="twitter:description"
+      content="Post::Text is a textboard a bit like 2channel. You can post whatever you want anonymously just please mind the rules."
+  >
+% end
 <h2 class="page-title"><%= title %></h2>
 <main class="page-body">
   <p>The rules here are pretty simple:</p>

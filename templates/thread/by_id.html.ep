@@ -8,6 +8,11 @@
   <meta property="og:description"
         content="<%= truncate_text $thread->{'body'} %>">
 <% end %>
+<% content_for twitter_card => begin %>
+  <meta name="twitter:title" content="<%= $thread->{'title'} %>">
+  <meta name="twitter:description"
+        content="<%= truncate_text $thread->{'body'} %>">
+<% end %>
 <main class="pager">
   <article class="post">
     <h3 class="post__title">

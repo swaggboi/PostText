@@ -5,6 +5,10 @@
   <meta property="og:title" content="<%= title %>">
   <meta property="og:description" content="In UTF-8 we trust. 🫡">
 % end
+% content_for twitter_card => begin
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="In UTF-8 we trust. 🫡">
+% end
 <h2 class="page-title"><%= title %></h2>
 <% if (scalar @{$threads}) { =%>
 <main class="pager">

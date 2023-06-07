@@ -9,6 +9,12 @@
   <meta property="og:description"
         content="<%= truncate_text $remark->{'body'} %>">
 <% end %>
+<% content_for twitter_card => begin %>
+  <meta name="twitter:title"
+        content="Thread #<%= $remark->{'thread_id'} %>, <%= title %>">
+  <meta name="twitter:description"
+        content="<%= truncate_text $remark->{'body'} %>">
+<% end %>
 <main class="pager">
   <article class="post">
     <h4 class="post__title">
