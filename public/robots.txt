@@ -1,2 +1,7 @@
 User-agent: *
-Disallow: /
+Disallow: /cursors/
+Disallow: /images/
+Disallow: /fonts/
+Disallow: /moderator/
+Disallow: /login
+Disallow: /logout
