@@ -13,20 +13,17 @@
   <%= content 'open_graph' =%>
   <meta property="og:url" content="<%= url_for->to_abs %>">
   <meta property="og:site_name" content="Post::Text">
+  <meta property="og:image" content="<%= url_for('/images/logo.png')->to_abs %>">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:alt"
+        content="Post::Text logo; a small nerdy anime girl giving a V sign">
   <%= asset 'app.css' %>
 </head>
 <body>
 <header class="site-header">
   <h1 class="site-title">Post::Text</h1>
-  <!--
-  <picture class="site-logo">
-    <source srcset="/images/logo_xl.png" media="(min-width: 1900px)">
-    <source srcset="/images/logo_l.png" media="(min-width: 1200px)">
-    <source srcset="/images/logo_m.png" media="(min-width: 700px)">
-    <img src="/images/logo_s.png"
-         alt="Post::Text logo; a small nerdy anime girl giving a V sign">
-  </picture>
-  -->
   <nav class="site-nav">
     <%= link_to List => threads_list => {list_page => 1},
         (class => 'click') %>
