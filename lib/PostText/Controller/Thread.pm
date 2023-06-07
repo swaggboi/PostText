@@ -91,7 +91,7 @@ sub feed($self) {
     my $chan_link = $self->url_for(threads_list => {list_page => 1} )->to_abs;
     my $rss_link  = $self->url_for(threads_feed => {format => 'rss'})->to_abs;
     my $rss_title = 'Post::Text';
-    my $rss_image = $self->url_for('/images/logo_small.png')->to_abs;
+    my $rss_image = $self->url_for('/images/icon_small.png')->to_abs;
 
     $rss->add_module(
         prefix => 'atom',

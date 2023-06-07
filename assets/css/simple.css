@@ -19,6 +19,11 @@
     gap: 1em;
 }
 
+.site-logo {
+  border: outset var(--light-warm-gray);
+  background-color: var(--light-warm-gray);
+}
+
 .site-title {
   text-align: center;
   border: outset var(--light-warm-gray);
