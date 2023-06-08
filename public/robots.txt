@@ -3,5 +3,8 @@ Disallow: /cursors/
 Disallow: /images/
 Disallow: /fonts/
 Disallow: /moderator/
+Disallow: /thread/bump/
+Disallow: /thread/flag/
+Disallow: /remark/flag/
 Disallow: /login
 Disallow: /logout
