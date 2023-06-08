@@ -7,7 +7,7 @@
 
 .pager__title {
   text-align: center;
-  border: inset var(--dark-warm-gray);
+  border: inset var(--dark-warm-gray) 0.18rem;
   padding: 0.5em 0;
   margin: 1em 0 0 0;
   background-color: var(--dark-warm-gray);
@@ -16,7 +16,7 @@
 .pager__nav {
   display: flex;
   flex-flow: row wrap;
-  border: inset var(--dark-warm-gray);
+  border: inset var(--dark-warm-gray) 0.18rem;
   background-color: var(--dark-warm-gray);
   padding: 0.5em 0.25em;
   gap: 0.25em;
@@ -30,7 +30,7 @@
  */
 
 .pager__nav > a {
-  border: outset var(--light-blue);
+  border: outset var(--light-blue) 0.18rem;
   flex: 1;
   text-align: center;
   background-color: var(--light-blue);
@@ -39,14 +39,14 @@
 }
 
 .pager__nav > a[rel="self"] {
-  border: inset var(--dark-blue);
+  border: inset var(--dark-blue) 0.18rem;
   background-color: var(--dark-blue);
 }
 
 .pager__nav > a:link::first-letter { text-decoration: underline; }
 
 .pager__nav > a:active {
-  border: inset var(--dark-blue);
+  border: inset var(--dark-blue) 0.18rem;
   background-color: var(--dark-blue);
 }
 
@@ -54,7 +54,7 @@
 
 .post {
   background-color: var(--light-warm-gray);
-  border: outset var(--light-warm-gray);
+  border: outset var(--light-warm-gray) 0.18rem;
   overflow-wrap: anywhere;
 }
 
@@ -65,11 +65,11 @@
   margin: 0;
   padding: 0.25em 0.5em 0.25em 0.75em;
   align-items: center;
-  border: inset var(--dark-warm-gray);
+  border: inset var(--dark-warm-gray) 0.18rem;
 }
 
 .post__id {
-  border: outset var(--true-gray);
+  border: outset var(--true-gray) 0.18rem;
   padding: 0.25em;
   background-color: var(--true-gray);
   text-decoration: none;
@@ -79,7 +79,7 @@
 
 .post__id:link::first-letter { text-decoration: underline; }
 
-.post__id:active { border: inset var(--true-gray); }
+.post__id:active { border: inset var(--true-gray) 0.18rem; }
 
 .post__date, .post__author, .post__body {
   margin: 1em 0.5em;
@@ -88,7 +88,7 @@
 
 .post__body {
     background-color: var(--dark-warm-gray);
-    border: inset var(--dark-warm-gray);
+    border: inset var(--dark-warm-gray) 0.18rem;
 }
 
 .post__nav {

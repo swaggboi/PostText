@@ -1,7 +1,7 @@
 .click {
     color: black;
     text-decoration: none;
-    border: outset var(--light-blue);
+    border: outset var(--light-blue) 0.18rem;
     background-color: var(--light-blue);
     white-space: nowrap; /* Prevent the button from going multi-line */
 }
@@ -9,7 +9,7 @@
 .click::first-letter { text-decoration: underline; }
 
 .click:active {
-    border: inset var(--dark-blue);
+    border: inset var(--dark-blue) 0.18rem;
     background-color: var(--dark-blue);
 }
 
@@ -21,7 +21,7 @@
 
 .site-title {
   text-align: center;
-  border: outset var(--light-warm-gray);
+  border: outset var(--light-warm-gray) 0.18rem;
   background-color: var(--light-warm-gray);
   padding: 0.5em 0;
   margin-bottom: 0.15em;
@@ -32,7 +32,7 @@
   display: flex;
   flex-flow: row wrap;
   gap: 0.25em;
-  border: outset var(--light-warm-gray);
+  border: outset var(--light-warm-gray) 0.18rem;
   padding: 0.5em 0.25em;
   background-color: var(--light-warm-gray);
 }
@@ -44,7 +44,7 @@
 
 .site-footer {
   text-align: center;
-  border: outset var(--light-warm-gray);
+  border: outset var(--light-warm-gray) 0.18rem;
   background-color: var(--light-warm-gray);
   padding: 0;
   margin: 1.25em 0;
@@ -52,7 +52,7 @@
 
 .page-title {
   text-align: center;
-  border: inset var(--dark-warm-gray);
+  border: inset var(--dark-warm-gray) 0.18rem;
   padding: 0.5em 0;
   margin: 0.85em 0;
   background-color: var(--dark-warm-gray);
@@ -60,13 +60,13 @@
 
 .page-body {
   background-color: var(--light-warm-gray);
-  border: outset var(--light-warm-gray);
+  border: outset var(--light-warm-gray) 0.18rem;
   padding: 0.5em 1em;
 }
 
 .form-body {
   background-color: var(--light-warm-gray);
-  border: outset var(--light-warm-gray);
+  border: outset var(--light-warm-gray) 0.18rem;
   padding: 0.5em 1em;
   display: flex;
   flex-flow: column;
@@ -79,10 +79,10 @@
     gap: 0.25em;
 }
 
-.form-field > input { border: inset var(--dark-warm-gray); }
+.form-field > input { border: inset var(--dark-warm-gray) 0.18rem; }
 
 .form-field > textarea {
-    border: inset var(--dark-warm-gray);
+    border: inset var(--dark-warm-gray) 0.18rem;
     overflow: scroll;
     resize: vertical;
 }
@@ -97,7 +97,7 @@
 .form-checkbox > input { outline: inset var(--dark-warm-gray); }
 
 .form-button {
-    border: outset var(--light-blue);
+    border: outset var(--light-blue) 0.18rem;
     background-color: var(--light-blue);
     padding: 0.5em 1.5em;
     text-align: left;
@@ -108,7 +108,7 @@
 .form-button::first-letter { text-decoration: underline; }
 
 .form-button:active {
-    border: inset var(--dark-blue);
+    border: inset var(--dark-blue) 0.18rem;
     background-color: var(--dark-blue);
 }
 
@@ -118,14 +118,14 @@
 }
 
 .stash-with-info {
-    border: dashed var(--highlight-green) 0.5em;
+    border: dashed var(--highlight-green) 0.5rem;
     background-clip: padding-box;
     padding: 1em;
     background-color: var(--transparent);
 }
 
 .stash-with-error {
-    border: dashed var(--highlight-red) 0.5em;
+    border: dashed var(--highlight-red) 0.5rem;
     background-clip: padding-box;
     padding: 1em;
     background-color: var(--transparent);
