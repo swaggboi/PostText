@@ -54,4 +54,20 @@ This is correct for a multi-line code block:
     <%= link_to 'RSS feed', threads_feed => {format => 'rss'} %>.</p>
   <p>Click 'New' in the top navigation bar to start a new thread and
     post your manifesto.</p>
+  <pre><code>
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mDMEZID+chYJKwYBBAHaRw8BAQdAHIXzI3VFHN6JuZ3ZWZZk+DVjqiWg9ZFx23vu
+lrq4vS60OXN3YWdnIGJvaSAoaHR0cHM6Ly93d3cuc3dhZ2cubmV0KSA8c3dhZ2di
+b2lAc2xhY2t3YXJlLnVrPoiTBBMWCgA7FiEEYeDwu4lVO6bRa7gHd6/apzLpHrAF
+AmSA/nICGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQd6/apzLpHrBK
+dAEAvoU7S2qEU30/ebmLd3aAfn0psdJuObUFMFmlqKKPWlABANsc/+OppyEUbwpl
+8baMWNw+rN2E0yw+b7TkHMXZ6gIDuDgEZID+chIKKwYBBAGXVQEFAQEHQLhSm2wg
+qhRnCnB799D9mBcWUbRgpzFO74FqS39EJlN+AwEIB4h4BBgWCgAgFiEEYeDwu4lV
+O6bRa7gHd6/apzLpHrAFAmSA/nICGwwACgkQd6/apzLpHrA7GgD/UeYdr3TRqsaQ
+swIo1svyQMVBS1ZNN3Kcrb872g40YLkA/RV7V2WNGs04CPA4l1BG7/S8OfOTdJx7
+V8A44FH+fkUI
+=QJUC
+-----END PGP PUBLIC KEY BLOCK-----
+  </code></pre>
 </main>
