@@ -154,7 +154,9 @@ sub flag($self) {
     my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
 
     $self->thread->flag($thread_id);
-    $self->flash(info => "Thread #$thread_id has been flagged. 🚩");
+    $self->flash(
+        info => "Thread #$thread_id has been flagged for moderator. 🚩"
+        );
 
     $self->redirect_to($redirect_url);
 }

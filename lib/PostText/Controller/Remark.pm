@@ -72,7 +72,9 @@ sub flag($self) {
 
 
     $self->remark->flag($remark_id);
-    $self->flash(info => "Remark #$remark_id has been flagged. 🚩");
+    $self->flash(
+        info => "Remark #$remark_id has been flagged for moderator. 🚩"
+        );
 
     $self->redirect_to($redirect_url);
 }
