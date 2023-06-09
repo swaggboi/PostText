@@ -17,15 +17,31 @@
 % end
 <h2 class="page-title"><%= title %></h2>
 <main class="page-body">
+  <h3>What is this?</h3>
   <p>Post::Text is a
     <a href="https://en.wikipedia.org/wiki/Textboard">textboard</a>
     a bit like 2channel. You can post whatever you want anonymously
-    just please mind the <%= link_to rules => 'rules_page' %>.
-    Markdown is supported for formatting posts using the
+    just please mind the <%= link_to rules => 'rules_page' %>.</p>
+  <h3>Flagging Posts</h3>
+  <p>There is a button for users to 'flag' a post for review by a
+    moderator. If you need further assistance you can reach out to the
+    <a href="mailto:swaggboi@slackware.uk">webmaster</a>.</p>
+  <h3>Bumping Posts</h3>
+  <p>There is also a 'bump' button you're free to use and abuse to
+    your heart's content. When adding a remark to a thread, you can
+    uncheck the 'bump' box to remark on the post without bumping
+    it.</p>
+  <h3>Subscribing with RSS</h3>
+  <p>If you're already using a feed reader or some sort of email
+    client you can check out the
+    <%= link_to 'RSS feed', threads_feed => {format => 'rss'} %>.
+    A feed reader can really be anything. For example there's a
+    <a href="https://monitorss.xyz">Discord bot</a> to subscribe
+    to feeds.</p>
+  <h3>Formatting with Markdown/HTML Tags</h3>
+  <p>Markdown is supported for formatting posts using the
     <a href="https://daringfireball.net/projects/markdown/syntax">
-    original implementation from The Daring Fireball</a>. For example,
-    back-ticks are for <em>inline code</em> while indentation should
-    be used if you want an entire code bock:</p>
+    original implementation from The Daring Fireball</a>. For example:</p>
   <pre><code>
 This is `inline_code()` and so is ```this()```. This is incorrect:
 
@@ -40,20 +56,38 @@ This is correct for a multi-line code block:
     if (true) {
         do_stuff();
     }
+
+This is a [hyperlink](http://example.com).
+
+This is a paragraph.&lt;br&gt;
+This is a new line within the same paragraph.
+
+This is a new paragraph since I used two new lines.
+
+- This is
+- an unordered
+- list.
+
+1. This is
+1. an ordered
+1. list.
+
+>This is a
+>block quote.
+>>Block quotes
+>>can be nested.
   </code></pre>
   <p>You can use an actual tab character or four spaces to indent.
     Only Markdown as well as the HTML tags <code>&lt;br&gt;</code> and
     <code>&lt;s&gt;</code> are supported. <strong>All other HTML will
     be filtered out.</strong></p>
-  <p>There is a button for users to 'flag' a post for review by a
-    moderator. If you need further assistance you can reach out to the
-    <a href="mailto:swaggboi@slackware.uk">webmaster</a>. There is
-    also a 'bump' button you're free to use and abuse to your heart's
-    content. If you're already using a feed reader or some sort of
-    email client you can check out the
-    <%= link_to 'RSS feed', threads_feed => {format => 'rss'} %>.</p>
+  <h3>Now Post a Thread</h3>
   <p>Click 'New' in the top navigation bar to start a new thread and
-    post your manifesto.</p>
+    post your manifesto. 🔥</p>
+  <h3>Webmaster PGP Key</h3>
+  <p>I like PGP so here's a public key that'll be used to sign
+  <em>super official</em> Post::Text business or you can use it to
+  email me from North Korea:</p>
   <pre><code>
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
