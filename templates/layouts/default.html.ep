@@ -45,7 +45,6 @@
     <% if (is_mod) { =%>
     <%= link_to Logout => mod_logout => (class => 'click') %>
     <% } =%>
-    </span>
   </nav>
   <% if (is_mod) { =%>
   <nav class="site-nav">
