@@ -150,15 +150,29 @@ sub bump($self) {
 }
 
 sub flag($self) {
-    my $thread_id    = $self->param('thread_id');
-    my $redirect_url = $self->url_for('threads_list')->fragment('info')->to_abs;
+    my $thread_id = $self->param('thread_id');
+    my $v         = $self->validation;
 
-    $self->thread->flag($thread_id);
-    $self->flash(
-        info => "Thread #$thread_id has been flagged for moderator. 🚩"
-        );
+    $v->optional(captcha => 'trim')->size(4, 4)->like(qr/flag/i);
 
-    $self->redirect_to($redirect_url);
+    if ($v->is_valid) {
+        my $redirect_url =
+            $self->url_for('threads_list')->fragment('info')->to_abs;
+
+        $self->thread->flag($thread_id);
+        $self->flash(
+            info => "Thread #$thread_id has been flagged for moderator. 🚩"
+          );
+
+        return $self->redirect_to($redirect_url);
+    }
+    elsif ($v->has_error) {
+        $self->stash(status => 400)
+    }
+
+    $self->stash(thread_id => $thread_id);
+
+    return $self->render;
 }
 
 1;

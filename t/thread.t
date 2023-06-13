@@ -98,9 +98,8 @@ subtest 'Flagging thread', sub {
         ->element_exists('a[href*="flag"]')
         ->text_like(h2 => qr/Thread #1/);
 
-    $t->get_ok('/thread/flag/1')->status_is(200)
-        ->element_exists('p[class="stash-with-info"]')
-        ->text_like(p => qr/Thread #1 has been flagged/);
+    $t->get_ok('/thread/flag/1'    )->status_is(200);
+    $t->get_ok('/thread/flag/65536')->status_is(404);
 };
 
 done_testing;
