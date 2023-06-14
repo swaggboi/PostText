@@ -49,3 +49,8 @@ pre > code {
 a:hover { cursor: url('/cursors/finger.cur'), auto; }
 
 img { max-width: 100%; }
+
+blockquote {
+    border-left: solid black;
+    padding-left: 0.25em;
+}
