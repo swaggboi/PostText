@@ -64,19 +64,29 @@ sub create($self) {
 }
 
 sub flag($self) {
-    my $remark_id    = $self->param('remark_id');
-    my $thread_id    = $self->remark->thread_id_for($remark_id);
-    my $redirect_url =
-        $self->url_for('single_thread', thread_id => $thread_id)
-            ->fragment('info')->to_abs;
+    my $remark_id = $self->param('remark_id');
+    my $v         = $self->validation;
 
+    $v->optional(captcha => 'trim')->size(4, 4)->like(qr/flag/i);
 
-    $self->remark->flag($remark_id);
-    $self->flash(
-        info => "Remark #$remark_id has been flagged for moderator. 🚩"
-        );
+    if ($v->is_valid) {
+        my $thread_id    = $self->remark->thread_id_for($remark_id);
+        my $redirect_url =
+            $self->url_for('single_thread', thread_id => $thread_id)
+                ->fragment('info')->to_abs;
 
-    $self->redirect_to($redirect_url);
+        $self->remark->flag($remark_id);
+        $self->flash(
+            info => "Remark #$remark_id has been flagged for moderator. 🚩"
+            );
+
+        return $self->redirect_to($redirect_url);
+    }
+    elsif ($v->has_error) {
+        $self->stash(status => 400)
+    }
+
+    return $self->render;
 }
 
 1;

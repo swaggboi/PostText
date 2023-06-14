@@ -90,7 +90,8 @@ subtest 'Bumping thread', sub {
 
     $t->get_ok('/thread/bump/1'    )->status_is(200);
     $t->get_ok('/thread/bump/65536')->status_is(404);
-    $t->get_ok('/thread/bump/1', form => {captcha => 'bump'})->status_is(400);
+    $t->get_ok('/thread/bump/1', form => {captcha => 'bump'})->status_is(200);
+    $t->get_ok('/thread/bump/1', form => {captcha => 'aaaa'})->status_is(400);
 };
 
 subtest 'Flagging thread', sub {
@@ -104,7 +105,8 @@ subtest 'Flagging thread', sub {
 
     $t->get_ok('/thread/flag/1'    )->status_is(200);
     $t->get_ok('/thread/flag/65536')->status_is(404);
-    $t->get_ok('/thread/flag/1', form => {captcha => 'flag'})->status_is(400);
+    $t->get_ok('/thread/flag/1', form => {captcha => 'flag'})->status_is(200);
+    $t->get_ok('/thread/flag/1', form => {captcha => 'aaaa'})->status_is(400);
 };
 
 done_testing;
