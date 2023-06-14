@@ -1,5 +1,5 @@
 % layout 'default';
-% title $thread_id ? "Flag Thread #$thread_id" : '?';
+% title $thread_id ? "Bump Thread #$thread_id" : '?';
 <h2 class="page-title"><%= title %></h2>
 <% if ($thread_id) { =%>
 <form class="form-body">
@@ -8,7 +8,7 @@
     <p class="field-with-error">Must be between <%= $error->[2] %>
       and <%= $error->[3] %> characters.</p>
     <% } =%>
-    <%= label_for captcha => "Enter the word 'flag' to confirm:" %>
+    <%= label_for captcha => "Enter the word 'bump' to confirm:" %>
     <%= text_field captcha => id => 'captcha' %>
   </div>
   <button type="submit" class="form-button">Confirm</button>
