@@ -16,7 +16,7 @@ use PostText::Model::Moderator;
 sub startup($self) {
     $self->plugin('Config');
     $self->plugin('TagHelpers::Pagination');
-    $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
+    $self->plugin(AssetPack => {pipes => [qw{Css JavaScript Combine}]});
 
     # Helpers
     $self->helper(pg => sub ($c) {
