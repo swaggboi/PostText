@@ -140,6 +140,7 @@ sub feed($self) {
 
 sub bump($self) {
     my $thread_id = $self->param('thread_id');
+    my $valid_id  = $self->thread->by_id($thread_id) ? 1 : 0;
     my $v         = $self->validation;
 
     $v->optional(captcha => 'trim')->size(4, 4)->like(qr/bump/i);
@@ -157,11 +158,17 @@ sub bump($self) {
         $self->stash(status => 400)
     }
 
+    $self->stash(status => 404, error => 'Thread not found 🤷')
+        unless $valid_id;
+
+    $self->stash(valid_id => $valid_id);
+
     return $self->render;
 }
 
 sub flag($self) {
     my $thread_id = $self->param('thread_id');
+    my $valid_id  = $self->thread->by_id($thread_id) ? 1 : 0;
     my $v         = $self->validation;
 
     $v->optional(captcha => 'trim')->size(4, 4)->like(qr/flag/i);
@@ -181,7 +188,10 @@ sub flag($self) {
         $self->stash(status => 400)
     }
 
-    $self->stash(thread_id => $thread_id);
+    $self->stash(status => 404, error => 'Thread not found 🤷')
+        unless $valid_id;
+
+    $self->stash(valid_id => $valid_id);
 
     return $self->render;
 }
