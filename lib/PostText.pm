@@ -24,10 +24,7 @@ sub startup($self) {
     });
 
     $self->helper(authenticator => sub ($c) {
-        state $authenticator = Crypt::Passphrase->new(
-            encoder    => 'Argon2',
-            validators => ['Bcrypt'], # For old passphrases
-          )
+        state $authenticator = Crypt::Passphrase->new(encoder => 'Argon2')
     });
 
     $self->helper(hr => sub ($c) {

@@ -15,6 +15,9 @@ COPY post_text.conf .
 # Dependency time
 RUN apt-get update
 RUN apt-get -y upgrade
+# Work around for test failing due to headers being lowercase now that
+# cpan.org is on HTTP/2
+RUN cpanm --notest Net::HTTP
 RUN cpanm --installdeps .
 
 # Test it
