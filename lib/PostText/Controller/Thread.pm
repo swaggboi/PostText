@@ -140,24 +140,13 @@ sub feed($self) {
 
 sub bump($self) {
     my $thread_id = $self->param('thread_id');
-    my $v         = $self->validation;
 
-    $v->optional(captcha => 'trim')->size(4, 4)->like(qr/bump/i);
+    $self->thread->bump($thread_id);
+    $self->flash(info => "Thread #$thread_id has been bumped. 🔝");
 
-    if ($v->is_valid) {
-        my $redirect_url =
-            $self->url_for('threads_list')->fragment('info')->to_abs;
-
-        $self->thread->bump($thread_id);
-        $self->flash(info => "Thread #$thread_id has been bumped. 🔝");
-
-        return $self->redirect_to($redirect_url);
-    }
-    elsif ($v->has_error) {
-        $self->stash(status => 400)
-    }
-
-    $self->render;
+    $self->redirect_to(
+        $self->url_for('threads_list')->fragment('info')->to_abs
+        );
 }
 
 sub flag($self) {
