@@ -3,6 +3,3 @@
 < css/elements.css
 < css/simple.css
 < css/nested.css
-
-! app.js
-< js/captcha.js
