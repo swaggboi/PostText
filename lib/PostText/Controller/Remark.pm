@@ -65,7 +65,6 @@ sub create($self) {
 
 sub flag($self) {
     my $remark_id = $self->param('remark_id');
-    my $valid_id  = $self->remark->by_id($remark_id) ? 1 : 0;
     my $v         = $self->validation;
 
     $v->optional(captcha => 'trim')->size(4, 4)->like(qr/flag/i);
@@ -86,11 +85,6 @@ sub flag($self) {
     elsif ($v->has_error) {
         $self->stash(status => 400)
     }
-
-    $self->stash(status => 404, error => 'Remark not found 🤷')
-        unless $valid_id;
-
-    $self->stash(valid_id => $valid_id);
 
     return $self->render;
 }

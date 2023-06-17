@@ -84,9 +84,12 @@ subtest 'Bumping thread', sub {
         ->element_exists('a[href*="bump"]')
         ->text_like(h2 => qr/Thread #1/);
 
+    $t->get_ok('/thread/bump/1')->status_is(200)
+        ->element_exists('p[class="stash-with-info"]')
+        ->text_like(p => qr/Thread #1 has been bumped/);
+
     $t->get_ok('/thread/bump/1'    )->status_is(200);
-    $t->get_ok('/thread/bump/65536')->status_is(404)
-        ->text_like(p => qr/Thread not found/);
+    $t->get_ok('/thread/bump/65536')->status_is(404);
     $t->get_ok('/thread/bump/1', form => {captcha => 'bump'})->status_is(200);
     $t->get_ok('/thread/bump/1', form => {captcha => 'aaaa'})->status_is(400);
 };
@@ -101,8 +104,7 @@ subtest 'Flagging thread', sub {
         ->text_like(h2 => qr/Thread #1/);
 
     $t->get_ok('/thread/flag/1'    )->status_is(200);
-    $t->get_ok('/thread/flag/65536')->status_is(404)
-        ->text_like(p => qr/Thread not found/);
+    $t->get_ok('/thread/flag/65536')->status_is(404);
     $t->get_ok('/thread/flag/1', form => {captcha => 'flag'})->status_is(200);
     $t->get_ok('/thread/flag/1', form => {captcha => 'aaaa'})->status_is(400);
 };

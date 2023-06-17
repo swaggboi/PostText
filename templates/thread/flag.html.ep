@@ -1,7 +1,7 @@
 % layout 'default';
-% title $valid_id ? "Flag Thread #$thread_id" : '?';
+% title $thread_id ? "Flag Thread #$thread_id" : '?';
 <h2 class="page-title"><%= title %></h2>
-<% if ($valid_id) { =%>
+<% if ($thread_id) { =%>
 <form class="form-body">
   <div class="form-field">
     <% if (my $error = validation->error('captcha')) { =%>

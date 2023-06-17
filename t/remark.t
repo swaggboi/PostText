@@ -49,8 +49,7 @@ subtest 'Flagging remark', sub {
         ->text_like(h2 => qr/Remark #1/);
 
     $t->get_ok('/remark/flag/1'    )->status_is(200);
-    $t->get_ok('/remark/flag/65536')->status_is(404)
-        ->text_like(p => qr/Remark not found/);
+    $t->get_ok('/remark/flag/65536')->status_is(404);
     $t->get_ok('/remark/flag/1', form => {captcha => 'flag'})->status_is(200);
     $t->get_ok('/remark/flag/1', form => {captcha => 'aaaa'})->status_is(400);
 };
