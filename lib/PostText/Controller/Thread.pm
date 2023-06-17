@@ -157,7 +157,7 @@ sub bump($self) {
         $self->stash(status => 400)
     }
 
-    return $self->render;
+    $self->render;
 }
 
 sub flag($self) {

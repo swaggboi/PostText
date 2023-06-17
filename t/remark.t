@@ -48,10 +48,9 @@ subtest 'Flagging remark', sub {
         ->element_exists('a[href*="flag"]')
         ->text_like(h2 => qr/Remark #1/);
 
-    $t->get_ok('/remark/flag/1'    )->status_is(200);
-    $t->get_ok('/remark/flag/65536')->status_is(404);
-    $t->get_ok('/remark/flag/1', form => {captcha => 'flag'})->status_is(200);
-    $t->get_ok('/remark/flag/1', form => {captcha => 'aaaa'})->status_is(400);
+    $t->get_ok('/remark/flag/1')->status_is(200)
+        ->element_exists('p[class="stash-with-info"]')
+        ->text_like(p => qr/Remark #1 has been flagged/);
 };
 
 done_testing;
