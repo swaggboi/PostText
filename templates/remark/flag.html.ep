@@ -12,5 +12,6 @@
     <%= text_field captcha => id => 'captcha' %>
   </div>
   <button type="submit" class="form-button">Confirm</button>
+  </fieldset>
 </form>
 <% } =%>
