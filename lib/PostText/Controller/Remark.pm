@@ -15,7 +15,9 @@ sub by_id($self) {
 }
 
 sub create($self) {
-    my ($thread_id, $v) = ($self->param('thread_id'), undef);
+    my $thread_id = $self->param('thread_id');
+    my $remark_id = $self->param('remark_id');
+    my $v;
 
     $v = $self->validation if $self->req->method eq 'POST';
 
@@ -50,7 +52,9 @@ sub create($self) {
     }
 
     my $thread      = $self->thread->by_id($thread_id);
-    my $last_remark = $self->remark->last_for($thread_id);
+    my $last_remark = $remark_id
+        ? $self->remark->by_id($remark_id)
+        : $self->remark->last_for($thread_id);
 
     $self->stash(
         thread      => $thread,

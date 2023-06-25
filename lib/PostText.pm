@@ -156,6 +156,7 @@ sub startup($self) {
     my $remark = $r->any('/remark');
 
     $remark->any([qw{GET POST}], '/post/:thread_id', [thread_id => qr/\d+/])
+        ->any('/:remark_id', [remark_id => qr/\d+/], {remark_id => 0})
         ->to('remark#create')
         ->name('post_remark');
 

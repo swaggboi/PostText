@@ -26,7 +26,10 @@ Now try requesting http://localhost:3000
 
 ## Testing
 
-Run the tests locally (against development environment):
+First, create a valid first thread and first remark to the first
+thread. The tests rely on the existence of thread #1 and remark #1
+being the first remark to that first thread. Then you can run the
+tests locally:
 
     prove -l
 

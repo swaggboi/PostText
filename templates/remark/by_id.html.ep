@@ -29,7 +29,8 @@
       <%= link_to Thread => single_thread =>
           {thread_id => $remark->{'thread_id'}}, (class => 'click') %>
       <%= link_to Remark => post_remark =>
-          {thread_id => $remark->{'thread_id'}}, (class => 'click') %>
+          {thread_id => $remark->{'thread_id'}, remark_id => $remark->{'id'}},
+          (class => 'click') %>
       <%= link_to Flag => flag_remark => {remark_id => $remark->{'id'}},
           (class => 'click') %>
     </nav>

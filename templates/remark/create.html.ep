@@ -48,6 +48,43 @@
   </div>
   <button type="submit" class="form-button">Post</button>
 </form>
+<%# Putting this first above the thread body (nested if, yucky sry) %>
+<% if (keys %{$last_remark}) { =%>
+<section class="pager">
+  <h3 class="pager__title">Last Remark</h3>
+  <article class="post">
+    <h4 class="post__title">
+      <span>
+        <%= $last_remark->{'date'} %>
+      </span>
+      <%= link_to "#$last_remark->{'id'}", single_remark =>
+          {remark_id => $last_remark->{'id'}}, (class => 'post__id') %>
+    </h4>
+    <h5 class="post__author"><%= $last_remark->{'author'} %></h5>
+    <div class="post__body">
+      <%== markdown $last_remark->{'body'} =%>
+    </div>
+    <nav class="post__nav">
+      <%= link_to Thread => single_thread =>
+          {thread_id => $last_remark->{'thread_id'}}, (class => 'click') %>
+      <%= link_to Remark => post_remark =>
+          {thread_id => $last_remark->{'thread_id'}}, (class => 'click') %>
+      <%= link_to Flag => flag_remark => {remark_id => $last_remark->{'id'}},
+          (class => 'click') %>
+    </nav>
+    <% if (is_mod) { =%>
+    <nav class="post__nav">
+      <%= link_to Hide => hide_remark => {remark_id => $last_remark->{'id'}},
+      (class => 'click') %>
+      <%= link_to Unhide => unhide_remark => {remark_id =>
+          $last_remark->{'id'}}, (class => 'click') %>
+      <%= link_to Unflag => unflag_remark => {remark_id =>
+          $last_remark->{'id'}}, (class => 'click') %>
+    </nav>
+    <% } =%>
+  </article>
+</section>
+<% } =%><%# Close the last_remark 'if' %>
 <section class="pager">
   <h3 class="pager__title">Thread</h3>
   <article class="post">
@@ -87,40 +124,4 @@
     <% } =%>
   </article>
 </section>
-<% } =%>
-<% if (keys %{$last_remark}) { =%>
-<section class="pager">
-  <h3 class="pager__title">Last Remark</h3>
-  <article class="post">
-    <h4 class="post__title">
-      <span>
-        <%= $last_remark->{'date'} %>
-      </span>
-      <%= link_to "#$last_remark->{'id'}", single_remark =>
-          {remark_id => $last_remark->{'id'}}, (class => 'post__id') %>
-    </h4>
-    <h5 class="post__author"><%= $last_remark->{'author'} %></h5>
-    <div class="post__body">
-      <%== markdown $last_remark->{'body'} =%>
-    </div>
-    <nav class="post__nav">
-      <%= link_to Thread => single_thread =>
-          {thread_id => $last_remark->{'thread_id'}}, (class => 'click') %>
-      <%= link_to Remark => post_remark =>
-          {thread_id => $last_remark->{'thread_id'}}, (class => 'click') %>
-      <%= link_to Flag => flag_remark => {remark_id => $last_remark->{'id'}},
-          (class => 'click') %>
-    </nav>
-    <% if (is_mod) { =%>
-    <nav class="post__nav">
-      <%= link_to Hide => hide_remark => {remark_id => $last_remark->{'id'}},
-      (class => 'click') %>
-      <%= link_to Unhide => unhide_remark => {remark_id =>
-          $last_remark->{'id'}}, (class => 'click') %>
-      <%= link_to Unflag => unflag_remark => {remark_id =>
-          $last_remark->{'id'}}, (class => 'click') %>
-    </nav>
-    <% } =%>
-  </article>
-</section>
-<% } =%>
+<% } =%><%# Close the thread 'if' %>
