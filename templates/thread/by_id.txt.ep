@@ -3,11 +3,11 @@
 %# will prevent some editors from auto-indenting the next line, hence
 %# the '#=' comment at the end of some lines.
 % if (keys %{$thread}) { #=
-%= $thread->{'id'    };
-%= $thread->{'title' };
-%= $thread->{'date'  };
-%= $thread->{'author'} . "\n";
-%= $thread->{'body'  };
+%=  $thread->{'id'    };
+%=  $thread->{'date'  };
+%== $thread->{'title' };
+%== $thread->{'author'} . "\n";
+%== $thread->{'body'  };
 % } else { #=
 %= stash 'error';
 % } #=
