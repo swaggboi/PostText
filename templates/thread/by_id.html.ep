@@ -76,7 +76,7 @@
   <% } =%>
   <% if ($last_page && $last_page != 1) { =%>
   <nav class="pager__nav">
-    <%= pagination $this_page, $last_page, ($base_path . '/{page}') %>
+    <%= pagination $this_page, $last_page, ($base_path . '/{page}#remarks') %>
   </nav>
   <% } =%>
 </section>

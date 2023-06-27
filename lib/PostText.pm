@@ -136,7 +136,7 @@ sub startup($self) {
         ->name('post_thread');
 
     $thread->any('/single/:thread_id', [thread_id => qr/\d+/])
-        ->get('/:thread_page', [thread_page => qr/\d+/], {thread_page => 1})
+        ->get('/:thread_page', [thread_page => qr/\d+/], {thread_page => 0})
         ->to('thread#by_id')
         ->name('single_thread');
 

@@ -43,8 +43,8 @@ sub by_id($self) {
     my $thread_id = $self->param('thread_id');
     my $thread    = $self->thread->by_id($thread_id);
     my $base_path = $self->match->path_for(thread_page => undef)->{'path'};
-    my $this_page = $self->param('thread_page');
-    my $last_page = $self->remark->last_page_for($thread_id);
+    my $last_page = $self->remark->last_page_for($thread_id) || 1;
+    my $this_page = $self->param('thread_page') || $last_page;
     my $remarks   = $self->remark->by_page_for($thread_id, $this_page);
 
     $self->stash(
@@ -61,7 +61,7 @@ sub by_id($self) {
     # Check for remarks or thread page number to make sure
     # remark->by_page_for did its job
     $self->stash(status => 404, error => 'Page not found 🕵️')
-        unless 1 >= $this_page || scalar @{$remarks};
+        unless scalar @{$remarks} || $this_page == $last_page;
 
     $self->render;
 }
