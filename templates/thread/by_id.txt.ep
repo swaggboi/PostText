@@ -1,10 +1,13 @@
-% if (keys %{$thread}) {
-  %= $thread->{'id'};
-  %= $thread->{'title'};
-  %= $thread->{'date'};
-  %= $thread->{'author'};
-
-  %= $thread->{'body'};
-% } else {
-  %= stash 'error';
-% }
+%# Because this is a text template (vs HTML) the whitespace is
+%# significant. Ending a line of embedded Perl with an equal sign
+%# will prevent some editors from auto-indenting the next line, hence
+%# the '#=' comment at the end of some lines.
+% if (keys %{$thread}) { #=
+%= $thread->{'id'    };
+%= $thread->{'title' };
+%= $thread->{'date'  };
+%= $thread->{'author'} . "\n";
+%= $thread->{'body'  };
+% } else { #=
+%= stash 'error';
+% } #=
