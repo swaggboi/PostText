@@ -1,0 +1,9 @@
+% if (keys %{$remark}) {
+  %= $remark->{'id'};
+  %= $remark->{'date'};
+  %= $remark->{'author'};
+
+  %= $remark->{'body'};
+% } else {
+  %= stash 'error';
+% }

@@ -61,6 +61,7 @@ tests locally:
 
 ## TODOs
 
+1. Probably gotta add a link to the 'raw' txt view somewhere
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
 
@@ -72,7 +73,4 @@ tests locally:
    NOT hidden_status` but that returns null, probably need a different
    `JOIN` which may not be worth the trouble/processing
 1. Implement tripcodes (moving this down in priority due to complexity...)
-1. Return a text response instead of HTML if a `.txt` extension [is
-   requested](https://docs.mojolicious.org/Mojolicious/Plugin/DefaultHelpers#respond_to)
-   (JSON?)
 1. Post thread via SMS (twil.io??)

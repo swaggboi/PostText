@@ -17,7 +17,14 @@ my %invalid_remark = (
 subtest 'View single remark', sub {
     $t->get_ok('/remark/single/1')->status_is(200)
         ->text_like(h2 => qr/Remark #1/)
-        ->element_exists('a[href$="/remark/post/1/1"]')
+        ->element_exists('a[href$="/remark/post/1/1"]');
+    $t->get_ok('/remark/single/65536')->status_is(404)
+        ->text_like(p => qr/Remark not found/);
+
+    $t->get_ok('/remark/single/1.txt')->status_is(200)
+        ->content_type_like(qr{text/plain});
+    $t->get_ok('/remark/single/65536.txt')->status_is(404)
+        ->content_type_like(qr{text/plain});
 };
 
 $t->ua->max_redirects(1);
@@ -29,6 +36,8 @@ subtest 'Post new remark', sub {
         ->element_exists('form textarea[name="body"]')
         ->element_exists('form button[type="submit"]' )
         ->text_like(h2 => qr/Remark on Thread #/);
+    $t->get_ok('/remark/post/65536')->status_is(404)
+        ->text_like(p => qr/Thread not found/);
     # Test the remark-to-remark thing
     $t->get_ok('/remark/post/1/1')->status_is(200)
         ->element_exists('form input[name="author"]' )

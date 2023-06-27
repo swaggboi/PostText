@@ -136,7 +136,8 @@ sub startup($self) {
         ->name('post_thread');
 
     $thread->any('/single/:thread_id', [thread_id => qr/\d+/])
-        ->get('/:thread_page', [thread_page => qr/\d+/], {thread_page => 0})
+        ->any('/:thread_page', [thread_page => qr/\d+/], {thread_page => 0})
+        ->get('/', [format => [qw{html txt}]], {format => undef})
         ->to('thread#by_id')
         ->name('single_thread');
 
@@ -160,7 +161,8 @@ sub startup($self) {
         ->to('remark#create')
         ->name('post_remark');
 
-    $remark->get('/single/:remark_id', [remark_id => qr/\d+/])
+    $remark->any('/single/:remark_id', [remark_id => qr/\d+/])
+        ->get('/', [format => [qw{html txt}]], {format => undef})
         ->to('remark#by_id')
         ->name('single_remark');
 
