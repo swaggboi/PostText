@@ -1,6 +1,8 @@
 % layout 'default';
 % title my $thread_id = $thread->{'id'} ? "Thread #$thread_id" : '?';
-<h2 class="page-title"><%= title %></h2>
+<h2 class="page-title">
+  <%= title %> <sup><%= link_to txt => url_for . '.txt' %></sup>
+</h2>
 <% if (keys %{$thread}) { =%>
 <% content_for open_graph => begin %>
   <meta property="og:type" content="article">

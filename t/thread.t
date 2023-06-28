@@ -35,7 +35,8 @@ subtest 'List threads by page', sub {
 
 subtest 'View single thread', sub {
     $t->get_ok('/thread/single/1')->status_is(200)
-        ->text_like(h2 => qr/Thread #1/);
+        ->text_like(h2 => qr/Thread #1/)
+        ->element_exists('h2 sup a[href$=".txt"]');
     $t->get_ok('/thread/single/65536')->status_is(404)
         ->text_like(p => qr/Thread not found/);
 

@@ -17,7 +17,8 @@ my %invalid_remark = (
 subtest 'View single remark', sub {
     $t->get_ok('/remark/single/1')->status_is(200)
         ->text_like(h2 => qr/Remark #1/)
-        ->element_exists('a[href$="/remark/post/1/1"]');
+        ->element_exists('a[href$="/remark/post/1/1"]')
+        ->element_exists('h2 sup a[href$=".txt"]');
     $t->get_ok('/remark/single/65536')->status_is(404)
         ->text_like(p => qr/Remark not found/);
 

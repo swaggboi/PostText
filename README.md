@@ -61,7 +61,7 @@ tests locally:
 
 ## TODOs
 
-1. Probably gotta add a link to the 'raw' txt view somewhere
+1. CAPTCHA
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
 
