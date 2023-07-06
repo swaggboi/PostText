@@ -54,3 +54,5 @@ blockquote {
     border-left: solid black;
     padding-left: 0.25em;
 }
+
+p, h1, h2, h3, h4, h5, h6, label, code { cursor: text; }
