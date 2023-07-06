@@ -61,6 +61,8 @@ tests locally:
 
 ## TODOs
 
+1. Post preview
+1. There was something else but I forget...
 1. CAPTCHA
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
