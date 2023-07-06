@@ -4,7 +4,7 @@
 # Jul 22 2022
 
 use v5.36;
-no warnings 'experimental';
+#no warnings 'experimental';
 use Mojo::File qw{curfile};
 use lib curfile->dirname->sibling('lib')->to_string;
 use Mojolicious::Commands;
