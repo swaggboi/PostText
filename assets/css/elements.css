@@ -47,7 +47,7 @@ pre > code {
     overflow-wrap: anywhere;
 }
 
-a:hover { cursor: url('/cursors/finger.cur'), auto; }
+a:hover, button { cursor: url('/cursors/finger.cur'), auto; }
 
 img { max-width: 100%; }
 
