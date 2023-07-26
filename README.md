@@ -41,15 +41,15 @@ tests locally:
 
 ### Tag
 
-    podman tag post_text git.n4vn33t.com/swag/post_text
+    podman tag post_text git.minimally.online/swaggboi/post_text
 
 ### Push
 
-    podman push git.n4vn33t.com/swag/post_text
+    podman push git.minimally.online/swaggboi/post_text
 
 ### Pull
 
-    podman pull git.n4vn33t.com/swag/post_text
+    podman pull git.minimally.online/swaggboi/post_text
 
 ### Run
 
