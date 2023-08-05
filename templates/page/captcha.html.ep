@@ -16,7 +16,7 @@
     <p class="field-with-error">Should be a single number between
       <%= $error->[2] %> and <%= $error->[3] %>.</p>
     <% } =%>
-    <%= label_for answer => "What roman numeral is this?: $roman_numeral" %>
+    <%= label_for answer => "What Roman numeral is this?: $roman_numeral" %>
     <%= number_field 'answer', (
         id       => 'answer',
         min      => 1,
