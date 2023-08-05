@@ -135,7 +135,7 @@ sub startup($self) {
 
     $r->get('/rules')->to('page#rules')->name('rules_page');
 
-    $r->get('/captcha/:return_url')
+    $r->any('/captcha/:return_url')
         ->to('page#captcha')
         ->name('captcha_page');
 
