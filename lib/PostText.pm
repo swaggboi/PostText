@@ -135,7 +135,7 @@ sub startup($self) {
 
     $r->get('/rules')->to('page#rules')->name('rules_page');
 
-    $r->any('/captcha/:return_url')
+    $r->any([qw{GET POST}], '/captcha/:return_url')
         ->to('page#captcha')
         ->name('captcha_page');
 
@@ -183,7 +183,7 @@ sub startup($self) {
         ->to('remark#by_id')
         ->name('single_remark');
 
-    $remark->get('/flag/:remark_id', [remark_id => qr/\d+/])
+    $human_remark->get('/flag/:remark_id', [remark_id => qr/\d+/])
         ->to('remark#flag')
         ->name('flag_remark');
 

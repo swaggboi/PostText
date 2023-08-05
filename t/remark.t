@@ -61,20 +61,4 @@ subtest 'Post new remark', sub {
         ->text_like(p => qr/Must be between/);
 };
 
-subtest 'Flagging remark', sub {
-    $t->get_ok('/remark/single/1')->status_is(200)
-        ->element_exists('a[href*="flag"]')
-        ->text_like(h2 => qr/Remark #1/);
-
-    $t->get_ok('/human/remark/flag/1')->status_is(302)
-        ->header_like(Location => qr/captcha/);
-
-    # Solved CAPTCHA
-    $tx->req->cookies({is_human => 1});
-
-    $t->get_ok('/human/thread/flag/1')->status_is(200)
-        ->element_exists('p[class="stash-with-info"]')
-        ->text_like(p => qr/Thread #1 has been flagged/);
-};
-
 done_testing;

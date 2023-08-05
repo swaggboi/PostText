@@ -9,3 +9,4 @@ requires 'CSS::Minifier::XS';
 requires 'Text::Markdown';
 requires 'HTML::Restrict';
 requires 'IO::Socket::SSL';
+requires 'Roman::Unicode';

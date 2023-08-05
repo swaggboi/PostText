@@ -33,7 +33,8 @@ sub captcha($self) {
             }
             else {
                 $self->stash(
-                    error => 'Sounds like something a robot would say...'
+                    status => 400,
+                    error  => 'Sounds like something a robot would say...'
                     )
             }
         }

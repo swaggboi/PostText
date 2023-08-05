@@ -13,8 +13,8 @@
 <form method="post" class="form-body">
   <div class="form-field">
     <% if (my $error = validation->error('answer')) { =%>
-    <p class="field-with-error">Must be between <%= $error->[2] %>
-      and <%= $error->[3] %> characters.</p>
+    <p class="field-with-error">Should be a single number between
+      <%= $error->[2] %> and <%= $error->[3] %>.</p>
     <% } =%>
     <%= label_for answer => "What roman numeral is this?: $roman_numeral" %>
     <%= text_field 'answer', (
