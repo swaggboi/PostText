@@ -1,0 +1,29 @@
+% layout 'default';
+% title 'CAPTCHA';
+% content_for open_graph => begin
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="What are you?">
+% end
+% content_for twitter_card => begin
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="What are you?">
+% end
+<h2 class="page-title"><%= title %></h2>
+<form method="post" class="form-body">
+  <div class="form-field">
+    <% if (my $error = validation->error('answer')) { =%>
+    <p class="field-with-error">Must be between <%= $error->[2] %>
+      and <%= $error->[3] %> characters.</p>
+    <% } =%>
+    <%#= label_for answer => "What number is this?: $roman_number" %>
+    <%= text_field 'answer', (
+        id        => 'answer',
+        maxlength => 1,
+        minlength => 1,
+        required  => undef
+    ) %>
+  </div>
+  <%= hidden_field url => $return_url, id => 'url' %>
+  <button type="submit" class="form-button">Answer</button>
+</form>

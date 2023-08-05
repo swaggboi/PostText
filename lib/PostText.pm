@@ -3,6 +3,7 @@ package PostText;
 # Sep 22 2022
 
 use Mojo::Base 'Mojolicious', -signatures;
+use Mojo::Util qw{b64_encode gzip};
 use Mojo::Pg;
 use Crypt::Passphrase;
 use Text::Markdown qw{markdown};
@@ -109,6 +110,16 @@ sub startup($self) {
         1;
     });
 
+    # For CAPTCHA protected routes
+    my $human = $r->under('/human', sub ($c) {
+        return 1 if $c->session('is_human');
+
+        return $c->redirect_to(
+            captcha_page => return_url =>
+                b64_encode gzip $c->url_for->to_abs->to_string
+          ), undef;
+    });
+
     # Root redirect
     $r->get('/', sub ($c) { $c->redirect_to('threads_list') });
 
@@ -124,8 +135,13 @@ sub startup($self) {
 
     $r->get('/rules')->to('page#rules')->name('rules_page');
 
+    $r->get('/captcha/:return_url')
+        ->to('page#captcha')
+        ->name('captcha_page');
+
     # Thread
-    my $thread = $r->any('/thread');
+    my $thread       = $r    ->any('/thread');
+    my $human_thread = $human->any('/thread');
 
     $thread->get('/list/:list_page', [list_page => qr/\d+/], {list_page => 1})
         ->to('thread#by_page')
@@ -141,20 +157,21 @@ sub startup($self) {
         ->to('thread#by_id')
         ->name('single_thread');
 
-    $thread->get('/bump/:thread_id', [thread_id => qr/\d+/])
-        ->to('thread#bump')
-        ->name('bump_thread');
-
-    $thread->get('/flag/:thread_id', [thread_id => qr/\d+/])
-        ->to('thread#flag')
-        ->name('flag_thread');
-
     $thread->get('feed', [format => [qw{rss xml}]])
         ->to('thread#feed')
         ->name('threads_feed');
 
+    $human_thread->get('/bump/:thread_id', [thread_id => qr/\d+/])
+        ->to('thread#bump')
+        ->name('bump_thread');
+
+    $human_thread->get('/flag/:thread_id', [thread_id => qr/\d+/])
+        ->to('thread#flag')
+        ->name('flag_thread');
+
     # Remark
-    my $remark = $r->any('/remark');
+    my $remark       = $r    ->any('/remark');
+    my $human_remark = $human->any('/remark');
 
     $remark->any([qw{GET POST}], '/post/:thread_id', [thread_id => qr/\d+/])
         ->any('/:remark_id', [remark_id => qr/\d+/], {remark_id => 0})
