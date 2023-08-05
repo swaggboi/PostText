@@ -17,11 +17,11 @@
       <%= $error->[2] %> and <%= $error->[3] %>.</p>
     <% } =%>
     <%= label_for answer => "What roman numeral is this?: $roman_numeral" %>
-    <%= text_field 'answer', (
-        id        => 'answer',
-        maxlength => 1,
-        minlength => 1,
-        required  => undef
+    <%= number_field 'answer', (
+        id       => 'answer',
+        min      => 1,
+        max      => 9,
+        required => undef
     ) %>
   </div>
   <%= hidden_field number => $roman_numeral, id => 'number' %>
