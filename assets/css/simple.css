@@ -64,6 +64,12 @@
   padding: 0.5em 1em;
 }
 
+.form-preview {
+    background-color: var(--dark-warm-gray);
+    border: inset var(--dark-warm-gray) 0.18rem;
+    padding: 0.25em 0.5em;
+}
+
 .form-body {
   background-color: var(--light-warm-gray);
   border: outset var(--light-warm-gray) 0.18rem;

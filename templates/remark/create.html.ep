@@ -14,6 +14,11 @@
         content="Remark on thread #<%= $thread->{'id'} %>.">
 <% end %>
 <form method="post" class="form-body">
+  <% if ($draft) { =%>
+  <div class="form-preview">
+    <%== markdown $draft =%>
+  </div>
+  <% } =%>
   <div class="form-field">
     <% if (my $error = validation->error('author')) { =%>
     <p class="field-with-error">Must be between <%= $error->[2] %>
@@ -45,6 +50,10 @@
   <div class="form-checkbox">
     <%= check_box bump => 1, id => 'bump', checked => undef %>
     <%= label_for bump => 'Bump' %>
+  </div>
+  <div class="form-checkbox">
+    <%= check_box preview => 1, id => 'preview' %>
+    <%= label_for preview => 'Preview' %>
   </div>
   <button type="submit" class="form-button">Post</button>
 </form>
