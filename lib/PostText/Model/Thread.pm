@@ -22,7 +22,8 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
                )
         VALUES (?, ?, ?, ?, ?)
      RETURNING thread_id;
-    END_SQL
+     END_SQL
+    # The indented heredoc got a little confused by this one...
 }
 
 sub by_page($self, $this_page = 1) {

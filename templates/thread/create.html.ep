@@ -11,6 +11,11 @@
 % end
 <h2 class="page-title"><%= title %></h2>
 <form method="post" class="form-body">
+  <% if ($draft) { =%>
+  <div class="form-preview">
+    <%== markdown $draft =%>
+  </div>
+  <% } =%>
   <div class="form-field">
     <% if (my $error = validation->error('author')) { =%>
     <p class="field-with-error">Must be between <%= $error->[2] %>
@@ -51,6 +56,10 @@
         required  => undef,
         rows      => 6
     ) %>
+  </div>
+  <div class="form-checkbox">
+    <%= check_box preview => 1, id => 'preview' %>
+    <%= label_for preview => 'Preview' %>
   </div>
   <button type="submit" class="form-button">Post</button>
 </form>

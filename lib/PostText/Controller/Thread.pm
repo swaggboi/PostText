@@ -5,36 +5,44 @@ use Date::Format;
 use XML::RSS;
 
 sub create($self) {
-    my $v;
+    my ($v, $draft);
 
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('author')->size(1,   63);
-        $v->required('title' )->size(1,  127);
-        $v->required('body'  )->size(2, 4000);
+        $v->required('author' )->size(1,   63);
+        $v->required('title'  )->size(1,  127);
+        $v->required('body'   )->size(2, 4000);
+        $v->optional('preview');
 
         if ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
-            my $thread_author = $v->param('author');
-            my $thread_title  = $v->param('title' );
-            my $thread_body   = $v->param('body'  );
-
-            my $new_thread_id = $self->thread->create(
-                $thread_author,
-                $thread_title,
-                $thread_body
-                );
+            my $thread_author = $v->param('author' );
+            my $thread_title  = $v->param('title'  );
+            my $thread_body   = $v->param('body'   );
+            my $preview       = $v->param('preview');
 
             $self->session(author => $thread_author);
 
-            return $self->redirect_to(
-                single_thread => {thread_id => $new_thread_id}
-                );
+            unless ($preview) {
+                my $new_thread_id = $self->thread->create(
+                    $thread_author,
+                    $thread_title,
+                    $thread_body
+                    );
+
+                return $self->redirect_to(
+                    single_thread => {thread_id => $new_thread_id}
+                    );
+            }
+
+            $draft = $thread_body;
         }
     }
+
+    $self->stash(draft => $draft);
 
     return $self->render;
 }
