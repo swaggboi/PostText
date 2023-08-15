@@ -75,3 +75,9 @@ tests locally:
    `JOIN` which may not be worth the trouble/processing
 1. Implement tripcodes (moving this down in priority due to complexity...)
 1. Post thread via SMS (twil.io??)
+
+## AGPL-3.0+ANTIFA compliance
+
+- Antifa
+- Trans Rights
+- Black Lives Matter
