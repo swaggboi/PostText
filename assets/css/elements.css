@@ -47,7 +47,9 @@ pre > code {
     overflow-wrap: anywhere;
 }
 
-a:hover, button { cursor: url('/cursors/finger.cur'), auto; }
+a:hover, button, input[type="checkbox"] {
+    cursor: url('/cursors/finger.cur'), auto;
+}
 
 img { max-width: 100%; }
 
