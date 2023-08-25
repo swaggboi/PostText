@@ -12,7 +12,7 @@ sub by_id($self) {
         unless keys %{$remark};
 
     # Set filename for right-click & save-as behavior
-    if ($self->stash('format') eq 'txt') {
+    if ($self->accepts(0, 'txt')) {
         $self->res->headers->content_disposition(
             "inline; filename=remark_${remark_id}.txt"
             )

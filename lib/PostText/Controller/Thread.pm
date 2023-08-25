@@ -76,7 +76,7 @@ sub by_id($self) {
         unless scalar @{$remarks} || $this_page == $last_page;
 
     # Set filename for right-click & save-as behavior
-    if ($self->stash('format') eq 'txt') {
+    if ($self->accepts(0, 'txt')) {
         $self->res->headers->content_disposition(
             "inline; filename=thread_${thread_id}.txt"
             )
