@@ -68,6 +68,7 @@
     background-color: var(--dark-warm-gray);
     border: inset var(--dark-warm-gray) 0.18rem;
     padding: 0.25em 0.5em;
+    overflow-wrap: anywhere;
 }
 
 .form-body {
