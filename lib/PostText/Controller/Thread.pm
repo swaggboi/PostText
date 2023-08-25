@@ -75,6 +75,13 @@ sub by_id($self) {
     $self->stash(status => 404, error => 'Page not found 🕵️')
         unless scalar @{$remarks} || $this_page == $last_page;
 
+    # Set filename for right-click & save-as behavior
+    if ($self->stash('format') eq 'txt') {
+        $self->res->headers->content_disposition(
+            "inline; filename=thread_${thread_id}.txt"
+            )
+    }
+
     $self->render;
 }
 
