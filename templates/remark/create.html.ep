@@ -40,7 +40,7 @@
     <%= label_for body => 'Text' %>
     <%= text_area body => (
         id        => 'body',
-        maxlength => 4000,
+        maxlength => $body_limit,
         minlength => 2,
         required  => undef,
         rows      => 6,

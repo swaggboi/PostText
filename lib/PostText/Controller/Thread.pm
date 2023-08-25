@@ -5,14 +5,15 @@ use Date::Format;
 use XML::RSS;
 
 sub create($self) {
+    my $body_limit = $self->config->{'body_max_length'} || 4_000;
     my ($v, $draft);
 
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('author' )->size(1,   63);
-        $v->required('title'  )->size(1,  127);
-        $v->required('body'   )->size(2, 4000);
+        $v->required('author' )->size(1,          63);
+        $v->required('title'  )->size(1,         127);
+        $v->required('body'   )->size(2, $body_limit);
         $v->optional('preview');
 
         if ($v->has_error) {
@@ -42,7 +43,10 @@ sub create($self) {
         }
     }
 
-    $self->stash(draft => $draft);
+    $self->stash(
+        draft      => $draft,
+        body_limit => $body_limit
+        );
 
     return $self->render;
 }

@@ -15,15 +15,16 @@ sub by_id($self) {
 }
 
 sub create($self) {
-    my $thread_id = $self->param('thread_id');
-    my $remark_id = $self->param('remark_id');
+    my $thread_id  = $self->param('thread_id');
+    my $remark_id  = $self->param('remark_id');
+    my $body_limit = $self->config->{'body_max_length'} || 4_000;
     my ($v, $draft);
 
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('author' )->size(1,   63);
-        $v->required('body'   )->size(2, 4000);
+        $v->required('author' )->size(1,          63);
+        $v->required('body'   )->size(2, $body_limit);
         $v->optional('bump'   );
         $v->optional('preview');
 
@@ -65,7 +66,8 @@ sub create($self) {
     $self->stash(
         thread      => $thread,
         last_remark => $last_remark,
-        draft       => $draft
+        draft       => $draft,
+        body_limit  => $body_limit
         );
 
     $self->stash(status => 404, error => 'Thread not found 🤷')
