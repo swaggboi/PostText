@@ -26,7 +26,7 @@
   <p>If you manage to break something please let me know so I can fix
     it. You can complain in a <%= link_to thread => 'post_thread' %>
     or on <a
-    href="https://codeburg.org/swaggboi/PostText">git</a> if
+    href="https://git.minimally.online/swaggboi/PostText">git</a> if
     that's your sort of thing.</p>
   <h3>Flagging Posts</h3>
   <p>There is a button for users to 'flag' a post for review by a
