@@ -27,7 +27,9 @@
 }
 
 body {
-    background-image: url('/images/background_stars_anm.gif');
+    /* background-image: url('/images/background_stars_anm.gif'); */
+    /* Was feelin this for September idk */
+    background-image: url('/images/topwwbackground.gif');
     width: 95vmin;
     margin: 0 auto;
     font-family: 'w95fa', sans-serif;
@@ -51,8 +53,6 @@ a:hover, button, input[type="checkbox"] {
     cursor: url('/cursors/finger.cur'), auto;
 }
 
-img { max-width: 100%; }
-
 blockquote {
     border-left: solid black;
     padding-left: 0.25em;
@@ -62,3 +62,8 @@ blockquote {
 p, h1, h2, h3, h4, h5, h6, label, code, ul, ol { cursor: text; }
 
 ol, ul { padding-left: 1.25em; }
+
+img {
+    cursor: url('/cursors/arrow.cur'), auto;
+    max-width: 100%;
+}
