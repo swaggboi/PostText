@@ -1,0 +1,28 @@
+% layout 'default';
+% title 'Feeds';
+% content_for open_graph => begin
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta
+      property="og:description"
+      content="Post::Text is a textboard a bit like 2channel. You can post whatever you want anonymously just please mind the rules."
+  >
+% end
+% content_for twitter_card => begin
+  <meta name="twitter:title" content="<%= title %>">
+  <meta
+      name="twitter:description"
+      content="Post::Text is a textboard a bit like 2channel. You can post whatever you want anonymously just please mind the rules."
+  >
+% end
+<h2 class="page-title"><%= title %></h2>
+<main class="page-body">
+  <p>You can stay up-to-date with the latest mindless drivel by
+    subscribing to these feeds using the <a
+    href="https://duckduckgo.com/?q=feed+readers&ia=web">feed
+    reader</a> of your choice!</p>
+  <ul>
+    <li><%= link_to Threads => threads_feed => {format => 'rss'} %></li>
+    <li><%= link_to Remarks => remarks_feed => {format => 'rss'} %></li>
+  </ul>
+</main>

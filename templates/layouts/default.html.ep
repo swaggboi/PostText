@@ -40,11 +40,7 @@
     <%= link_to New   => post_thread => (class => 'click') %>
     <%= link_to About => about_page  => (class => 'click') %>
     <%= link_to Rules => rules_page  => (class => 'click') %>
-    <%= link_to RSS => threads_feed => {format => 'rss'},
-        (class => 'click') %>
-    <% if (is_mod) { =%>
-    <%= link_to Logout => mod_logout => (class => 'click') %>
-    <% } =%>
+    <%= link_to Feeds => feeds_page  => (class => 'click') %>
   </nav>
   <% if (is_mod) { =%>
   <nav class="site-nav">
@@ -52,6 +48,7 @@
     <%= link_to Flagged => flagged_list => (class => 'click') %>
     <%= link_to Hidden  => hidden_list  => (class => 'click') %>
     <%= link_to Reset   => mod_reset    => (class => 'click') %>
+    <%= link_to Logout  => mod_logout   => (class => 'click') %>
   </nav>
   <% } =%>
   <% if (is_admin) { =%>

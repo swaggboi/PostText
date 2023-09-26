@@ -8,6 +8,8 @@ sub about($self) { $self->render }
 
 sub rules($self) { $self->render }
 
+sub feeds($self) { $self->render }
+
 sub captcha($self) {
     my $v;
 

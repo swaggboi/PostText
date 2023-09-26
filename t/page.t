@@ -8,4 +8,6 @@ $t->get_ok('/about')->status_is(200)->text_like(h2 => qr/About Post::Text/);
 
 $t->get_ok('/rules')->status_is(200)->text_like(h2 => qr/The Rules/);
 
+$t->get_ok('/feeds')->status_is(200)->text_like(h2 => qr/Feeds/);
+
 done_testing;
