@@ -116,4 +116,19 @@ sub unflag($self, $remark_id) {
        END_SQL
 }
 
+sub feed($self) {
+    my $date_format = $self->date_format;
+
+    $self->pg->db->query(<<~'END_SQL', $date_format)->hashes;
+            SELECT remark_id               AS id,
+                   TO_CHAR(remark_date, ?) AS date,
+                   remark_body             AS body
+              FROM remarks
+             WHERE NOT hidden_status
+             GROUP BY remark_id
+             ORDER BY remark_date DESC
+             LIMIT 15;
+           END_SQL
+}
+
 1;

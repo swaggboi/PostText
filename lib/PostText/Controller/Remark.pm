@@ -1,6 +1,8 @@
 package PostText::Controller::Remark;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+use Date::Format;
+use XML::RSS;
 
 sub by_id($self) {
     my $remark_id = $self->param('remark_id');
@@ -97,6 +99,61 @@ sub flag($self) {
         );
 
     $self->redirect_to($redirect_url);
+}
+
+sub feed($self) {
+    my $remarks   = $self->remark->feed;
+    my $rss       = XML::RSS->new(version => '2.0');
+    my $chan_link = $self->url_for(threads_list => {list_page => 1} )->to_abs;
+    my $rss_link  = $self->url_for(remarks_feed => {format => 'rss'})->to_abs;
+    my $rss_title = 'Post::Text Remarks';
+    my $rss_image = $self->url_for('/images/icon_small.png')->to_abs;
+
+    $rss->add_module(
+        prefix => 'atom',
+        uri    => 'http://www.w3.org/2005/Atom'
+        );
+
+    $rss->channel(
+        title         => $rss_title,
+        description   => 'In UTF-8 we trust. 🫡',
+        link          => $chan_link,
+        lastBuildDate => time2str('%a, %d %b %Y %X %z', time),
+        atom          => {
+            link => {
+                href => "$rss_link", # This has to be quoted idk why
+                rel  => 'self',
+                type => 'application/rss+xml'
+            }
+        });
+
+    $rss->image(
+        title       => $rss_title,
+        url         => $rss_image,
+        link        => $chan_link,
+        width       => 144,
+        height      => 144,
+        description => 'A small nerdy anime girl'
+        );
+
+    for my $remark (@{$remarks}) {
+        my $description = $self->markdown($remark->{'body'});
+        my $item_link   = $self->url_for(
+            single_remark => {remark_id => $remark->{'id'}}
+            )->to_abs;
+
+        $rss->add_item(
+            # Maybe do like Re: $thread_title but that's too much
+            # effort tonight am lazy
+            #title       => $remark->{'title'},
+            link        => $item_link,
+            permaLink   => $item_link,
+            description => $description,
+            pubDate     => $remark->{'date'}
+            );
+    }
+
+    $self->render(text => $rss->as_string);
 }
 
 1;

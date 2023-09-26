@@ -187,6 +187,10 @@ sub startup($self) {
         ->to('remark#flag')
         ->name('flag_remark');
 
+    $remark->get('feed', [format => [qw{rss xml}]])
+        ->to('remark#feed')
+        ->name('remarks_feed');
+
     # Login/out
     $r->any([qw{GET POST}], '/login')
         ->to('moderator#login')

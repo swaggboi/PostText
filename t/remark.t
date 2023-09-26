@@ -28,6 +28,11 @@ subtest 'View single remark', sub {
         ->content_type_like(qr{text/plain});
 };
 
+subtest 'Remarks feed', sub {
+    $t->get_ok('/remark/feed.rss')->status_is(200)
+        ->content_type_is('application/rss+xml')
+};
+
 $t->ua->max_redirects(1);
 
 subtest 'Post new remark', sub {
