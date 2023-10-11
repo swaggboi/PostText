@@ -7,5 +7,14 @@ Disallow: /login
 Disallow: /logout
 Disallow: /human/
 
+User-agent: Yahoo! Slurp
+Disallow: /cursors/
+Disallow: /images/
+Disallow: /fonts/
+Disallow: /moderator/
+Disallow: /login
+Disallow: /logout
+Disallow: /human/
+
 User-agent: *
 Disallow: /
