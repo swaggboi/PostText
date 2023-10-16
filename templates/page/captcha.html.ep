@@ -18,10 +18,11 @@
     <% } =%>
     <%= label_for answer => "What Roman numeral is this?: $roman_numeral" %>
     <%= number_field 'answer', (
-        id       => 'answer',
-        min      => 1,
-        max      => 9,
-        required => undef
+        id        => 'answer',
+        min       => 1,
+        max       => 9,
+        required  => undef,
+        autofocus => undef
     ) %>
   </div>
   <%= hidden_field number => $roman_numeral, id => 'number' %>

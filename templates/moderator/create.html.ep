@@ -8,7 +8,7 @@
       and <%= $error->[3] %> characters.</p>
     <% } =%>
     <%= label_for name => 'Name' %>
-    <%= text_field name => (id => 'name') %>
+    <%= text_field name => (id => 'name', autofocus => undef) %>
   </div>
   <div class="form-field">
     <% if (my $error = validation->error('email')) { =%>

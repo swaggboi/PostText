@@ -8,7 +8,7 @@
       and <%= $error->[3] %> characters.</p>
     <% } =%>
     <%= label_for password => 'Password' %>
-    <%= password_field password => (id => 'password') %>
+    <%= password_field password => (id => 'password', autofocus => undef) %>
   </div>
   <button type="submit" class="form-button">Reset</button>
 </form>
