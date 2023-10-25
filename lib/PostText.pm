@@ -56,7 +56,7 @@ sub startup($self) {
         state $moderator = PostText::Model::Moderator->new(
             pg            => $c->pg,
             authenticator => $c->authenticator
-          )
+            )
     });
 
     $self->helper(truncate_text => sub ($c, $input_text) {
