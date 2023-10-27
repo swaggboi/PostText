@@ -8,27 +8,6 @@ has per_page => 5;
 
 has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS TZHTZM';
 
-# args: date_format, search_query, limit, offset
-# SELECT 'thread'                                               AS post_type,
-#        thread_id                                              AS post_id,
-#        TO_CHAR(thread_date, $1)                               AS post_date,
-#        thread_author                                          AS post_author,
-#        thread_body                                            AS post_body,
-#        ts_rank(search_tokens, plainto_tsquery('english', $2)) AS search_rank
-#   FROM threads
-#  WHERE search_tokens @@ plainto_tsquery('english', $2)
-#  UNION ALL
-# SELECT 'remark',
-#        remark_id,
-#        remark_date,
-#        remark_author,
-#        remark_body,
-#        ts_rank(search_tokens, plainto_tsquery('english', $2))
-#   FROM remarks
-#  WHERE search_tokens @@ plainto_tsquery('english', $2)
-#  ORDER BY search_rank DESC, post_date DESC
-#  LIMIT $3 OFFSET $4;
-
 sub search($self, $search_query, $this_page = 1) {
     my $date_format = $self->date_format;
     my $row_count   = $self->per_page;
@@ -41,18 +20,18 @@ sub search($self, $search_query, $this_page = 1) {
                TO_CHAR(thread_date, $1)                               AS post_date,
                thread_author                                          AS post_author,
                thread_body                                            AS post_body,
-               ts_rank(search_tokens, plainto_tsquery('english', $2)) AS search_rank
+               TS_RANK(search_tokens, PLAINTO_TSQUERY('english', $2)) AS search_rank
           FROM threads
-         WHERE search_tokens @@ plainto_tsquery('english', $2)
+         WHERE search_tokens @@ PLAINTO_TSQUERY('english', $2)
          UNION ALL
         SELECT 'remark',
                remark_id,
                TO_CHAR(remark_date, $1),
                remark_author,
                remark_body,
-               ts_rank(search_tokens, plainto_tsquery('english', $2))
+               TS_RANK(search_tokens, PLAINTO_TSQUERY('english', $2))
           FROM remarks
-         WHERE search_tokens @@ plainto_tsquery('english', $2)
+         WHERE search_tokens @@ PLAINTO_TSQUERY('english', $2)
          ORDER BY search_rank DESC, post_date DESC
          LIMIT $3 OFFSET $4;
        END_SQL
