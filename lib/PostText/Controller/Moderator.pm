@@ -7,7 +7,7 @@ sub flagged($self) {
     my @post_links    = map {
         $self->url_for(
             'hidden_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
-          )
+            )
     } @{$flagged_posts};
 
     $self->stash(post_links => \@post_links);
@@ -20,7 +20,7 @@ sub hidden($self) {
     my @post_links    = map {
         $self->url_for(
             'hidden_' . $_->{'type'}, $_->{'type'} . '_id' => $_->{'id'}
-          )
+            )
     } @{$hidden_posts};
 
     $self->stash(post_links => \@post_links);
