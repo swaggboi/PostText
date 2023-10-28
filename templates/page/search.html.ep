@@ -21,7 +21,8 @@
         id        => 'search',
         maxlength => 2047,
         minlength => 1,
-        required  => undef
+        required  => undef,
+        autofocus => undef
     ) %>
   </div>
   <button type="submit" class="form-button">Search</button>
