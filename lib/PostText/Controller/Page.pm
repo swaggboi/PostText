@@ -59,13 +59,19 @@ sub search($self) {
         $v->required('q'   )->size(1, 2_047);
         $v->optional('page');
 
-        $search_query   = $v->param('q');
-        $this_page      = $v->param('page') || 1;
-        $last_page      = $self->page->last_page_for($search_query);
-        $base_path      = $self->url_for->query(q => $search_query);
-        $search_results = $self->page->search($search_query, $this_page);
+        if ($v->has_error) {
+            $self->stash(status => 400)
+        }
+        else {
+            $search_query   = $v->param('q');
+            $this_page      = $v->param('page') || 1;
+            $last_page      = $self->page->last_page_for($search_query);
+            $base_path      = $self->url_for->query(q => $search_query);
+            $search_results = $self->page->search($search_query, $this_page);
 
-        $self->stash(status => 400) if $v->has_error;
+            $self->stash(status => 404, error => 'No posts found. 🔎')
+                unless scalar @{$search_results};
+        }
     }
 
     $self->stash(
