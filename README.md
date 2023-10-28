@@ -61,7 +61,7 @@ tests locally:
 
 ## TODOs
 
-1. Hide ancient posts
+1. Hide ancient posts (test this, dev DB is broken fuck)
 1. Put a link to search_page somewhere
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?

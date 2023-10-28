@@ -104,6 +104,10 @@ sub startup($self) {
         $self->page->per_page($results_per_page)
     }
 
+    if (my $max_thread_pages = $self->config->{'max_thread_pages'}) {
+        $self->thread->max_pages($max_thread_pages)
+    }
+
     $self->asset->process;
 
     push @{$self->commands->namespaces}, 'PostText::Command';
