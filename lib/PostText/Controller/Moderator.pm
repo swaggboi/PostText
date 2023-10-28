@@ -57,7 +57,7 @@ sub login($self) {
                     author   => $mod_name,
                     is_admin => $admin_status
                     );
-                $self->flash(info => "Hello, $mod_name 😎");
+                $self->flash(info => "Hello, $mod_name. 😎");
                 $self->moderator->login_timestamp($mod_id);
 
                 return $self->redirect_to('flagged_list');
@@ -77,7 +77,7 @@ sub login($self) {
 sub logout($self) {
     delete $self->session->%{qw(mod_id is_admin)};
 
-    $self->flash(info => 'Logged out successfully 👋');
+    $self->flash(info => 'Logged out successfully. 👋');
 
     $self->redirect_to('threads_list');
 }
@@ -163,7 +163,7 @@ sub create($self) {
             my $password = $v->param('password');
 
             $self->moderator->create($name, $email, $password);
-            $self->stash(info => "Created moderator account for $name 🧑‍🏭");
+            $self->stash(info => "Created moderator account for $name. 🧑‍🏭");
         }
     }
 
@@ -187,7 +187,7 @@ sub admin_reset($self) {
             my $password = $v->param('password');
 
             $self->moderator->admin_reset($email, $password);
-            $self->stash(info => "Reset password for $email 🔐");
+            $self->stash(info => "Reset password for $email. 🔐");
         }
     }
 
@@ -210,7 +210,7 @@ sub mod_reset($self) {
             my $mod_id   = $self->session->{'mod_id'};
 
             $self->moderator->mod_reset($mod_id, $password);
-            $self->flash(info => "Password has been reset 🔐");
+            $self->flash(info => "Password has been reset. 🔐");
 
             return $self->redirect_to('flagged_list');
         }
@@ -234,7 +234,7 @@ sub lock_acct($self) {
             my $email = $v->param('email');
 
             $self->moderator->lock_acct($email);
-            $self->stash(info => "Account $email has been locked 🔒");
+            $self->stash(info => "Account $email has been locked. 🔒");
         }
     }
 
@@ -256,7 +256,7 @@ sub unlock_acct($self) {
             my $email = $v->param('email');
 
             $self->moderator->unlock_acct($email);
-            $self->stash(info => "Account $email has been unlocked 🔓");
+            $self->stash(info => "Account $email has been unlocked. 🔓");
         }
     }
 
@@ -278,7 +278,7 @@ sub promote($self) {
             my $email = $v->param('email');
 
             $self->moderator->promote($email);
-            $self->stash(info => "Account $email has been promoted to admin 🧑‍🎓");
+            $self->stash(info => "Account $email has been promoted to admin. 🧑‍🎓");
         }
     }
 
@@ -300,7 +300,7 @@ sub demote($self) {
             my $email = $v->param('email');
 
             $self->moderator->demote($email);
-            $self->stash(info => "Account $email has been demoted to mod 🧒");
+            $self->stash(info => "Account $email has been demoted to mod. 🧒");
         }
     }
 
@@ -326,7 +326,7 @@ sub thread_by_id($self) {
 
     $self->stash(thread => $thread);
 
-    $self->stash(status => 404, error => 'Thread not found 🤷')
+    $self->stash(status => 404, error => 'Thread not found. 🤷')
         unless keys %{$thread};
 
     $self->render;
@@ -338,7 +338,7 @@ sub remark_by_id($self) {
 
     $self->stash(remark => $remark);
 
-    $self->stash(status => 404, error => 'Remark not found 🤷')
+    $self->stash(status => 404, error => 'Remark not found. 🤷')
         unless keys %{$remark};
 
     $self->render;
