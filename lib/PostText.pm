@@ -147,7 +147,7 @@ sub startup($self) {
     $r->get('/feeds')->to('page#feeds')->name('feeds_page');
 
     # Not-so-static but I mean they're all 'pages' c'mon
-    $r->get('/search')->to('page#search')->name('search_page');
+    $human->get('/search')->to('page#search')->name('search_page');
 
     $r->any([qw{GET POST}], '/captcha/*return_url')
         ->to('page#captcha')

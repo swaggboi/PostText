@@ -1,5 +1,14 @@
 % layout 'default';
 % title 'Search Posts';
+<% content_for open_graph => begin %>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="Search for posts.">
+<% end %>
+<% content_for twitter_card => begin %>
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="Search for posts.">
+<% end %>
 <h2 class="page-title"><%= title %></h2>
 <form method="get" class="form-body">
   <div class="form-field">
