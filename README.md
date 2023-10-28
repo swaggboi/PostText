@@ -61,7 +61,8 @@ tests locally:
 
 ## TODOs
 
-1. Full text search + archive old posts
+1. Hide ancient posts
+1. Put a link to search_page somewhere
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
 
