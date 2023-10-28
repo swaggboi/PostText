@@ -37,5 +37,28 @@ sub search($self, $search_query, $this_page = 1) {
        END_SQL
 }
 
+sub count_for($self, $search_query) {
+    $self->pg->db->query(<<~'END_SQL', $search_query)->hash->{'post_tally'}
+         SELECT COUNT(*) AS post_tally
+           FROM (SELECT thread_date AS post_date
+                   FROM threads
+                  WHERE search_tokens @@ PLAINTO_TSQUERY('english', $1)
+                  UNION ALL
+                 SELECT remark_date
+                   FROM remarks
+                  WHERE search_tokens @@ PLAINTO_TSQUERY('english', $1))
+             AS posts;
+        END_SQL
+}
+
+sub last_page_for($self, $search_query) {
+    my $post_count = $self->count_for($search_query);
+    my $last_page  = int($post_count / $self->per_page);
+
+    # Add a page for 'remainder' posts
+    $last_page++ if $post_count % $self->per_page;
+
+    return $last_page;
+}
 
 1;
