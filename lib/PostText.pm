@@ -129,7 +129,7 @@ sub startup($self) {
 
         return $c->redirect_to(
             captcha_page => return_url =>
-                b64_encode gzip $c->url_for->to_abs->to_string
+                b64_encode gzip $c->url_with->to_abs->to_string
           ), undef;
     });
 

@@ -62,7 +62,6 @@ tests locally:
 ## TODOs
 
 1. Winter/Christmas/New Years background
-1. Make CAPTCHA preserve search query
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
 
