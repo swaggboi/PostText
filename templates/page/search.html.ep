@@ -1,0 +1,60 @@
+% layout 'default';
+% title 'Search Posts';
+<% content_for open_graph => begin %>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="Search for posts.">
+<% end %>
+<% content_for twitter_card => begin %>
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="Search for posts.">
+<% end %>
+<h2 class="page-title"><%= title %></h2>
+<form method="get" class="form-body">
+  <div class="form-field">
+    <% if (my $error = validation->error('q')) { =%>
+    <p class="field-with-error">Must be between <%= $error->[2] %>
+      and <%= $error->[3] %> characters.</p>
+    <% } =%>
+    <%= label_for search => 'Search' %>
+    <%= text_field q => (
+        id        => 'search',
+        maxlength => 2047,
+        minlength => 1,
+        required  => undef,
+        autofocus => undef
+    ) %>
+  </div>
+  <button type="submit" class="form-button">Search</button>
+</form>
+<% if (scalar @{$search_results}) { =%>
+<main class="pager" id="results">
+  <h3 class="pager__title">Results</h3>
+  <% for my $result (@{$search_results}) { =%>
+  <article class="post">
+    <h4 class="post__title">
+      <span>
+        <%= $result->{'post_date'} %>
+      </span>
+      <% if ($result->{'post_type'} eq 'thread') { =%>
+      <%= link_to "#$result->{'post_id'}", single_thread =>
+        {thread_id => $result->{'post_id'}}, (class => 'post__id') %>
+      <% } else { =%>
+      <%= link_to "#$result->{'post_id'}", single_remark =>
+        {remark_id => $result->{'post_id'}}, (class => 'post__id') %>
+      <% } =%>
+    </h4>
+    <h5 class="post__author"><%= $result->{'post_author'} %></h5>
+    <div class="post__body">
+      <%== markdown $result->{'post_body'} =%>
+    </div>
+  </article>
+  <% } =%>
+  <% if ($last_page && $last_page != 1) { =%>
+  <nav class="pager__nav">
+    <%= pagination $this_page, $last_page,
+      ($base_path . '&page={page}#results') %>
+  </nav>
+  <% } =%>
+</main>
+<% } =%>

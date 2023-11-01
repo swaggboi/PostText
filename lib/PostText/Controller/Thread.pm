@@ -67,12 +67,12 @@ sub by_id($self) {
         remarks   => $remarks
         );
 
-    $self->stash(status => 404, error => 'Thread not found 🤷')
+    $self->stash(status => 404, error => 'Thread not found. 🤷')
         unless keys %{$thread};
 
     # Check for remarks or thread page number to make sure
     # remark->by_page_for did its job
-    $self->stash(status => 404, error => 'Page not found 🕵️')
+    $self->stash(status => 404, error => 'Page not found. 🕵️')
         unless scalar @{$remarks} || $this_page == $last_page;
 
     # Set filename for right-click & save-as behavior
@@ -98,7 +98,7 @@ sub by_page($self) {
         base_path => $base_path
         );
 
-    $self->stash(status => 404, error => 'Page not found 🕵️')
+    $self->stash(status => 404, error => 'Page not found. 🕵️')
         unless scalar @{$threads};
 
     $self->render;

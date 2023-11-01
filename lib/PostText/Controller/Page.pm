@@ -50,4 +50,38 @@ sub captcha($self) {
     $self->render;
 }
 
+sub search($self) {
+    my $v              = $self->validation;
+    my $search_results = [];
+    my ($search_query, $this_page, $last_page, $base_path);
+
+    if ($v->has_data) {
+        $v->required('q'   )->size(1, 2_047);
+        $v->optional('page');
+
+        if ($v->has_error) {
+            $self->stash(status => 400)
+        }
+        else {
+            $search_query   = $v->param('q');
+            $this_page      = $v->param('page') || 1;
+            $last_page      = $self->page->last_page_for($search_query);
+            $base_path      = $self->url_for->query(q => $search_query);
+            $search_results = $self->page->search($search_query, $this_page);
+
+            $self->stash(status => 404, error => 'No posts found. 🔎')
+                unless scalar @{$search_results};
+        }
+    }
+
+    $self->stash(
+        this_page      => $this_page,
+        last_page      => $last_page,
+        base_path      => $base_path,
+        search_results => $search_results
+        );
+
+    $self->render;
+}
+
 1;

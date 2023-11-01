@@ -13,6 +13,7 @@ use HTML::Restrict;
 use PostText::Model::Thread;
 use PostText::Model::Remark;
 use PostText::Model::Moderator;
+use PostText::Model::Page;
 
 sub startup($self) {
     $self->plugin('Config');
@@ -59,6 +60,10 @@ sub startup($self) {
             )
     });
 
+    $self->helper(page => sub ($c) {
+        state $moderator = PostText::Model::Page->new(pg => $c->pg)
+    });
+
     $self->helper(truncate_text => sub ($c, $input_text) {
         my $truncated_text = 299 < length($input_text)
             ? substr($input_text, 0, 299) . '…' : $input_text;
@@ -85,7 +90,7 @@ sub startup($self) {
     # Finish configuring some things
     $self->secrets($self->config->{'secrets'}) || die $@;
 
-    $self->pg->migrations->from_dir('migrations')->migrate(14);
+    $self->pg->migrations->from_dir('migrations')->migrate(15);
 
     if (my $threads_per_page = $self->config->{'threads_per_page'}) {
         $self->thread->per_page($threads_per_page)
@@ -93,6 +98,14 @@ sub startup($self) {
 
     if (my $remarks_per_page = $self->config->{'remarks_per_page'}) {
         $self->remark->per_page($remarks_per_page)
+    }
+
+    if (my $results_per_page = $self->config->{'results_per_page'}) {
+        $self->page->per_page($results_per_page)
+    }
+
+    if (my $max_thread_pages = $self->config->{'max_thread_pages'}) {
+        $self->thread->max_pages($max_thread_pages)
     }
 
     $self->asset->process;
@@ -116,7 +129,7 @@ sub startup($self) {
 
         return $c->redirect_to(
             captcha_page => return_url =>
-                b64_encode gzip $c->url_for->to_abs->to_string
+                b64_encode gzip $c->url_with->to_abs->to_string
           ), undef;
     });
 
@@ -136,6 +149,9 @@ sub startup($self) {
     $r->get('/rules')->to('page#rules')->name('rules_page');
 
     $r->get('/feeds')->to('page#feeds')->name('feeds_page');
+
+    # Not-so-static but I mean they're all 'pages' c'mon
+    $human->get('/search')->to('page#search')->name('search_page');
 
     $r->any([qw{GET POST}], '/captcha/*return_url')
         ->to('page#captcha')

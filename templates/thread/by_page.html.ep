@@ -12,6 +12,22 @@
 <h2 class="page-title"><%= title %></h2>
 <% if (scalar @{$threads}) { =%>
 <main class="pager">
+  <%= form_for search_page => (class => 'form-body'), begin %>
+    <div class="form-field">
+      <% if (my $error = validation->error('q')) { =%>
+      <p class="field-with-error">Must be between <%= $error->[2] %>
+        and <%= $error->[3] %> characters.</p>
+    <% } =%>
+    <%= label_for search => 'Search' %>
+    <%= text_field q => (
+        id        => 'search',
+        maxlength => 2047,
+        minlength => 1,
+        required  => undef
+    ) %>
+    </div>
+    <button type="submit" class="form-button">Search</button>
+  <% end %>
   <% for my $thread (@{$threads}) { =%>
   <article class="post">
     <h3 class="post__title">

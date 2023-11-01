@@ -2,7 +2,7 @@ package PostText::Model::Thread;
 
 use Mojo::Base -base, -signatures;
 
-has [qw{pg hr}];
+has [qw{pg hr max_pages}];
 
 has per_page => 5;
 
@@ -53,11 +53,16 @@ sub by_page($self, $this_page = 1) {
 sub last_page($self) {
     my $thread_count = $self->count;
     my $last_page    = int($thread_count / $self->per_page);
+    my $max_pages    = $self->max_pages;
 
     # Add a page for 'remainder' posts
     $last_page++ if $thread_count % $self->per_page;
 
-    $last_page;
+    if ($max_pages) {
+        $last_page = $max_pages if $last_page > $max_pages
+    }
+
+    return $last_page;
 }
 
 sub count($self) {

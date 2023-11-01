@@ -61,7 +61,7 @@ tests locally:
 
 ## TODOs
 
-1. Full text search + archive old posts
+1. Winter/Christmas/New Years background
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
 

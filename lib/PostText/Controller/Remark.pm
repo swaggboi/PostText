@@ -10,7 +10,7 @@ sub by_id($self) {
 
     $self->stash(remark => $remark);
 
-    $self->stash(status => 404, error => 'Remark not found 🤷')
+    $self->stash(status => 404, error => 'Remark not found. 🤷')
         unless keys %{$remark};
 
     # Set filename for right-click & save-as behavior
@@ -79,7 +79,7 @@ sub create($self) {
         body_limit  => $body_limit
         );
 
-    $self->stash(status => 404, error => 'Thread not found 🤷')
+    $self->stash(status => 404, error => 'Thread not found. 🤷')
         unless keys %{$thread};
 
     return $self->render;
