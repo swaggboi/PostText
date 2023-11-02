@@ -32,9 +32,9 @@
   <%= asset 'app.css' %>
 </head>
 <body>
-<header class="site-header">
-  <h1 class="site-title">Post::Text</h1>
-  <nav class="site-nav">
+<header class="header">
+  <h1 class="header__title">Post::Text</h1>
+  <nav class="header__nav">
     <%= link_to List => threads_list => {list_page => 1},
         (class => 'click') %>
     <%= link_to New   => post_thread => (class => 'click') %>
@@ -43,7 +43,7 @@
     <%= link_to Feeds => feeds_page  => (class => 'click') %>
   </nav>
   <% if (is_mod) { =%>
-  <nav class="site-nav">
+  <nav class="header__nav header__nav--moderator">
     <span>Moderate:</span>
     <%= link_to Flagged => flagged_list => (class => 'click') %>
     <%= link_to Hidden  => hidden_list  => (class => 'click') %>
@@ -52,7 +52,7 @@
   </nav>
   <% } =%>
   <% if (is_admin) { =%>
-  <nav class="site-nav">
+  <nav class="header__nav header__nav--moderator">
     <span>Admin:</span>
     <%= link_to Create  => create_mod   => (class => 'click') %>
     <%= link_to Reset   => admin_reset  => (class => 'click') %>
@@ -62,20 +62,18 @@
     <%= link_to Demote  => demote_admin => (class => 'click') %>
   </nav>
   <% } =%>
-  <%= form_for search_page => (class => 'search-body'), begin %>
-    <div class="search-field">
-      <% if (my $error = validation->error('q')) { =%>
-      <p class="field-with-error">Must be between <%= $error->[2] %>
-        and <%= $error->[3] %> characters.</p>
-      <% } =%>
-      <%= text_field q => (
-          id        => 'search',
-          maxlength => 2047,
-          minlength => 1,
-          required  => undef
-      ) %>
-      <button type="submit" class="search-button">Search</button>
-    </div>
+  <%= form_for search_page => (class => 'header__search'), begin %>
+    <% if (my $error = validation->error('q')) { =%>
+    <p class="field-with-error">Must be between <%= $error->[2] %>
+      and <%= $error->[3] %> characters.</p>
+    <% } =%>
+    <%= text_field q => (
+        id        => 'search',
+        maxlength => 2047,
+        minlength => 1,
+        required  => undef
+    ) %>
+    <button type="submit" class="search-button">Search</button>
   <% end %>
 </header>
 <% if (flash 'error') { =%>
