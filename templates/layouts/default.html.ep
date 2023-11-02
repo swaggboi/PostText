@@ -62,6 +62,21 @@
     <%= link_to Demote  => demote_admin => (class => 'click') %>
   </nav>
   <% } =%>
+  <%= form_for search_page => (class => 'search-body'), begin %>
+    <div class="search-field">
+      <% if (my $error = validation->error('q')) { =%>
+      <p class="field-with-error">Must be between <%= $error->[2] %>
+        and <%= $error->[3] %> characters.</p>
+      <% } =%>
+      <%= text_field q => (
+          id        => 'search',
+          maxlength => 2047,
+          minlength => 1,
+          required  => undef
+      ) %>
+      <button type="submit" class="search-button">Search</button>
+    </div>
+  <% end %>
 </header>
 <% if (flash 'error') { =%>
 <p class="stash-with-error" id="error"><%= flash 'error' %></p>

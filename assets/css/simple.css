@@ -119,6 +119,38 @@
     background-color: var(--dark-blue);
 }
 
+.search-body {
+  background-color: var(--light-warm-gray);
+  border: outset var(--light-warm-gray) 0.18rem;
+  padding: 0.5em 0.5em;
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+  margin-top: 0.25em;
+}
+
+.search-field {
+    display: flex;
+    flex-flow: row;
+    gap: 0;
+}
+
+#search { width: 100%; }
+
+.search-button {
+    border: outset var(--light-blue) 0.18rem;
+    background-color: var(--light-blue);
+    text-align: left;
+    color: black;
+}
+
+.search-button::first-letter { text-decoration: underline; }
+
+.search-button:active {
+    border: inset var(--dark-blue) 0.18rem;
+    background-color: var(--dark-blue);
+}
+
 .field-with-error {
     border: dashed var(--highlight-red);
     padding: 0.5em 0.25em;

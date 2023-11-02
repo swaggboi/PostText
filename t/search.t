@@ -18,14 +18,11 @@ subtest 'Search after CAPTCHA', sub {
         ->status_is(302)
         ->header_like(Location => qr{human/search});
 
-    $t->get_ok('/human/search')->status_is(200)
-        ->text_like(h2 => qr/Search Posts/);
+    $t->get_ok('/human/search?q=lmao')->status_is(200)
+        ->text_like(h2 => qr/Search Results/);
 
     $t->get_ok('/human/search?q=aaaaaaaaaa')->status_is(404)
         ->text_like(p => qr/No posts found/);
-
-    $t->get_ok('/human/search?q=lmao')->status_is(200)
-        ->text_like(h3 => qr/Results/);
 
     $t->get_ok("/human/search?q=$invalid_query")->status_is(400)
         ->text_like(p => qr/Must be between/);

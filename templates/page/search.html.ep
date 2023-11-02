@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Search Posts';
+% title 'Search Results';
 <% content_for open_graph => begin %>
   <meta property="og:type" content="website">
   <meta property="og:title" content="<%= title %>">
@@ -10,26 +10,8 @@
   <meta name="twitter:description" content="Search for posts.">
 <% end %>
 <h2 class="page-title"><%= title %></h2>
-<form method="get" class="form-body">
-  <div class="form-field">
-    <% if (my $error = validation->error('q')) { =%>
-    <p class="field-with-error">Must be between <%= $error->[2] %>
-      and <%= $error->[3] %> characters.</p>
-    <% } =%>
-    <%= label_for search => 'Search' %>
-    <%= text_field q => (
-        id        => 'search',
-        maxlength => 2047,
-        minlength => 1,
-        required  => undef,
-        autofocus => undef
-    ) %>
-  </div>
-  <button type="submit" class="form-button">Search</button>
-</form>
 <% if (scalar @{$search_results}) { =%>
 <main class="pager" id="results">
-  <h3 class="pager__title">Results</h3>
   <% for my $result (@{$search_results}) { =%>
   <article class="post">
     <h4 class="post__title">
