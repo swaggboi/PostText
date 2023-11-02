@@ -98,8 +98,9 @@
 .search-button {
     border: outset var(--light-blue) 0.18rem;
     background-color: var(--light-blue);
-    text-align: left;
+    text-align: center;
     color: black;
+    padding: 0 1em;
 }
 
 .search-button::first-letter { text-decoration: underline; }
