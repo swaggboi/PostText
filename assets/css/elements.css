@@ -37,6 +37,8 @@ body {
     width: 95vmin;
     margin: 0 auto;
     font-family: 'w95fa', sans-serif;
+    /* Always show scroll bar otherwise content shifts about */
+    overflow: scroll;
 }
 
 code {
