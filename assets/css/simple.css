@@ -135,7 +135,10 @@
     gap: 0;
 }
 
-#search { width: 100%; }
+#search {
+    width: 100%;
+    border: inset var(--dark-warm-gray) 0.18rem;
+}
 
 .search-button {
     border: outset var(--light-blue) 0.18rem;
