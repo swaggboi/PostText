@@ -61,7 +61,6 @@ tests locally:
 
 ## TODOs
 
-1. Winter/Christmas/New Years background
 1. "All new posts flagged" mode (require approval for new posts)
 1. Tests for mod-only user?
 
@@ -69,9 +68,6 @@ tests locally:
 
 ### (Lord knows there's TODOs I could be working on...)
 
-1. Is `remark_tally` counting hidden remarks? Tried to add a `WHERE
-   NOT hidden_status` but that returns null, probably need a different
-   `JOIN` which may not be worth the trouble/processing
 1. Implement tripcodes (moving this down in priority due to complexity...)
 1. Post thread via SMS (twil.io??)
 
