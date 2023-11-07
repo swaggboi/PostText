@@ -23,6 +23,7 @@ sub search($self, $search_query, $this_page = 1) {
                TS_RANK(search_tokens, PLAINTO_TSQUERY('english', $2)) AS search_rank
           FROM threads
          WHERE search_tokens @@ PLAINTO_TSQUERY('english', $2)
+           AND NOT hidden_status
          UNION ALL
         SELECT 'remark',
                remark_id,
@@ -32,6 +33,7 @@ sub search($self, $search_query, $this_page = 1) {
                TS_RANK(search_tokens, PLAINTO_TSQUERY('english', $2))
           FROM remarks
          WHERE search_tokens @@ PLAINTO_TSQUERY('english', $2)
+           AND NOT hidden_status
          ORDER BY search_rank DESC, post_date DESC
          LIMIT $3 OFFSET $4;
        END_SQL
@@ -43,10 +45,12 @@ sub count_for($self, $search_query) {
            FROM (SELECT thread_date AS post_date
                    FROM threads
                   WHERE search_tokens @@ PLAINTO_TSQUERY('english', $1)
+                    AND NOT hidden_status
                   UNION ALL
                  SELECT remark_date
                    FROM remarks
-                  WHERE search_tokens @@ PLAINTO_TSQUERY('english', $1))
+                  WHERE search_tokens @@ PLAINTO_TSQUERY('english', $1)
+                    AND NOT hidden_status)
              AS posts;
         END_SQL
 }
