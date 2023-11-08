@@ -43,7 +43,7 @@ sub by_page($self, $this_page = 1) {
               FROM threads      AS t
               LEFT JOIN remarks AS r
                 ON t.thread_id = r.thread_id
-             WHERE NOT (t.hidden_status OR r.hidden_status)
+             WHERE NOT t.hidden_status
              GROUP BY t.thread_id
              ORDER BY t.bump_date DESC
              LIMIT ? OFFSET ?;
