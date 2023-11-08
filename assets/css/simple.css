@@ -18,7 +18,7 @@
     border: outset var(--light-warm-gray) 0.18rem;
     background-color: var(--light-warm-gray);
     padding: 0;
-    margin: 1.25em 0;
+    margin: 1.25em 0 1.5em 0;
 }
 
 .page-title {

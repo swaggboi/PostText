@@ -113,7 +113,7 @@
     border: outset var(--light-warm-gray) 0.18rem;
     background-color: var(--light-warm-gray);
     padding: 0 0.25em 0.5em 0.25em;
-    margin-top: 1.25em;
+    margin-top: 1.5em;
 }
 
 .header__title {
