@@ -37,6 +37,12 @@ my %invalid_remark = (
     body   => 'a'
     );
 
+# No CAPTCHA yet
+$t->get_ok('/human/thread/post')->status_is(302)
+    ->header_like(Location => qr/captcha/);
+$t->get_ok('/human/remark/post/1')->status_is(302)
+    ->header_like(Location => qr/captcha/);
+
 # Do CAPTCHA
 $t->post_ok($bump_thread_url, form => \%good_captcha)
     ->status_is(302)
