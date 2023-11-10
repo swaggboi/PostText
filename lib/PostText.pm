@@ -165,10 +165,6 @@ sub startup($self) {
         ->to('thread#by_page')
         ->name('threads_list');
 
-    $thread->any([qw{GET POST}], '/post')
-        ->to('thread#create')
-        ->name('post_thread');
-
     $thread->any('/single/:thread_id', [thread_id => qr/\d+/])
         ->any('/:thread_page', [thread_page => qr/\d+/], {thread_page => 0})
         ->get('/', [format => [qw{html txt}]], {format => undef})
@@ -187,27 +183,32 @@ sub startup($self) {
         ->to('thread#flag')
         ->name('flag_thread');
 
+    $human_thread->any([qw{GET POST}], '/post')
+        ->to('thread#create')
+        ->name('post_thread');
+
     # Remark
     my $remark       = $r    ->any('/remark');
     my $human_remark = $human->any('/remark');
-
-    $remark->any([qw{GET POST}], '/post/:thread_id', [thread_id => qr/\d+/])
-        ->any('/:remark_id', [remark_id => qr/\d+/], {remark_id => 0})
-        ->to('remark#create')
-        ->name('post_remark');
 
     $remark->any('/single/:remark_id', [remark_id => qr/\d+/])
         ->get('/', [format => [qw{html txt}]], {format => undef})
         ->to('remark#by_id')
         ->name('single_remark');
 
+    $remark->get('feed', [format => [qw{rss xml}]])
+        ->to('remark#feed')
+        ->name('remarks_feed');
+
     $human_remark->get('/flag/:remark_id', [remark_id => qr/\d+/])
         ->to('remark#flag')
         ->name('flag_remark');
 
-    $remark->get('feed', [format => [qw{rss xml}]])
-        ->to('remark#feed')
-        ->name('remarks_feed');
+    $human_remark
+        ->any([qw{GET POST}], '/post/:thread_id', [thread_id => qr/\d+/])
+        ->any('/:remark_id', [remark_id => qr/\d+/], {remark_id => 0})
+        ->to('remark#create')
+        ->name('post_remark');
 
     # Login/out
     $r->any([qw{GET POST}], '/login')
