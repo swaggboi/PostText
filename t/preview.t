@@ -4,6 +4,11 @@ use Test::Mojo;
 
 my $t = Test::Mojo->new('PostText');
 
+# For CAPTCHA
+my %good_captcha    = (answer => 1, number => 'Ⅰ');
+my $bump_thread_url =
+    '/captcha/H4sIAImTzmQAA8soKSmw0tfPyU9OzMnILy6xMjYwMNDPKM1NzNMvyShKTUzRTyrNLdA3BAD5ek7T%0AKQAAAA==%0A';
+
 my %preview_thread = (
     author  => 'Anonymous',
     title   => 'hi',
@@ -17,20 +22,25 @@ my %preview_remark = (
     preview => 1
     );
 
+# Do CAPTCHA
+$t->post_ok($bump_thread_url, form => \%good_captcha)
+    ->status_is(302)
+    ->header_like(Location => qr{human/thread/bump/1});
+
 subtest 'Check the form + button', sub {
-    $t->get_ok('/remark/post/1')->status_is(200)
+    $t->get_ok('/human/remark/post/1')->status_is(200)
         ->element_exists('input[id="preview"]');
 
-    $t->get_ok('/thread/post')->status_is(200)
+    $t->get_ok('/human/thread/post')->status_is(200)
         ->element_exists('input[id="preview"]');
 };
 
 subtest 'Submit input', sub {
-    $t->post_ok('/remark/post/1', form => \%preview_remark)
+    $t->post_ok('/human/remark/post/1', form => \%preview_remark)
         ->status_is(200)
         ->text_like(p => qr/ayy\.\.\. lmao/);
 
-    $t->post_ok('/thread/post', form => \%preview_thread)
+    $t->post_ok('/human/thread/post', form => \%preview_thread)
         ->status_is(200)
         ->text_like(p => qr/ayy\.\.\. lmao/);
 };
