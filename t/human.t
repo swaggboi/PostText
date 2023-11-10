@@ -100,5 +100,4 @@ subtest 'Flagging remark', sub {
         ->header_like(Location => qr{human/remark/flag/1});
 };
 
-
 done_testing;
