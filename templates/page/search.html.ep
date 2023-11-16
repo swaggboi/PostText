@@ -28,7 +28,7 @@
     </h4>
     <h5 class="post__author"><%= $result->{'post_author'} %></h5>
     <div class="post__body">
-      <%== markdown $result->{'post_body'} =%>
+      <%== markdown truncate_text $result->{'post_body'} =%>
     </div>
   </article>
   <% } =%>
