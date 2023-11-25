@@ -3,7 +3,7 @@
 %# will prevent some editors from auto-indenting the next line, hence
 %# the '#=' comment at the end of some lines.
 % if (keys %{$remark}) { #=
-%=  $remark->{'id'    };
+Remark #<%= $remark->{'id'} %>
 %=  $remark->{'date'  };
 %== $remark->{'author'} . "\n";
 %== $remark->{'body'  };
