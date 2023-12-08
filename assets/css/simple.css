@@ -65,6 +65,8 @@
     resize: vertical;
 }
 
+.form-field > textarea:after { cursor: ns-resize; }
+
 .form-checkbox {
     display: flex;
     flex-flow: row;
