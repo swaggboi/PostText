@@ -26,7 +26,7 @@
     <% if (299 < length $thread->{'body'}) { %>
     <details class="post__body">
       <summary>
-        [Show All]<%== markdown truncate_text $thread->{'body'} =%>
+        <%== truncate_text $thread->{'body'} =%>
       </summary>
       <%== markdown $thread->{'body'} =%>
     </details>
