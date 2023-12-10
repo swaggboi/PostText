@@ -33,7 +33,9 @@ body {
     /* Spooky time! */
     /* background-image: url('/images/halloween_background_1.gif'); */
     /* Winter/snow */
-    background-image: url('/images/jwsfp1.gif');
+    /* background-image: url('/images/jwsfp1.gif'); */
+    /* Christmas */
+    background-image: url('/images/christmas.gif');
     width: 95vmin;
     margin: 0 auto;
     font-family: 'w95fa', sans-serif;
@@ -73,3 +75,5 @@ img {
     cursor: url('/cursors/arrow.cur'), auto;
     max-width: 100%;
 }
+
+summary { cursor: pointer; }

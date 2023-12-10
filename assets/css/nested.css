@@ -91,6 +91,8 @@
     border: inset var(--dark-warm-gray) 0.18rem;
 }
 
+details[open].post__body summary { display: none; }
+
 .post__nav {
     display: flex;
     justify-content: flex-end;

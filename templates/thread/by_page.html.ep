@@ -23,9 +23,18 @@
     </h3>
     <h4 class="post__date"><%= $thread->{'date'} %></h4>
     <h5 class="post__author"><%= $thread->{'author'} %></h5>
+    <% if (299 < length $thread->{'body'}) { %>
+    <details class="post__body">
+      <summary>
+        [Show All]<%== markdown truncate_text $thread->{'body'} =%>
+      </summary>
+      <%== markdown $thread->{'body'} =%>
+    </details>
+    <% } else { =%>
     <div class="post__body">
-      <%== markdown truncate_text $thread->{'body'} =%>
+      <%== markdown $thread->{'body'} =%>
     </div>
+    <% } =%>
     <nav class="post__nav">
       <%= link_to Remark => post_remark => {thread_id => $thread->{'id'}},
           (class => 'click') %>
