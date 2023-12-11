@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Search Results';
+% title scalar @{$search_results} ? 'Search Results' : 'Search';
 <% content_for open_graph => begin %>
   <meta property="og:type" content="website">
   <meta property="og:title" content="<%= title %>">
@@ -27,9 +27,18 @@
       <% } =%>
     </h4>
     <h5 class="post__author"><%= $result->{'post_author'} %></h5>
+    <% if (299 < length $result->{'post_body'}) { =%>
+    <details class="post__body">
+      <summary>
+        <%= truncate_text $result->{'post_body'} %>
+      </summary>
+      <%== markdown $result->{'post_body'} =%>
+    </details>
+    <% } else { =%>
     <div class="post__body">
-      <%== markdown truncate_text $result->{'post_body'} =%>
+      <%== markdown $result->{'post_body'} =%>
     </div>
+    <% } =%>
   </article>
   <% } =%>
   <% if ($last_page && $last_page != 1) { =%>
