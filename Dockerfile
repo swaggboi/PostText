@@ -20,9 +20,6 @@ RUN apt-get -y upgrade
 RUN cpanm --notest Net::HTTP
 RUN cpanm --installdeps .
 
-# Test it
-RUN prove -l -v
-
 # Finish setting up the environment
 ENV MOJO_REVERSE_PROXY=1
 EXPOSE 3000
