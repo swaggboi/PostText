@@ -22,8 +22,8 @@
 }
 
 @font-face {
-    font-family: 'fsex300';
-    src: url('/fonts/fsex300.woff2') format('woff2');
+    font-family: 'vt323';
+    src: url('/fonts/vt323.woff2') format('woff2');
 }
 
 body {
@@ -46,7 +46,7 @@ body {
 code {
     background-color: black;
     color: lime;
-    font-family: "fsex300", monospace;
+    font-family: 'vt323', monospace;
 }
 
 pre > code {
@@ -57,7 +57,7 @@ pre > code {
     overflow-wrap: anywhere;
 }
 
-a:hover, button, input[type="checkbox"], summary {
+a:hover, button, input[type='checkbox'], summary {
     cursor: url('/cursors/finger.cur'), auto;
 }
 
