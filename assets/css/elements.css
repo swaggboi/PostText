@@ -55,6 +55,7 @@ pre > code {
     display: inline-block;
     width: 100%;
     overflow-wrap: anywhere;
+    box-sizing: border-box;
 }
 
 a:hover, button, input[type='checkbox'], summary {
