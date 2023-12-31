@@ -27,7 +27,7 @@
 }
 
 body {
-    /* background-image: url('/images/background_stars_anm.gif'); */
+    background-image: url('/images/background_stars_anm.gif');
     /* Was feelin this for September idk */
     /* background-image: url('/images/topwwbackground.gif'); */
     /* Spooky time! */
@@ -35,7 +35,7 @@ body {
     /* Winter/snow */
     /* background-image: url('/images/jwsfp1.gif'); */
     /* Christmas */
-    background-image: url('/images/christmas.gif');
+    /* background-image: url('/images/christmas.gif'); */
     width: 95vmin;
     margin: 0 auto;
     font-family: 'w95fa', sans-serif;
