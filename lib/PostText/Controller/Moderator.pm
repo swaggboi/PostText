@@ -344,4 +344,12 @@ sub remark_by_id($self) {
     $self->render;
 }
 
+sub list($self) {
+    my $moderators = $self->moderator->list;
+
+    $self->stash(moderators => $moderators);
+
+    $self->render;
+}
+
 1;

@@ -51,6 +51,7 @@
     <%= link_to Flagged => flagged_list => (class => 'click') %>
     <%= link_to Hidden  => hidden_list  => (class => 'click') %>
     <%= link_to Reset   => mod_reset    => (class => 'click') %>
+    <%= link_to List    => mod_list     => (class => 'click') %>
     <%= link_to Logout  => mod_logout   => (class => 'click') %>
   </nav>
   <% } =%>

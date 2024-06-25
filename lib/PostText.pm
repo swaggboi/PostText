@@ -231,6 +231,10 @@ sub startup($self) {
         ->to('moderator#mod_reset')
         ->name('mod_reset');
 
+    $moderator->get('/list')
+        ->to('moderator#list')
+        ->name('mod_list');
+
     my $mod_thread = $moderator->any('/thread');
 
     $mod_thread->get('/unflag/:thread_id', [thread_id => qr/\d+/])

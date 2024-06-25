@@ -5,8 +5,8 @@ use Test::Mojo;
 my $t = Test::Mojo->new('PostText');
 
 my %valid_login   = (
-    email    => 'swaggboi@slackware.uk',
-    password => 'i like to party'
+    email    => 'swaggboi@gangstalking.agency',
+    password => 'i also like to party'
     );
 
 my %invalid_login = (
@@ -114,6 +114,12 @@ subtest Login => sub {
             ->element_exists('form input[name="password"]')
     };
 
+    subtest List => sub {
+        $t->get_ok('/moderator/list')
+            ->status_is(200)
+            ->text_like(h2 => qr/Moderator List/)
+    };
+
     # Mod session ends
     $t->get_ok('/logout')
         ->status_is(302)
@@ -127,6 +133,7 @@ subtest Login => sub {
             ->element_exists_not('a[href*="/unflag/1"]'         )
             ->element_exists_not('a[href*="/moderator/flagged"]')
             ->element_exists_not('a[href*="/moderator/hidden"]' )
+            ->element_exists_not('a[href*="/moderator/list"]'   )
             ->element_exists_not('a[href*="/logout"]'           );
 
         $t->get_ok('/remark/single/1')
@@ -136,6 +143,7 @@ subtest Login => sub {
             ->element_exists_not('a[href*="/unflag/1"]'         )
             ->element_exists_not('a[href*="/moderator/flagged"]')
             ->element_exists_not('a[href*="/moderator/hidden"]' )
+            ->element_exists_not('a[href*="/moderator/list"]'   )
             ->element_exists_not('a[href*="/logout"]'           );
 
         $t->get_ok('/moderator/flagged')
@@ -143,6 +151,10 @@ subtest Login => sub {
             ->header_like(Location => qr/login/);
 
         $t->get_ok('/moderator/hidden')
+            ->status_is(302)
+            ->header_like(Location => qr/login/);
+
+        $t->get_ok('/moderator/list')
             ->status_is(302)
             ->header_like(Location => qr/login/);
     };

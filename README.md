@@ -62,7 +62,6 @@ tests locally:
 
 1. Test JS with LibreJS or something like that (I don't like RMS I
    just want free JS!!)
-1. Tests for mod-only user?
 
 ## Crazy future ideas
 
@@ -71,6 +70,7 @@ tests locally:
 1. Is `remark_tally` counting hidden remarks? Tried to add a `WHERE
    NOT hidden_status` but that returns null, probably need a different
    `JOIN` which may not be worth the trouble/processing
+1. Nah it needs a subquery instead of just `COUNT(*)` (dude trust me)
 1. Implement tripcodes (moving this down in priority due to complexity...)
 1. Post thread via SMS (twil.io??)
 

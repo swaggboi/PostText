@@ -259,4 +259,19 @@ sub remark_by_id($self, $remark_id) {
        END_SQL
 }
 
+sub list($self) {
+    my $date_format = $self->date_format;
+
+    $self->pg->db->query(<<~'END_SQL', $date_format)->hashes;
+        SELECT moderator_id                 AS id,
+               moderator_name               AS name,
+               email_addr,
+               TO_CHAR(creation_date,   $1) AS creation_date,
+               TO_CHAR(last_login_date, $1) AS last_login_date,
+               lock_status,
+               admin_status
+          FROM moderators;
+        END_SQL
+}
+
 1;

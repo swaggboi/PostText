@@ -1,0 +1,29 @@
+% layout 'default';
+% title 'Moderator List';
+<h2 class="page-title"><%= title %></h2>
+<main class="page-body">
+  <% if (scalar @{$moderators}) { =%>
+  <table>
+    <tr>
+      <th>Moderator ID</th>
+      <th>Moderator Name</th>
+      <th>Email Address</th>
+      <th>Creation Date</th>
+      <th>Last Login Date</th>
+      <th>Locked?</th>
+      <th>Admin?</th>
+    </tr>
+    <% for my $moderator (@{$moderators}) { %>
+      <tr>
+        <td><%= $moderator->{'id'             } %></td>
+        <td><%= $moderator->{'name'           } %></td>
+        <td><%= $moderator->{'email_addr'     } %></td>
+        <td><%= $moderator->{'creation_date'  } %></td>
+        <td><%= $moderator->{'last_login_date'} %></td>
+        <td><%= $moderator->{'lock_status'    } %></td>
+        <td><%= $moderator->{'admin_status'   } %></td>
+      </tr>
+    <% } %>
+  </table>
+  <% } =%>
+</main>
