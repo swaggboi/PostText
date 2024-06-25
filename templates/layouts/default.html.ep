@@ -29,9 +29,10 @@
         content="<%= url_for('/images/logo.png')->to_abs %>">
   <meta name="twitter:image:alt"
         content="Post::Text logo; a small nerdy anime girl giving a V sign">
-  <%= stylesheet '/css/elements.css' %>
-  <%= stylesheet '/css/simple.css'   %>
-  <%= stylesheet '/css/nested.css'   %>
+  <%= stylesheet '/css/elements.css'                 %>
+  <%= stylesheet '/css/simple.css'                   %>
+  <%= stylesheet '/css/nested.css'                   %>
+  <%= javascript '/js/background.js', defer => undef %>
 </head>
 <body>
 <header class="header">
