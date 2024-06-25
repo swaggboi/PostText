@@ -6,5 +6,4 @@ requires 'Date::Format';
 requires 'XML::RSS';
 requires 'Text::Markdown';
 requires 'HTML::Restrict';
-#requires 'IO::Socket::SSL';
 requires 'Roman::Unicode';
