@@ -19,8 +19,7 @@ should be YAML or XML or something better suited.
 
 Run it in development mode:
 
-    morbo -w assets/css/ -w public/ -w lib/ -w templates/ \
-        -w script/ script/post_text
+    morbo -w public/ -w lib/ -w templates/ -w script/ script/post_text
 
 Now try requesting http://localhost:3000
 
@@ -64,7 +63,6 @@ tests locally:
 1. Re-visit this TODO list because it doesn't seem like I'm gunna
    bother with all new posts flagged mode lmao. There's a CAPTCHA now
    so it's not as painfully open...
-1. Deprecate/remove AssetPack dependency
 1. Automate the holiday backgrounds with JS
 1. Test JS with LibreJS or something like that (I don't like RMS I
    just want free JS!!)
