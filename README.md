@@ -60,7 +60,6 @@ tests locally:
 
 ## TODOs
 
-1. Automate the holiday backgrounds with JS
 1. Test JS with LibreJS or something like that (I don't like RMS I
    just want free JS!!)
 1. Tests for mod-only user?
