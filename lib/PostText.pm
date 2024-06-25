@@ -18,7 +18,6 @@ use PostText::Model::Page;
 sub startup($self) {
     $self->plugin('Config');
     $self->plugin('TagHelpers::Pagination');
-    $self->plugin(AssetPack => {pipes => [qw{Css Combine}]});
 
     # Helpers
     $self->helper(pg => sub ($c) {
@@ -107,8 +106,6 @@ sub startup($self) {
     if (my $max_thread_pages = $self->config->{'max_thread_pages'}) {
         $self->thread->max_pages($max_thread_pages)
     }
-
-    $self->asset->process;
 
     push @{$self->commands->namespaces}, 'PostText::Command';
 
