@@ -60,13 +60,6 @@ tests locally:
 
 ## TODOs
 
-1. Test JS with LibreJS or something like that (I don't like RMS I
-   just want free JS!!)
-
-## Crazy future ideas
-
-### (Lord knows there's TODOs I could be working on...)
-
 1. Is `remark_tally` counting hidden remarks? Tried to add a `WHERE
    NOT hidden_status` but that returns null, probably need a different
    `JOIN` which may not be worth the trouble/processing

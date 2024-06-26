@@ -13,17 +13,17 @@
       <th>Locked?</th>
       <th>Admin?</th>
     </tr>
-    <% for my $moderator (@{$moderators}) { %>
-      <tr>
-        <td><%= $moderator->{'id'             } %></td>
-        <td><%= $moderator->{'name'           } %></td>
-        <td><%= $moderator->{'email_addr'     } %></td>
-        <td><%= $moderator->{'creation_date'  } %></td>
-        <td><%= $moderator->{'last_login_date'} %></td>
-        <td><%= $moderator->{'lock_status'    } %></td>
-        <td><%= $moderator->{'admin_status'   } %></td>
-      </tr>
-    <% } %>
+    <% for my $moderator (@{$moderators}) { =%>
+    <tr>
+      <td><%= $moderator->{'id'             } %></td>
+      <td><%= $moderator->{'name'           } %></td>
+      <td><%= $moderator->{'email_addr'     } %></td>
+      <td><%= $moderator->{'creation_date'  } %></td>
+      <td><%= $moderator->{'last_login_date'} %></td>
+      <td><%= $moderator->{'lock_status'    } %></td>
+      <td><%= $moderator->{'admin_status'   } %></td>
+    </tr>
+    <% } =%>
   </table>
   <% } =%>
 </main>
