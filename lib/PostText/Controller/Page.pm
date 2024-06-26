@@ -10,6 +10,8 @@ sub rules($self) { $self->render }
 
 sub feeds($self) { $self->render }
 
+sub javascript($self) { $self->render }
+
 sub captcha($self) {
     my $v;
 

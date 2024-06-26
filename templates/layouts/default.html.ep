@@ -93,6 +93,9 @@
 <%= content =%>
 <footer class="site-footer">
   <p>In UTF-8 we trust. 🫡</p>
+  <p><%= link_to javascript_page =>
+         ('data-jslicense', 1),
+         begin %>JavaScript License Information<% end %></p>
 </footer>
 </body>
 </html>

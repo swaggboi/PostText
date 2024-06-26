@@ -147,6 +147,8 @@ sub startup($self) {
 
     $r->get('/feeds')->to('page#feeds')->name('feeds_page');
 
+    $r->get('/javascript')->to('page#javascript')->name('javascript_page');
+
     # Not-so-static but I mean they're all 'pages' c'mon
     $human->get('/search')->to('page#search')->name('search_page');
 

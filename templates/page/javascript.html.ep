@@ -1,0 +1,28 @@
+% layout 'default';
+% title 'JavaScript License Information';
+% content_for open_graph => begin
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta
+      property="og:description"
+      content="Post::Text is a textboard a bit like 2channel. You can post whatever you want anonymously just please mind the rules."
+  >
+% end
+% content_for twitter_card => begin
+  <meta name="twitter:title" content="<%= title %>">
+  <meta
+      name="twitter:description"
+      content="Post::Text is a textboard a bit like 2channel. You can post whatever you want anonymously just please mind the rules."
+  >
+% end
+<h2 class="page-title"><%= title %></h2>
+<main class="page-body">
+  <table id="jslicense-labels1">
+    <tr>
+      <td><%= link_to 'background.js', '/js/background.js' %></td>
+      <td><%= link_to 'http://www.gnu.org/licenses/gpl-3.0.html',
+              begin%>GNU General Public License 3.0 or later<% end %></td>
+      <td><%= link_to 'background.js', '/js/background.js' %></td>
+    </tr>
+  </table>
+</main>
