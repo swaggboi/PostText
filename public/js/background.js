@@ -9,7 +9,10 @@
         case 0:
             setImage('/images/jwsfp1.gif');
             break;
-        case 3:
+        case 1:
+            setImage('/images/outofthedarknessbkgtile.gif');
+            break;
+        case 2:
             setImage('/images/background2.gif');
             break;
         case 9:
