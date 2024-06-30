@@ -60,12 +60,7 @@ tests locally:
 
 ## TODOs
 
-1. Is `remark_tally` counting hidden remarks? Tried to add a `WHERE
-   NOT hidden_status` but that returns null, probably need a different
-   `JOIN` which may not be worth the trouble/processing
-1. Nah it needs a subquery instead of just `COUNT(*)` (dude trust me)
-1. Implement tripcodes (moving this down in priority due to complexity...)
-1. Post thread via SMS (twil.io??)
+- Tripcodes/PGP signing somehow perhaps...
 
 ## AGPL-3.0+ANTIFA compliance
 

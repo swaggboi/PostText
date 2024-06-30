@@ -44,6 +44,7 @@ sub by_page($self, $this_page = 1) {
               LEFT JOIN remarks AS r
                 ON t.thread_id = r.thread_id
              WHERE NOT t.hidden_status
+               AND NOT r.hidden_status
              GROUP BY t.thread_id
              ORDER BY t.bump_date DESC
              LIMIT ? OFFSET ?;
