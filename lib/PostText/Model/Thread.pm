@@ -38,7 +38,11 @@ sub by_page($self, $this_page = 1) {
                    t.thread_author           AS author,
                    t.thread_title            AS title,
                    t.thread_body             AS body,
-                   COUNT(r.*)                AS remark_tally,
+                   SUM(CASE
+                            WHEN NOT r.hidden_status
+                            THEN 1
+                            ELSE 0
+                       END)                  AS remark_tally,
                    t.bump_tally              AS bump_tally
               FROM threads      AS t
               LEFT JOIN remarks AS r
