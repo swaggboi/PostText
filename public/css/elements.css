@@ -76,3 +76,5 @@ table, th, td {
     border: 0.15em dotted black;
     text-align: center;
 }
+
+summary { margin: 1em 0 1em 0; }
