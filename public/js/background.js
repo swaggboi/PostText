@@ -15,6 +15,7 @@
         case 2:
             setImage('/images/background2.gif');
             break;
+        case 8:
         case 9:
             setImage('/images/halloween_background_1.gif');
             break;
