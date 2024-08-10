@@ -61,6 +61,7 @@ tests locally:
 
 ## TODOs
 
+- Implement [CSRF](https://docs.mojolicious.org/Mojolicious/Guides/Rendering#Cross-site-request-forgery)
 - Tripcodes/PGP signing somehow perhaps...
 
 ## AGPL-3.0+ANTIFA compliance
