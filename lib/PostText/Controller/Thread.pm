@@ -15,8 +15,15 @@ sub create($self) {
         $v->required('title'  )->size(1,         127);
         $v->required('body'   )->size(2, $body_limit);
         $v->optional('preview');
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                );
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
