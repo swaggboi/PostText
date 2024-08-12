@@ -40,6 +40,11 @@ subtest 'Submit input', sub {
         ->status_is(200)
         ->text_like(p => qr/ayy\.\.\. lmao/);
 
+    $t->get_ok('/human/thread/post');
+
+    $preview_thread{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok('/human/thread/post', form => \%preview_thread)
         ->status_is(200)
         ->text_like(p => qr/ayy\.\.\. lmao/);
