@@ -61,6 +61,7 @@ tests locally:
 
 ## TODOs
 
+- Redirect for `/thread/post`
 - Implement [CSRF](https://docs.mojolicious.org/Mojolicious/Guides/Rendering#Cross-site-request-forgery)
 - Tripcodes/PGP signing somehow perhaps...
 
