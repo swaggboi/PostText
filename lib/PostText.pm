@@ -182,6 +182,11 @@ sub startup($self) {
         ->to('thread#flag')
         ->name('flag_thread');
 
+    # Redirect for this old path to the new one
+    $thread->any([qw{GET POST}], '/post', sub ($c) {
+        $c->redirect_to('post_thread')
+    });
+
     $human_thread->any([qw{GET POST}], '/post')
         ->to('thread#create')
         ->name('post_thread');
