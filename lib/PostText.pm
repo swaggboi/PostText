@@ -19,6 +19,12 @@ sub startup($self) {
     $self->plugin('Config');
     $self->plugin('TagHelpers::Pagination');
 
+    # Alpha testing Slapbird APM
+    if (my $slapbirdapm_api_key = $self->config->{'slapbirdapm_api_key'}) {
+        $self->plugin('SlapbirdAPM', key => $slapbirdapm_api_key)
+            if $self->mode eq 'production'
+    }
+
     # Helpers
     $self->helper(pg => sub ($c) {
         state $pg = Mojo::Pg->new($c->config->{$self->mode}{'pg_string'})
