@@ -8,6 +8,12 @@ my %good_human    = (answer => 1, number => 'Ⅰ');
 my $search_url    =
     '/captcha/H4sIABJ8PGUAA8soKSmw0tfPyU9OzMnILy6xMjYwMNDPKM1NzNMvTk0sSs4AAPrUR3kiAAAA%0A';
 
+subtest 'Search form', sub {
+    $t->get_ok('/thread/list')
+        ->element_exists('form input[name="q"]'      )
+        ->element_exists('form button[type="submit"]');
+};
+
 subtest 'Search before CAPTCHA', sub {
     $t->get_ok('/human/search')->status_is(302)
         ->header_like(Location => qr/captcha/);
