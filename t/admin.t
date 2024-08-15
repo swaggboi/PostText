@@ -10,6 +10,11 @@ my %valid_login   = (
     );
 
 subtest Login => sub {
+    $t->get_ok('/login');
+
+    $valid_login{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok('/login', form => \%valid_login)
         ->status_is(302)
         ->header_like(Location => qr{moderator/flagged});
@@ -31,9 +36,10 @@ subtest Login => sub {
         $t->get_ok('/moderator/admin/create')
             ->status_is(200)
             ->text_like(h2 => qr/Create Moderator/)
-            ->element_exists('form input[name="name"]'    )
-            ->element_exists('form input[name="email"]'   )
-            ->element_exists('form input[name="password"]')
+            ->element_exists('form input[name="name"]'      )
+            ->element_exists('form input[name="email"]'     )
+            ->element_exists('form input[name="password"]'  )
+            ->element_exists('form input[name="csrf_token"]')
     };
 
     subtest Reset => sub {
@@ -43,6 +49,7 @@ subtest Login => sub {
             ->element_exists('a[href*="/moderator/admin/reset"]')
             ->element_exists('form input[name="email"]'         )
             ->element_exists('form input[name="password"]'      )
+            ->element_exists('form input[name="csrf_token"]'    )
     };
 
     subtest Lock => sub {
@@ -51,6 +58,7 @@ subtest Login => sub {
             ->text_like(h2 => qr/Lock Account/)
             ->element_exists('a[href*="/moderator/admin/lock"]')
             ->element_exists('form input[name="email"]'        )
+            ->element_exists('form input[name="csrf_token"]'   )
     };
 
     subtest Unlock => sub {
@@ -59,6 +67,7 @@ subtest Login => sub {
             ->text_like(h2 => qr/Unlock Account/)
             ->element_exists('a[href*="/moderator/admin/unlock"]')
             ->element_exists('form input[name="email"]'          )
+            ->element_exists('form input[name="csrf_token"]'     )
     };
 
     subtest Promote => sub {
@@ -67,6 +76,7 @@ subtest Login => sub {
             ->text_like(h2 => qr/Promote Moderator/)
             ->element_exists('a[href*="/moderator/admin/promote"]')
             ->element_exists('form input[name="email"]'           )
+            ->element_exists('form input[name="csrf_token"]'      )
     };
 
     subtest Demote => sub {
@@ -75,6 +85,7 @@ subtest Login => sub {
             ->text_like(h2 => qr/Demote Admin/)
             ->element_exists('a[href*="/moderator/admin/demote"]')
             ->element_exists('form input[name="email"]'          )
+            ->element_exists('form input[name="csrf_token"]'     )
     };
 
     # Admin session ends

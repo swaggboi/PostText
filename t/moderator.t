@@ -17,15 +17,27 @@ my %invalid_login = (
 subtest Login => sub {
     $t->get_ok('/login')
         ->status_is(200)
-        ->element_exists('form input[name="email"]')
-        ->element_exists('form input[name="password"]')
+        ->element_exists('form input[name="email"]'     )
+        ->element_exists('form input[name="password"]'  )
+        ->element_exists('form input[name="csrf_token"]')
         ->text_like(h2 => qr/Moderator Login/);
+
+    # Bad CSRF token
+    $t->post_ok('/login', form => \%valid_login)
+        ->status_is(403)
+        ->text_like(p => qr/Something went wrong/);
+
+    $invalid_login{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
 
     $t->post_ok('/login', form => \%invalid_login)
         ->status_is(403)
         ->element_exists('form input[name="email"]')
         ->element_exists('form input[name="password"]')
         ->text_like(p => qr/Invalid login/);
+
+    $valid_login{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
 
     $t->post_ok('/login', form => \%valid_login)
         ->status_is(302)

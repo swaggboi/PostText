@@ -25,11 +25,29 @@ subtest 'Bumping thread', sub {
     $t->get_ok('/human/thread/bump/1')->status_is(302)
         ->header_like(Location => qr/captcha/);
 
+    $t->get_ok($bump_thread_url)
+        ->status_is(200)
+        ->element_exists('input[name="answer"]'    )
+        ->element_exists('input[name="number"]'    )
+        ->element_exists('input[name="csrf_token"]');
+
+    # Bad CSRF
+    $t->post_ok($bump_thread_url, form => \%bad_bot)
+        ->status_is(403)
+        ->element_exists('p[class="stash-with-error"]')
+        ->text_like(p => qr/Something went wrong/);
+
     # Bad CAPTCHA
+    $bad_bot{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok($bump_thread_url, form => \%bad_bot)
         ->status_is(400)
         ->element_exists('p[class="stash-with-error"]')
         ->text_like(p => qr/Sounds like something a robot would say/);
+
+    $invalid_captcha{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
 
     $t->post_ok($bump_thread_url, form => \%invalid_captcha)
         ->status_is(400)
@@ -37,6 +55,9 @@ subtest 'Bumping thread', sub {
         ->text_like(p => qr/Should be a single number/);
 
     # Solved CAPTCHA
+    $good_human{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok($bump_thread_url, form => \%good_human)
         ->status_is(302)
         ->header_like(Location => qr{human/thread/bump/1});
@@ -56,11 +77,25 @@ subtest 'Flagging thread', sub {
     $t->get_ok('/human/thread/flag/1')->status_is(302)
         ->header_like(Location => qr/captcha/);
 
+    # Bad CSRF
+    $t->get_ok($flag_thread_url);
+
+    $t->post_ok($flag_thread_url, form => \%bad_bot)
+        ->status_is(403)
+        ->element_exists('p[class="stash-with-error"]')
+        ->text_like(p => qr/Something went wrong/);
+
     # Bad CAPTCHA
+    $bad_bot{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok($flag_thread_url, form => \%bad_bot)
         ->status_is(400)
         ->element_exists('p[class="stash-with-error"]')
         ->text_like(p => qr/Sounds like something a robot would say/);
+
+    $invalid_captcha{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
 
     $t->post_ok($flag_thread_url, form => \%invalid_captcha)
         ->status_is(400)
@@ -68,6 +103,9 @@ subtest 'Flagging thread', sub {
         ->text_like(p => qr/Should be a single number/);
 
     # Solved CAPTCHA
+    $good_human{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok($flag_thread_url, form => \%good_human)
         ->status_is(302)
         ->header_like(Location => qr{human/thread/flag/1});
@@ -83,11 +121,25 @@ subtest 'Flagging remark', sub {
     $t->get_ok('/human/remark/flag/1')->status_is(302)
         ->header_like(Location => qr/captcha/);
 
+    # Bad CSRF
+    $t->get_ok($flag_remark_url);
+
+    $t->post_ok($flag_remark_url, form => \%bad_bot)
+        ->status_is(403)
+        ->element_exists('p[class="stash-with-error"]')
+        ->text_like(p => qr/Something went wrong/);
+
     # Bad CAPTCHA
+    $bad_bot{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok($flag_remark_url, form => \%bad_bot)
         ->status_is(400)
         ->element_exists('p[class="stash-with-error"]')
         ->text_like(p => qr/Sounds like something a robot would say/);
+
+    $invalid_captcha{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
 
     $t->post_ok($flag_remark_url, form => \%invalid_captcha)
         ->status_is(400)
@@ -95,6 +147,9 @@ subtest 'Flagging remark', sub {
         ->text_like(p => qr/Should be a single number/);
 
     # Solved CAPTCHA
+    $good_human{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok($flag_remark_url, form => \%good_human)
         ->status_is(302)
         ->header_like(Location => qr{human/remark/flag/1});

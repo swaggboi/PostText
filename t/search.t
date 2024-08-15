@@ -14,6 +14,11 @@ subtest 'Search before CAPTCHA', sub {
 };
 
 subtest 'Search after CAPTCHA', sub {
+    $t->get_ok($search_url);
+
+    $good_human{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok($search_url, form => \%good_human)
         ->status_is(302)
         ->header_like(Location => qr{human/search});
