@@ -160,8 +160,15 @@ sub create($self) {
         $v->required('name'    )->size(1,     64);
         $v->required('email'   )->size(6,    320);
         $v->required('password')->size(12, undef);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
@@ -185,8 +192,15 @@ sub admin_reset($self) {
     if ($v && $v->has_data) {
         $v->required('email'   )->size(6,    320);
         $v->required('password')->size(12, undef);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
@@ -208,8 +222,15 @@ sub mod_reset($self) {
 
     if ($v && $v->has_data) {
         $v->required('password')->size(12, undef);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
@@ -233,8 +254,15 @@ sub lock_acct($self) {
 
     if ($v && $v->has_data) {
         $v->required('email')->size(6, 320);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
@@ -255,8 +283,15 @@ sub unlock_acct($self) {
 
     if ($v && $v->has_data) {
         $v->required('email')->size(6, 320);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
@@ -277,8 +312,15 @@ sub promote($self) {
 
     if ($v && $v->has_data) {
         $v->required('email')->size(6, 320);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
@@ -299,8 +341,15 @@ sub demote($self) {
 
     if ($v && $v->has_data) {
         $v->required('email')->size(6, 320);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
