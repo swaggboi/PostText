@@ -1,4 +1,4 @@
-FROM docker.io/perl:5.36
+FROM docker.io/perl:5.40
 
 # Move it
 WORKDIR /opt
