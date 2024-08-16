@@ -26,5 +26,6 @@
     ) %>
   </div>
   <%= hidden_field number => $roman_numeral, id => 'number' %>
+  <%= csrf_field %>
   <button type="submit" class="form-button">Answer</button>
 </form>

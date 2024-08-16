@@ -55,6 +55,7 @@
     <%= check_box preview => 1, id => 'preview' %>
     <%= label_for preview => 'Preview' %>
   </div>
+  <%= csrf_field %>
   <button type="submit" class="form-button">Post</button>
 </form>
 <%# Putting this first above the thread body (nested if, yucky sry) %>
