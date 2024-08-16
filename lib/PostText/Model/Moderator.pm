@@ -156,7 +156,8 @@ sub flagged($self) {
         SELECT 'remark',
                remark_id
           FROM remarks
-         WHERE flagged_status;
+         WHERE flagged_status
+         ORDER BY id DESC;
        END_SQL
 }
 
@@ -170,7 +171,8 @@ sub hidden($self) {
         SELECT 'remark',
                remark_id
           FROM remarks
-         WHERE hidden_status;
+         WHERE hidden_status
+         ORDER BY id DESC;
        END_SQL
 }
 
@@ -270,7 +272,8 @@ sub list($self) {
                TO_CHAR(last_login_date, $1) AS last_login_date,
                lock_status,
                admin_status
-          FROM moderators;
+          FROM moderators
+         ORDER BY last_login_date DESC;
         END_SQL
 }
 
