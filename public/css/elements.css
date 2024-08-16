@@ -73,7 +73,6 @@ table { width: 100%; }
 
 table, th, td {
     border-collapse: collapse;
-    border: 0.15em dotted black;
     text-align: center;
 }
 
