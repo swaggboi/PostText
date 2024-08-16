@@ -23,6 +23,11 @@ my %preview_remark = (
     );
 
 # Do CAPTCHA
+$t->get_ok($bump_thread_url);
+
+$good_captcha{'csrf_token'} =
+    $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
 $t->post_ok($bump_thread_url, form => \%good_captcha)
     ->status_is(302)
     ->header_like(Location => qr{human/thread/bump/1});
@@ -36,6 +41,11 @@ subtest 'Check the form + button', sub {
 };
 
 subtest 'Submit input', sub {
+    $t->get_ok('/human/remark/post/1');
+
+    $preview_remark{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok('/human/remark/post/1', form => \%preview_remark)
         ->status_is(200)
         ->text_like(p => qr/ayy\.\.\. lmao/);
