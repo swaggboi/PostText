@@ -10,6 +10,7 @@
     <%= label_for password => 'Password' %>
     <%= password_field password => (id => 'password', autofocus => undef) %>
   </div>
+  <%= csrf_field %>
   <button type="submit" class="form-button">Reset</button>
 </form>
 

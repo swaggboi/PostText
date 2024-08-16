@@ -12,11 +12,12 @@
   </div>
   <div class="form-field">
     <% if (my $error = validation->error('password')) { =%>
-    <p class="field-with-error">Must be between <%= $error->[2] %>
-      and <%= $error->[3] %> characters.</p>
+    <p class="field-with-error">Must be atleast <%= $error->[2] %>
+      characters.</p>
     <% } =%>
     <%= label_for password => 'Password' %>
     <%= password_field password => (id => 'password') %>
   </div>
+  <%= csrf_field %>
   <button type="submit" class="form-button">Login</button>
 </form>

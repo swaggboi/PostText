@@ -10,5 +10,6 @@
     <%= label_for email => 'Email' %>
     <%= email_field email => (id => 'email', autofocus => undef) %>
   </div>
+  <%= csrf_field %>
   <button type="submit" class="form-button">Unlock</button>
 </form>
