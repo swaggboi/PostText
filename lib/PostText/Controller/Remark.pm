@@ -36,8 +36,15 @@ sub create($self) {
         $v->required('body'   )->size(2, $body_limit);
         $v->optional('bump'   );
         $v->optional('preview');
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {

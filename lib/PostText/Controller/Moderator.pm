@@ -39,8 +39,15 @@ sub login($self) {
     if ($v && $v->has_data) {
         $v->required('email'   )->size(6,    320);
         $v->required('password')->size(12, undef);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                );
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {
