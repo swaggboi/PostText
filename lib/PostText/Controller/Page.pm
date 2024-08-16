@@ -20,8 +20,15 @@ sub captcha($self) {
     if ($v && $v->has_data) {
         $v->required('answer')->num(1,  9);
         $v->required('number')->size(1, 4);
+        $v->csrf_protect;
 
-        if ($v->has_error) {
+        if ($v->has_error('csrf_token')) {
+            $self->stash(
+                status => 403,
+                error  => 'Something went wrong, please try again. 🥺'
+                )
+        }
+        elsif ($v->has_error) {
             $self->stash(status => 400)
         }
         else {

@@ -44,6 +44,11 @@ $t->get_ok('/human/remark/post/1')->status_is(302)
     ->header_like(Location => qr/captcha/);
 
 # Do CAPTCHA
+$t->get_ok($bump_thread_url);
+
+$good_captcha{'csrf_token'} =
+    $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
 $t->post_ok($bump_thread_url, form => \%good_captcha)
     ->status_is(302)
     ->header_like(Location => qr{human/thread/bump/1});
@@ -51,8 +56,6 @@ $t->post_ok($bump_thread_url, form => \%good_captcha)
 $t->ua->max_redirects(1);
 
 subtest 'Post new thread', sub {
-    my $csrf_token;
-
     # GET
     $t->get_ok('/human/thread/post')->status_is(200)
         ->element_exists('form input[name="author"]'    )
@@ -121,9 +124,24 @@ subtest 'Post new remark', sub {
         ->element_exists('form button[type="submit"]' )
         ->text_like(h2 => qr/Remark on Thread #/);
 
+    # No CSRF token
+    $t->post_ok('/human/remark/post/1', form => \%valid_remark)
+        ->status_is(403)
+        ->text_like(p => qr/Something went wrong/);
+
+    $t->get_ok('/human/remark/post/1');
+
+    $valid_remark{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
+
     $t->post_ok('/human/remark/post/1', form => \%valid_remark)
         ->status_is(200)
         ->text_like(h2 => qr/Thread #1/);
+
+    $t->get_ok('/human/remark/post/1');
+
+    $invalid_remark{'csrf_token'} =
+        $t->tx->res->dom->at('input[name="csrf_token"]')->val;
 
     $t->post_ok('/human/remark/post/1', form => \%invalid_remark)
         ->status_is(400)
