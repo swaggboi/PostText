@@ -1,8 +1,6 @@
 (function () {
-    const bodyStyle = document.body.style;
-
     function setImage(url) {
-        bodyStyle.backgroundImage = "url('" + url + "')";
+        document.body.style.backgroundImage = "url('" + url + "')";
     }
 
     switch (new Date().getMonth()) {
