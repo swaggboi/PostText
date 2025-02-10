@@ -61,7 +61,7 @@ tests locally:
 
 ## TODOs
 
-- Clean up mod buttons from non-mod views
+- Figure out why `filter_text` is set to `0` and document that?
 - Stop working on this and start the imageboard
 
 ## AGPL-3.0+ANTIFA compliance
