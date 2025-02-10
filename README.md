@@ -61,7 +61,6 @@ tests locally:
 
 ## TODOs
 
-- Figure out why `filter_text` is set to `0` and document that?
 - Stop working on this and start the imageboard
 
 ## AGPL-3.0+ANTIFA compliance

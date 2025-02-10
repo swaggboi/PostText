@@ -30,6 +30,8 @@ sub startup($self) {
 
     $self->helper(hr => sub ($c) {
         state $hr = HTML::Restrict->new(
+            # filter_text breaks greater and less than symbols in Markdown code blocks
+            # Also breaks Markdown quote blocks
             filter_text            => 0,
             strip_enclosed_content => [],
             rules                  => {
