@@ -61,6 +61,7 @@ tests locally:
 
 ## TODOs
 
+- Clean up mod buttons from non-mod views
 - Stop working on this and start the imageboard
 
 ## AGPL-3.0+ANTIFA compliance
