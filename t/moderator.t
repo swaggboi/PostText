@@ -87,13 +87,13 @@ subtest Login => sub {
     };
 
     subtest 'Buttons for mods', sub {
-        $t->get_ok('/thread/single/1')
+        $t->get_ok('/moderator/thread/single/1')
             ->status_is(200)
             ->element_exists('a[href*="/hide/1"]'  )
             ->element_exists('a[href*="/unhide/1"]')
             ->element_exists('a[href*="/unflag/1"]');
 
-        $t->get_ok('/remark/single/1')
+        $t->get_ok('/moderator/remark/single/1')
             ->status_is(200)
             ->element_exists('a[href*="/hide/1"]'  )
             ->element_exists('a[href*="/unhide/1"]')

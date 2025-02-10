@@ -38,16 +38,6 @@
       <%= link_to Flag => flag_thread => {thread_id => $thread->{'id'}},
           (class => 'click') %>
     </nav>
-    <% if (is_mod) { =%>
-    <nav class="post__nav">
-      <%= link_to Hide => hide_thread => {thread_id => $thread->{'id'}},
-          (class => 'click') %>
-      <%= link_to Unhide => unhide_thread => {thread_id => $thread->{'id'}},
-          (class => 'click') %>
-      <%= link_to Unflag => unflag_thread => {thread_id => $thread->{'id'}},
-          (class => 'click') %>
-    </nav>
-    <% } =%>
   </article>
 </main>
 <% } =%>
