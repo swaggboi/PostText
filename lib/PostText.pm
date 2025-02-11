@@ -140,13 +140,13 @@ sub startup($self) {
         $c->session(expires => 1);
 
         $c->redirect_to('threads_list');
-    });
+    })->name('new_session');
 
     # Hide a version string to check build later
     if (my $version = $self->config->{'version'}) {
         $r->get('/version', sub ($c) {
             $c->render(text => $version)
-        });
+        })->name('version_string');
     }
 
     # Static pages
