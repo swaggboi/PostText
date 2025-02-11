@@ -145,7 +145,7 @@ sub startup($self) {
     # Hide a version string to check build later
     if (my $version = $self->config->{'version'}) {
         $r->get('/version', sub ($c) {
-            $c->render(text => $version)
+            $c->render(text => $version . "\n")
         })->name('version_string');
     }
 
