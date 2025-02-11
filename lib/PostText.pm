@@ -142,6 +142,13 @@ sub startup($self) {
         $c->redirect_to('threads_list');
     });
 
+    # Hide a version string to check build later
+    if (my $version = $self->config->{'version'}) {
+        $r->get('/version', sub ($c) {
+            $c->render(text => $version)
+        });
+    }
+
     # Static pages
     $r->get('/about')->to('page#about')->name('about_page');
 
