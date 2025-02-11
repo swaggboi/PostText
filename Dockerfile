@@ -5,7 +5,6 @@ WORKDIR /opt
 COPY lib/ ./lib/
 COPY migrations/ ./migrations/
 COPY public/ ./public/
-COPY t/ ./t/
 COPY templates/ ./templates/
 COPY script/ ./script/
 COPY cpanfile .
