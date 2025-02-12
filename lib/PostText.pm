@@ -138,6 +138,7 @@ sub startup($self) {
     # Shortcut to new session cookie/identity
     $r->get('/new', sub ($c) {
         $c->session(expires => 1);
+        $c->flash(info => 'Session has been reset; have a cookie. 🍪');
 
         $c->redirect_to('threads_list');
     })->name('new_session');
