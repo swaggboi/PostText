@@ -27,6 +27,7 @@
 }
 
 body {
+    background-color: black;
     background-image: url('/images/background_stars_anm.gif');
     width: 95vmin;
     margin: 0 auto;
