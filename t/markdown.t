@@ -63,7 +63,7 @@ subtest 'Submit markdown input', sub {
 
     $t->post_ok('/human/remark/post/1', form => \%markdown_remark)
         ->status_is(200)
-        ->text_like(h1 => qr/ayy\.\.\. lmao/);
+        ->text_like('div.form-preview h1', qr/ayy\.\.\. lmao/);
 
     $t->get_ok('/human/thread/post');
 
@@ -72,7 +72,7 @@ subtest 'Submit markdown input', sub {
 
     $t->post_ok('/human/thread/post', form => \%markdown_thread)
         ->status_is(200)
-        ->text_like(h1 => qr/ayy\.\.\. lmao/);
+        ->text_like('div.form-preview h1', qr/ayy\.\.\. lmao/);
 };
 
 subtest 'Submit plain text input', sub {
@@ -83,7 +83,7 @@ subtest 'Submit plain text input', sub {
 
     $t->post_ok('/human/remark/post/1', form => \%plain_text_remark)
         ->status_is(200)
-        ->text_like(p => qr/# ayy\.\.\. lmao/);
+        ->text_like('span.plain-text', qr/# ayy\.\.\. lmao/);
 
     $t->get_ok('/human/thread/post');
 
@@ -92,7 +92,7 @@ subtest 'Submit plain text input', sub {
 
     $t->post_ok('/human/thread/post', form => \%plain_text_thread)
         ->status_is(200)
-        ->text_like(p => qr/# ayy\.\.\. lmao/);
+        ->text_like('span.plain-text', qr/# ayy\.\.\. lmao/);
 };
 
 done_testing;
