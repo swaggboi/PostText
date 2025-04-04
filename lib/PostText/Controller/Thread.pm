@@ -41,7 +41,7 @@ sub create($self) {
                     $thread_author,
                     $thread_title,
                     $thread_body,
-                    $markdown_status
+                    $markdown
                     );
 
                 return $self->redirect_to(
