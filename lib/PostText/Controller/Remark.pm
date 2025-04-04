@@ -32,10 +32,11 @@ sub create($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('author' )->size(1,          63);
-        $v->required('body'   )->size(2, $body_limit);
-        $v->optional('bump'   );
-        $v->optional('preview');
+        $v->required('author'  )->size(1,          63);
+        $v->required('body'    )->size(2, $body_limit);
+        $v->optional('bump'    );
+        $v->optional('preview' );
+        $v->optional('markdown');
         $v->csrf_protect;
 
         if ($v->has_error('csrf_token')) {
@@ -48,10 +49,11 @@ sub create($self) {
             $self->stash(status => 400)
         }
         else {
-            my $remark_author = $v->param('author' );
-            my $remark_body   = $v->param('body'   );
-            my $bump_thread   = $v->param('bump'   );
-            my $preview       = $v->param('preview');
+            my $remark_author = $v->param('author'  );
+            my $remark_body   = $v->param('body'    );
+            my $bump_thread   = $v->param('bump'    );
+            my $preview       = $v->param('preview' );
+            my $markdown      = $v->param('markdown');
 
             $self->session(author => $remark_author);
 
@@ -59,7 +61,8 @@ sub create($self) {
                 $self->remark->create(
                     $thread_id,
                     $remark_author,
-                    $remark_body
+                    $remark_body,
+                    $markdown
                     );
 
                 $self->thread->bump($thread_id) if $bump_thread;

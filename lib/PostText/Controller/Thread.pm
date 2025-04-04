@@ -11,10 +11,11 @@ sub create($self) {
     $v = $self->validation if $self->req->method eq 'POST';
 
     if ($v && $v->has_data) {
-        $v->required('author' )->size(1,          63);
-        $v->required('title'  )->size(1,         127);
-        $v->required('body'   )->size(2, $body_limit);
-        $v->optional('preview');
+        $v->required('author'  )->size(1,          63);
+        $v->required('title'   )->size(1,         127);
+        $v->required('body'    )->size(2, $body_limit);
+        $v->optional('preview' );
+        $v->optional('markdown');
         $v->csrf_protect;
 
         if ($v->has_error('csrf_token')) {
@@ -27,10 +28,11 @@ sub create($self) {
             $self->stash(status => 400)
         }
         else {
-            my $thread_author = $v->param('author' );
-            my $thread_title  = $v->param('title'  );
-            my $thread_body   = $v->param('body'   );
-            my $preview       = $v->param('preview');
+            my $thread_author = $v->param('author'  );
+            my $thread_title  = $v->param('title'   );
+            my $thread_body   = $v->param('body'    );
+            my $preview       = $v->param('preview' );
+            my $markdown      = $v->param('markdown');
 
             $self->session(author => $thread_author);
 
@@ -38,7 +40,8 @@ sub create($self) {
                 my $new_thread_id = $self->thread->create(
                     $thread_author,
                     $thread_title,
-                    $thread_body
+                    $thread_body,
+                    $markdown_status
                     );
 
                 return $self->redirect_to(
