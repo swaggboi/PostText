@@ -61,7 +61,7 @@ tests locally:
 
 ## TODOs
 
-- Stop working on this and start the imageboard
+- Do I need `SUM` for `by_id()`?
 
 ## AGPL-3.0+ANTIFA compliance
 

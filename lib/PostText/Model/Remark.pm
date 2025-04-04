@@ -18,7 +18,8 @@ sub by_page_for($self, $thread_id, $this_page = 1) {
         SELECT remark_id               AS id,
                TO_CHAR(remark_date, ?) AS date,
                remark_author           AS author,
-               remark_body             AS body
+               remark_body             AS body,
+               markdown_status         AS markdown
           FROM remarks
          WHERE thread_id = ?
            AND NOT hidden_status
@@ -27,7 +28,16 @@ sub by_page_for($self, $thread_id, $this_page = 1) {
        END_SQL
 }
 
-sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
+sub create(
+        $self,
+        $thread_id,
+        $author,
+        $body,
+        $markdown = 0,
+        $hidden = 0,
+        $flagged = 0
+    )
+{
     my $clean_body = $self->hr->process($body);
     my @data       = ($thread_id, $author, $clean_body, $hidden, $flagged);
 
@@ -37,9 +47,10 @@ sub create($self, $thread_id, $author, $body, $hidden = 0, $flagged = 0) {
                remark_author,
                remark_body,
                hidden_status,
-               flagged_status
+               flagged_status,
+               markdown_status
                )
-        VALUES (?, ?, ?, ?, ?);
+        VALUES (?, ?, ?, ?, ?, ?);
        END_SQL
 }
 
@@ -69,7 +80,8 @@ sub last_for($self, $thread_id) {
         SELECT remark_id               AS id,
                TO_CHAR(remark_date, ?) AS date,
                remark_author           AS author,
-               remark_body             AS body
+               remark_body             AS body,
+               markdown_status         AS markdown
           FROM remarks
          WHERE thread_id = ?
          ORDER BY remark_date
@@ -85,7 +97,8 @@ sub by_id($self, $remark_id) {
                TO_CHAR(remark_date, ?) AS date,
                remark_author           AS author,
                remark_body             AS body,
-               thread_id
+               thread_id,
+               markdown_status         AS markdown
           FROM remarks
          WHERE remark_id = ?
            AND NOT hidden_status;
@@ -122,7 +135,8 @@ sub feed($self) {
     $self->pg->db->query(<<~'END_SQL', $date_format)->hashes;
             SELECT remark_id               AS id,
                    TO_CHAR(remark_date, ?) AS date,
-                   remark_body             AS body
+                   remark_body             AS body,
+                   markdown_status         AS markdown
               FROM remarks
              WHERE NOT hidden_status
              GROUP BY remark_id

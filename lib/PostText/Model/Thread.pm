@@ -8,9 +8,25 @@ has per_page => 5;
 
 has date_format => 'Dy, FMDD Mon YYYY HH24:MI:SS TZHTZM';
 
-sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
+sub create(
+        $self,
+        $author,
+        $title,
+        $body,
+        $markdown = 0,
+        $hidden = 0,
+        $flagged = 0
+    )
+{
     my $clean_body = $self->hr->process($body);
-    my @data       = ($author, $title, $clean_body, $hidden, $flagged);
+    my @data       = (
+        $author,
+        $title,
+        $clean_body,
+        $hidden,
+        $flagged,
+        $markdown
+        );
 
     $self->pg->db->query(<<~'END_SQL', @data)->hash->{'thread_id'};
         INSERT INTO threads (
@@ -18,9 +34,10 @@ sub create($self, $author, $title, $body, $hidden = 0, $flagged = 0) {
                thread_title,
                thread_body,
                hidden_status,
-               flagged_status
+               flagged_status,
+               markdown_status
                )
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
      RETURNING thread_id;
      END_SQL
     # The indented heredoc got a little confused by this one...
@@ -43,7 +60,8 @@ sub by_page($self, $this_page = 1) {
                             THEN 1
                             ELSE 0
                        END)                  AS remark_tally,
-                   t.bump_tally              AS bump_tally
+                   t.bump_tally              AS bump_tally,
+                   t.markdown_status         AS markdown
               FROM threads      AS t
               LEFT JOIN remarks AS r
                 ON t.thread_id = r.thread_id
@@ -87,7 +105,8 @@ sub by_id($self, $thread_id) {
                t.thread_title            AS title,
                t.thread_body             AS body,
                COUNT(r.*)                AS remark_tally,
-               t.bump_tally              AS bump_tally
+               t.bump_tally              AS bump_tally,
+               t.markdown_status         AS markdown
           FROM threads      AS t
           LEFT JOIN remarks AS r
             ON t.thread_id = r.thread_id
@@ -121,7 +140,8 @@ sub feed($self) {
             SELECT thread_id               AS id,
                    TO_CHAR(thread_date, ?) AS date,
                    thread_title            AS title,
-                   thread_body             AS body
+                   thread_body             AS body,
+                   markdown_status         AS markdown
               FROM threads
              WHERE NOT hidden_status
              GROUP BY thread_id
