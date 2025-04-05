@@ -33,13 +33,20 @@ sub create(
         $thread_id,
         $author,
         $body,
-        $markdown = 0,
+        $markdown //= 0,
         $hidden = 0,
         $flagged = 0
     )
 {
     my $clean_body = $self->hr->process($body);
-    my @data       = ($thread_id, $author, $clean_body, $hidden, $flagged);
+    my @data       = (
+        $thread_id,
+        $author,
+        $clean_body,
+        $hidden,
+        $flagged,
+        $markdown
+        );
 
     $self->pg->db->query(<<~'END_SQL', @data);
         INSERT INTO remarks (
