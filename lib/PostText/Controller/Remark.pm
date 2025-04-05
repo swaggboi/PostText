@@ -73,7 +73,7 @@ sub create($self) {
                 })->fragment('remarks'));
             }
 
-            $draft = $remark_body;
+            $draft = {body => $remark_body, markdown => $markdown};
         }
     }
 

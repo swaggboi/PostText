@@ -14,9 +14,13 @@
         content="Remark on thread #<%= $thread->{'id'} %>.">
 <% end %>
 <form method="post" class="form-body">
-  <% if ($draft) { =%>
+  <% if (keys %{$draft}) { =%>
   <div class="form-preview">
-    <%== markdown $draft =%>
+    <% if ($draft->{'markdown'}) { =%>
+    <%== markdown $draft->{'body'} =%>
+    <% } else {                    =%>
+    <%= $draft->{'body'}           =%>
+    <% }                           =%>
   </div>
   <% } =%>
   <div class="form-field">
@@ -52,6 +56,10 @@
     <%= label_for bump => 'Bump' %>
   </div>
   <div class="form-checkbox">
+    <%= check_box markdown => 1, id => 'markdown' %>
+    <%= label_for markdown => 'Markdown' %>
+  </div>
+  <div class="form-checkbox">
     <%= check_box preview => 1, id => 'preview' %>
     <%= label_for preview => 'Preview' %>
   </div>
@@ -72,7 +80,7 @@
     </h4>
     <h5 class="post__author"><%= $last_remark->{'author'} %></h5>
     <div class="post__body">
-      <%== markdown $last_remark->{'body'} =%>
+      <%= $last_remark->{'body'} =%>
     </div>
     <nav class="post__nav">
       <%= link_to Thread => single_thread =>
@@ -98,7 +106,7 @@
     <h4 class="post__date"><%= $thread->{'date'} %></h4>
     <h5 class="post__author"><%= $thread->{'author'} %></h5>
     <div class="post__body">
-      <%== markdown $thread->{'body'} =%>
+      <%= $thread->{'body'} =%>
     </div>
     <nav class="post__nav">
       <%= link_to post_remark => {thread_id => $thread->{'id'}},
