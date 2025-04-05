@@ -11,9 +11,13 @@
 % end
 <h2 class="page-title"><%= title %></h2>
 <form method="post" class="form-body">
-  <% if ($draft) { =%>
+  <% if (keys %{$draft}) { =%>
   <div class="form-preview">
-    <%== markdown $draft =%>
+    <% if ($draft->{'markdown'}) { =%>
+    <%== markdown $draft->{'body'} =%>
+    <% } else {                    =%>
+    <%= $draft->{'body'}           =%>
+    <% }                           =%>
   </div>
   <% } =%>
   <div class="form-field">

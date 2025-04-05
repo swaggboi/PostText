@@ -36,8 +36,6 @@ sub create($self) {
 
             $self->session(author => $thread_author);
 
-            print $self->dumper($v);
-
             unless ($preview) {
                 my $new_thread_id = $self->thread->create(
                     $thread_author,
@@ -51,7 +49,7 @@ sub create($self) {
                     );
             }
 
-            $draft = $thread_body;
+            $draft = {body => $thread_body, markdown => $markdown};
         }
     }
 
