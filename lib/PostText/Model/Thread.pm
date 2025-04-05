@@ -13,7 +13,7 @@ sub create(
         $author,
         $title,
         $body,
-        $markdown = 0,
+        $markdown //= 0,
         $hidden = 0,
         $flagged = 0
     )
