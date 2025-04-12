@@ -130,3 +130,5 @@
     padding: 1em;
     background-color: var(--transparent);
 }
+
+.plain-text { white-space: pre-wrap; }
