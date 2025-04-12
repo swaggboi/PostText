@@ -11,7 +11,11 @@
     <h4 class="post__date"><%= $thread->{'date'} %></h4>
     <h5 class="post__author"><%= $thread->{'author'} %></h5>
     <div class="post__body">
+      <% if ($thread->{'markdown'}) { =%>
       <%== markdown $thread->{'body'} =%>
+      <% } else { =%>
+      <span class="plain-text"><%= $thread->{'body'} %></span>
+      <% } =%>
     </div>
     <nav class="post__nav">
       <%= link_to Hide => hide_thread => {thread_id => $thread->{'id'}},

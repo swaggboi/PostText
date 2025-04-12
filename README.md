@@ -61,7 +61,6 @@ tests locally:
 
 ## TODOs
 
-- Check mod/admin templates for if-markdown
 - Fix preview tests
 - Do I need `SUM` for `by_id()`?
 
