@@ -61,7 +61,7 @@ tests locally:
 
 ## TODOs
 
-- Fix preview tests
+- Add SlapbirdAPM back in
 - Do I need `SUM` for `by_id()`?
 
 ## AGPL-3.0+ANTIFA compliance

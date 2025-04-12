@@ -10,16 +10,18 @@ my $bump_thread_url =
     '/captcha/H4sIAImTzmQAA8soKSmw0tfPyU9OzMnILy6xMjYwMNDPKM1NzNMvyShKTUzRTyrNLdA3BAD5ek7T%0AKQAAAA==%0A';
 
 my %preview_thread = (
-    author  => 'Anonymous',
-    title   => 'hi',
-    body    => 'ayy... lmao',
-    preview => 1
+    author   => 'Anonymous',
+    title    => 'hi',
+    body     => 'ayy... lmao',
+    preview  => 1,
+    markdown => 1
     );
 
 my %preview_remark = (
-    author  => 'Anonymous',
-    body    => 'ayy... lmao',
-    preview => 1
+    author   => 'Anonymous',
+    body     => 'ayy... lmao',
+    preview  => 1,
+    markdown => 1
     );
 
 # Do CAPTCHA
