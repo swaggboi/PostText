@@ -25,7 +25,11 @@
     </h4>
     <h5 class="post__author"><%= $remark->{'author'} %></h5>
     <div class="post__body">
+      <% if ($remark->{'markdown'}) { =%>
       <%== markdown $remark->{'body'} =%>
+      <% } else { =%>
+      <span class="plain-text"><%= $remark->{'body'} %></span>
+      <% } =%>
     </div>
     <nav class="post__nav">
       <%= link_to Thread => single_thread =>

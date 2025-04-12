@@ -61,7 +61,6 @@ tests locally:
 
 ## TODOs
 
-- Do the if-markdown-else-plaintext stuff in templates
 - Fix preview tests
 - Do I need `SUM` for `by_id()`?
 

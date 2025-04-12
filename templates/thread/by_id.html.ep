@@ -24,7 +24,11 @@
     <h4 class="post__date"><%= $thread->{'date'} %></h4>
     <h5 class="post__author"><%= $thread->{'author'} %></h5>
     <div class="post__body">
+      <% if ($thread->{'markdown'}) { =%>
       <%== markdown $thread->{'body'} =%>
+      <% } else { =%>
+      <span class="plain-text"><%= $thread->{'body'} %></span>
+      <% } =%>
     </div>
     <nav class="post__nav">
       <%= link_to post_remark => {thread_id => $thread->{'id'}},
@@ -55,7 +59,11 @@
     </h4>
     <h5 class="post__author"><%= $remark->{'author'} %></h5>
     <div class="post__body">
+      <% if ($remark->{'markdown'}) { =%>
       <%== markdown $remark->{'body'} =%>
+      <% } else { =%>
+      <span class="plain-text"><%= $remark->{'body'} %></span>
+      <% } =%>
     </div>
     <nav class="post__nav">
       <%= link_to Remark => post_remark =>
