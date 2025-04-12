@@ -28,11 +28,19 @@
       <summary>
         <%= truncate_text $thread->{'body'} %>
       </summary>
+      <% if ($thread->{'markdown'}) { =%>
       <%== markdown $thread->{'body'} =%>
+      <% } else { =%>
+      <span class="plain-text"><%= $thread->{'body'} %></span>
+      <% } =%>
     </details>
     <% } else { =%>
     <div class="post__body">
+      <% if ($thread->{'markdown'}) { =%>
       <%== markdown $thread->{'body'} =%>
+      <% } else { =%>
+      <span class="plain-text"><%= $thread->{'body'} %></span>
+      <% } =%>
     </div>
     <% } =%>
     <nav class="post__nav">

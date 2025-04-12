@@ -134,5 +134,5 @@
 .plain-text {
     white-space: pre-wrap;
     display: inline-block;
-    margin-bottom: 1em;
+    margin: 1em 0;
 }
