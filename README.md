@@ -63,6 +63,7 @@ tests locally:
 
 - Do the if-markdown-else-plaintext stuff in templates
 - `plain-text` CSS class may need bottom padding
+- Fix preview tests
 - Do I need `SUM` for `by_id()`?
 
 ## AGPL-3.0+ANTIFA compliance
