@@ -238,7 +238,8 @@ sub thread_by_id($self, $thread_id) {
                t.thread_title            AS title,
                t.thread_body             AS body,
                COUNT(r.*)                AS remark_tally,
-               t.bump_tally              AS bump_tally
+               t.bump_tally              AS bump_tally,
+               t.markdown_status         AS markdown
           FROM threads      AS t
           LEFT JOIN remarks AS r
             ON t.thread_id = r.thread_id
@@ -255,7 +256,8 @@ sub remark_by_id($self, $remark_id) {
                TO_CHAR(remark_date, ?) AS date,
                remark_author           AS author,
                remark_body             AS body,
-               thread_id
+               thread_id,
+               markdown_status         AS markdown
           FROM remarks
          WHERE remark_id = ?;
        END_SQL
