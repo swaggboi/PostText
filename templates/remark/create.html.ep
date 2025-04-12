@@ -82,7 +82,9 @@
     </h4>
     <h5 class="post__author"><%= $last_remark->{'author'} %></h5>
     <div class="post__body">
-      <%= $last_remark->{'body'} =%>
+      <span class="plain-text">
+        <%= $last_remark->{'body'} =%>
+      </span>
     </div>
     <nav class="post__nav">
       <%= link_to Thread => single_thread =>
@@ -108,7 +110,9 @@
     <h4 class="post__date"><%= $thread->{'date'} %></h4>
     <h5 class="post__author"><%= $thread->{'author'} %></h5>
     <div class="post__body">
-      <%= $thread->{'body'} =%>
+      <span class="plain-text">
+        <%= $thread->{'body'} =%>
+      </span>
     </div>
     <nav class="post__nav">
       <%= link_to post_remark => {thread_id => $thread->{'id'}},
