@@ -16,8 +16,10 @@
     <% if ($draft->{'markdown'}) { =%>
     <%== markdown $draft->{'body'} =%>
     <% } else {                    =%>
-    <%= $draft->{'body'}           =%>
-    <% }                           =%>
+    <span class="plain-text">
+      <%= $draft->{'body'} =%>
+    </span>
+    <% } =%>
   </div>
   <% } =%>
   <div class="form-field">

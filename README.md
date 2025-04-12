@@ -62,7 +62,7 @@ tests locally:
 ## TODOs
 
 - Do the if-markdown-else-plaintext stuff in templates
-- Non-markdown posts will need to handle whitespace/newlines with CSS stuff
+- `plain-text` CSS class may need bottom padding
 - Do I need `SUM` for `by_id()`?
 
 ## AGPL-3.0+ANTIFA compliance
