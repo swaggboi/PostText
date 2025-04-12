@@ -131,4 +131,8 @@
     background-color: var(--transparent);
 }
 
-.plain-text { white-space: pre-wrap; }
+.plain-text {
+    white-space: pre-wrap;
+    display: inline-block;
+    margin-bottom: 1em;
+}
