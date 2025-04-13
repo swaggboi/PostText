@@ -11,7 +11,6 @@ ALTER COLUMN markdown_status
   SET NOT NULL;
 
 -- Do the same for remarks
-
 ALTER TABLE remarks
   ADD COLUMN markdown_status BOOLEAN;
 
