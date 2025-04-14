@@ -7,4 +7,4 @@ requires 'XML::RSS';
 requires 'Text::Markdown';
 requires 'HTML::Restrict';
 requires 'Roman::Unicode';
-requires 'SlapbirdAPM::Agent::Mojo';
+requires 'SlapbirdAPM::Agent::Mojo', '>= 0.012';
