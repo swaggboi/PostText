@@ -147,7 +147,9 @@ sub feed($self) {
         );
 
     for my $remark (@{$remarks}) {
-        my $description = $self->markdown($remark->{'body'});
+        my $description = $remark->{'markdown'}
+            ? $self->markdown($remark->{'body'})
+            : $remark->{'body'};
         my $item_link   = $self->url_for(
             single_remark => {remark_id => $remark->{'id'}}
             )->to_abs;

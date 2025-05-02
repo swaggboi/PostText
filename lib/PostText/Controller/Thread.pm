@@ -150,7 +150,9 @@ sub feed($self) {
         );
 
     for my $thread (@{$threads}) {
-        my $description = $self->markdown($thread->{'body'});
+        my $description = $thread->{'markdown'}
+            ? $self->markdown($thread->{'body'})
+            : $thread->{'body'};
         my $item_link   = $self->url_for(
             single_thread => {thread_id => $thread->{'id'}}
             )->to_abs;
